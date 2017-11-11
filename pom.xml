@@ -12,8 +12,11 @@
     </properties>
 
     <modules>
-        <module>stock-app-core</module>
-        <module>stock-app-web</module>
+        <module>dao</module>
+        <module>web-app</module>
+        <module>model</module>
+        <module>client</module>
+        <module>rest-app</module>
     </modules>
 
     <dependencyManagement>
