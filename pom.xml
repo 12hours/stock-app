@@ -9,6 +9,7 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <failOnMissingWebXml>false</failOnMissingWebXml>
+        <spring.version>5.0.1.RELEASE</spring.version>
         <junit.version>4.12</junit.version>
         <mockito.version>2.12.0</mockito.version>
         <lombok.version>1.16.18</lombok.version>
@@ -29,7 +30,7 @@
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-framework-bom</artifactId>
-                <version>5.0.1.RELEASE</version>
+                <version>${spring.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -100,6 +101,7 @@
     <dependencies>
     	
     </dependencies>
+
     
 </project>
 

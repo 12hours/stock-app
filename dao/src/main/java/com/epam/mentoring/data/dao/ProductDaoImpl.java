@@ -5,36 +5,46 @@ import java.util.Map;
 
 import javax.sql.DataSource;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Component;
 
 import com.epam.mentoring.data.model.Product;
+import com.epam.mentoring.data.util.mappers.ProductRowMapper;
 import com.epam.mentoring.data.util.mappers.ProductsWithQuantitiesMapper;
 
+@Component
 public class ProductDaoImpl implements IProductDao{
 	
 	@Value("product.get.by_id")
-	private String getProductByIdQuery;
+	private String getProductByIdSql;
 	
 	@Value("product.get.all")
-	private String getAllProductsQuery;
+	private String getAllProductsSql;
 	
 	@Value("product.add")
-	private String addProductQuery;
+	private String addProductSql;
 	
 	@Value("product.update")
-	private String updateProductQuery;
+	private String updateProductSql;
 	
 	@Value("product.delete")
-	private String deleteProductQuery;
+	private String deleteProductSql;
 	
 	@Value("product.quantity.get.by_id")
-	private String getProductQuantityBtIdQuery;
+	private String getProductQuantityBtIdSql;
 	
 	@Value("product.quantity.get.all")
-	private String getAllProductsWithQuantitiesQuery;
+	private String getAllProductsWithQuantitiesSql;
 	
 	private JdbcTemplate jdbcTemplate;
+	
+	@Autowired
+	ProductRowMapper productRowMapper;
+	
+	@Autowired
+	ProductsWithQuantitiesMapper productsWithQuantitiesMapper;
 	
 	public ProductDaoImpl(DataSource dataSource) {
 		jdbcTemplate = new JdbcTemplate(dataSource);
@@ -42,8 +52,8 @@ public class ProductDaoImpl implements IProductDao{
 
 	@Override
 	public Product getProductById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		Product product = jdbcTemplate.queryForObject(getProductByIdSql, productRowMapper);
+		return product;
 	}
 
 	@Override
@@ -78,7 +88,7 @@ public class ProductDaoImpl implements IProductDao{
 
 	@Override
 	public Map<Product, Integer> getAllProductsWithQuantities() {
-		Map<Product, Integer> map = jdbcTemplate.queryForObject(getAllProductsWithQuantitiesQuery, new ProductsWithQuantitiesMapper());
+		Map<Product, Integer> map = jdbcTemplate.queryForObject(getAllProductsWithQuantitiesSql, productsWithQuantitiesMapper);
 		return map;
 	}
 
