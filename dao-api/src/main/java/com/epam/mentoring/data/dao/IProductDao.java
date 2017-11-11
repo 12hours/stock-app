@@ -9,7 +9,7 @@ public interface IProductDao {
 	Product getProductById(int id);
 	List<Product> getAllProducts();
 	int getProductQuantity(int id);
-	Map<Product,Integer> getAllProductsQuantities();
+	Map<Product,Integer> getAllProductsWithQuantities();
 	int addProduct(Product product);
 	int updateProduct(Product product);
 	int deleteProduct(int id);
