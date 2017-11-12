@@ -2,12 +2,14 @@ package com.epam.mentoring.data.dao;
 
 import java.util.List;
 
+import org.springframework.dao.DataAccessException;
+
 import com.epam.mentoring.data.model.ProductType;
 
 public interface IProductTypeDao {
-	ProductType getProductTypeById(int id);
-	List<ProductType> getAllProductTypes();
-	int updateProductType(ProductType productType);
-	int addProductType(ProductType productType);
-	int deleteProductType(int id);
+	ProductType getProductTypeById(int id) throws DataAccessException;
+	List<ProductType> getAllProductTypes() throws DataAccessException;
+	int updateProductType(ProductType productType) throws DataAccessException;
+	int addProductType(ProductType productType) throws DataAccessException;
+	int deleteProductType(int id) throws DataAccessException;
 }

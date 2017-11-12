@@ -9,11 +9,6 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <failOnMissingWebXml>false</failOnMissingWebXml>
-        <spring.version>5.0.1.RELEASE</spring.version>
-        <junit.version>4.12</junit.version>
-        <mockito.version>2.12.0</mockito.version>
-        <lombok.version>1.16.18</lombok.version>
-		<h2.version>1.4.196</h2.version>
     </properties>
 
     <modules>
@@ -21,44 +16,28 @@
         <module>dao-api</module>
         <module>web-app</module>
         <module>model</module>
-        <module>client</module>
+        <module>service</module>
         <module>rest-app</module>
     </modules>
 
     <dependencyManagement>
         <dependencies>
-            <dependency>
+            <!-- <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-framework-bom</artifactId>
                 <version>${spring.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
-            </dependency>
-    	<dependency>
-	    	<groupId>junit</groupId>
-	    	<artifactId>junit</artifactId>
-	    	<version>${junit.version}</version>
-	    	<scope>test</scope>
-    	</dependency>
-    	<dependency>
-    		<groupId>org.mockito</groupId>
-    		<artifactId>mockito-core</artifactId>
-    		<version>${mockito.version}</version>
-    		<scope>test</scope>
-    	</dependency>
+            </dependency> -->
+            
 		<dependency>
-		    <groupId>org.projectlombok</groupId>
-		    <artifactId>lombok</artifactId>
-		    <version>${lombok.version}</version>
-		    <scope>provided</scope>
-		</dependency>
-		 <dependency>
-        	<groupId>com.h2database</groupId>
-        	<artifactId>h2</artifactId>
-        	<version>${h2.version}</version>
-        	<scope>test</scope>
+            <groupId>io.spring.platform</groupId>
+            <artifactId>platform-bom</artifactId>
+            <version>Athens-SR6</version>
+            <type>pom</type>
+            <scope>import</scope>
         </dependency>
-        
+            
         <dependency>
         	<groupId>com.epam.mentoring</groupId>
         	<artifactId>dao</artifactId>
@@ -79,7 +58,7 @@
         
         <dependency>
         	<groupId>com.epam.mentoring</groupId>
-        	<artifactId>client</artifactId>
+        	<artifactId>service</artifactId>
         	<version>${project.version}</version>
         </dependency>
         
