@@ -12,7 +12,6 @@ import org.springframework.stereotype.Component;
 import com.epam.mentoring.data.model.Product;
 import com.epam.mentoring.data.model.ProductType;
 
-@Component
 public class ProductRowMapper implements RowMapper<Product>{
 
 	@Value("product.column.id")

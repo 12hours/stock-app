@@ -1,38 +1,130 @@
 package com.epam.mentoring.data.dao;
 
-import java.util.Map;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
 
-import javax.sql.DataSource;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.jdbc.Sql;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.jdbc.Sql.ExecutionPhase;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.epam.mentoring.data.TestConfig;
 import com.epam.mentoring.data.model.Product;
 
 @ContextConfiguration(classes = TestConfig.class)
 @ActiveProfiles("test")
-@RunWith(SpringRunner.class)
-@TestPropertySource("classpath:/h2-database-sql.properties")
+@RunWith(SpringJUnit4ClassRunner.class)
 public class ProductDaoImplTest {
 
 	@Autowired
 	@Qualifier("ProductDaoImpl")
 	private IProductDao dao;
 	
+	@Autowired
+	private JdbcTemplate jdbcTemplate;
+	
 	@Test
-	@Sql({"classpath:/create_tables.sql"})
+	@Sql("classpath:/create_tables.sql")
+	@Sql("classpath:/data.sql")
+	@Sql(value = "classpath:/delete_tables.sql", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	public void getAllProductsWithQuantitesTest() {
-//		Map<Product, Integer> productsAndQuantitesMap = dao.getAllProductsWithQuantities();
+		Map<Integer, Integer> expectedQuantitiesMap = new HashMap<Integer, Integer>() {
+			{
+				put(1, 5);
+				put(2, 27);
+				put(3, 29);
+				put(4, 50);
+				put(5, 5);
+				put(6, 25);
+				put(7, 7);
+				put(8, 30);
+				put(9, 12);
+			}
+		};
 		
+		Map<Product, Integer> productsAndQuantitesMap = dao.getAllProductsWithQuantities();
+		assertThat(productsAndQuantitesMap.size(), is(9));
+		
+		for(Map.Entry<Product, Integer> entry: productsAndQuantitesMap.entrySet()) {
+			assertThat(entry.getValue(), equalTo(expectedQuantitiesMap.get(entry.getKey().getId()))); 
+		}
 	}
+	
+	@Test
+	@Sql("classpath:/create_tables.sql")
+	@Sql("classpath:/data.sql")
+	@Sql(value = "classpath:/delete_tables.sql", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
+	public void getAllProductsWithQuantitesUpdateValuesTest() {
+		Map<Integer, Integer> expectedQuantitiesMap = new HashMap<Integer, Integer>() {
+			{
+				put(1, 20);
+				put(2, 27);
+				put(3, 34);
+				put(4, 42);
+				put(5, 23);
+				put(6, 25);
+				put(7, 15);
+				put(8, 18);
+				put(9, 9);
+			}
+		};
+		
+		jdbcTemplate.execute("INSERT INTO product_income VALUES (13, 15, 10013, '2017-11-10', 1, 1, 1)");
+		jdbcTemplate.execute("INSERT INTO product_income VALUES (14, 10, 10014, '2017-11-10', 3, 1, 1)");
+		jdbcTemplate.execute("INSERT INTO product_income VALUES (15, 18, 10015, '2017-11-10', 5, 1, 1)");
+		jdbcTemplate.execute("INSERT INTO product_income VALUES (16, 8, 10016, '2017-11-10', 7, 1, 1)");
+		jdbcTemplate.execute("INSERT INTO product_outcome VALUES (13, 5, '2017-11-10', 3, 1)");
+		jdbcTemplate.execute("INSERT INTO product_outcome VALUES (14, 8, '2017-11-10', 4, 1)");
+		jdbcTemplate.execute("INSERT INTO product_outcome VALUES (15, 12, '2017-11-10', 8, 1)");
+		jdbcTemplate.execute("INSERT INTO product_outcome VALUES (16, 3, '2017-11-10', 9, 1)");
+		
+		Map<Product, Integer> productsAndQuantitesMap = dao.getAllProductsWithQuantities();
+		assertThat(productsAndQuantitesMap.size(), is(9));
+		
+		for(Map.Entry<Product, Integer> entry: productsAndQuantitesMap.entrySet()) {
+			assertThat(entry.getValue(), equalTo(expectedQuantitiesMap.get(entry.getKey().getId()))); 
+		}
+	}
+	
+	@Test
+	@Sql("classpath:/create_tables.sql")
+	@Sql("classpath:/data.sql")
+	@Sql(value = "classpath:/delete_tables.sql", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
+	public void getAllProductsWithQuantitesOnlyIncomeTest() {
+		Map<Integer, Integer> expectedQuantitiesMap = new HashMap<Integer, Integer>() {
+			{
+				put(1, 10);
+				put(2, 40);
+				put(3, 45);
+				put(4, 50);
+				put(5, 25);
+				put(6, 50);
+				put(7, 10);
+				put(8, 30);
+				put(9, 25);
+			}
+		};
+		
+		jdbcTemplate.execute("DELETE FROM product_outcome");
+		
+		Map<Product, Integer> productsAndQuantitesMap = dao.getAllProductsWithQuantities();
+		assertThat(productsAndQuantitesMap.size(), is(9));
+		
+		for(Map.Entry<Product, Integer> entry: productsAndQuantitesMap.entrySet()) {
+			assertThat(entry.getValue(), equalTo(expectedQuantitiesMap.get(entry.getKey().getId()))); 
+		}
+	}
+
 	
 	
 	
