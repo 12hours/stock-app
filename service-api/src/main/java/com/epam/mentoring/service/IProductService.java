@@ -27,5 +27,7 @@ public interface IProductService {
 	public Map<Product, Integer> getAllProductsWithQuantities() throws DataAccessException;
 	
 	public void deleteProductById(Long id) throws DataAccessException;
+
+	Map<Product, Integer> getAllProductsWithQuantites();
 	
 }

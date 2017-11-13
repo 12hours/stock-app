@@ -14,6 +14,11 @@
     </parent>
     
     <dependencies>
+    	<dependency>
+    		<groupId>com.epam.mentoring</groupId>
+    		<artifactId>model</artifactId>
+    	</dependency>
+    
     </dependencies>
 
 </project>

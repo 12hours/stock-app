@@ -21,7 +21,17 @@
     	
     	<dependency>
     		<groupId>com.epam.mentoring</groupId>
+    		<artifactId>model</artifactId>
+    	</dependency>
+    	
+    	<dependency>
+    		<groupId>com.epam.mentoring</groupId>
     		<artifactId>service-api</artifactId>
+    	</dependency>
+    	
+    	<dependency>
+    		<groupId>org.slf4j</groupId>
+    		<artifactId>slf4j-api</artifactId>
     	</dependency>
     	
     </dependencies>
