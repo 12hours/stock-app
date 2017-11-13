@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.epam.mentoring</groupId>
-    <artifactId>service</artifactId>
+    <artifactId>client-api</artifactId>
 
     <parent>
         <groupId>com.epam.mentoring</groupId>
@@ -14,15 +14,6 @@
     </parent>
     
     <dependencies>
-    	<dependency>
-    		<groupId>com.epam.mentoring</groupId>
-    		<artifactId>model</artifactId>
-    	</dependency>
-		
-		<dependency>
-		    <groupId>org.slf4j</groupId>
-		    <artifactId>slf4j-api</artifactId>
-		</dependency>    	
     </dependencies>
 
 </project>
