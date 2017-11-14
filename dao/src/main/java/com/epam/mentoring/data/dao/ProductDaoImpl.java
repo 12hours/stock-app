@@ -1,7 +1,5 @@
 package com.epam.mentoring.data.dao;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
@@ -9,11 +7,9 @@ import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.ResultSetExtractor;
-import org.springframework.stereotype.Component;
 
+import org.springframework.util.Assert;
 import com.epam.mentoring.data.model.Product;
 import com.epam.mentoring.data.util.mappers.ProductRowMapper;
 import com.epam.mentoring.data.util.mappers.ProductsWithQuantitiesResultSetExtractor;
@@ -67,8 +63,8 @@ public class ProductDaoImpl implements IProductDao{
 
 	@Override
 	public int addProduct(Product product) {
-		// TODO Auto-generated method stub
-		return 0;
+		Assert.notNull(product, "No product provided for saving");
+		return jdbcTemplate.update(addProductSql, product.getProductName(), product.getPrice(), product.getType().getId());
 	}
 
 	@Override

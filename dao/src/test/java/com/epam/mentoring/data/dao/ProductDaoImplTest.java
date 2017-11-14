@@ -2,6 +2,7 @@ package com.epam.mentoring.data.dao;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.Assert.assertThat;
 
 import java.util.HashMap;
@@ -22,8 +23,9 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.epam.mentoring.data.TestConfig;
 import com.epam.mentoring.data.model.Product;
+import com.epam.mentoring.data.model.ProductType;
 
-@ContextConfiguration(classes = TestConfig.class)
+@ContextConfiguration(classes = {TestConfig.class})
 @ActiveProfiles("test")
 @RunWith(SpringJUnit4ClassRunner.class)
 public class ProductDaoImplTest {
@@ -130,6 +132,31 @@ public class ProductDaoImplTest {
 		}
 	}
 
+	@Test
+	@Sql("classpath:/create_tables.sql")
+	@Sql("classpath:/data.sql")
+	@Sql(value = "classpath:/delete_tables.sql", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
+	public void addProductGetProductTest() {
+		
+		ProductType productType = new ProductType();
+		productType.setId(1);
+		
+		Product product = new Product();
+		product.setPrice(100);
+		product.setProductName("dummy_product");
+		product.setType(productType);
+		
+		int ra = dao.addProduct(product);
+		assertThat(Integer.valueOf(ra), equalTo(Integer.valueOf(1)));
+		
+		Product extractedProduct = dao.getProductById(10);
+		assertThat(extractedProduct, notNullValue());
+		assertThat(extractedProduct.getId(), equalTo(10));
+		assertThat(extractedProduct.getProductName(), equalTo("dummy_product"));
+		assertThat(extractedProduct.getPrice(), equalTo(100.0F));
+		assertThat(extractedProduct.getType().getTypeName(), equalTo("CPU"));
+		assertThat(extractedProduct.getType().getId(), equalTo(1));
+	}
 	
 	
 	

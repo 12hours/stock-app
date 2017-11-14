@@ -14,34 +14,32 @@ import com.epam.mentoring.data.model.ProductType;
 
 public class ProductRowMapper implements RowMapper<Product>{
 
-	@Value("product.column.id")
+	@Value("${product.column.id}")
 	private String PRODUCT_ID_COL;
 	
-	@Value("product.column.price")
+	@Value("${product.column.price}")
 	private String PRODUCT_PRICE_COL;
 	
-	@Value("product.column.name")
+	@Value("${product.column.name}")
 	private String PRODUCT_NAME_COL;
 	
-	@Value("product_type.column.id")
+	@Value("${product_type.column.id}")
 	private String PRODUCT_TYPE_ID_COL;
 	
-	@Value("product_type.column.name")
+	@Value("${product_type.column.name}")
 	private String PRODUCT_TYPE_NAME_COL;
 	
 	@Override
 	public Product mapRow(ResultSet rs, int rowNum) throws SQLException {
 		Product product = null;
-		if (rs.next()) {
-			product = new Product();
-			product.setId(rs.getInt(PRODUCT_ID_COL));
-			product.setPrice(rs.getFloat(PRODUCT_PRICE_COL));
-			product.setProductName(PRODUCT_NAME_COL);
-			ProductType productType = new ProductType();
-			productType.setId(rs.getInt(PRODUCT_TYPE_ID_COL));
-			productType.setTypeName(rs.getString(PRODUCT_TYPE_NAME_COL));
-			product.setType(productType);
-		}
+		product = new Product();
+		product.setId(rs.getInt(PRODUCT_ID_COL));
+		product.setPrice(rs.getFloat(PRODUCT_PRICE_COL));
+		product.setProductName(rs.getString(PRODUCT_NAME_COL));
+		ProductType productType = new ProductType();
+		productType.setId(rs.getInt(PRODUCT_TYPE_ID_COL));
+		productType.setTypeName(rs.getString(PRODUCT_TYPE_NAME_COL));
+		product.setType(productType);
 		return product;
 	}
 
