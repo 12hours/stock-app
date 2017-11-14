@@ -21,6 +21,31 @@
     		<groupId>com.epam.mentoring</groupId>
     		<artifactId>client-api</artifactId>
     	</dependency>
+    	
+    	<dependency>
+    		<groupId>com.epam.mentoring</groupId>
+    		<artifactId>client</artifactId>
+    	</dependency>
+    	
+    	<dependency>
+    		<groupId>com.epam.mentoring</groupId>
+    		<artifactId>service-api</artifactId>
+    	</dependency>
+    	
+    	<dependency>
+    		<groupId>com.epam.mentoring</groupId>
+    		<artifactId>service</artifactId>
+    	</dependency>
+    	
+    	<dependency>
+    		<groupId>com.epam.mentoring</groupId>
+    		<artifactId>dao-api</artifactId>
+    	</dependency>
+    	
+    	<dependency>
+    		<groupId>com.epam.mentoring</groupId>
+    		<artifactId>dao</artifactId>
+    	</dependency>
     
     	<dependency>
     		<groupId>org.springframework</groupId>
@@ -49,11 +74,13 @@
 	      <artifactId>jcl-over-slf4j</artifactId>
 	      <scope>runtime</scope>
 	   </dependency>
+	   
 	   <dependency>
 	      <groupId>org.slf4j</groupId>
 	      <artifactId>slf4j-api</artifactId>
-	      <scope>runtime</scope>
+	      <!-- <scope>runtime</scope> -->
 	   </dependency>
+	   
 	   <dependency>
 	      <groupId>org.slf4j</groupId>
 	      <artifactId>slf4j-log4j12</artifactId>
@@ -73,6 +100,9 @@
             <plugin>
                 <groupId>org.eclipse.jetty</groupId>
                 <artifactId>jetty-maven-plugin</artifactId>
+                <configuration>
+                	<reload>automatic</reload>
+                </configuration>
             </plugin>
         </plugins>
     </build>

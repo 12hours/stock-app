@@ -57,7 +57,7 @@ public class ProductService implements IProductService{
 	}
 	
 	@Override
-	public Map<Product, Integer> getAllProductsWithQuantites(){
+	public Map<Product, Integer> getAllProductsWithQuantities() throws DataAccessException{
 		Map<Product, Integer> productsWithQuantitiesMap = productDao.getAllProductsWithQuantities();
 		logger.debug("getting products with quantities: " + productsWithQuantitiesMap.size() + " items found");
 		return productsWithQuantitiesMap;
@@ -68,10 +68,4 @@ public class ProductService implements IProductService{
 		
 	}
 
-	@Override
-	public Map<Product, Integer> getAllProductsWithQuantities() throws DataAccessException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
 }

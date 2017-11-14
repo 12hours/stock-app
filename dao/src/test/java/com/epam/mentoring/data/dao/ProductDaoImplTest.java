@@ -9,6 +9,8 @@ import java.util.Map;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -25,6 +27,8 @@ import com.epam.mentoring.data.model.Product;
 @ActiveProfiles("test")
 @RunWith(SpringJUnit4ClassRunner.class)
 public class ProductDaoImplTest {
+	
+	Logger logger = LoggerFactory.getLogger(ProductDaoImplTest.class);
 
 	@Autowired
 	@Qualifier("ProductDaoImpl")
@@ -34,10 +38,11 @@ public class ProductDaoImplTest {
 	private JdbcTemplate jdbcTemplate;
 	
 	@Test
-	@Sql("classpath:/create_tables.sql")
-	@Sql("classpath:/data.sql")
-	@Sql(value = "classpath:/delete_tables.sql", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
+	@Sql("classpath:create_tables.sql")
+	@Sql("classpath:data.sql")
+	@Sql(value = "classpath:delete_tables.sql", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	public void getAllProductsWithQuantitesTest() {
+		logger.info("getAllProductsWithQuantitesTest run");
 		Map<Integer, Integer> expectedQuantitiesMap = new HashMap<Integer, Integer>() {
 			{
 				put(1, 5);

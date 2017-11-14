@@ -3,6 +3,7 @@ package com.epam.mentoring.web.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Description;
+import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.web.servlet.ViewResolver;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.spring4.SpringTemplateEngine;
@@ -40,6 +41,14 @@ public class ThymeLeafConfig {
 		thymeleafViewResolver.setOrder(1);
 //		thymeleafViewResolver.setViewNames(new String[]{"*.html"});
 		return thymeleafViewResolver;
+	}
+	
+	@Bean
+	@Description("Spring Message Resolver")
+	public ResourceBundleMessageSource messageSource() {
+	    ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
+	    messageSource.setBasename("messages");
+	    return messageSource;
 	}
 
 }
