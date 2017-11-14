@@ -5,7 +5,7 @@
 
     <groupId>com.epam.mentoring</groupId>
     <artifactId>web-app</artifactId>
-    <version>0.1.0</version>
+    <version>1.0</version>
     <packaging>war</packaging>
 
     <parent>
@@ -14,5 +14,68 @@
         <version>1.0</version>
         <relativePath>..</relativePath>
     </parent>
+    
+    <dependencies>
+    	
+    	<dependency>
+    		<groupId>com.epam.mentoring</groupId>
+    		<artifactId>client-api</artifactId>
+    	</dependency>
+    
+    	<dependency>
+    		<groupId>org.springframework</groupId>
+    		<artifactId>spring-webmvc</artifactId>
+    	</dependency>
+    	
+		<dependency>
+		    <groupId>org.thymeleaf</groupId>
+		    <artifactId>thymeleaf</artifactId>
+		</dependency>
+		
+		<dependency>
+		    <groupId>org.thymeleaf</groupId>
+		    <artifactId>thymeleaf-spring4</artifactId>
+		</dependency>
+		
+    	
+    	
+    	<dependency>
+    		<groupId>javax.servlet</groupId>
+    		<artifactId>javax.servlet-api</artifactId>
+    	</dependency>
+    	
+    	<dependency>
+	      <groupId>org.slf4j</groupId>
+	      <artifactId>jcl-over-slf4j</artifactId>
+	      <scope>runtime</scope>
+	   </dependency>
+	   <dependency>
+	      <groupId>org.slf4j</groupId>
+	      <artifactId>slf4j-api</artifactId>
+	      <scope>runtime</scope>
+	   </dependency>
+	   <dependency>
+	      <groupId>org.slf4j</groupId>
+	      <artifactId>slf4j-log4j12</artifactId>
+	      <scope>runtime</scope>
+	   </dependency>
+    	
+		<dependency>
+		    <groupId>org.apache.logging.log4j</groupId>
+		    <artifactId>log4j-core</artifactId>
+		</dependency>
+    	
+    </dependencies>
+    
+     <build>
+        <plugins>
+            <!-- embedded Jetty server, for testing -->
+            <plugin>
+                <groupId>org.eclipse.jetty</groupId>
+                <artifactId>jetty-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+    
 </project>
 
