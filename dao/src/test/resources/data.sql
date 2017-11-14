@@ -29,9 +29,9 @@ INSERT INTO `${supplier.table.name}`
 `${supplier.column.name.name}`,
 `${supplier.column.details.name}`)
 VALUES
-(1, 'Nova Computers', ''),
-(2, 'PC World Group', ''),
-(3, 'Ultra Hardware Inc.', '');
+(1, 'Nova Computers', 'details A'),
+(2, 'PC World Group', 'details B'),
+(3, 'Ultra Hardware Inc.', 'details C');
 
 INSERT INTO `${user.table.name}`
 (`${user.column.id.name}`,

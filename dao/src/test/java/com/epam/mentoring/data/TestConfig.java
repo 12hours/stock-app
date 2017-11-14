@@ -13,9 +13,17 @@ import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 
 import com.epam.mentoring.data.dao.IProductDao;
+import com.epam.mentoring.data.dao.IProductIncomeDao;
+import com.epam.mentoring.data.dao.IProductTypeDao;
+import com.epam.mentoring.data.dao.ISupplierDao;
 import com.epam.mentoring.data.dao.ProductDaoImpl;
+import com.epam.mentoring.data.dao.ProductIncomeDaoImpl;
+import com.epam.mentoring.data.dao.ProductTypeDaoImpl;
+import com.epam.mentoring.data.dao.SupplierDaoImpl;
 import com.epam.mentoring.data.util.mappers.ProductRowMapper;
 import com.epam.mentoring.data.util.mappers.ProductsWithQuantitiesResultSetExtractor;
+import com.epam.mentoring.data.util.mappers.SupplierRowMapper;
+import com.epam.mentoring.data.util.mappers.SuppliersResultSetExtractor;
 
 @Configuration
 @Profile("test")
@@ -44,12 +52,41 @@ public class TestConfig {
 		return new ProductRowMapper();
 	}
 	
+	@Bean
+	SupplierRowMapper supplerRowMapper() {
+		return new SupplierRowMapper();
+	}
+	
+	@Bean
+	SuppliersResultSetExtractor suppliersResultSetExtractor() {
+		return new SuppliersResultSetExtractor();
+	}
 	
 	@Bean(name = "ProductDaoImpl")
 	IProductDao productDao() {
 		IProductDao dao = new ProductDaoImpl(dataSource());
 		return dao;
 	}
+	
+	@Bean
+	ISupplierDao supplierDao() {
+		ISupplierDao dao = new SupplierDaoImpl(dataSource());
+		return dao;
+	}
+	
+	@Bean
+	IProductTypeDao productTypeDao() {
+		IProductTypeDao dao = new ProductTypeDaoImpl(dataSource());
+		return dao;
+	}
+	
+	@Bean
+	IProductIncomeDao productIncomeDao() {
+		IProductIncomeDao dao = new ProductIncomeDaoImpl(dataSource());
+		return dao;
+	}
+	
+	
 	
     @Bean
     JdbcTemplate jdbcTemplate() {
