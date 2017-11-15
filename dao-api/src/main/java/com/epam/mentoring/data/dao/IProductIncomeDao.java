@@ -6,5 +6,5 @@ import com.epam.mentoring.data.model.ProductIncome;
 
 public interface IProductIncomeDao {
 	ProductIncome getProductIncomeById(int id) throws DataAccessException;
-	void addProductIncome(ProductIncome productIncome) throws DataAccessException;
+	int addProductIncome(ProductIncome productIncome) throws DataAccessException;
 }

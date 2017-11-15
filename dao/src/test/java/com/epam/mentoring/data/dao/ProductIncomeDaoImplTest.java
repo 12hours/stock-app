@@ -1,0 +1,142 @@
+package com.epam.mentoring.data.dao;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+
+import java.util.Calendar;
+import java.util.Date;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.jdbc.Sql;
+import org.springframework.test.context.jdbc.Sql.ExecutionPhase;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import com.epam.mentoring.data.TestConfig;
+import com.epam.mentoring.data.model.Product;
+import com.epam.mentoring.data.model.ProductIncome;
+import com.epam.mentoring.data.model.ProductType;
+import com.epam.mentoring.data.model.Supplier;
+import com.epam.mentoring.data.model.User;
+
+@ContextConfiguration(classes = {TestConfig.class})
+@ActiveProfiles("test")
+@RunWith(SpringJUnit4ClassRunner.class)
+public class ProductIncomeDaoImplTest {
+
+	@Autowired
+	private IProductIncomeDao dao;
+
+	@Autowired
+	private JdbcTemplate jdbcTemplate;
+
+	@Test
+	@Sql("classpath:/h2/create_tables.sql")
+	@Sql("classpath:/h2/data.sql")
+	@Sql(value = "classpath:/h2/delete_tables.sql", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
+	public void getProductIncomeTest() {
+		ProductIncome productIncome = dao.getProductIncomeById(1);
+		assertNotNull(productIncome);
+		assertEquals(productIncome.getId(), 1);
+		assertEquals(productIncome.getOrderNumber(), 10001L);
+		assertEquals(productIncome.getQuantity(), 10);
+		Calendar dateGoal = Calendar.getInstance();
+		dateGoal.set(2017, 9, 25);
+//		Date date = new Date(dateCalendar.getTimeInMillis());
+		Calendar dateExtracted = Calendar.getInstance();
+		dateExtracted.setTime(productIncome.getDate());
+		assertEquals(dateGoal.get(dateGoal.YEAR), dateExtracted.get(dateExtracted.YEAR));
+		assertEquals(dateGoal.get(dateGoal.MONTH), dateExtracted.get(dateExtracted.MONTH));
+		assertEquals(dateGoal.get(dateGoal.DAY_OF_MONTH), dateExtracted.get(dateExtracted.DAY_OF_MONTH));
+		
+		ProductType productTypeGoal = new ProductType();
+		productTypeGoal.setId(1);
+		productTypeGoal.setTypeName("CPU");
+		Product productGoal = new Product();
+		productGoal.setId(1);
+		productGoal.setProductName("Intel Core i7 8700");
+		productGoal.setPrice(360);
+		productGoal.setType(productTypeGoal);
+		assertEquals(productGoal, productIncome.getProduct());
+		
+		Supplier supplierGoal = new Supplier();
+		supplierGoal.setId(1);
+		supplierGoal.setName("Nova Computers");
+		supplierGoal.setDetails("");
+		assertEquals(supplierGoal, productIncome.getSupplier());
+		
+		User userGoal = productIncome.getUser();
+		userGoal.setId(1);
+		userGoal.setName("accounter");
+		userGoal.setPassword("12345");
+		assertEquals(userGoal, productIncome.getUser());
+	}
+	
+	@Test
+	@Sql("classpath:/h2/create_tables.sql")
+	@Sql("classpath:/h2/data.sql")
+	@Sql(value = "classpath:/h2/delete_tables.sql", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
+	public void addProductIncomeTest() {
+		ProductIncome productIncome = new ProductIncome();
+		Product product = new Product();
+		product.setId(1);
+		User user = new User();
+		user.setId(1);
+		Supplier supplier = new Supplier();
+		supplier.setId(1);
+		
+		productIncome.setOrderNumber(10015);
+		productIncome.setQuantity(16);
+		Calendar date = Calendar.getInstance();
+		date.set(2017, 9, 25);
+		productIncome.setDate(new Date(date.getTimeInMillis()));
+		productIncome.setProduct(product);
+		productIncome.setSupplier(supplier);
+		productIncome.setUser(user);
+		
+		dao.addProductIncome(productIncome);
+		
+		
+		ProductIncome productIncomeExtracted = dao.getProductIncomeById(13);
+		assertNotNull(productIncomeExtracted);
+		assertEquals(13, productIncomeExtracted.getId());
+		assertEquals(10015L, productIncomeExtracted.getOrderNumber());
+		assertEquals(16, productIncomeExtracted.getQuantity());
+		Calendar dateGoal = Calendar.getInstance();
+		dateGoal.set(2017, 9, 25);
+//		Date date = new Date(dateCalendar.getTimeInMillis());
+		Calendar dateExtracted = Calendar.getInstance();
+		dateExtracted.setTime(productIncomeExtracted.getDate());
+		assertEquals(dateGoal.get(dateGoal.YEAR), dateExtracted.get(dateExtracted.YEAR));
+		assertEquals(dateGoal.get(dateGoal.MONTH), dateExtracted.get(dateExtracted.MONTH));
+		assertEquals(dateGoal.get(dateGoal.DAY_OF_MONTH), dateExtracted.get(dateExtracted.DAY_OF_MONTH));
+		
+		ProductType productTypeGoal = new ProductType();
+		productTypeGoal.setId(1);
+		productTypeGoal.setTypeName("CPU");
+		Product productGoal = new Product();
+		productGoal.setId(1);
+		productGoal.setProductName("Intel Core i7 8700");
+		productGoal.setPrice(360);
+		productGoal.setType(productTypeGoal);
+		assertEquals(productGoal, productIncomeExtracted.getProduct());
+		
+		Supplier supplierGoal = new Supplier();
+		supplierGoal.setId(1);
+		supplierGoal.setName("Nova Computers");
+		supplierGoal.setDetails("");
+		assertEquals(supplierGoal, productIncomeExtracted.getSupplier());
+		
+		User userGoal = productIncomeExtracted.getUser();
+		userGoal.setId(1);
+		userGoal.setName("accounter");
+		userGoal.setPassword("12345");
+		assertEquals(userGoal, productIncomeExtracted.getUser());
+		
+	}
+
+}

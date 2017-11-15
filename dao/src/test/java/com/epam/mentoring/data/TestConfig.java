@@ -2,13 +2,11 @@ package com.epam.mentoring.data;
 
 import javax.sql.DataSource;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 
@@ -20,6 +18,8 @@ import com.epam.mentoring.data.dao.ProductDaoImpl;
 import com.epam.mentoring.data.dao.ProductIncomeDaoImpl;
 import com.epam.mentoring.data.dao.ProductTypeDaoImpl;
 import com.epam.mentoring.data.dao.SupplierDaoImpl;
+import com.epam.mentoring.data.util.mappers.ProductIncomeRowMapper;
+import com.epam.mentoring.data.util.mappers.ProductIncomesResultSetExtractor;
 import com.epam.mentoring.data.util.mappers.ProductRowMapper;
 import com.epam.mentoring.data.util.mappers.ProductTypeRowMapper;
 import com.epam.mentoring.data.util.mappers.ProductTypesResultSetExtractor;
@@ -27,9 +27,10 @@ import com.epam.mentoring.data.util.mappers.ProductsWithQuantitiesResultSetExtra
 import com.epam.mentoring.data.util.mappers.SupplierRowMapper;
 import com.epam.mentoring.data.util.mappers.SuppliersResultSetExtractor;
 
+
 @Configuration
 @Profile("test")
-@PropertySource("classpath:/h2-database-sql.properties")
+@PropertySource("classpath:/h2/h2-database-sql.properties")
 public class TestConfig {
 //
 	@Bean
@@ -45,7 +46,7 @@ public class TestConfig {
 	}
 	
 	@Bean
-	ProductsWithQuantitiesResultSetExtractor productsWithQuantitiesMapper() {
+	ProductsWithQuantitiesResultSetExtractor productsWithQuantitiesResultSetExtractor() {
 		return new ProductsWithQuantitiesResultSetExtractor();
 	}
 	
@@ -72,6 +73,16 @@ public class TestConfig {
 	@Bean
 	ProductTypesResultSetExtractor productTypesResultSetExtractor() {
 		return new ProductTypesResultSetExtractor();
+	}
+	
+	@Bean
+	ProductIncomeRowMapper productIncomeRowMapper() {
+		return new ProductIncomeRowMapper();
+	}
+	
+	@Bean
+	ProductIncomesResultSetExtractor productIncomesResultSetExtractor() {
+		return new ProductIncomesResultSetExtractor();
 	}
 	
 	

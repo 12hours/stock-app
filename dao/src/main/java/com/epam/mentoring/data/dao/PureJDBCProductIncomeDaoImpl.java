@@ -6,6 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import org.springframework.dao.DataAccessException;
+
 import com.epam.mentoring.data.model.ProductIncome;
 
 
@@ -59,9 +61,10 @@ public class PureJDBCProductIncomeDaoImpl implements IProductIncomeDao {
 	}
 
 	@Override
-	public void addProductIncome(ProductIncome productIncome) {
+	public int addProductIncome(ProductIncome productIncome) throws DataAccessException {
 		// TODO Auto-generated method stub
-
+		return 0;
 	}
+
 
 }
