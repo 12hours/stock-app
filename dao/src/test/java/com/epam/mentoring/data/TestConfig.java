@@ -21,6 +21,8 @@ import com.epam.mentoring.data.dao.ProductIncomeDaoImpl;
 import com.epam.mentoring.data.dao.ProductTypeDaoImpl;
 import com.epam.mentoring.data.dao.SupplierDaoImpl;
 import com.epam.mentoring.data.util.mappers.ProductRowMapper;
+import com.epam.mentoring.data.util.mappers.ProductTypeRowMapper;
+import com.epam.mentoring.data.util.mappers.ProductTypesResultSetExtractor;
 import com.epam.mentoring.data.util.mappers.ProductsWithQuantitiesResultSetExtractor;
 import com.epam.mentoring.data.util.mappers.SupplierRowMapper;
 import com.epam.mentoring.data.util.mappers.SuppliersResultSetExtractor;
@@ -61,6 +63,17 @@ public class TestConfig {
 	SuppliersResultSetExtractor suppliersResultSetExtractor() {
 		return new SuppliersResultSetExtractor();
 	}
+	
+	@Bean
+	ProductTypeRowMapper productTypeRowMapper() {
+		return new ProductTypeRowMapper();
+	}
+	
+	@Bean
+	ProductTypesResultSetExtractor productTypesResultSetExtractor() {
+		return new ProductTypesResultSetExtractor();
+	}
+	
 	
 	@Bean(name = "ProductDaoImpl")
 	IProductDao productDao() {

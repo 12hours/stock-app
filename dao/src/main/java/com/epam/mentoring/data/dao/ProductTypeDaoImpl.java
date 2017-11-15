@@ -4,26 +4,50 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.DataAccessException;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowCallbackHandler;
+import org.springframework.jdbc.core.RowMapper;
+import org.springframework.util.Assert;
 
 import com.epam.mentoring.data.model.ProductType;
+import com.epam.mentoring.data.util.mappers.ProductTypeRowMapper;
+import com.epam.mentoring.data.util.mappers.ProductTypesResultSetExtractor;
 
 public class ProductTypeDaoImpl implements IProductTypeDao {
+	
+	@Value("${product_type.get.by_id}")
+	private String getProductTypeById;
+	
+	@Value("${product_type.get.all}")
+	private String getAllProductTypes;
+	
+	@Value("${product_type.add}")
+	private String addProductType;
+	
+	private JdbcTemplate jdbcTemplate;
+	@Autowired
+	private ProductTypeRowMapper productTypeRowMapper;
 
+	@Autowired
+	private ProductTypesResultSetExtractor productTypeResultSetExtractor;
+	
 	public ProductTypeDaoImpl(DataSource dataSource) {
-		// TODO Auto-generated constructor stub
+		this.jdbcTemplate = new JdbcTemplate(dataSource);
 	}
 	
 	@Override
 	public ProductType getProductTypeById(int id) throws DataAccessException {
-		// TODO Auto-generated method stub
-		return null;
+		ProductType productType = jdbcTemplate.queryForObject(getProductTypeById, new Object[] {id}, productTypeRowMapper);
+		return productType;
 	}
 
 	@Override
 	public List<ProductType> getAllProductTypes() throws DataAccessException {
-		// TODO Auto-generated method stub
-		return null;
+		List<ProductType> productTypes = jdbcTemplate.query(getAllProductTypes, productTypeResultSetExtractor);
+		return productTypes;
 	}
 
 	@Override
@@ -34,8 +58,8 @@ public class ProductTypeDaoImpl implements IProductTypeDao {
 
 	@Override
 	public int addProductType(ProductType productType) throws DataAccessException {
-		// TODO Auto-generated method stub
-		return 0;
+		Assert.notNull(productType, "No productType provided for saving");
+		return jdbcTemplate.update(addProductType, productType.getTypeName());
 	}
 
 	@Override
