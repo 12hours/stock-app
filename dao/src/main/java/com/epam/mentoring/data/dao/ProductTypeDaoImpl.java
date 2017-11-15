@@ -8,8 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowCallbackHandler;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.util.Assert;
 
 import com.epam.mentoring.data.model.ProductType;
@@ -19,13 +17,13 @@ import com.epam.mentoring.data.util.mappers.ProductTypesResultSetExtractor;
 public class ProductTypeDaoImpl implements IProductTypeDao {
 	
 	@Value("${product_type.get.by_id}")
-	private String getProductTypeById;
-	
+	private String GET_PRODUCT_TYPE_BY_ID_SQL;
+
 	@Value("${product_type.get.all}")
-	private String getAllProductTypes;
-	
+	private String GET_ALL_PRODUCT_TYPES_SQL;
+
 	@Value("${product_type.add}")
-	private String addProductType;
+	private String ADD_PRODUCT_TYPE_SQL;
 	
 	private JdbcTemplate jdbcTemplate;
 	@Autowired
@@ -39,14 +37,14 @@ public class ProductTypeDaoImpl implements IProductTypeDao {
 	}
 	
 	@Override
-	public ProductType getProductTypeById(int id) throws DataAccessException {
-		ProductType productType = jdbcTemplate.queryForObject(getProductTypeById, new Object[] {id}, productTypeRowMapper);
+	public ProductType getProductTypeById(Integer id) throws DataAccessException {
+		ProductType productType = jdbcTemplate.queryForObject(GET_PRODUCT_TYPE_BY_ID_SQL, new Object[] {id}, productTypeRowMapper);
 		return productType;
 	}
 
 	@Override
 	public List<ProductType> getAllProductTypes() throws DataAccessException {
-		List<ProductType> productTypes = jdbcTemplate.query(getAllProductTypes, productTypeResultSetExtractor);
+		List<ProductType> productTypes = jdbcTemplate.query(GET_ALL_PRODUCT_TYPES_SQL, productTypeResultSetExtractor);
 		return productTypes;
 	}
 
@@ -58,12 +56,11 @@ public class ProductTypeDaoImpl implements IProductTypeDao {
 
 	@Override
 	public int addProductType(ProductType productType) throws DataAccessException {
-		Assert.notNull(productType, "No productType provided for saving");
-		return jdbcTemplate.update(addProductType, productType.getTypeName());
+		return jdbcTemplate.update(ADD_PRODUCT_TYPE_SQL, productType.getTypeName());
 	}
 
 	@Override
-	public int deleteProductType(int id) throws DataAccessException {
+	public int deleteProductType(Integer id) throws DataAccessException {
 		// TODO Auto-generated method stub
 		return 0;
 	}

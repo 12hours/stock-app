@@ -17,13 +17,13 @@ import com.epam.mentoring.data.util.mappers.SuppliersResultSetExtractor;
 public class SupplierDaoImpl implements ISupplierDao {
 
 	@Value("${supplier.get.by_id}")
-	private String getSupplierById;
+	private String GET_SUPPLIER_BY_ID_SQL;
 	
 	@Value("${supplier.get.all}")
-	private String getAllSuppliersSql;
+	private String GET_ALL_SUPPLIERS_SQL;
 	
 	@Value("${supplier.add}")
-	private String addSupplierSql;
+	private String ADD_SUPPLIER_SQL;
 	
 	private JdbcTemplate jdbcTemplate;
 	
@@ -38,20 +38,19 @@ public class SupplierDaoImpl implements ISupplierDao {
 	}
 	
 	@Override
-	public Supplier getSupplierById(int id) throws DataAccessException {
-		Supplier supplier = jdbcTemplate.queryForObject(getSupplierById, new Object[] {id}, supplierRowMapper);
+	public Supplier getSupplierById(Integer id) throws DataAccessException {
+		Supplier supplier = jdbcTemplate.queryForObject(GET_SUPPLIER_BY_ID_SQL, new Object[] {id}, supplierRowMapper);
 		return supplier;
 	}
 
 	@Override
 	public List<Supplier> getAllSuppliers() throws DataAccessException {
-		return jdbcTemplate.query(getAllSuppliersSql, suppliersResultSetExtractor);
+		return jdbcTemplate.query(GET_ALL_SUPPLIERS_SQL, suppliersResultSetExtractor);
 	}
 
 	@Override
 	public int addSupplier(Supplier supplier) throws DataAccessException {
-		Assert.notNull(supplier, "No supplier provided for saving");
-		return jdbcTemplate.update(addSupplierSql, supplier.getName(), supplier.getDetails());
+		return jdbcTemplate.update(ADD_SUPPLIER_SQL, supplier.getName(), supplier.getDetails());
 	}
 
 	@Override
@@ -61,7 +60,7 @@ public class SupplierDaoImpl implements ISupplierDao {
 	}
 
 	@Override
-	public int deleteSupplier(int id) throws DataAccessException {
+	public int deleteSupplier(Integer id) throws DataAccessException {
 		// TODO Auto-generated method stub
 		return 0;
 	}

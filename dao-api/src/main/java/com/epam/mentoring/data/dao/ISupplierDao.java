@@ -10,6 +10,6 @@ public interface ISupplierDao {
 	List<Supplier> getAllSuppliers() throws DataAccessException;
 	int addSupplier(Supplier supplier) throws DataAccessException;
 	int updateSupplier(Supplier supplier) throws DataAccessException;
-	int deleteSupplier(int id) throws DataAccessException;
-	Supplier getSupplierById(int id) throws DataAccessException;
+	int deleteSupplier(Integer id) throws DataAccessException;
+	Supplier getSupplierById(Integer id) throws DataAccessException;
 }

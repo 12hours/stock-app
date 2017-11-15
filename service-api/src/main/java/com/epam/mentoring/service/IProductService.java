@@ -10,13 +10,13 @@ import com.epam.mentoring.data.model.ProductType;
 
 public interface IProductService {
 	
-	public Product findProductById(Long id) throws DataAccessException;
+	public Product findProductById(Integer id) throws DataAccessException;
 	
 	public Product findProductByName(String name) throws DataAccessException;
 	
 	public List<Product> findAllProductsByType(ProductType type) throws DataAccessException;
 	
-	public Product saveProduct(Product product) throws DataAccessException;
+	public int saveProduct(Product product) throws DataAccessException;
 	
 	public Product updateProduct(Long id, Product product) throws DataAccessException;
 	

@@ -29,7 +29,7 @@ public class PureJDBCProductIncomeDaoImpl implements IProductIncomeDao {
 	}
 	
 	@Override
-	public ProductIncome getProductIncomeById(int id) {
+	public ProductIncome getProductIncomeById(Integer id) {
 		Connection conn = null;
 		ProductIncome productIncome = null;
 		try {
@@ -61,7 +61,7 @@ public class PureJDBCProductIncomeDaoImpl implements IProductIncomeDao {
 	}
 
 	@Override
-	public int addProductIncome(ProductIncome productIncome) throws DataAccessException {
+	public Integer addProductIncome(ProductIncome productIncome) throws DataAccessException {
 		// TODO Auto-generated method stub
 		return 0;
 	}

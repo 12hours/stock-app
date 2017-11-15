@@ -10,6 +10,7 @@ import org.springframework.dao.DataAccessException;
 import com.epam.mentoring.data.dao.IProductDao;
 import com.epam.mentoring.data.model.Product;
 import com.epam.mentoring.data.model.ProductType;
+import org.springframework.util.Assert;
 
 public class ProductService implements IProductService{
 	
@@ -22,37 +23,38 @@ public class ProductService implements IProductService{
 	}
 	
 	@Override
-	public Product findProductById(Long id) {
+	public Product findProductById(Integer id) throws DataAccessException {
 		return null;
 	}
 	
 	@Override
-	public Product findProductByName(String name) {
+	public Product findProductByName(String name) throws DataAccessException {
 		return null;
 	}
 	
 	@Override
-	public List<Product> findAllProductsByType(ProductType type){
+	public List<Product> findAllProductsByType(ProductType type) throws DataAccessException {
 		return null;
 	}
 	
 	@Override
-	public Product saveProduct(Product product) {
+	public int saveProduct(Product product) throws DataAccessException {
+		Assert.notNull(product, "No product provided");
+		return productDao.addProduct(product);
+	}
+	
+	@Override
+	public Product updateProduct(Long id, Product product) throws DataAccessException {
 		return null;
 	}
 	
 	@Override
-	public Product updateProduct(Long id, Product product) {
+	public List<Product> getAllProducts() throws DataAccessException {
 		return null;
 	}
 	
 	@Override
-	public List<Product> getAllProducts(){
-		return null;
-	}
-	
-	@Override
-	public Integer getProductQuantity(Long id) {
+	public Integer getProductQuantity(Long id) throws DataAccessException {
 		return null;
 	}
 	
@@ -64,7 +66,7 @@ public class ProductService implements IProductService{
 	}
 	
 	@Override
-	public void deleteProductById(Long id) {
+	public void deleteProductById(Long id) throws DataAccessException {
 		
 	}
 	

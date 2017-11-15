@@ -17,25 +17,25 @@ import com.epam.mentoring.data.util.mappers.ProductsWithQuantitiesResultSetExtra
 public class ProductDaoImpl implements IProductDao{
 	
 	@Value("${product.get.by_id}")
-	private String getProductByIdSql;
+	private String GET_PRODUCT_BY_ID_SQL;
 	
 	@Value("${product.get.all}")
-	private String getAllProductsSql;
+	private String GET_ALL_PRODUCTS_SQL;
 	
 	@Value("${product.add}")
-	private String addProductSql;
+	private String ADD_PRODUCT_SQL;
 	
 	@Value("${product.update}")
-	private String updateProductSql;
+	private String UPDATE_PRODUCT_SQL;
 	
 	@Value("${product.delete}")
-	private String deleteProductSql;
+	private String DELETE_PRODUCT_SQL;
 	
 	@Value("${product.quantity.get.by_id}")
-	private String getProductQuantityBtIdSql;
+	private String GET_PRODUCT_QUANTITY_BY_ID_SQL;
 	
 	@Value("${product.quantity.get.all}")
-	private String getAllProductsWithQuantitiesSql;
+	private String GET_ALL_PRODUCTS_WITH_QUANTITIES_SQL;
 	
 	private JdbcTemplate jdbcTemplate;
 	
@@ -50,8 +50,8 @@ public class ProductDaoImpl implements IProductDao{
 	}
 
 	@Override
-	public Product getProductById(int id) {
-		Product product = jdbcTemplate.queryForObject(getProductByIdSql, new Object[] {id}, productRowMapper);
+	public Product getProductById(Integer id) {
+		Product product = jdbcTemplate.queryForObject(GET_PRODUCT_BY_ID_SQL, new Object[] {id}, productRowMapper);
 		return product;
 	}
 
@@ -63,8 +63,7 @@ public class ProductDaoImpl implements IProductDao{
 
 	@Override
 	public int addProduct(Product product) {
-		Assert.notNull(product, "No product provided for saving");
-		return jdbcTemplate.update(addProductSql, product.getProductName(), product.getPrice(), product.getType().getId());
+		return jdbcTemplate.update(ADD_PRODUCT_SQL, product.getProductName(), product.getPrice(), product.getType().getId());
 	}
 
 	@Override
@@ -74,20 +73,20 @@ public class ProductDaoImpl implements IProductDao{
 	}
 
 	@Override
-	public int deleteProduct(int id) {
+	public int deleteProduct(Integer id) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
-	public int getProductQuantity(int id) {
+	public int getProductQuantityById(Integer id) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
 	public Map<Product, Integer> getAllProductsWithQuantities() {
-		Map<Product, Integer> map = jdbcTemplate.query(getAllProductsWithQuantitiesSql, productsWithQuantitiesMapper);		
+		Map<Product, Integer> map = jdbcTemplate.query(GET_ALL_PRODUCTS_WITH_QUANTITIES_SQL, productsWithQuantitiesMapper);
 		return map;
 	}
 
