@@ -56,7 +56,7 @@ public class ProductIncomeDaoImplTest {
 		
 		ProductType productTypeGoal = new ProductType();
 		productTypeGoal.setId(1);
-		productTypeGoal.setTypeName("CPU");
+		productTypeGoal.setName("CPU");
 		Product productGoal = new Product();
 		productGoal.setId(1);
 		productGoal.setProductName("Intel Core i7 8700");
@@ -118,7 +118,7 @@ public class ProductIncomeDaoImplTest {
 		
 		ProductType productTypeGoal = new ProductType();
 		productTypeGoal.setId(1);
-		productTypeGoal.setTypeName("CPU");
+		productTypeGoal.setName("CPU");
 		Product productGoal = new Product();
 		productGoal.setId(1);
 		productGoal.setProductName("Intel Core i7 8700");

@@ -5,12 +5,9 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.env.Environment;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.ResultSetExtractor;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 
 import com.epam.mentoring.data.model.Product;
@@ -47,7 +44,7 @@ public class ProductsWithQuantitiesResultSetExtractor implements ResultSetExtrac
 			product.setProductName(rs.getString(PRODUCT_NAME_COL));
 			ProductType productType = new ProductType();
 			productType.setId(rs.getInt(PRODUCT_TYPE_ID_COL));
-			productType.setTypeName(rs.getString(PRODUCT_TYPE_NAME_COL));
+			productType.setName(rs.getString(PRODUCT_TYPE_NAME_COL));
 			product.setType(productType);
 			map.put(product, rs.getInt(PRODUCT_QUANTITY_COL));
 		}

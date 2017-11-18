@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.util.Assert;
 
 import com.epam.mentoring.data.model.ProductType;
 import com.epam.mentoring.data.util.mappers.ProductTypeRowMapper;
@@ -56,7 +55,7 @@ public class ProductTypeDaoImpl implements IProductTypeDao {
 
 	@Override
 	public int addProductType(ProductType productType) throws DataAccessException {
-		return jdbcTemplate.update(ADD_PRODUCT_TYPE_SQL, productType.getTypeName());
+		return jdbcTemplate.update(ADD_PRODUCT_TYPE_SQL, productType.getName());
 	}
 
 	@Override

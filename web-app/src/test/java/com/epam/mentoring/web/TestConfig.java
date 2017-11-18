@@ -80,7 +80,7 @@ public class TestConfig {
         Mockito.when(productIncomeConsumerMock.addProductIncome(Mockito.any(ProductIncome.class))).thenReturn(1);
         Mockito.when(productIncomeConsumerMock.findAll()).thenReturn(referencedProductIncomeList());
         Mockito.when(productIncomeConsumerMock.findProductIncome(Mockito.any(Integer.class))).then((Answer<ProductIncome>) invocation -> {
-            Integer id = invocation.getArgumentAt(0, Integer.class);
+            Integer id = invocation.getArgumentAt( 0, Integer.class);
             return referencedProductIncomeList().get(0);
         });
         return productIncomeConsumerMock;

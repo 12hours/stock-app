@@ -3,11 +3,8 @@ package com.epam.mentoring.data.util.mappers;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.env.Environment;
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.stereotype.Component;
 
 import com.epam.mentoring.data.model.Product;
 import com.epam.mentoring.data.model.ProductType;
@@ -38,7 +35,7 @@ public class ProductRowMapper implements RowMapper<Product>{
 		product.setProductName(rs.getString(PRODUCT_NAME_COL));
 		ProductType productType = new ProductType();
 		productType.setId(rs.getInt(PRODUCT_TYPE_ID_COL));
-		productType.setTypeName(rs.getString(PRODUCT_TYPE_NAME_COL));
+		productType.setName(rs.getString(PRODUCT_TYPE_NAME_COL));
 		product.setType(productType);
 		return product;
 	}

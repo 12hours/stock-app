@@ -36,14 +36,14 @@ public class ProductTypeDaoImplTest {
 	@Sql(value = "classpath:delete_tables.sql", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	public void addAndGetProductTypeTest() {
 		ProductType productType = new ProductType();
-		productType.setTypeName("dummy_type");
+		productType.setName("dummy_type");
 		int rc = dao.addProductType(productType);
 		assertEquals(rc, 1);
 		
 		ProductType extractedProductType = dao.getProductTypeById(6);
 		assertNotNull(extractedProductType);
 		assertEquals(extractedProductType.getId(), Integer.valueOf(6));
-		assertEquals(extractedProductType.getTypeName(), "dummy_type");
+		assertEquals(extractedProductType.getName(), "dummy_type");
 	}
 	
 	@Test
@@ -57,7 +57,7 @@ public class ProductTypeDaoImplTest {
 		
 		ProductType productTypeToFind = new ProductType();
 		productTypeToFind.setId(3);
-		productTypeToFind.setTypeName("Videocard");
+		productTypeToFind.setName("Videocard");
 
 		assertTrue(productTypes.contains(productTypeToFind));
 	}

@@ -4,7 +4,10 @@ import com.epam.mentoring.data.model.Product;
 import com.epam.mentoring.data.model.ProductIncome;
 import com.epam.mentoring.data.model.ProductType;
 import com.epam.mentoring.data.model.Supplier;
+import com.epam.mentoring.web.forms.ProductForm;
 import com.epam.mentoring.web.forms.ProductIncomeForm;
+import com.epam.mentoring.web.forms.ProductTypeForm;
+import com.epam.mentoring.web.forms.SupplierForm;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.PropertyMap;
 import org.modelmapper.Provider;
@@ -17,6 +20,7 @@ public class DTOUtils {
     static {
         INSTANCE = new ModelMapper();
         INSTANCE.addMappings(new PropertyMap<ProductIncomeForm, ProductIncome>() {
+            @Override
             protected void configure() {
                 skip().setId(null);
                 map().setDate(source.getDate());
@@ -26,6 +30,33 @@ public class DTOUtils {
                 map().getSupplier().setId(source.getSupplierId());
                 map().getUser().setId(source.getUserId());
             }
+        });
+
+        INSTANCE.addMappings(new PropertyMap<ProductTypeForm, ProductType>() {
+            @Override
+            protected void configure() {
+                skip().setId(null);
+                map().setName(source.getName());
+            }
+        });
+
+        INSTANCE.addMappings(new PropertyMap<ProductForm, Product>() {
+            @Override
+            protected void configure() {
+                skip().setId(null);
+                map().setPrice(source.getPrice());
+                map().setProductName(source.getName());
+                map().getType().setId(source.getProductTypeId());
+            }
+        });
+
+        INSTANCE.addMappings(new PropertyMap<SupplierForm, Supplier>() {
+             @Override
+             protected void configure() {
+                skip().setId(null);
+                map().setName(source.getName());
+                map().setDetails(source.getDetails());
+             }
         });
         INSTANCE.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
         INSTANCE.getConfiguration().setAmbiguityIgnored(true);

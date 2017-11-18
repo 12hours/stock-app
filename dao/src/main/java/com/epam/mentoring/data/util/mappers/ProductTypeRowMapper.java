@@ -20,7 +20,7 @@ public class ProductTypeRowMapper implements RowMapper<ProductType>{
 	public ProductType mapRow(ResultSet rs, int rowNum) throws SQLException {
 		ProductType productType = new ProductType();
 		productType.setId(rs.getInt(PRODUCT_TYPE_ID_COL));
-		productType.setTypeName(rs.getString(PRODUCT_TYPE_NAME_COL));
+		productType.setName(rs.getString(PRODUCT_TYPE_NAME_COL));
 		return productType;
 	}
 	

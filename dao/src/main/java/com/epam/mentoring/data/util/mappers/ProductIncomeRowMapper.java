@@ -75,7 +75,7 @@ public class ProductIncomeRowMapper implements RowMapper<ProductIncome> {
 	public ProductIncome mapRow(ResultSet rs, int rowNum) throws SQLException {
 		ProductType productType = new ProductType();
 		productType.setId(rs.getInt(PRODUCT_TYPE_ID_COL));
-		productType.setTypeName(rs.getString(PRODUCT_TYPE_NAME_COL));
+		productType.setName(rs.getString(PRODUCT_TYPE_NAME_COL));
 		Product product = null;
 		product = new Product();
 		product.setId(rs.getInt(PRODUCT_ID_COL));

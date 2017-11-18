@@ -97,29 +97,9 @@ public class StockControllerTest {
         verifyNoMoreInteractions(productConsumer);
     }
 
-    @Test
-    public void getAddProductIncomeFormPageTest() throws Exception {
-        mockMvc.perform(get("/add_product_income"))
-                .andExpect(status().isOk())
-                .andExpect(view().name("add_product_income"))
-                .andExpect(model().attribute("products", hasSize(3)))
-                .andExpect(model().attribute("products", equalTo(referencedProductList)))
-                .andExpect(model().attribute("productTypes", equalTo(referencedPorductTypeList)))
-                .andExpect(model().attribute("suppliers", equalTo(referencedSupplierList)));
-    }
 
-    @Test
-    public void postAddProductIncomeFormPageTest() throws Exception {
-        MockHttpServletRequestBuilder post = post("/add_product_income");
-        post.param("productId", "1");
-        post.param("quantity", "50");
-        post.param("supplierId", "2");
-        post.param("userId", "3");
-        post.param("orderNumber", "10001");
-        post.param("date", "2017-11-01");
-        mockMvc.perform(post);
-        Mockito.verify(productIncomeConsumer, times(1)).addProductIncome(Mockito.any(ProductIncome.class));
-    }
+
+
 
     @Test
     public void postAddProductFormPageTest() throws Exception {

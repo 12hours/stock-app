@@ -156,7 +156,7 @@ public class ProductDaoImplTest {
 		assertThat(extractedProduct.getId(), equalTo(10));
 		assertThat(extractedProduct.getProductName(), equalTo("dummy_product"));
 		assertTrue(extractedProduct.getPrice().compareTo(BigDecimal.valueOf(100.0)) == 0);
-		assertThat(extractedProduct.getType().getTypeName(), equalTo("CPU"));
+		assertThat(extractedProduct.getType().getName(), equalTo("CPU"));
 		assertThat(extractedProduct.getType().getId(), equalTo(1));
 	}
 	

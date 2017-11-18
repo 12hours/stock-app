@@ -25,7 +25,7 @@ public class ProductTypesResultSetExtractor implements ResultSetExtractor<List<P
 		while (rs.next()) {
 			ProductType productType = new ProductType();
 			productType.setId(rs.getInt(PRODUCT_TYPE_ID_COL));
-			productType.setTypeName(rs.getString(PRODUCT_TYPE_NAME_COL));
+			productType.setName(rs.getString(PRODUCT_TYPE_NAME_COL));
 			productTypes.add(productType);
 		}
 		return productTypes;

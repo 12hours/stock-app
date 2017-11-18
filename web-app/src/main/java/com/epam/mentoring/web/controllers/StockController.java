@@ -13,9 +13,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import com.epam.mentoring.client.IProductConsumer;
 import com.epam.mentoring.data.model.Product;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
+@RequestMapping("/stock")
 public class StockController {
 	
 	Logger logger = LoggerFactory.getLogger(StockController.class);
