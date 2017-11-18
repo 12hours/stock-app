@@ -61,10 +61,16 @@ public class TestConfig {
     List<ProductIncome> referencedProductIncomeList() {
 
         List<ProductIncome> productIncomes = new ArrayList<>();
-        productIncomes.add(new ProductIncome(1, referencedProductList().get(1), 10, 10010, new Date(System
-                .currentTimeMillis()), referencedUserList().get(0), referencedSupplierList().get(0)));
-        productIncomes.add(new ProductIncome(2, referencedProductList().get(2), 20, 10011, new Date(System
-                .currentTimeMillis()), referencedUserList().get(0), referencedSupplierList().get(0)));
+        productIncomes.add(
+                new ProductIncome(1, 10,  10010,
+                        new Date(System.currentTimeMillis()), referencedProductList().get(1),
+                        referencedUserList().get(0),
+                        referencedSupplierList().get(0)));
+        productIncomes.add(
+                new ProductIncome(2, 20,  10010,
+                        new Date(System.currentTimeMillis()), referencedProductList().get(2),
+                        referencedUserList().get(0),
+                        referencedSupplierList().get(0)));
         return productIncomes;
     }
 

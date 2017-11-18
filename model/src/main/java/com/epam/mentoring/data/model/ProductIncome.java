@@ -13,12 +13,13 @@ import lombok.Setter;
 @AllArgsConstructor
 public class ProductIncome {
 	private Integer id;
-	private Product product;
 	private int quantity;
 	private long orderNumber;
 	private Date date;
+	private Product product;
 	private User user;
 	private Supplier supplier;
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;

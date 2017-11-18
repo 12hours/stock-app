@@ -5,13 +5,12 @@ import com.epam.mentoring.client.IProductIncomeConsumer;
 import com.epam.mentoring.client.IProductTypeConsumer;
 import com.epam.mentoring.client.ISupplierConsumer;
 import com.epam.mentoring.data.model.*;
+import com.epam.mentoring.web.DTOUtils;
+import com.epam.mentoring.web.forms.ProductIncomeForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 import java.util.List;
@@ -46,17 +45,8 @@ public class AddFormController {
     }
 
     @PostMapping("/product-income")
-    public void saveProductIncome(@RequestParam("productId") Integer productId,
-                                  @RequestParam("quantity") Integer quantity,
-                                  @RequestParam("orderNumber") Long orderNumber,
-                                  @RequestParam("date") Date date,
-                                  @RequestParam("supplierId") Integer supplierId,
-                                  @RequestParam("userId") Integer userId) {
-        ProductIncome productIncome = new ProductIncome();
-        Product product = new Product();
-        ProductType productType = new ProductType();
-        Supplier supplier = new Supplier();
-        User user = new User();
+    public void saveProductIncome(@ModelAttribute ProductIncomeForm form) {
+        ProductIncome productIncome = DTOUtils.map(form);
         productIncomeConsumer.addProductIncome(productIncome);
     }
 }
