@@ -97,20 +97,5 @@ public class StockControllerTest {
         verifyNoMoreInteractions(productConsumer);
     }
 
-
-
-
-
-    @Test
-    public void postAddProductFormPageTest() throws Exception {
-        MockHttpServletRequestBuilder post = post("/add_product_income");
-        post.param("productName", "Core i9");
-        post.param("price", "500.0");
-        post.param("productType", "1");
-        mockMvc.perform(post);
-        Mockito.verify(productConsumer, times(1)).saveProduct(Mockito.any(Product.class));
-    }
-
-
 }
 

@@ -42,12 +42,9 @@ public class StockController {
 		return "stocklist";
 	}
 
-	@GetMapping("/add-product-income")
-	public String saveProduct(@RequestParam("productName") String productName,
-							  @RequestParam("price") float price,
-							  @RequestParam("productTypeId") Integer productTypeId){
-
-
+	@GetMapping("/operations")
+	public String saveProduct(Model model){
+		// TODO: implement
 		return "redirect:stocklist";
 	}
 	
