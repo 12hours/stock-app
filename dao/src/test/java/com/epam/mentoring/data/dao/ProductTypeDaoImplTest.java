@@ -42,7 +42,7 @@ public class ProductTypeDaoImplTest {
 		
 		ProductType extractedProductType = dao.getProductTypeById(6);
 		assertNotNull(extractedProductType);
-		assertEquals(extractedProductType.getId(), 6);
+		assertEquals(extractedProductType.getId(), Integer.valueOf(6));
 		assertEquals(extractedProductType.getTypeName(), "dummy_type");
 	}
 	

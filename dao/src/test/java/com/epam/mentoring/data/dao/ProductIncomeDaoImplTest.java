@@ -3,6 +3,7 @@ package com.epam.mentoring.data.dao;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
+import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -41,7 +42,7 @@ public class ProductIncomeDaoImplTest {
 	public void getProductIncomeTest() {
 		ProductIncome productIncome = dao.getProductIncomeById(1);
 		assertNotNull(productIncome);
-		assertEquals(productIncome.getId(), 1);
+		assertEquals(Integer.valueOf(1), productIncome.getId());
 		assertEquals(productIncome.getOrderNumber(), 10001L);
 		assertEquals(productIncome.getQuantity(), 10);
 		Calendar dateGoal = Calendar.getInstance();
@@ -59,7 +60,7 @@ public class ProductIncomeDaoImplTest {
 		Product productGoal = new Product();
 		productGoal.setId(1);
 		productGoal.setProductName("Intel Core i7 8700");
-		productGoal.setPrice(360);
+		productGoal.setPrice(BigDecimal.valueOf(360));
 		productGoal.setType(productTypeGoal);
 		assertEquals(productGoal, productIncome.getProduct());
 		
@@ -103,7 +104,7 @@ public class ProductIncomeDaoImplTest {
 		
 		ProductIncome productIncomeExtracted = dao.getProductIncomeById(13);
 		assertNotNull(productIncomeExtracted);
-		assertEquals(13, productIncomeExtracted.getId());
+		assertEquals(Integer.valueOf(13), productIncomeExtracted.getId());
 		assertEquals(10015L, productIncomeExtracted.getOrderNumber());
 		assertEquals(16, productIncomeExtracted.getQuantity());
 		Calendar dateGoal = Calendar.getInstance();
@@ -121,7 +122,7 @@ public class ProductIncomeDaoImplTest {
 		Product productGoal = new Product();
 		productGoal.setId(1);
 		productGoal.setProductName("Intel Core i7 8700");
-		productGoal.setPrice(360);
+		productGoal.setPrice(BigDecimal.valueOf(360));
 		productGoal.setType(productTypeGoal);
 		assertEquals(productGoal, productIncomeExtracted.getProduct());
 		

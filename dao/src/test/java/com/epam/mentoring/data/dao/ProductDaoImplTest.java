@@ -4,7 +4,9 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -142,7 +144,7 @@ public class ProductDaoImplTest {
 		productType.setId(1);
 		
 		Product product = new Product();
-		product.setPrice(100);
+		product.setPrice(new BigDecimal(100.0));
 		product.setProductName("dummy_product");
 		product.setType(productType);
 		
@@ -153,7 +155,7 @@ public class ProductDaoImplTest {
 		assertThat(extractedProduct, notNullValue());
 		assertThat(extractedProduct.getId(), equalTo(10));
 		assertThat(extractedProduct.getProductName(), equalTo("dummy_product"));
-		assertThat(extractedProduct.getPrice(), equalTo(100.0F));
+		assertTrue(extractedProduct.getPrice().compareTo(BigDecimal.valueOf(100.0)) == 0);
 		assertThat(extractedProduct.getType().getTypeName(), equalTo("CPU"));
 		assertThat(extractedProduct.getType().getId(), equalTo(1));
 	}

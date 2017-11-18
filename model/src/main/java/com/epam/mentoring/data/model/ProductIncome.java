@@ -1,13 +1,18 @@
 package com.epam.mentoring.data.model;
 
 import java.util.Date;
+
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class ProductIncome {
-	private int id;
+	private Integer id;
 	private Product product;
 	private int quantity;
 	private long orderNumber;

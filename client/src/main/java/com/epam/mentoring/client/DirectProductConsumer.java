@@ -53,7 +53,7 @@ public class DirectProductConsumer implements IProductConsumer {
 	}
 
 	@Override
-	public Product saveProduct(Product product) throws ServerDataAccessException {
+	public Integer saveProduct(Product product) throws ServerDataAccessException {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -16,7 +16,7 @@ public interface IProductConsumer {
 	
 	public List<Product> findAllProductsByType(ProductType type) throws ServerDataAccessException;
 	
-	public Product saveProduct(Product product) throws ServerDataAccessException;
+	public Integer saveProduct(Product product) throws ServerDataAccessException;
 	
 	public Product updateProduct(Long id, Product product) throws ServerDataAccessException;
 	

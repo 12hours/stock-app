@@ -79,7 +79,7 @@ public class ProductIncomeRowMapper implements RowMapper<ProductIncome> {
 		Product product = null;
 		product = new Product();
 		product.setId(rs.getInt(PRODUCT_ID_COL));
-		product.setPrice(rs.getFloat(PRODUCT_PRICE_COL));
+		product.setPrice(rs.getBigDecimal(PRODUCT_PRICE_COL));
 		product.setProductName(rs.getString(PRODUCT_NAME_COL));
 		product.setType(productType);
 		Supplier supplier = new Supplier();

@@ -1,17 +1,22 @@
 package com.epam.mentoring.data.model;
 
 import java.util.Date;
+
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class User {
-	private int id;
+	private Integer id;
 	private String name;
 	private String password;
 	private boolean isAdmin;
-	private Date registrationDate;
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -20,7 +25,6 @@ public class User {
 		result = prime * result + (isAdmin ? 1231 : 1237);
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((password == null) ? 0 : password.hashCode());
-		result = prime * result + ((registrationDate == null) ? 0 : registrationDate.hashCode());
 		return result;
 	}
 	@Override
@@ -46,17 +50,12 @@ public class User {
 				return false;
 		} else if (!password.equals(other.password))
 			return false;
-		if (registrationDate == null) {
-			if (other.registrationDate != null)
-				return false;
-		} else if (!registrationDate.equals(other.registrationDate))
-			return false;
 		return true;
 	}
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", name=" + name + ", password=" + password + ", isAdmin=" + isAdmin
-				+ ", registrationDate=" + registrationDate + "]";
+				+ "]";
 	}
 
 	

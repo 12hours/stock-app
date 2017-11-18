@@ -43,7 +43,7 @@ public class ProductsWithQuantitiesResultSetExtractor implements ResultSetExtrac
 		while (rs.next()) {
 			Product product =  new Product();
 			product.setId(rs.getInt(PRODUCT_ID_COL));
-			product.setPrice(rs.getFloat(PRODUCT_PRICE_COL));
+			product.setPrice(rs.getBigDecimal(PRODUCT_PRICE_COL));
 			product.setProductName(rs.getString(PRODUCT_NAME_COL));
 			ProductType productType = new ProductType();
 			productType.setId(rs.getInt(PRODUCT_TYPE_ID_COL));

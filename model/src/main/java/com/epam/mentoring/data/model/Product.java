@@ -1,55 +1,38 @@
 package com.epam.mentoring.data.model;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
+
+import java.math.BigDecimal;
 
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @ToString
 public class Product {
-	private int id;
+	private Integer id;
 	private String productName;
-	private float price;
+	private BigDecimal price;
 	private ProductType type;
-	
+
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+
+		Product product = (Product) o;
+
+		if (productName != null ? !productName.equals(product.productName) : product.productName != null) return false;
+		if (price != null ? !(price.compareTo(product.price) == 0) : product.price != null) return false;
+		return type != null ? type.equals(product.type) : product.type == null;
+	}
+
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + id;
-		result = prime * result + Float.floatToIntBits(price);
-		result = prime * result + ((productName == null) ? 0 : productName.hashCode());
-		result = prime * result + ((type == null) ? 0 : type.hashCode());
+		int result = productName != null ? productName.hashCode() : 0;
+		result = 31 * result + (price != null ? price.hashCode() : 0);
+		result = 31 * result + (type != null ? type.hashCode() : 0);
 		return result;
 	}
-	
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Product other = (Product) obj;
-		if (id != other.id)
-			return false;
-		if (Float.floatToIntBits(price) != Float.floatToIntBits(other.price))
-			return false;
-		if (productName == null) {
-			if (other.productName != null)
-				return false;
-		} else if (!productName.equals(other.productName))
-			return false;
-		if (type == null) {
-			if (other.type != null)
-				return false;
-		} else if (!type.equals(other.type))
-			return false;
-		return true;
-	}
-	
-	
-	
 }

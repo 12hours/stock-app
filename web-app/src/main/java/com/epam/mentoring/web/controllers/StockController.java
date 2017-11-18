@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import com.epam.mentoring.client.IProductConsumer;
 import com.epam.mentoring.data.model.Product;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class StockController {
@@ -30,19 +32,21 @@ public class StockController {
 		return "redirect:stocklist";
 	}
 	
-	@GetMapping("/test")
-	public String test(Model model) {
-		model.addAttribute("name", "victor");
-		return "test";
-	}
-	
 	@GetMapping("/stocklist")
 	public String getStockList(Model model) {
 		Map<Product, Integer> productsWithQuantities = productConsumer.getAllProductsWithQuantites();
 //		logger.debug("getting products with quantities: " + productsWithQuantities.size() + " items found");
-//		System.out.println(productsWithQuantities.size());
 		model.addAttribute("productsWithQuantities", productsWithQuantities);
 		return "stocklist";
+	}
+
+	@GetMapping("/add-product-income")
+	public String saveProduct(@RequestParam("productName") String productName,
+							  @RequestParam("price") float price,
+							  @RequestParam("productTypeId") Integer productTypeId){
+
+
+		return "redirect:stocklist";
 	}
 	
 }
