@@ -30,8 +30,13 @@ public class AppConfig {
 	DataSource dataSource;
 	
 	@Bean
+	IProductDao productDao() {
+		return new ProductDaoImpl(dataSource);
+	}
+
+	@Bean
 	IProductService productService() {
-		return new ProductService(new ProductDaoImpl(dataSource));
+		return new ProductService(productDao());
 	}
 
 	@Bean
@@ -40,17 +45,32 @@ public class AppConfig {
 	}
 
 	@Bean
+	IProductTypeDao productTypeDao(){
+		return new ProductTypeDaoImpl(dataSource);
+	}
+
+	@Bean
 	IProductTypeConsumer directProductTypeConsumer() {
-		return new DirectProductTypeConsumer(new ProductTypeDaoImpl(dataSource));
+		return new DirectProductTypeConsumer(productTypeDao());
+	}
+
+	@Bean
+	IProductIncomeDao productIncomeDao() {
+		return new ProductIncomeDaoImpl(dataSource);
 	}
 
 	@Bean
 	IProductIncomeConsumer directProductIncomeConsumer() {
-		return new DirectProductIncomeConsumer(new ProductIncomeDaoImpl(dataSource));
+		return new DirectProductIncomeConsumer(productIncomeDao());
+	}
+
+	@Bean
+	ISupplierDao supplierDao() {
+		return new SupplierDaoImpl(dataSource);
 	}
 
 	@Bean
 	ISupplierConsumer directSupplierConsumer() {
-		return new DirectSupplierConsumer(new SupplierDaoImpl(dataSource));
+		return new DirectSupplierConsumer(supplierDao());
 	}
 }

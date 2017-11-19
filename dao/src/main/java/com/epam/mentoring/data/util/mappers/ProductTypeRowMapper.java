@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jdbc.core.RowMapper;
 
 import com.epam.mentoring.data.model.ProductType;
+import org.springframework.stereotype.Component;
 
+@Component
 public class ProductTypeRowMapper implements RowMapper<ProductType>{
 
 	@Value("${product_type.column.id}")

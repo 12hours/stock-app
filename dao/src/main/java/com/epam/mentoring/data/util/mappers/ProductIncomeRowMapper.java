@@ -11,7 +11,9 @@ import com.epam.mentoring.data.model.ProductIncome;
 import com.epam.mentoring.data.model.ProductType;
 import com.epam.mentoring.data.model.Supplier;
 import com.epam.mentoring.data.model.User;
+import org.springframework.stereotype.Component;
 
+@Component
 public class ProductIncomeRowMapper implements RowMapper<ProductIncome> {
 
 	@Value("${product_income.column.id}")

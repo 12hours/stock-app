@@ -40,7 +40,7 @@ public class ProductIncomeDaoImplTest {
 	@Sql("classpath:/h2/data.sql")
 	@Sql(value = "classpath:/h2/delete_tables.sql", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	public void getProductIncomeTest() {
-		ProductIncome productIncome = dao.getProductIncomeById(1);
+		ProductIncome productIncome = dao.getProductIncomeById(Integer.valueOf(1));
 		assertNotNull(productIncome);
 		assertEquals(Integer.valueOf(1), productIncome.getId());
 		assertEquals(productIncome.getOrderNumber(), 10001L);
@@ -102,7 +102,7 @@ public class ProductIncomeDaoImplTest {
 		dao.addProductIncome(productIncome);
 		
 		
-		ProductIncome productIncomeExtracted = dao.getProductIncomeById(13);
+		ProductIncome productIncomeExtracted = dao.getProductIncomeById(Integer.valueOf(13));
 		assertNotNull(productIncomeExtracted);
 		assertEquals(Integer.valueOf(13), productIncomeExtracted.getId());
 		assertEquals(10015L, productIncomeExtracted.getOrderNumber());

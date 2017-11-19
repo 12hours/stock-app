@@ -50,7 +50,7 @@ public class ProductService implements IProductService{
 	
 	@Override
 	public List<Product> getAllProducts() throws DataAccessException {
-		return null;
+		return productDao.getAllProducts();
 	}
 	
 	@Override

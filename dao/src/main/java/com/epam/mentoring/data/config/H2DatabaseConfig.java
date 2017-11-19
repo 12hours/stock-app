@@ -30,8 +30,8 @@ import com.epam.mentoring.data.config.conditions.H2DatabaseCondition;
 
 @Conditional(H2DatabaseCondition.class)
 @Configuration
-@PropertySource("classpath:/h2/h2-database-sql.properties")
-@PropertySource("classpath:/h2/h2-database-init.properties")
+@PropertySource("classpath:/h2-database-sql.properties")
+@PropertySource("classpath:/h2-database-init.properties")
 public class H2DatabaseConfig {
 	
 	

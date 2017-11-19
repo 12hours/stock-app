@@ -9,21 +9,7 @@ import com.epam.mentoring.data.util.mappers.ProductsWithQuantitiesResultSetExtra
 import com.epam.mentoring.data.util.mappers.SupplierRowMapper;
 
 @Configuration
-@ComponentScan
+@ComponentScan(basePackages = {"com.epam.mentoring.data.util.mappers", "com.epam.mentoring.data.config"})
 public class DaoConfig {
-	
-	@Bean
-	ProductRowMapper productRowMapper() {
-		return new ProductRowMapper();
-	}
-	
-	@Bean
-	ProductsWithQuantitiesResultSetExtractor productsWithQuantitiesResultSetExtractor() {
-		return new ProductsWithQuantitiesResultSetExtractor();
-	}
-	
-	@Bean
-	SupplierRowMapper supplerRowMapper() {
-		return new SupplierRowMapper();
-	}
+
 }

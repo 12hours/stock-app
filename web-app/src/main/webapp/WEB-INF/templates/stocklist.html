@@ -10,7 +10,6 @@
     <table>
       <tr>
         <th>NAME</th>
-        <th>PRICE</th>
         <th>IN STOCK</th>
       </tr>
       <tr th:each="prod : ${productsWithQuantities}">
@@ -18,5 +17,6 @@
         <td th:text="${prod.value}">2.41</td>
       </tr>
     </table>
+<a th:href="@{/add/}"><button>Add to stock</button></a>
 </body>
 </html>

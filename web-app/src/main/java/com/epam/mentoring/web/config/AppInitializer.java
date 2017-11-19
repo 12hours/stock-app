@@ -18,7 +18,7 @@ public class AppInitializer extends AbstractAnnotationConfigDispatcherServletIni
 	protected Class<?>[] getRootConfigClasses() {
 		return null;
 //		return new Class[] {
-//				
+//
 //			};
 	}
 

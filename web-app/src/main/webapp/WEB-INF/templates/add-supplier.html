@@ -5,14 +5,14 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-    <h1>Product list</h1>
-  
-    <table>
-      <tr>
-        <th>NAME</th>
-        <th>PRICE</th>
-        <th>IN STOCK</th>
-      </tr>
-    </table>
+    <h1>Add new supplier</h1>
+    <form th:action="@{/add/add-supplier}" method="post" th:object="${supplierForm}">
+        Supplier name:
+        <input type="text" th:field="*{name}"></input><br/>
+        Details:
+        <input type="text" th:field="*{details}"></input><br/>
+        <input type="submit" value="submit"></input>
+    </form>
+
 </body>
 </html>

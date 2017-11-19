@@ -3,11 +3,11 @@ package com.epam.mentoring.data.dao;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import java.math.BigDecimal;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.junit.Test;
@@ -160,6 +160,23 @@ public class ProductDaoImplTest {
 		assertThat(extractedProduct.getType().getId(), equalTo(1));
 	}
 	
-	
+
+	@Test
+	@Sql("classpath:/create_tables.sql")
+	@Sql("classpath:/data.sql")
+	@Sql(value = "classpath:/delete_tables.sql", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
+	public void getAllProductsTest() {
+		List<Product> products = dao.getAllProducts();
+		assertNotNull(products);
+		assertEquals(9, products.size());
+
+		ProductType productType_1 = new ProductType(1, "CPU");
+		ProductType productType_3 = new ProductType(3, "Videocard");
+		Product productToFind_1 = new Product(3, "Nvidia GTX 1050Ti", BigDecimal.valueOf(200), productType_3);
+		Product productToFind_2 = new Product(5, "AMD Ryzen 7 1700", BigDecimal.valueOf(325), productType_1);
+
+		assertTrue(products.contains(productToFind_1));
+		assertTrue(products.contains(productToFind_2));
+	}
 	
 }

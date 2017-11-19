@@ -10,7 +10,9 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.ResultSetExtractor;
 
 import com.epam.mentoring.data.model.Supplier;
+import org.springframework.stereotype.Component;
 
+@Component
 public class SuppliersResultSetExtractor implements ResultSetExtractor<List<Supplier>>{
 
 	@Value("${supplier.column.id}")

@@ -1,5 +1,6 @@
 package com.epam.mentoring.web.config;
 
+import com.epam.mentoring.web.forms.ProductIncomeForm;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Description;
@@ -49,6 +50,11 @@ public class ThymeLeafConfig {
 	    ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
 	    messageSource.setBasename("messages");
 	    return messageSource;
+	}
+
+	@Bean("productIncomeForm")
+	public ProductIncomeForm productIncomeForm() {
+		return new ProductIncomeForm();
 	}
 
 }

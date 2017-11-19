@@ -10,7 +10,9 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.ResultSetExtractor;
 
 import com.epam.mentoring.data.model.ProductType;
+import org.springframework.stereotype.Component;
 
+@Component
 public class ProductTypesResultSetExtractor implements ResultSetExtractor<List<ProductType>> {
 
 	@Value("${product_type.column.id}")

@@ -5,6 +5,7 @@ import java.util.Map;
 
 import javax.sql.DataSource;
 
+import com.epam.mentoring.data.util.mappers.ProductResultSetExtractor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -41,6 +42,9 @@ public class ProductDaoImpl implements IProductDao{
 	
 	@Autowired
 	ProductRowMapper productRowMapper;
+
+	@Autowired
+	ProductResultSetExtractor productResultSetExtractor;
 	
 	@Autowired
 	ProductsWithQuantitiesResultSetExtractor productsWithQuantitiesMapper;
@@ -57,8 +61,7 @@ public class ProductDaoImpl implements IProductDao{
 
 	@Override
 	public List<Product> getAllProducts() {
-		// TODO Auto-generated method stub
-		return null;
+		return jdbcTemplate.query(GET_ALL_PRODUCTS_SQL, productResultSetExtractor);
 	}
 
 	@Override

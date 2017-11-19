@@ -2,6 +2,7 @@ package com.epam.mentoring.data;
 
 import javax.sql.DataSource;
 
+import com.epam.mentoring.data.util.mappers.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -18,19 +19,11 @@ import com.epam.mentoring.data.dao.ProductDaoImpl;
 import com.epam.mentoring.data.dao.ProductIncomeDaoImpl;
 import com.epam.mentoring.data.dao.ProductTypeDaoImpl;
 import com.epam.mentoring.data.dao.SupplierDaoImpl;
-import com.epam.mentoring.data.util.mappers.ProductIncomeRowMapper;
-import com.epam.mentoring.data.util.mappers.ProductIncomesResultSetExtractor;
-import com.epam.mentoring.data.util.mappers.ProductRowMapper;
-import com.epam.mentoring.data.util.mappers.ProductTypeRowMapper;
-import com.epam.mentoring.data.util.mappers.ProductTypesResultSetExtractor;
-import com.epam.mentoring.data.util.mappers.ProductsWithQuantitiesResultSetExtractor;
-import com.epam.mentoring.data.util.mappers.SupplierRowMapper;
-import com.epam.mentoring.data.util.mappers.SuppliersResultSetExtractor;
 
 
 @Configuration
 @Profile("test")
-@PropertySource("classpath:/h2/h2-database-sql.properties")
+@PropertySource("classpath:/h2-database-sql.properties")
 public class TestConfig {
 //
 	@Bean
@@ -53,6 +46,11 @@ public class TestConfig {
 	@Bean
 	ProductRowMapper productRowMapper() {
 		return new ProductRowMapper();
+	}
+
+	@Bean
+	ProductResultSetExtractor productResultSetExtractor() {
+		return new ProductResultSetExtractor();
 	}
 	
 	@Bean

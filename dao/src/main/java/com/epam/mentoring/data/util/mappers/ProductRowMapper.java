@@ -8,7 +8,9 @@ import org.springframework.jdbc.core.RowMapper;
 
 import com.epam.mentoring.data.model.Product;
 import com.epam.mentoring.data.model.ProductType;
+import org.springframework.stereotype.Component;
 
+@Component
 public class ProductRowMapper implements RowMapper<Product>{
 
 	@Value("${product.column.id}")

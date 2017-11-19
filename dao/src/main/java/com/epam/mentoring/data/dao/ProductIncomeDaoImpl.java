@@ -22,7 +22,7 @@ public class ProductIncomeDaoImpl implements IProductIncomeDao{
 	
 	@Autowired
 	private ProductIncomeRowMapper productIncomeRowMapper;
-	
+
 	public ProductIncomeDaoImpl(DataSource datasource) {
 		this.jdbcTemplate = new JdbcTemplate(datasource);
 	}

@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jdbc.core.RowMapper;
 
 import com.epam.mentoring.data.model.Supplier;
+import org.springframework.stereotype.Component;
 
+@Component
 public class SupplierRowMapper implements RowMapper<Supplier>{
 	
 	@Value("${supplier.column.id}")

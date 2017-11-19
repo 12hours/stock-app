@@ -54,8 +54,7 @@ public class DirectProductConsumer implements IProductConsumer {
 
 	@Override
 	public Integer saveProduct(Product product) throws ServerDataAccessException {
-		// TODO Auto-generated method stub
-		return null;
+		return productService.saveProduct(product);
 	}
 
 	@Override
@@ -66,8 +65,7 @@ public class DirectProductConsumer implements IProductConsumer {
 
 	@Override
 	public List<Product> getAllProducts() throws ServerDataAccessException {
-		// TODO Auto-generated method stub
-		return null;
+		return productService.getAllProducts();
 	}
 
 	@Override

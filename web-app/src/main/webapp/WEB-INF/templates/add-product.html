@@ -5,14 +5,20 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-    <h1>Product list</h1>
-  
-    <table>
-      <tr>
-        <th>NAME</th>
-        <th>PRICE</th>
-        <th>IN STOCK</th>
-      </tr>
-    </table>
+    <h1>Add new product</h1>
+
+    <form th:action="@{/add/add-product}" method="post" th:object="${productForm}">
+
+        Product type:
+        <select th:field="*{productTypeId}">
+            <option th:each="type: ${productTypes}" th:value="${{type.id}}" th:text="${type.name}"></option>
+        </select><a th:href="@{/add/add-product-type}">Add another product type</a><br/>
+        Product name:
+        <input type="text" th:field="*{name}"></input><br/>
+        Price:
+        <input type="text" th:field="*{price}"></input><br/>
+        <input type="submit" value="submit"></input><a th:href="@{/add/}"><button>Back</button></a>
+    </form>
+
 </body>
 </html>

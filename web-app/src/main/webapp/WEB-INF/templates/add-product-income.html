@@ -5,14 +5,30 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-    <h1>Product list</h1>
-  
-    <table>
-      <tr>
-        <th>NAME</th>
-        <th>PRICE</th>
-        <th>IN STOCK</th>
-      </tr>
-    </table>
+    <h1>Add incoming product</h1>
+
+    <form th:action="@{/add/add-product-income}" method="post" th:object="${productIncomeForm}">
+        Order number:
+        <input type="text" th:field="*{orderNumber}"></input><br/>
+        Date:
+        <input type="text" th:field="*{date}"></input><br/>
+        Quantity:
+        <input type="text" th:field="*{quantity}"></input><br/>
+        Product:
+        <select th:field="*{productId}">
+            <option th:each="prod: ${products}" th:value="${{prod.id}}" th:text="${prod.productName}"></option>
+        </select><a th:href="@{/add/add-product}">Add another product</a><br/>
+        Supplier:
+        <select th:field="*{supplierId}">
+            <option th:each="supplier: ${suppliers}" th:value="${{supplier.id}}"
+                    th:text="${supplier.name}"></option>
+        </select><a th:href="@{/add/add-supplier}">Add another supplier</a><br/>
+        User:
+        <select th:field="*{userId}">
+            <option th:value="1" th:text="User"></option>
+        </select><br/>
+        <input type="submit" value="submit"></input><a th:href="@{/}"><button>Back</button></a>
+    </form>
+
 </body>
 </html>

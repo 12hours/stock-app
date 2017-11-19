@@ -8,7 +8,9 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.ResultSetExtractor;
 
 import com.epam.mentoring.data.model.ProductIncome;
+import org.springframework.stereotype.Component;
 
+@Component
 public class ProductIncomesResultSetExtractor implements ResultSetExtractor<List<ProductIncome>> {
 
 	@Override
