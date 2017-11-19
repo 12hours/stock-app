@@ -1,0 +1,8 @@
+= Stock-app
+:toc:
+
+== Overview
+include::overview.adoc[]
+
+== Application structure
+include::structure.adoc[]

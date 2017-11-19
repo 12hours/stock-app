@@ -1,0 +1,19 @@
+Simple web-application for warehouse accounting. +
+Allows user interactively add and remove products to/from stock,
+access list of available products and suppliers,
+see current list of products on stock and see history of operations.
+
+Core technologies used:
+
+ - `Spring platform BOM Athens-SR6` for dependency management
+ - `Spring-framework 4.3.9` as IoC container
+ - `Spring-jdbc 4.3.9` for data access
+ - `Spring-webmvc 4.3.9` for web layer
+ - `Thymeleaf 2.1.5` as template engine
+ - `log4j 1.12.17` and `slf4j 1.7.25` for logging
+ - `h2database 1.4.195` as database (for a time)
+
+
+
+
+

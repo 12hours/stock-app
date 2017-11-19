@@ -1,0 +1,114 @@
+Application is divided in couple of modules (layers):
+
+=== Application modules
+ - `dao` and `dao-api`: `dao` module contain DAO objects, it handles database connection as well. `dao-api` is simply
+  API for DAO objects. DAO classes are supposed to be accessed only by `service` layer.
+ - `service` and `service-api`: `service` module currently works as a proxy between
+ `dao` and rest of the application. Currently it's main role is exception handling, validation and logging.
+ - `client` and `client-api`: represents a client classes that accesses data through `service` layer. `client-api`
+ interfaces are used as much as possible, so `client` layer classes always ready to be replaced with another
+ implementation.
+ - `web-app` module: contains client web-application
+ - `rest-app` module: to be implemented.
+
+
+image::images/app.png[]
+
+As diagram shows, apllication is divided into two logical parts: `web-app` ('frontend') and `rest-app` ('backend').
+Function of `web-app` is to present data to user. `web-app` can obtain data by accessing `client`.
+And as `web-app` depends only on `client-api` it has no concern in how `client` will get data from database.
+Current application structure implies either direct invoking of `service` layer or using of rest-api. This way
+`rest-app` appears to be optional.
+
+
+//[ditaa, app.png, png]
+//....
+//                                          +--------------------------------+
+//+-----------------------+                 : rest-app    +----------------+ |
+//|        web-app        |                 |             |                | |
+//|   +---------------+   +---------+ REST  | +-----------+   +--------+   | |
+//|   |  Controllers  |<--| client- |<--=---| |service-api|<--|  dao-  |   | |
+//|   |               |-->|   api   |---=-->| |           |-->|  api   |   | |
+//|   |       ^       |   +---------+       | +----^------+   +--------+   | |
+//|   +-------|-------+   |     |   direct  |      |      |                | |
+//|   |       v       |   |     +------=----|--=---+      +----------------+ |
+//|   |               |   |                 +--------------------------------+
+//|   |template engine|   |                                     | ^
+//+---+---------------+---+                                     | |
+//            UI                                                v |
+//                                                            +------+
+//                                                            |{s}   |
+//                                                            |      |
+//                                                            |      |
+//                                                            +------+
+//
+//                                                            Database
+//....
+
+
+=== Database backend
+[.lead]
+*Overview* +
+Application is supposed to be database agnostic (at least H2 and MySQL databases support is expected). Currently only H2
+database is used. +
+
+Database consists of 6 tables:
+
+ - `product`
+ - `product_type`
+ - `supplier`
+ - `user`
+ - `product_income`
+ - `product_outcome`
+
+image::images/diagram.png[]
+
+Database table and column names, as well as data types definitions are specified in `${basedir}/dao/database
+.properties` file
+making them flexible for changing. This file is proccessed by Maven during `dao` module building.
+
+[.lead]
+*Database configuration* +
+Firstly, database tapy should be specified as application property, e.g.
+----
+app.database.type = h2
+----
+Currently only H2 database is supported;
+`DataSource` and SQL scripts will be configured according to this property.
+
+Then database user is inclined to import `DaoConfig` into Spring configurtion class.
+[source,java]
+----
+...
+import com.epam.mentoring.data.config.DaoConfig;
+
+@Configuration
+@Import(DaoConfig.class)
+public class AppConfig {
+...
+----
+
+After that `DataSource` object can be autowired into configuration
+for using in declarations of DAO beans:
+[source,java]
+----
+...
+import com.epam.mentoring.data.config.DaoConfig;
+
+@Configuration
+@Import(DaoConfig.class)
+public class AppConfig {
+
+    @Autowired
+    DataSource datasource;
+
+    @Bean
+    IProductDao productDao(){
+        return new ProductDaoImpl(datasource);
+    }
+...
+----
+
+
+
+

@@ -97,6 +97,42 @@
         
         </dependencies>
     </dependencyManagement>
-    
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.asciidoctor</groupId>
+				<artifactId>asciidoctor-maven-plugin</artifactId>
+				<version>1.5.6</version>
+				<executions>
+					<execution>
+						<id>output-html</id>
+						<phase>generate-resources</phase>
+						<goals>
+							<goal>process-asciidoc</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<backend>html</backend>
+					<doctype>book</doctype>
+					<sourceDirectory>docs/asciidoc</sourceDirectory>
+					<resources>
+						<resource>
+							<directory>docs/asciidoc/images</directory>
+							<targetPath>images</targetPath>
+							<includes>
+								<include>**/*.jpg</include>
+								<include>**/*.png</include>
+								<include>**/*.gif</include>
+							</includes>
+						</resource>
+					</resources>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+
 </project>
 

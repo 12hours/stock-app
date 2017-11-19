@@ -10,6 +10,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import com.epam.mentoring.data.model.ProductIncome;
 import com.epam.mentoring.data.util.mappers.ProductIncomeRowMapper;
 
+import java.util.List;
+
 public class ProductIncomeDaoImpl implements IProductIncomeDao{
 
 	private JdbcTemplate jdbcTemplate;
@@ -37,6 +39,21 @@ public class ProductIncomeDaoImpl implements IProductIncomeDao{
 		return jdbcTemplate.update(ADD_PRODUCT_INCOME_SQL, productIncome.getDate(), productIncome.getOrderNumber(),
 				productIncome.getQuantity(), productIncome.getProduct().getId(), productIncome.getSupplier().getId(),
 				productIncome.getUser().getId());
+	}
+
+	@Override
+	public Integer deleteProductIncome(Integer id) throws DataAccessException {
+		return null;
+	}
+
+	@Override
+	public Integer updateProductIncome(ProductIncome productIncome) throws DataAccessException {
+		return null;
+	}
+
+	@Override
+	public List<ProductIncome> getAllProductIncomes() throws DataAccessException {
+		return null;
 	}
 
 }
