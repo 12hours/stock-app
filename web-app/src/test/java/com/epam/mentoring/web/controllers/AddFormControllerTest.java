@@ -119,7 +119,7 @@ public class AddFormControllerTest {
                         new BasicNameValuePair("userId", "3")
                 )))))
                 .andExpect(status().is3xxRedirection())
-                .andExpect(view().name("redirect:/stock"));
+                .andExpect(view().name("redirect:/"));
 
         ArgumentCaptor<ProductIncome> productIncomeArgumentCaptor = ArgumentCaptor.forClass(ProductIncome.class);
         Mockito.verify(productIncomeConsumer).addProductIncome(productIncomeArgumentCaptor.capture());
@@ -163,7 +163,7 @@ public class AddFormControllerTest {
                         new BasicNameValuePair("name", "RAM")
                 )))))
                 .andExpect(status().is3xxRedirection())
-                .andExpect(view().name("redirect:/add"));
+                .andExpect(view().name("redirect:/add/add-product"));
 
         ArgumentCaptor<ProductType> productTypeArgumentCaptor = ArgumentCaptor.forClass(ProductType.class);
         Mockito.verify(productTypeConsumer).saveProductType(productTypeArgumentCaptor.capture());
@@ -191,7 +191,7 @@ public class AddFormControllerTest {
                         new BasicNameValuePair("productTypeId", "2")
                 )))))
                 .andExpect(status().is3xxRedirection())
-                .andExpect(view().name("redirect:/add"));
+                .andExpect(view().name("redirect:/add/"));
 
         ArgumentCaptor<Product> productArgumentCaptor = ArgumentCaptor.forClass(Product.class);
         Mockito.verify(productConsumer).saveProduct(productArgumentCaptor.capture());
@@ -220,7 +220,7 @@ public class AddFormControllerTest {
                         new BasicNameValuePair("details", "Dummy Details")
                 )))))
                 .andExpect(status().is3xxRedirection())
-                .andExpect(view().name("redirect:/add"));
+                .andExpect(view().name("redirect:/add/"));
 
         ArgumentCaptor<Supplier> supplierArgumentCaptor = ArgumentCaptor.forClass(Supplier.class);
         Mockito.verify(supplierConsumer).saveSupplier(supplierArgumentCaptor.capture());
