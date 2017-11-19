@@ -7,6 +7,7 @@ import javax.sql.DataSource;
 
 import com.epam.mentoring.client.*;
 import com.epam.mentoring.data.dao.*;
+import com.epam.mentoring.service.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +17,6 @@ import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.PropertySource;
 
 import com.epam.mentoring.data.config.DaoConfig;
-import com.epam.mentoring.service.IProductService;
-import com.epam.mentoring.service.ProductService;
 
 @Configuration
 @Import(DaoConfig.class)
@@ -50,8 +49,13 @@ public class AppConfig {
 	}
 
 	@Bean
+	IProductTypeService productTypeService() {
+		return new ProductTypeService(productTypeDao());
+	}
+
+	@Bean
 	IProductTypeConsumer directProductTypeConsumer() {
-		return new DirectProductTypeConsumer(productTypeDao());
+		return new DirectProductTypeConsumer(productTypeService());
 	}
 
 	@Bean
@@ -60,8 +64,13 @@ public class AppConfig {
 	}
 
 	@Bean
+	IProductIncomeService productIncomeService() {
+		return new ProductIncomeService(productIncomeDao());
+	}
+
+	@Bean
 	IProductIncomeConsumer directProductIncomeConsumer() {
-		return new DirectProductIncomeConsumer(productIncomeDao());
+		return new DirectProductIncomeConsumer(productIncomeService());
 	}
 
 	@Bean
@@ -70,7 +79,12 @@ public class AppConfig {
 	}
 
 	@Bean
+	ISupplierService supplierService() {
+		return new SupplierService(supplierDao());
+	}
+
+	@Bean
 	ISupplierConsumer directSupplierConsumer() {
-		return new DirectSupplierConsumer(supplierDao());
+		return new DirectSupplierConsumer(supplierService());
 	}
 }

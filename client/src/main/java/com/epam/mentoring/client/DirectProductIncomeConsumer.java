@@ -2,28 +2,30 @@ package com.epam.mentoring.client;
 
 import com.epam.mentoring.data.dao.IProductIncomeDao;
 import com.epam.mentoring.data.model.ProductIncome;
+import com.epam.mentoring.service.IProductIncomeService;
+import com.epam.mentoring.service.IProductService;
 import org.springframework.util.Assert;
 
 import java.util.List;
 
 public class DirectProductIncomeConsumer implements IProductIncomeConsumer {
 
-    private IProductIncomeDao dao;
+    private IProductIncomeService productIncomeService;
 
-    public DirectProductIncomeConsumer(IProductIncomeDao dao) {
-        this.dao = dao;
+    public DirectProductIncomeConsumer(IProductIncomeService service) {
+        this.productIncomeService = service;
     }
 
     @Override
     public Integer addProductIncome(ProductIncome productIncome) {
         Assert.notNull(productIncome, "No ProductIncome object provided for saving");
-        return dao.addProductIncome(productIncome);
+        return productIncomeService.saveProductIncome(productIncome);
     }
 
     @Override
     public ProductIncome findProductIncome(Integer id) {
         Assert.notNull(id, "No id provided for search");
-        return dao.getProductIncomeById(id);
+        return productIncomeService.getProductIncomeById(id);
     }
 
     @Override

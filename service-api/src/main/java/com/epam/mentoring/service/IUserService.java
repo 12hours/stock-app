@@ -5,6 +5,9 @@ import org.springframework.dao.DataAccessException;
 
 import java.util.List;
 
+/**
+ * Interface for User service
+ */
 public interface IUserService {
     User getUserById(int id) throws DataAccessException;
     List<User> getAllUsers() throws DataAccessException;

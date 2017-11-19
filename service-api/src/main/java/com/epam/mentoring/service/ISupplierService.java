@@ -5,6 +5,9 @@ import org.springframework.dao.DataAccessException;
 
 import java.util.List;
 
+/**
+ * Interface for Supplier service
+ */
 public interface ISupplierService {
     List<Supplier> getAllSuppliers() throws DataAccessException;
     int saveSupplier(Supplier supplier) throws DataAccessException;

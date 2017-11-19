@@ -24,7 +24,6 @@ public class DirectProductConsumer implements IProductConsumer {
 	@Override
 	public Map<Product, Integer> getAllProductsWithQuantites() throws ServerDataAccessException {
 		Map<Product, Integer> productsWithQuantitiesMap = productService.getAllProductsWithQuantities();
-		System.out.println("GETTING");
 //		logger.debug("getting products with quantities: " + productsWithQuantitiesMap.size() + " items found");
 		return productsWithQuantitiesMap;
 	}

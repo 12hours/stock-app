@@ -5,6 +5,9 @@ import org.springframework.dao.DataAccessException;
 
 import java.util.List;
 
+/**
+ * Interface for ProductType service
+ */
 public interface IProductTypeService {
     ProductType getProductTypeById(Integer id) throws DataAccessException;
     List<ProductType> getAllProductTypes() throws DataAccessException;

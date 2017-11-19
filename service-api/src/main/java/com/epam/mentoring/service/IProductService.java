@@ -8,6 +8,9 @@ import org.springframework.dao.DataAccessException;
 import com.epam.mentoring.data.model.Product;
 import com.epam.mentoring.data.model.ProductType;
 
+/**
+ * Interface for Product service
+ */
 public interface IProductService {
 	
 	public Product findProductById(Integer id) throws DataAccessException;

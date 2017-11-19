@@ -40,6 +40,7 @@ public class ProductService implements IProductService{
 	@Override
 	public int saveProduct(Product product) throws DataAccessException {
 		Assert.notNull(product, "No product provided");
+		logger.debug("Saving product " + product.toString());
 		return productDao.addProduct(product);
 	}
 	
@@ -50,7 +51,9 @@ public class ProductService implements IProductService{
 	
 	@Override
 	public List<Product> getAllProducts() throws DataAccessException {
-		return productDao.getAllProducts();
+		List<Product> products = productDao.getAllProducts();
+		logger.info("Getting all products. Found " + products.size() + " items");
+		return products;
 	}
 	
 	@Override
