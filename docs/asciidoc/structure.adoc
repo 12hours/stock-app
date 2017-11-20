@@ -73,7 +73,7 @@ making them flexible for changing. This file is proccessed by Maven during `dao`
 
 Firstly, database tapy should be specified as application property, e.g.
 ----
-app.database.type = h2
+app.database.type=h2
 ----
 Currently only H2 database is supported;
 `DataSource` and SQL scripts will be configured according to this property.
