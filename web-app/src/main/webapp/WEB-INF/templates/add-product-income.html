@@ -11,7 +11,7 @@
         <span th:text="#{add_product_income.order_number}"></span>
         <input type="text" th:field="*{orderNumber}"></input><br/>
         <span th:text="#{add_product_income.date}"></span>
-        <input type="text" th:field="*{date}"></input><br/>
+        <input type="text" th:field="*{date}" placeholder="YYYY-MM-DD"></input><br/>
         <span th:text="#{add_product_income.quantity}"></span>
         <input type="text" th:field="*{quantity}"></input><br/>
         <span th:text="#{add_product_income.product}"></span>
@@ -27,9 +27,10 @@
         <select th:field="*{userId}">
             <option th:value="1" th:text="User"></option>
         </select><br/>
-        <input type="submit" th:value="#{add_product_income.submit}"></input><a th:href="@{/}"><button
-            th:text="#{add_product_income.back}"></button></a>
+        <input type="submit" th:value="#{add_product_income.submit}"></input>
     </form>
+    <a th:href="@{/}"><button
+            th:text="#{add_product_income.back}"></button></a>
 
 </body>
 </html>

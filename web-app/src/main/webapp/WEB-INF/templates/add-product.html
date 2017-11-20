@@ -17,9 +17,9 @@
         <input type="text" th:field="*{name}"></input><br/>
         <span th:text="#{add_product.price}"></span>
         <input type="text" th:field="*{price}"></input><br/>
-        <input type="submit" th:value="#{add_product.submit}"></input><a
-            th:href="@{/add/}"><button th:text="#{add_product.back}"></button></a>
+        <input type="submit" th:value="#{add_product.submit}"></input>
     </form>
+    <a th:href="@{/add/}"><button th:text="#{add_product.back}"></button></a>
 
 </body>
 </html>

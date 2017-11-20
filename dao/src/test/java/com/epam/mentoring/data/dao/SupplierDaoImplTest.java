@@ -62,7 +62,7 @@ public class SupplierDaoImplTest {
 		Supplier supplierToFind = new Supplier();
 		supplierToFind.setId(1);
 		supplierToFind.setName("Nova Computers");
-		supplierToFind.setDetails("details A");
+		supplierToFind.setDetails("");
 		assertTrue(suppliers.contains(supplierToFind));
 	}
 	
