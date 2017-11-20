@@ -52,7 +52,7 @@ public class ProductService implements IProductService{
 	@Override
 	public List<Product> getAllProducts() throws DataAccessException {
 		List<Product> products = productDao.getAllProducts();
-		logger.info("Getting all products. Found " + products.size() + " items");
+		logger.debug("Getting all products. Found " + products.size() + " items");
 		return products;
 	}
 	

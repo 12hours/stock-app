@@ -1,6 +1,7 @@
-Application is divided in couple of modules (layers):
+
 
 === Application modules
+Application is divided in couple of modules (layers): +
  - `dao` and `dao-api`: `dao` module contain DAO objects, it handles database connection as well. `dao-api` is simply
   API for DAO objects. DAO classes are supposed to be accessed only by `service` layer.
  - `service` and `service-api`: `service` module currently works as a proxy between
@@ -12,7 +13,7 @@ Application is divided in couple of modules (layers):
  - `rest-app` module: to be implemented.
 
 
-image::images/app.png[]
+image::app.png[]
 
 As diagram shows, apllication is divided into two logical parts: `web-app` ('frontend') and `rest-app` ('backend').
 Function of `web-app` is to present data to user. `web-app` can obtain data by accessing `client`.
@@ -61,7 +62,7 @@ Database consists of 6 tables:
  - `product_income`
  - `product_outcome`
 
-image::images/diagram.png[]
+image::diagram.png[]
 
 Database table and column names, as well as data types definitions are specified in `${basedir}/dao/database
 .properties` file
@@ -69,6 +70,7 @@ making them flexible for changing. This file is proccessed by Maven during `dao`
 
 [.lead]
 *Database configuration* +
+
 Firstly, database tapy should be specified as application property, e.g.
 ----
 app.database.type = h2

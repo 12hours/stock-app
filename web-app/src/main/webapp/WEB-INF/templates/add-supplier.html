@@ -1,17 +1,18 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Getting Started: Serving Web Content</title>
+    <title th:text="#{add_supplier.title}"></title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-    <h1>Add new supplier</h1>
+    <h1 th:text="#{add_supplier.header}"></h1>
     <form th:action="@{/add/add-supplier}" method="post" th:object="${supplierForm}">
-        Supplier name:
+        <span th:text="#{add_supplier.supplier_name}"></span>
         <input type="text" th:field="*{name}"></input><br/>
-        Details:
+        <span th:text="#{add_supplier.details}"></span>
         <input type="text" th:field="*{details}"></input><br/>
-        <input type="submit" value="submit"></input>
+        <input type="submit" th:value="#{add_supplier.submit}"></input>
+        <a th:href="@{/add/}"><button th:text="#{add_supplier.back}"></button></a>
     </form>
 
 </body>

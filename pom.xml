@@ -100,6 +100,24 @@
 
 	<build>
 		<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-javadoc-plugin</artifactId>
+					<version>3.0.0-M1</version>
+					<configuration>
+						<show>private</show>
+					</configuration>
+					<executions>
+						<execution>
+							<id>aggregate</id>
+							<goals>
+								<goal>aggregate</goal>
+							</goals>
+							<phase>generate-resources</phase>
+						</execution>
+					</executions>
+				</plugin>
+
 			<plugin>
 				<groupId>org.asciidoctor</groupId>
 				<artifactId>asciidoctor-maven-plugin</artifactId>
@@ -117,6 +135,7 @@
 					<backend>html</backend>
 					<doctype>book</doctype>
 					<sourceDirectory>docs/asciidoc</sourceDirectory>
+					<outputDirectory>${project.build.directory}/site</outputDirectory>
 					<resources>
 						<resource>
 							<directory>docs/asciidoc/images</directory>

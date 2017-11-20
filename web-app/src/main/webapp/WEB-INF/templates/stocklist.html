@@ -1,22 +1,22 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Getting Started: Serving Web Content</title>
+    <title th:text="#{stocklist.title}"></title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-    <h1>Product list</h1>
+    <h1 th:text="#{stocklist.header}"></h1>
   
     <table>
       <tr>
-        <th>NAME</th>
-        <th>IN STOCK</th>
+        <th th:text="#{stocklist.table.product}"></th>
+        <th th:text="#{stocklist.table.quantity}"></th>
       </tr>
       <tr th:each="prod : ${productsWithQuantities}">
-        <td th:text="${prod.key.productName}">Onions</td>
-        <td th:text="${prod.value}">2.41</td>
+        <td th:text="${prod.key.productName}"></td>
+        <td th:text="${prod.value}"></td>
       </tr>
     </table>
-<a th:href="@{/add/}"><button>Add to stock</button></a>
+<a th:href="@{/add/}"><button th:text="#{stocklist.add}"></button></a>
 </body>
 </html>
