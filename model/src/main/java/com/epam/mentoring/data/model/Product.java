@@ -11,7 +11,7 @@ import java.math.BigDecimal;
 @ToString
 public class Product {
 	private Integer id;
-	private String productName;
+	private String name;
 	private BigDecimal price;
 	private ProductType type;
 
@@ -23,14 +23,14 @@ public class Product {
 
 		Product product = (Product) o;
 
-		if (productName != null ? !productName.equals(product.productName) : product.productName != null) return false;
+		if (name != null ? !name.equals(product.name) : product.name != null) return false;
 		if (price != null ? !(price.compareTo(product.price) == 0) : product.price != null) return false;
 		return type != null ? type.equals(product.type) : product.type == null;
 	}
 
 	@Override
 	public int hashCode() {
-		int result = productName != null ? productName.hashCode() : 0;
+		int result = name != null ? name.hashCode() : 0;
 		result = 31 * result + (price != null ? price.hashCode() : 0);
 		result = 31 * result + (type != null ? type.hashCode() : 0);
 		return result;

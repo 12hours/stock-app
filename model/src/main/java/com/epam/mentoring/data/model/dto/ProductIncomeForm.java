@@ -1,4 +1,4 @@
-package com.epam.mentoring.web.forms;
+package com.epam.mentoring.data.model.dto;
 
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;

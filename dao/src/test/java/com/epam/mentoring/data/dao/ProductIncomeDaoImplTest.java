@@ -59,7 +59,7 @@ public class ProductIncomeDaoImplTest {
 		productTypeGoal.setName("CPU");
 		Product productGoal = new Product();
 		productGoal.setId(1);
-		productGoal.setProductName("Intel Core i7 8700");
+		productGoal.setName("Intel Core i7 8700");
 		productGoal.setPrice(BigDecimal.valueOf(360));
 		productGoal.setType(productTypeGoal);
 		assertEquals(productGoal, productIncome.getProduct());
@@ -121,7 +121,7 @@ public class ProductIncomeDaoImplTest {
 		productTypeGoal.setName("CPU");
 		Product productGoal = new Product();
 		productGoal.setId(1);
-		productGoal.setProductName("Intel Core i7 8700");
+		productGoal.setName("Intel Core i7 8700");
 		productGoal.setPrice(BigDecimal.valueOf(360));
 		productGoal.setType(productTypeGoal);
 		assertEquals(productGoal, productIncomeExtracted.getProduct());

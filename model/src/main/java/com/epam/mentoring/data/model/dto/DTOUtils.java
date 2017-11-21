@@ -1,17 +1,11 @@
-package com.epam.mentoring.web;
+package com.epam.mentoring.data.model.dto;
 
 import com.epam.mentoring.data.model.Product;
 import com.epam.mentoring.data.model.ProductIncome;
 import com.epam.mentoring.data.model.ProductType;
 import com.epam.mentoring.data.model.Supplier;
-import com.epam.mentoring.web.forms.ProductForm;
-import com.epam.mentoring.web.forms.ProductIncomeForm;
-import com.epam.mentoring.web.forms.ProductTypeForm;
-import com.epam.mentoring.web.forms.SupplierForm;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.PropertyMap;
-import org.modelmapper.Provider;
-import org.modelmapper.builder.ConfigurableMapExpression;
 import org.modelmapper.convention.MatchingStrategies;
 
 public class DTOUtils {
@@ -45,7 +39,7 @@ public class DTOUtils {
             protected void configure() {
                 skip().setId(null);
                 map().setPrice(source.getPrice());
-                map().setProductName(source.getName());
+                map().setName(source.getName());
                 map().getType().setId(source.getProductTypeId());
             }
         });
@@ -64,10 +58,6 @@ public class DTOUtils {
 
     public static <S, T> T map(S source, Class<T> targetClass) {
         return INSTANCE.map(source, targetClass);
-    }
-
-    public static ProductIncome map(ProductIncomeForm form) {
-        return INSTANCE.map(form, ProductIncome.class);
     }
 
     public static <S, T> void mapTo(S source, T dist) {

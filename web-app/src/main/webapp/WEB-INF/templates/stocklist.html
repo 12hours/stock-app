@@ -13,7 +13,7 @@
         <th th:text="#{stocklist.table.quantity}"></th>
       </tr>
       <tr th:each="prod : ${productsWithQuantities}">
-        <td th:text="${prod.key.productName}"></td>
+        <td th:text="${prod.key.name}"></td>
         <td th:text="${prod.value}"></td>
       </tr>
     </table>

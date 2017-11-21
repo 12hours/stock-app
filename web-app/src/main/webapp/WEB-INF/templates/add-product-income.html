@@ -16,7 +16,7 @@
         <input type="text" th:field="*{quantity}"></input><br/>
         <span th:text="#{add_product_income.product}"></span>
         <select th:field="*{productId}">
-            <option th:each="prod: ${products}" th:value="${{prod.id}}" th:text="${prod.productName}"></option>
+            <option th:each="prod: ${products}" th:value="${{prod.id}}" th:text="${prod.name}"></option>
         </select><a th:href="@{/add/add-product}" th:text="#{add_product_income.add_product}"></a><br/>
         <span th:text="#{add_product_income.supplier}"></span>
         <select th:field="*{supplierId}">

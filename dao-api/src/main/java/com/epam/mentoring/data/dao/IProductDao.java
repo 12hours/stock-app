@@ -3,6 +3,7 @@ package com.epam.mentoring.data.dao;
 import java.util.List;
 import java.util.Map;
 
+import com.epam.mentoring.data.model.dto.ProductWithQuantityView;
 import org.springframework.dao.DataAccessException;
 
 import com.epam.mentoring.data.model.Product;
@@ -66,6 +67,12 @@ public interface IProductDao {
 	 * @throws DataAccessException
 	 */
 	int deleteProduct(Integer id) throws DataAccessException;
-	
+
+	/**
+	 * Gets all products and thier quantities represented as {@code ProductWithQuantityView} objects
+	 * @return list of ProductWithQuantity objects
+	 * @throws DataAccessException
+	 */
+	List<ProductWithQuantityView> getAllProductsWithQuantitesAsViews() throws DataAccessException;
 
 }

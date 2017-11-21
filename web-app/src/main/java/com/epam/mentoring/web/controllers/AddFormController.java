@@ -4,20 +4,22 @@ import com.epam.mentoring.client.IProductConsumer;
 import com.epam.mentoring.client.IProductIncomeConsumer;
 import com.epam.mentoring.client.IProductTypeConsumer;
 import com.epam.mentoring.client.ISupplierConsumer;
+import com.epam.mentoring.data.config.DaoConfig;
 import com.epam.mentoring.data.model.*;
-import com.epam.mentoring.web.DTOUtils;
-import com.epam.mentoring.web.forms.ProductForm;
-import com.epam.mentoring.web.forms.ProductIncomeForm;
-import com.epam.mentoring.web.forms.ProductTypeForm;
-import com.epam.mentoring.web.forms.SupplierForm;
+import com.epam.mentoring.data.model.dto.DTOUtils;
+import com.epam.mentoring.data.model.dto.ProductForm;
+import com.epam.mentoring.data.model.dto.ProductIncomeForm;
+import com.epam.mentoring.data.model.dto.ProductTypeForm;
+import com.epam.mentoring.data.model.dto.SupplierForm;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
+import java.io.*;
 import java.util.List;
 
 @Controller
@@ -46,7 +48,7 @@ public class AddFormController {
 //    }
 
     @GetMapping("/")
-    public String root() {
+    public String root() throws IOException {
         return "redirect:/add/add-product-income";
     }
 
@@ -66,7 +68,7 @@ public class AddFormController {
     public String saveProductIncome(@ModelAttribute("productIncomeForm") ProductIncomeForm productIncomeForm,
                                     BindingResult bindingResult,
                                     Errors errors) {
-        ProductIncome productIncome = DTOUtils.map(productIncomeForm);
+        ProductIncome productIncome = DTOUtils.map(productIncomeForm, ProductIncome.class);
         productIncomeConsumer.addProductIncome(productIncome);
         return "redirect:/";
     }

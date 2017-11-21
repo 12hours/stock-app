@@ -6,12 +6,16 @@ import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.Assert.*;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.epam.mentoring.data.model.dto.ProductWithQuantityView;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.junit.runners.MethodSorters;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,17 +34,18 @@ import com.epam.mentoring.data.model.ProductType;
 @ContextConfiguration(classes = {TestConfig.class})
 @ActiveProfiles("test")
 @RunWith(SpringJUnit4ClassRunner.class)
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class ProductDaoImplTest {
-	
+
 	Logger logger = LoggerFactory.getLogger(ProductDaoImplTest.class);
 
 	@Autowired
 	@Qualifier("ProductDaoImpl")
 	private IProductDao dao;
-	
+
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
-	
+
 	@Test
 	@Sql("classpath:create_tables.sql")
 	@Sql("classpath:data.sql")
@@ -60,15 +65,15 @@ public class ProductDaoImplTest {
 				put(9, 12);
 			}
 		};
-		
+
 		Map<Product, Integer> productsAndQuantitesMap = dao.getAllProductsWithQuantities();
 		assertThat(productsAndQuantitesMap.size(), is(9));
-		
+
 		for(Map.Entry<Product, Integer> entry: productsAndQuantitesMap.entrySet()) {
-			assertThat(entry.getValue(), equalTo(expectedQuantitiesMap.get(entry.getKey().getId()))); 
+			assertThat(entry.getValue(), equalTo(expectedQuantitiesMap.get(entry.getKey().getId())));
 		}
 	}
-	
+
 	@Test
 	@Sql("classpath:/create_tables.sql")
 	@Sql("classpath:/data.sql")
@@ -87,7 +92,7 @@ public class ProductDaoImplTest {
 				put(9, 9);
 			}
 		};
-		
+
 		jdbcTemplate.execute("INSERT INTO product_income VALUES (13, 15, 10013, '2017-11-10', 1, 1, 1)");
 		jdbcTemplate.execute("INSERT INTO product_income VALUES (14, 10, 10014, '2017-11-10', 3, 1, 1)");
 		jdbcTemplate.execute("INSERT INTO product_income VALUES (15, 18, 10015, '2017-11-10', 5, 1, 1)");
@@ -96,15 +101,15 @@ public class ProductDaoImplTest {
 		jdbcTemplate.execute("INSERT INTO product_outcome VALUES (14, 8, '2017-11-10', 4, 1)");
 		jdbcTemplate.execute("INSERT INTO product_outcome VALUES (15, 12, '2017-11-10', 8, 1)");
 		jdbcTemplate.execute("INSERT INTO product_outcome VALUES (16, 3, '2017-11-10', 9, 1)");
-		
+
 		Map<Product, Integer> productsAndQuantitesMap = dao.getAllProductsWithQuantities();
 		assertThat(productsAndQuantitesMap.size(), is(9));
-		
+
 		for(Map.Entry<Product, Integer> entry: productsAndQuantitesMap.entrySet()) {
-			assertThat(entry.getValue(), equalTo(expectedQuantitiesMap.get(entry.getKey().getId()))); 
+			assertThat(entry.getValue(), equalTo(expectedQuantitiesMap.get(entry.getKey().getId())));
 		}
 	}
-	
+
 	@Test
 	@Sql("classpath:/create_tables.sql")
 	@Sql("classpath:/data.sql")
@@ -123,14 +128,14 @@ public class ProductDaoImplTest {
 				put(9, 25);
 			}
 		};
-		
+
 		jdbcTemplate.execute("DELETE FROM product_outcome");
-		
+
 		Map<Product, Integer> productsAndQuantitesMap = dao.getAllProductsWithQuantities();
 		assertThat(productsAndQuantitesMap.size(), is(9));
-		
+
 		for(Map.Entry<Product, Integer> entry: productsAndQuantitesMap.entrySet()) {
-			assertThat(entry.getValue(), equalTo(expectedQuantitiesMap.get(entry.getKey().getId()))); 
+			assertThat(entry.getValue(), equalTo(expectedQuantitiesMap.get(entry.getKey().getId())));
 		}
 	}
 
@@ -139,27 +144,27 @@ public class ProductDaoImplTest {
 	@Sql("classpath:/data.sql")
 	@Sql(value = "classpath:/delete_tables.sql", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	public void addProductGetProductTest() {
-		
+
 		ProductType productType = new ProductType();
 		productType.setId(1);
-		
+
 		Product product = new Product();
 		product.setPrice(new BigDecimal(100.0));
-		product.setProductName("dummy_product");
+		product.setName("dummy_product");
 		product.setType(productType);
-		
+
 		int ra = dao.addProduct(product);
 		assertThat(Integer.valueOf(ra), equalTo(Integer.valueOf(1)));
-		
+
 		Product extractedProduct = dao.getProductById(10);
 		assertThat(extractedProduct, notNullValue());
 		assertThat(extractedProduct.getId(), equalTo(10));
-		assertThat(extractedProduct.getProductName(), equalTo("dummy_product"));
+		assertThat(extractedProduct.getName(), equalTo("dummy_product"));
 		assertTrue(extractedProduct.getPrice().compareTo(BigDecimal.valueOf(100.0)) == 0);
 		assertThat(extractedProduct.getType().getName(), equalTo("CPU"));
 		assertThat(extractedProduct.getType().getId(), equalTo(1));
 	}
-	
+
 
 	@Test
 	@Sql("classpath:/create_tables.sql")
@@ -178,5 +183,31 @@ public class ProductDaoImplTest {
 		assertTrue(products.contains(productToFind_1));
 		assertTrue(products.contains(productToFind_2));
 	}
-	
+
+
+	@Test
+	@Sql("classpath:/create_tables.sql")
+	@Sql("classpath:/data.sql")
+	@Sql(value = "classpath:/delete_tables.sql", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
+	public void getAllProductsWithQuantitesAsViewsTest() throws Exception {
+		List<ProductWithQuantityView> productWithQuantityViews = dao.getAllProductsWithQuantitesAsViews();
+		assertNotNull(productWithQuantityViews);
+		assertEquals(9, productWithQuantityViews.size());
+
+		List<ProductWithQuantityView> expectedQuantitiesList = new ArrayList<ProductWithQuantityView>() {
+			{
+				add(new ProductWithQuantityView(1, "Intel Core i7 8700", 5));
+				add(new ProductWithQuantityView(2, "Intel Core i3 8100", 27));
+				add(new ProductWithQuantityView(3, "Nvidia GTX 1050Ti", 29));
+				add(new ProductWithQuantityView(4, "Intel Pentium G4360", 50));
+				add(new ProductWithQuantityView(5, "AMD Ryzen 7 1700", 5));
+				add(new ProductWithQuantityView(6, "Samsung 850 Evo 256 Gb", 25));
+				add(new ProductWithQuantityView(7, "Intel Core i5 6600K", 7));
+				add(new ProductWithQuantityView(8, "Kingston UV400 120 Gb", 30));
+				add(new ProductWithQuantityView(9, "ASRock Z370", 12));
+			}
+		};
+
+		assertTrue(productWithQuantityViews.containsAll(expectedQuantitiesList));
+	}
 }

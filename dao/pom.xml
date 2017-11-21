@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.epam.mentoring</groupId>
@@ -18,112 +18,120 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-jdbc</artifactId>
         </dependency>
-        
+
         <dependency>
-        	<groupId>com.h2database</groupId>
-        	<artifactId>h2</artifactId>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
         </dependency>
-        
+
         <dependency>
-        	<groupId>com.epam.mentoring</groupId>
-        	<artifactId>model</artifactId>
+            <groupId>com.epam.mentoring</groupId>
+            <artifactId>model</artifactId>
         </dependency>
-        
+
         <dependency>
-        	<groupId>com.epam.mentoring</groupId>
-        	<artifactId>dao-api</artifactId>
+            <groupId>com.epam.mentoring</groupId>
+            <artifactId>dao-api</artifactId>
         </dependency>
-        
+
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-core</artifactId>
         </dependency>
-        
+
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-beans</artifactId>
         </dependency>
-        
+
         <dependency>
-        	<groupId>org.springframework</groupId>
-        	<artifactId>spring-context</artifactId>
-        	<exclusions>
-        		<exclusion>
-	            <groupId>commons-logging</groupId>
-	            <artifactId>commons-logging</artifactId>
-	         </exclusion>
-        	</exclusions>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>commons-logging</groupId>
+                    <artifactId>commons-logging</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
-        
+
         <dependency>
-        	<groupId>org.springframework</groupId>
-        	<artifactId>spring-test</artifactId>
-        	<scope>test</scope>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <scope>test</scope>
         </dependency>
-        
+
         <dependency>
-	      <groupId>org.slf4j</groupId>
-	      <artifactId>jcl-over-slf4j</artifactId>
-	      <scope>runtime</scope>
-	   </dependency>
-	   <dependency>
-	      <groupId>org.slf4j</groupId>
-	      <artifactId>slf4j-api</artifactId>
-	      <scope>runtime</scope>
-	   </dependency>
-	   <dependency>
-	      <groupId>org.slf4j</groupId>
-	      <artifactId>slf4j-log4j12</artifactId>
-	      <scope>runtime</scope>
-	   </dependency>
-    	
-		<dependency>
-		    <groupId>org.apache.logging.log4j</groupId>
-		    <artifactId>log4j-core</artifactId>
-		</dependency>
-        
-        <dependency>
-        	<groupId>junit</groupId>
-        	<artifactId>junit</artifactId>
-        	<scope>test</scope>
+            <groupId>org.slf4j</groupId>
+            <artifactId>jcl-over-slf4j</artifactId>
+            <scope>runtime</scope>
         </dependency>
-        
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+
     </dependencies>
-    
-        
-    		<build>
-    		<resources>
-    			<resource>
-    				<directory>src/main/resources</directory>
-    				<filtering>true</filtering>
-    			</resource>
-    		</resources>   
-    		<testResources>
-    			<testResource>
-    				<directory>src/test/resources</directory>
-    				<filtering>true</filtering>
-    			</testResource>
-    		</testResources> 
-			    <plugins>
-			      <plugin>
-			        <groupId>org.codehaus.mojo</groupId>
-			        <artifactId>properties-maven-plugin</artifactId>
-			        <version>1.0-alpha-1</version>
-			        <executions>
-			          <execution>
-			            <phase>initialize</phase>
-			            <goals>
-			              <goal>read-project-properties</goal>
-			            </goals>
-			            <configuration>
-			              <files>
-			                <file>${basedir}/database.properties</file>
-			              </files>
-			            </configuration>
-			          </execution>
-			        </executions>
-			      </plugin>
-			   </plugins>
-			   </build>
-    
+
+
+    <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+        <testResources>
+            <testResource>
+                <directory>src/test/resources</directory>
+                <filtering>true</filtering>
+            </testResource>
+        </testResources>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>properties-maven-plugin</artifactId>
+                <version>1.0-alpha-1</version>
+                <executions>
+                    <execution>
+                        <phase>initialize</phase>
+                        <goals>
+                            <goal>read-project-properties</goal>
+                        </goals>
+                        <configuration>
+                            <files>
+                                <file>${basedir}/database.properties</file>
+                            </files>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <trimStackTrace>false</trimStackTrace>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
 </project>

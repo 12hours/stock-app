@@ -1,7 +1,8 @@
 package com.epam.mentoring.web;
 
 import com.epam.mentoring.data.model.ProductIncome;
-import com.epam.mentoring.web.forms.ProductIncomeForm;
+import com.epam.mentoring.data.model.dto.DTOUtils;
+import com.epam.mentoring.data.model.dto.ProductIncomeForm;
 import org.junit.Test;
 
 import java.util.Date;
@@ -22,7 +23,7 @@ public class DTOUtilsTest {
                 .userId(3)
                 .build();
 
-        ProductIncome productIncome = DTOUtils.map(productIncomeForm);
+        ProductIncome productIncome = DTOUtils.map(productIncomeForm, ProductIncome.class);
         System.out.println(productIncome);
         assertEquals(date, productIncome.getDate());
         assertEquals(10000L, productIncome.getOrderNumber());

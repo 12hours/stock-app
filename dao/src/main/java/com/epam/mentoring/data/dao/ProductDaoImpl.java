@@ -1,16 +1,19 @@
 package com.epam.mentoring.data.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import javax.sql.DataSource;
 
+import com.epam.mentoring.data.model.dto.DTOUtils;
+import com.epam.mentoring.data.model.dto.ProductWithQuantityView;
 import com.epam.mentoring.data.util.mappers.ProductResultSetExtractor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 
-import org.springframework.util.Assert;
 import com.epam.mentoring.data.model.Product;
 import com.epam.mentoring.data.util.mappers.ProductRowMapper;
 import com.epam.mentoring.data.util.mappers.ProductsWithQuantitiesResultSetExtractor;
@@ -66,7 +69,7 @@ public class ProductDaoImpl implements IProductDao{
 
 	@Override
 	public int addProduct(Product product) {
-		return jdbcTemplate.update(ADD_PRODUCT_SQL, product.getProductName(), product.getPrice(), product.getType().getId());
+		return jdbcTemplate.update(ADD_PRODUCT_SQL, product.getName(), product.getPrice(), product.getType().getId());
 	}
 
 	@Override
@@ -79,6 +82,21 @@ public class ProductDaoImpl implements IProductDao{
 	public int deleteProduct(Integer id) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public List<ProductWithQuantityView> getAllProductsWithQuantitesAsViews() throws DataAccessException {
+		Map<Product, Integer> allProductsWithQuantities = this.getAllProductsWithQuantities();
+		List<ProductWithQuantityView> productWithQuantityViewList = new ArrayList<>();
+		for (Map.Entry<Product, Integer> entry : allProductsWithQuantities.entrySet()) {
+			Product product = entry.getKey();
+			ProductWithQuantityView productWithQuantityView = new ProductWithQuantityView();
+			productWithQuantityView.setId(product.getId());
+			productWithQuantityView.setProductName(product.getName());
+			productWithQuantityView.setQuantity(entry.getValue());
+			productWithQuantityViewList.add(productWithQuantityView);
+		}
+		return productWithQuantityViewList;
 	}
 
 	@Override
