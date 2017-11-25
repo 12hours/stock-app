@@ -20,7 +20,6 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-//@RequestMapping("/")
 public class StockController {
 
     private IProductService productService;
@@ -29,7 +28,7 @@ public class StockController {
         this.productService = productService;
     }
 
-    @RequestMapping(value = "/stock/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @RequestMapping(value = "/stock", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity<List<ProductWithQuantityView>> productWithQuantityViewList() {
         List<ProductWithQuantityView> allProductsWithQuantitiesViews = productService.getAllProductsWithQuantitiesViews();
         ResponseEntity<List<ProductWithQuantityView>> responseEntity = new

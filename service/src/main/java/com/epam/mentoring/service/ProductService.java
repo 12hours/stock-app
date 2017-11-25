@@ -76,7 +76,10 @@ public class ProductService implements IProductService{
 
 	@Override
 	public List<ProductWithQuantityView> getAllProductsWithQuantitiesViews() {
-		return null;
+		List<ProductWithQuantityView> allProductsWithQuantitesAsViews = productDao.getAllProductsWithQuantitesAsViews();
+		logger.debug("getting all products with quantities as views: " + allProductsWithQuantitesAsViews.size() + " " +
+				"items found");
+		return allProductsWithQuantitesAsViews;
 	}
 
 }

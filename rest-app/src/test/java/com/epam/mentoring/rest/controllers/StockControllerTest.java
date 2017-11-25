@@ -20,6 +20,9 @@ import org.springframework.web.context.WebApplicationContext;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -59,9 +62,10 @@ public class StockControllerTest {
                 .andExpect(jsonPath("$[1].quantity", is(20)))
                 .andExpect(jsonPath("$[2].id", is(2)))
                 .andExpect(jsonPath("$[2].productName", is("Core i3")))
-                .andExpect(jsonPath("$[2].quantity", is(25)))
-        ;
-
+                .andExpect(jsonPath("$[2].quantity", is(25)));
+        verify(productService, times(1)).getAllProductsWithQuantitiesViews();
+        verifyNoMoreInteractions(productService);
     }
+
 
 }
