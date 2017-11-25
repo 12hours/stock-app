@@ -2,6 +2,7 @@ package com.epam.mentoring.service;
 
 import com.epam.mentoring.data.dao.IProductIncomeDao;
 import com.epam.mentoring.data.model.ProductIncome;
+import com.epam.mentoring.data.model.dto.ProductIncomeForm;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataAccessException;
@@ -25,9 +26,14 @@ public class ProductIncomeService implements IProductIncomeService {
     }
 
     @Override
-    public int saveProductIncome(ProductIncome productIncome) throws DataAccessException {
+    public Integer saveProductIncome(ProductIncome productIncome) throws DataAccessException {
         Assert.notNull(productIncome, "No ProductIncome provided");
         logger.debug("Saving ProductIncome " + productIncome.toString());
         return productIncomeDao.addProductIncome(productIncome);
+    }
+
+    @Override
+    public Integer saveProductIncome(ProductIncomeForm productIncomeForm) throws DataAccessException {
+        return null;
     }
 }

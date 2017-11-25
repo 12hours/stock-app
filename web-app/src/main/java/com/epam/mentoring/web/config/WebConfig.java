@@ -18,7 +18,7 @@ import org.thymeleaf.templateresolver.TemplateResolver;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = "com.epam.mentoring.web.controllers")
+@ComponentScan(basePackages = "com.epam.mentoring.web.com.epam.mentoring.rest.controllers")
 public class WebConfig {
 
 	

@@ -3,6 +3,7 @@ package com.epam.mentoring.service;
 import java.util.List;
 import java.util.Map;
 
+import com.epam.mentoring.data.model.dto.ProductWithQuantityView;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataAccessException;
@@ -72,5 +73,10 @@ public class ProductService implements IProductService{
 	public void deleteProductById(Long id) throws DataAccessException {
 		
 	}
-	
+
+	@Override
+	public List<ProductWithQuantityView> getAllProductsWithQuantitiesViews() {
+		return null;
+	}
+
 }

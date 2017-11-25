@@ -1,6 +1,7 @@
 package com.epam.mentoring.service;
 
 import com.epam.mentoring.data.model.ProductIncome;
+import com.epam.mentoring.data.model.dto.ProductIncomeForm;
 import org.springframework.dao.DataAccessException;
 
 /**
@@ -8,5 +9,6 @@ import org.springframework.dao.DataAccessException;
  */
 public interface IProductIncomeService {
     ProductIncome getProductIncomeById(Integer id) throws DataAccessException;
-    int saveProductIncome(ProductIncome productIncome) throws DataAccessException;
+    Integer saveProductIncome(ProductIncome productIncome) throws DataAccessException;
+    Integer saveProductIncome(ProductIncomeForm productIncomeForm) throws DataAccessException;
 }
