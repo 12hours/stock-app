@@ -1,10 +1,9 @@
 package com.epam.mentoring.web.controllers;
 
-import com.epam.mentoring.client.IProductConsumer;
-import com.epam.mentoring.client.IProductIncomeConsumer;
-import com.epam.mentoring.client.IProductTypeConsumer;
-import com.epam.mentoring.client.ISupplierConsumer;
-import com.epam.mentoring.data.config.DaoConfig;
+import com.epam.mentoring.client.ProductConsumer;
+import com.epam.mentoring.client.ProductIncomeConsumer;
+import com.epam.mentoring.client.ProductTypeConsumer;
+import com.epam.mentoring.client.SupplierConsumer;
 import com.epam.mentoring.data.model.*;
 import com.epam.mentoring.data.model.dto.DTOUtils;
 import com.epam.mentoring.data.model.dto.ProductForm;
@@ -12,7 +11,6 @@ import com.epam.mentoring.data.model.dto.ProductIncomeForm;
 import com.epam.mentoring.data.model.dto.ProductTypeForm;
 import com.epam.mentoring.data.model.dto.SupplierForm;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -28,19 +26,19 @@ import java.util.List;
 public class AddFormController {
 
     @Autowired
-    private IProductIncomeConsumer productIncomeConsumer;
+    private ProductIncomeConsumer productIncomeConsumer;
 
     @Autowired
-    private IProductConsumer productConsumer;
+    private ProductConsumer productConsumer;
 
     @Autowired
-    private IProductTypeConsumer productTypeConsumer;
+    private ProductTypeConsumer productTypeConsumer;
 
     @Autowired
-    private ISupplierConsumer supplierConsumer;
+    private SupplierConsumer supplierConsumer;
 
 //    @Autowired
-//    public AddFormController(IProductIncomeConsumer productIncomeConsumer, IProductConsumer productConsumer, IProductTypeConsumer productTypeConsumer, ISupplierConsumer supplierConsumer) {
+//    public AddFormController(ProductIncomeConsumer productIncomeConsumer, ProductConsumer productConsumer, ProductTypeConsumer productTypeConsumer, SupplierConsumer supplierConsumer) {
 //        this.productIncomeConsumer = productIncomeConsumer;
 //        this.productConsumer = productConsumer;
 //        this.productTypeConsumer = productTypeConsumer;

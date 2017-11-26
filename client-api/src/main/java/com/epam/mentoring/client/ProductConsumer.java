@@ -10,7 +10,7 @@ import com.epam.mentoring.data.model.ProductType;
 import com.epam.mentoring.data.model.dto.ProductForm;
 import com.epam.mentoring.data.model.dto.ProductWithQuantityView;
 
-public interface IProductConsumer {
+public interface ProductConsumer {
 	
 	Product findProductById(Long id) throws ServerDataAccessException;
 	

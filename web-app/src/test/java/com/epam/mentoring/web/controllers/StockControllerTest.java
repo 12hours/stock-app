@@ -1,19 +1,15 @@
 package com.epam.mentoring.web.controllers;
 
 
-import com.epam.mentoring.client.IProductConsumer;
-import com.epam.mentoring.client.IProductIncomeConsumer;
+import com.epam.mentoring.client.ProductConsumer;
+import com.epam.mentoring.client.ProductIncomeConsumer;
 import com.epam.mentoring.data.model.Product;
-import com.epam.mentoring.data.model.ProductIncome;
 import com.epam.mentoring.data.model.ProductType;
 import com.epam.mentoring.data.model.Supplier;
 import com.epam.mentoring.web.TestConfig;
 import com.epam.mentoring.web.config.ThymeLeafConfig;
 import com.epam.mentoring.web.config.WebConfig;
-import org.hamcrest.BaseMatcher;
 import org.hamcrest.CustomMatcher;
-import org.hamcrest.Description;
-import org.hamcrest.Matcher;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -24,7 +20,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.web.context.WebApplicationContext;
 
 import java.util.List;
@@ -47,10 +42,10 @@ public class StockControllerTest {
     private MockMvc mockMvc;
 
     @Autowired
-    IProductConsumer productConsumer;
+    ProductConsumer productConsumer;
 
     @Autowired
-    IProductIncomeConsumer productIncomeConsumer;
+    ProductIncomeConsumer productIncomeConsumer;
 
     @Autowired
     @Qualifier("refProductList")

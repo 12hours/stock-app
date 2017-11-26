@@ -1,11 +1,12 @@
 package com.epam.mentoring.web.config;
 
-import java.net.URL;
-import java.net.URLClassLoader;
-
 import javax.sql.DataSource;
 
 import com.epam.mentoring.client.*;
+import com.epam.mentoring.client.direct.DirectProductConsumer;
+import com.epam.mentoring.client.direct.DirectProductIncomeConsumer;
+import com.epam.mentoring.client.direct.DirectProductTypeConsumer;
+import com.epam.mentoring.client.direct.DirectSupplierConsumer;
 import com.epam.mentoring.data.dao.*;
 import com.epam.mentoring.service.*;
 import org.slf4j.Logger;
@@ -39,7 +40,7 @@ public class AppConfig {
 	}
 
 	@Bean
-	IProductConsumer directProductConsumer() {
+    ProductConsumer directProductConsumer() {
 		return new DirectProductConsumer(productService());
 	}
 
@@ -54,7 +55,7 @@ public class AppConfig {
 	}
 
 	@Bean
-	IProductTypeConsumer directProductTypeConsumer() {
+    ProductTypeConsumer directProductTypeConsumer() {
 		return new DirectProductTypeConsumer(productTypeService());
 	}
 
@@ -69,7 +70,7 @@ public class AppConfig {
 	}
 
 	@Bean
-	IProductIncomeConsumer directProductIncomeConsumer() {
+    ProductIncomeConsumer directProductIncomeConsumer() {
 		return new DirectProductIncomeConsumer(productIncomeService());
 	}
 
@@ -84,7 +85,7 @@ public class AppConfig {
 	}
 
 	@Bean
-	ISupplierConsumer directSupplierConsumer() {
+    SupplierConsumer directSupplierConsumer() {
 		return new DirectSupplierConsumer(supplierService());
 	}
 }

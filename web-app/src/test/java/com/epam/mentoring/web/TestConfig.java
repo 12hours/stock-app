@@ -1,9 +1,9 @@
 package com.epam.mentoring.web;
 
-import com.epam.mentoring.client.IProductConsumer;
-import com.epam.mentoring.client.IProductIncomeConsumer;
-import com.epam.mentoring.client.IProductTypeConsumer;
-import com.epam.mentoring.client.ISupplierConsumer;
+import com.epam.mentoring.client.ProductConsumer;
+import com.epam.mentoring.client.ProductIncomeConsumer;
+import com.epam.mentoring.client.ProductTypeConsumer;
+import com.epam.mentoring.client.SupplierConsumer;
 import com.epam.mentoring.data.model.*;
 import org.mockito.Mockito;
 import org.mockito.invocation.InvocationOnMock;
@@ -75,8 +75,8 @@ public class TestConfig {
     }
 
     @Bean
-    IProductIncomeConsumer productIncomeConsumer() {
-        IProductIncomeConsumer productIncomeConsumerMock = Mockito.mock(IProductIncomeConsumer.class);
+    ProductIncomeConsumer productIncomeConsumer() {
+        ProductIncomeConsumer productIncomeConsumerMock = Mockito.mock(ProductIncomeConsumer.class);
         Mockito.when(productIncomeConsumerMock.addProductIncome(Mockito.any(ProductIncome.class))).thenReturn(1);
         Mockito.when(productIncomeConsumerMock.findAll()).thenReturn(referencedProductIncomeList());
         Mockito.when(productIncomeConsumerMock.findProductIncome(Mockito.any(Integer.class))).then((Answer<ProductIncome>) invocation -> {
@@ -87,11 +87,11 @@ public class TestConfig {
     }
 
     @Bean
-    IProductConsumer productConsumer() {
+    ProductConsumer productConsumer() {
 
         List<Product> productsList = referencedProductList();
 
-        IProductConsumer productConsumerMock = Mockito.mock(IProductConsumer.class);
+        ProductConsumer productConsumerMock = Mockito.mock(ProductConsumer.class);
         Map<Product, Integer> productWithQuantitiesMap = new HashMap<>();
         productWithQuantitiesMap.put(productsList.get(0), 10);
         productWithQuantitiesMap.put(productsList.get(1), 20);
@@ -111,8 +111,8 @@ public class TestConfig {
     }
 
     @Bean
-    IProductTypeConsumer productTypeConsumer() {
-        IProductTypeConsumer productTypeConsumer = Mockito.mock(IProductTypeConsumer.class);
+    ProductTypeConsumer productTypeConsumer() {
+        ProductTypeConsumer productTypeConsumer = Mockito.mock(ProductTypeConsumer.class);
         Mockito.when(productTypeConsumer.findAll()).thenReturn(referencedProductTypeList());
         Mockito.when(productTypeConsumer.findProductType(Mockito.any())).thenAnswer(new Answer<ProductType>() {
             @Override
@@ -127,8 +127,8 @@ public class TestConfig {
     }
 
     @Bean
-    ISupplierConsumer supplierConsumer() {
-        ISupplierConsumer supplierConsumer = Mockito.mock(ISupplierConsumer.class);
+    SupplierConsumer supplierConsumer() {
+        SupplierConsumer supplierConsumer = Mockito.mock(SupplierConsumer.class);
         Mockito.when(supplierConsumer.findAll()).thenReturn(referencedSupplierList());
         Mockito.when(supplierConsumer.saveSupplier(Mockito.any(Supplier.class))).thenReturn(referencedSupplierList().size());
         Mockito.when(supplierConsumer.findSupplier(Mockito.any(Integer.class))).thenAnswer(new Answer<Supplier>() {

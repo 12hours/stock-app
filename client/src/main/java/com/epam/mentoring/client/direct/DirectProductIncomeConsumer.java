@@ -1,14 +1,15 @@
-package com.epam.mentoring.client;
+package com.epam.mentoring.client.direct;
 
-import com.epam.mentoring.data.dao.IProductIncomeDao;
+import com.epam.mentoring.client.ProductIncomeConsumer;
+import com.epam.mentoring.client.exception.ServerDataAccessException;
 import com.epam.mentoring.data.model.ProductIncome;
+import com.epam.mentoring.data.model.dto.ProductIncomeForm;
 import com.epam.mentoring.service.IProductIncomeService;
-import com.epam.mentoring.service.IProductService;
 import org.springframework.util.Assert;
 
 import java.util.List;
 
-public class DirectProductIncomeConsumer implements IProductIncomeConsumer {
+public class DirectProductIncomeConsumer implements ProductIncomeConsumer {
 
     private IProductIncomeService productIncomeService;
 
@@ -20,6 +21,11 @@ public class DirectProductIncomeConsumer implements IProductIncomeConsumer {
     public Integer addProductIncome(ProductIncome productIncome) {
         Assert.notNull(productIncome, "No ProductIncome object provided for saving");
         return productIncomeService.saveProductIncome(productIncome);
+    }
+
+    @Override
+    public Integer addProductIncome(ProductIncomeForm productIncomeForm) throws ServerDataAccessException {
+        return null;
     }
 
     @Override

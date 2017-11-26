@@ -1,9 +1,9 @@
 package com.epam.mentoring.web.controllers;
 
-import com.epam.mentoring.client.IProductConsumer;
-import com.epam.mentoring.client.IProductIncomeConsumer;
-import com.epam.mentoring.client.IProductTypeConsumer;
-import com.epam.mentoring.client.ISupplierConsumer;
+import com.epam.mentoring.client.ProductConsumer;
+import com.epam.mentoring.client.ProductIncomeConsumer;
+import com.epam.mentoring.client.ProductTypeConsumer;
+import com.epam.mentoring.client.SupplierConsumer;
 import com.epam.mentoring.data.model.Product;
 import com.epam.mentoring.data.model.ProductIncome;
 import com.epam.mentoring.data.model.ProductType;
@@ -56,16 +56,16 @@ public class AddFormControllerTest {
     private MockMvc mockMvc;
 
     @Autowired
-    IProductConsumer productConsumer;
+    ProductConsumer productConsumer;
 
     @Autowired
-    IProductIncomeConsumer productIncomeConsumer;
+    ProductIncomeConsumer productIncomeConsumer;
 
     @Autowired
-    IProductTypeConsumer productTypeConsumer;
+    ProductTypeConsumer productTypeConsumer;
 
     @Autowired
-    ISupplierConsumer supplierConsumer;
+    SupplierConsumer supplierConsumer;
 
     @Autowired
     @Qualifier("refProductList")

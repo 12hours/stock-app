@@ -1,8 +1,9 @@
-package com.epam.mentoring.client;
+package com.epam.mentoring.client.direct;
 
 import java.util.List;
 import java.util.Map;
 
+import com.epam.mentoring.client.ProductConsumer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -11,7 +12,7 @@ import com.epam.mentoring.data.model.Product;
 import com.epam.mentoring.data.model.ProductType;
 import com.epam.mentoring.service.IProductService;
 
-public class DirectProductConsumer implements IProductConsumer {
+public class DirectProductConsumer implements ProductConsumer {
 	
 	private static final Logger logger = LoggerFactory.getLogger(DirectProductConsumer.class.getName());
 	
