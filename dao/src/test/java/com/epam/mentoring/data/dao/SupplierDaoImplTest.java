@@ -34,9 +34,9 @@ public class SupplierDaoImplTest {
 	private JdbcTemplate jdbcTemplate;
 	
 	@Test
-	@Sql("classpath:create_tables.sql")
-	@Sql("classpath:data.sql")
-	@Sql(value = "classpath:delete_tables.sql", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
+	@Sql("classpath:/h2/create_tables.sql")
+	@Sql("classpath:/h2/data.sql")
+	@Sql(value = "classpath:/h2/delete_tables.sql", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	public void addAndGetSupplierTest() {
 		Supplier supplier = new Supplier();
 		supplier.setName("test supplier");
@@ -51,9 +51,9 @@ public class SupplierDaoImplTest {
 	}
 	
 	@Test
-	@Sql("classpath:create_tables.sql")
-	@Sql("classpath:data.sql")
-	@Sql(value = "classpath:delete_tables.sql", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
+	@Sql("classpath:/h2/create_tables.sql")
+	@Sql("classpath:/h2/data.sql")
+	@Sql(value = "classpath:/h2/delete_tables.sql", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	public void getAllSuppliersTest() {
 		List<Supplier> suppliers = dao.getAllSuppliers();
 		assertNotNull(suppliers);

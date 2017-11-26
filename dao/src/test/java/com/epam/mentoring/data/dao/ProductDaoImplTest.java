@@ -47,9 +47,9 @@ public class ProductDaoImplTest {
 	private JdbcTemplate jdbcTemplate;
 
 	@Test
-	@Sql("classpath:create_tables.sql")
-	@Sql("classpath:data.sql")
-	@Sql(value = "classpath:delete_tables.sql", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
+	@Sql("classpath:/h2/create_tables.sql")
+	@Sql("classpath:/h2/data.sql")
+	@Sql(value = "classpath:/h2/delete_tables.sql", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	public void getAllProductsWithQuantitesTest() {
 		logger.info("getAllProductsWithQuantitesTest run");
 		Map<Integer, Integer> expectedQuantitiesMap = new HashMap<Integer, Integer>() {

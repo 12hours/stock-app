@@ -11,7 +11,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-@Component
 public class SQLDialectConfiguratorApplicationContextInitializer implements ApplicationContextInitializer<ConfigurableApplicationContext> {
 
     private static final String H2 = "h2";

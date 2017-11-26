@@ -31,9 +31,9 @@ public class ProductTypeDaoImplTest {
 	private JdbcTemplate jdbcTemplate;
 
 	@Test
-	@Sql("classpath:create_tables.sql")
-	@Sql("classpath:data.sql")
-	@Sql(value = "classpath:delete_tables.sql", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
+	@Sql("classpath:/h2/create_tables.sql")
+	@Sql("classpath:/h2/data.sql")
+	@Sql(value = "classpath:/h2/delete_tables.sql", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	public void addAndGetProductTypeTest() {
 		ProductType productType = new ProductType();
 		productType.setName("dummy_type");
@@ -47,9 +47,9 @@ public class ProductTypeDaoImplTest {
 	}
 	
 	@Test
-	@Sql("classpath:create_tables.sql")
-	@Sql("classpath:data.sql")
-	@Sql(value = "classpath:delete_tables.sql", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
+	@Sql("classpath:/h2/create_tables.sql")
+	@Sql("classpath:/h2/data.sql")
+	@Sql(value = "classpath:/h2/delete_tables.sql", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	public void getAllProductTypesTest() {
 		List<ProductType> productTypes = dao.getAllProductTypes();
 		assertNotNull(productTypes);
