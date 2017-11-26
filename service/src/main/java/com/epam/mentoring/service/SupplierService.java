@@ -2,6 +2,8 @@ package com.epam.mentoring.service;
 
 import com.epam.mentoring.data.dao.ISupplierDao;
 import com.epam.mentoring.data.model.Supplier;
+import com.epam.mentoring.data.model.dto.DTOUtils;
+import com.epam.mentoring.data.model.dto.SupplierForm;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataAccessException;
@@ -27,10 +29,18 @@ public class SupplierService implements ISupplierService {
     }
 
     @Override
-    public int saveSupplier(Supplier supplier) throws DataAccessException {
+    public Integer saveSupplier(Supplier supplier) throws DataAccessException {
         Assert.notNull(supplier, "No supplier provided for saving");
+        Assert.notNull(supplier.getName(), "No name for supplier provided");
         logger.debug("Saving Supplier " + supplier.toString());
         return supplierDao.addSupplier(supplier);
+    }
+
+    @Override
+    public Integer saveSupplier(SupplierForm supplierForm) {
+        Assert.notNull(supplierForm, "No supplier form provided");
+        Supplier supplier = DTOUtils.map(supplierForm, Supplier.class);
+        return saveSupplier(supplier);
     }
 
     @Override

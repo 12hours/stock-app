@@ -1,6 +1,7 @@
 package com.epam.mentoring.service;
 
 import com.epam.mentoring.data.model.Supplier;
+import com.epam.mentoring.data.model.dto.SupplierForm;
 import org.springframework.dao.DataAccessException;
 
 import java.util.List;
@@ -10,7 +11,10 @@ import java.util.List;
  */
 public interface ISupplierService {
     List<Supplier> getAllSuppliers() throws DataAccessException;
-    int saveSupplier(Supplier supplier) throws DataAccessException;
+    Integer saveSupplier(Supplier supplier) throws DataAccessException;
+
+    Integer saveSupplier(SupplierForm supplierForm);
+
     int updateSupplier(Supplier supplier) throws DataAccessException;
     int deleteSupplier(Integer id) throws DataAccessException;
     Supplier getSupplierById(Integer id) throws DataAccessException;

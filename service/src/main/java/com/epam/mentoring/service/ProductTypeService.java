@@ -2,6 +2,8 @@ package com.epam.mentoring.service;
 
 import com.epam.mentoring.data.dao.IProductTypeDao;
 import com.epam.mentoring.data.model.ProductType;
+import com.epam.mentoring.data.model.dto.DTOUtils;
+import com.epam.mentoring.data.model.dto.ProductTypeForm;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataAccessException;
@@ -34,15 +36,22 @@ public class ProductTypeService implements IProductTypeService {
     }
 
     @Override
-    public int updateProductType(ProductType productType) throws DataAccessException {
+    public Integer updateProductType(ProductType productType) throws DataAccessException {
         return 0;
     }
 
     @Override
-    public int saveProductType(ProductType productType) throws DataAccessException {
+    public Integer saveProductType(ProductType productType) throws DataAccessException {
         Assert.notNull(productType, "No ProductType provided for saving");
+        Assert.notNull(productType.getName(), "No name for product type provided");
         logger.debug("Saving ProductType " + productType.toString());
         return productTypeDao.addProductType(productType);
+    }
+
+    @Override
+    public Integer saveProductType(ProductTypeForm productTypeForm) throws DataAccessException {
+        ProductType productType = DTOUtils.map(productTypeForm, ProductType.class);
+        return saveProductType(productType);
     }
 
     @Override
