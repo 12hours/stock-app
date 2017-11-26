@@ -3,6 +3,8 @@ package com.epam.mentoring.service;
 import java.util.List;
 import java.util.Map;
 
+import com.epam.mentoring.data.model.dto.DTOUtils;
+import com.epam.mentoring.data.model.dto.ProductForm;
 import com.epam.mentoring.data.model.dto.ProductWithQuantityView;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,10 +41,19 @@ public class ProductService implements IProductService{
 	}
 	
 	@Override
-	public int saveProduct(Product product) throws DataAccessException {
+	public Integer saveProduct(Product product) throws DataAccessException {
 		Assert.notNull(product, "No product provided");
+		Assert.notNull(product.getName(), "No product name provided");
+		Assert.notNull(product.getPrice(), "No product price provided");
+		Assert.notNull(product.getType().getId(), "No product type id provided");
 		logger.debug("Saving product " + product.toString());
 		return productDao.addProduct(product);
+	}
+
+	@Override
+	public Integer saveProduct(ProductForm productForm) throws DataAccessException {
+		Product product = DTOUtils.map(productForm, Product.class);
+		return saveProduct(product);
 	}
 	
 	@Override
