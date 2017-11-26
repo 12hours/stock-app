@@ -5,6 +5,8 @@ import com.epam.mentoring.service.IProductService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ContextConfiguration;
@@ -31,7 +33,7 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppC
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {RestWebConfig.class, TestConfig.class})
+@ContextConfiguration(classes = {TestConfig.class})
 @WebAppConfiguration
 public class StockControllerTest {
 

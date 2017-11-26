@@ -28,7 +28,7 @@ public class ProductIncomeController {
         this.productIncomeService = productIncomeService;
     }
 
-    @PostMapping(value = "/income", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @PostMapping(value = "/income")
     public ResponseEntity<Void> addIncome(@Valid @RequestBody ProductIncomeForm productIncomeForm,
                                           UriComponentsBuilder ucBuilder) throws CannotSaveException {
         try {

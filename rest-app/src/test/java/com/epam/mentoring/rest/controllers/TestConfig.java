@@ -12,9 +12,11 @@ import org.mockito.Mockito;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 import org.springframework.dao.DataAccessException;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import java.util.*;
 
@@ -23,6 +25,8 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @Configuration
+@ComponentScan(basePackageClasses = {StockController.class})
+@EnableWebMvc
 public class TestConfig {
 
     @Bean
