@@ -13,8 +13,8 @@ import lombok.Setter;
 @AllArgsConstructor
 public class ProductIncome {
 	private Integer id;
-	private int quantity;
-	private long orderNumber;
+	private Integer quantity;
+	private Long orderNumber;
 	private Date date;
 	private Product product;
 	private User user;

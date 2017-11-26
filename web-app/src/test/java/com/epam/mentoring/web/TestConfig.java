@@ -62,12 +62,12 @@ public class TestConfig {
 
         List<ProductIncome> productIncomes = new ArrayList<>();
         productIncomes.add(
-                new ProductIncome(1, 10,  10010,
+                new ProductIncome(1, 10,  10010L,
                         new Date(System.currentTimeMillis()), referencedProductList().get(1),
                         referencedUserList().get(0),
                         referencedSupplierList().get(0)));
         productIncomes.add(
-                new ProductIncome(2, 20,  10010,
+                new ProductIncome(2, 20,  10010L,
                         new Date(System.currentTimeMillis()), referencedProductList().get(2),
                         referencedUserList().get(0),
                         referencedSupplierList().get(0)));

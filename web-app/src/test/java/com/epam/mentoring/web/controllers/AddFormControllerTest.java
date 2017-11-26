@@ -119,8 +119,8 @@ public class AddFormControllerTest {
         assertEquals(Integer.valueOf(1), productIncomeArgumentCaptor.getValue().getProduct().getId());
         assertEquals(Integer.valueOf(2), productIncomeArgumentCaptor.getValue().getSupplier().getId());
         assertEquals(Integer.valueOf(3), productIncomeArgumentCaptor.getValue().getUser().getId());
-        assertEquals(15, productIncomeArgumentCaptor.getValue().getQuantity());
-        assertEquals(10001L, productIncomeArgumentCaptor.getValue().getOrderNumber());
+        assertEquals(Integer.valueOf(15), productIncomeArgumentCaptor.getValue().getQuantity());
+        assertEquals(Long.valueOf(10001), productIncomeArgumentCaptor.getValue().getOrderNumber());
 
         Calendar dateGoal = Calendar.getInstance();
         dateGoal.set(2017, 10, 1);

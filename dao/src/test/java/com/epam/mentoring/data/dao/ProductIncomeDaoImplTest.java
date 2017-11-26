@@ -43,8 +43,8 @@ public class ProductIncomeDaoImplTest {
 		ProductIncome productIncome = dao.getProductIncomeById(Integer.valueOf(1));
 		assertNotNull(productIncome);
 		assertEquals(Integer.valueOf(1), productIncome.getId());
-		assertEquals(productIncome.getOrderNumber(), 10001L);
-		assertEquals(productIncome.getQuantity(), 10);
+		assertEquals(Long.valueOf(10001), productIncome.getOrderNumber());
+		assertEquals(Integer.valueOf(10), productIncome.getQuantity());
 		Calendar dateGoal = Calendar.getInstance();
 		dateGoal.set(2017, 9, 25);
 //		Date date = new Date(dateCalendar.getTimeInMillis());
@@ -90,7 +90,7 @@ public class ProductIncomeDaoImplTest {
 		Supplier supplier = new Supplier();
 		supplier.setId(1);
 		
-		productIncome.setOrderNumber(10015);
+		productIncome.setOrderNumber(10015L);
 		productIncome.setQuantity(16);
 		Calendar date = Calendar.getInstance();
 		date.set(2017, 9, 25);
@@ -105,8 +105,8 @@ public class ProductIncomeDaoImplTest {
 		ProductIncome productIncomeExtracted = dao.getProductIncomeById(Integer.valueOf(13));
 		assertNotNull(productIncomeExtracted);
 		assertEquals(Integer.valueOf(13), productIncomeExtracted.getId());
-		assertEquals(10015L, productIncomeExtracted.getOrderNumber());
-		assertEquals(16, productIncomeExtracted.getQuantity());
+		assertEquals(Long.valueOf(10015), productIncomeExtracted.getOrderNumber());
+		assertEquals(Integer.valueOf(16), productIncomeExtracted.getQuantity());
 		Calendar dateGoal = Calendar.getInstance();
 		dateGoal.set(2017, 9, 25);
 //		Date date = new Date(dateCalendar.getTimeInMillis());

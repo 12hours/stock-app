@@ -26,6 +26,18 @@ public class DTOUtils {
             }
         });
 
+        INSTANCE.addMappings(new PropertyMap<ProductIncome, ProductIncomeForm>() {
+            @Override
+            protected void configure() {
+                map().setProductId(source.getProduct().getId());
+                map().setDate(source.getDate());
+                map().setOrderNumber(source.getOrderNumber());
+                map().setQuantity(source.getQuantity());
+                map().setSupplierId(source.getSupplier().getId());
+                map().setUserId(source.getUser().getId());
+            }
+        });
+
         INSTANCE.addMappings(new PropertyMap<ProductTypeForm, ProductType>() {
             @Override
             protected void configure() {
