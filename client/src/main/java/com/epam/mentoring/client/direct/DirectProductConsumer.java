@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Map;
 
 import com.epam.mentoring.client.ProductConsumer;
+import com.epam.mentoring.data.model.dto.ProductForm;
+import com.epam.mentoring.data.model.dto.ProductWithQuantityView;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -28,7 +30,12 @@ public class DirectProductConsumer implements ProductConsumer {
 //		logger.debug("getting products with quantities: " + productsWithQuantitiesMap.size() + " items found");
 		return productsWithQuantitiesMap;
 	}
-	
+
+	@Override
+	public List<ProductWithQuantityView> getAllProductsWithQuantitiesViews() throws ServerDataAccessException {
+		return null;
+	}
+
 	@Override
 	public void deleteProductById(Long id) {
 		
@@ -55,6 +62,11 @@ public class DirectProductConsumer implements ProductConsumer {
 	@Override
 	public Integer saveProduct(Product product) throws ServerDataAccessException {
 		return productService.saveProduct(product);
+	}
+
+	@Override
+	public Integer saveProduct(ProductForm productForm) throws ServerDataAccessException {
+		return null;
 	}
 
 	@Override

@@ -1,5 +1,6 @@
 package com.epam.mentoring.web.config;
 
+import com.epam.mentoring.web.controllers.AddFormController;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
@@ -18,10 +19,10 @@ import org.thymeleaf.templateresolver.TemplateResolver;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = "com.epam.mentoring.web.com.epam.mentoring.rest.controllers")
+@ComponentScan(basePackageClasses = AddFormController.class)
 public class WebConfig {
 
-	
+
 //    private static final String UTF8 = "UTF-8";
 //
 //    private ApplicationContext applicationContext;

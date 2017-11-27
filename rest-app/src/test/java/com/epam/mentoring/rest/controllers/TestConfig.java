@@ -1,11 +1,17 @@
 package com.epam.mentoring.rest.controllers;
 
+import com.epam.mentoring.data.model.ProductType;
+import com.epam.mentoring.data.model.Supplier;
 import com.epam.mentoring.data.model.dto.ProductIncomeForm;
+import com.epam.mentoring.data.model.dto.ProductTypeForm;
 import com.epam.mentoring.data.model.dto.ProductWithQuantityView;
-import com.epam.mentoring.service.IProductIncomeService;
-import com.epam.mentoring.service.IProductService;
+import com.epam.mentoring.data.model.dto.SupplierForm;
+import com.epam.mentoring.service.*;
+import com.epam.mentoring.test.TestData;
 import org.hamcrest.CustomMatcher;
 import org.hamcrest.Matcher;
+import org.junit.Before;
+import org.mockito.ArgumentCaptor;
 import org.mockito.ArgumentMatcher;
 import org.mockito.Matchers;
 import org.mockito.Mockito;
@@ -51,31 +57,35 @@ public class TestConfig {
     @Bean
     IProductIncomeService productIncomeService() {
         IProductIncomeService productIncomeService = mock(IProductIncomeService.class);
-//        when(productIncomeService.saveProductIncome(Matchers.argThat(
-//                new ArgumentMatcher<ProductIncomeForm>() {
-//                    @Override
-//                    public boolean matches(Object item) {
-//                        ProductIncomeForm form = (ProductIncomeForm) item;
-////                        return true;
-//                        return form.getProductId() == 42;
-//                    }
-//                }))).thenThrow(DataAccessException.class);
-//        when(productIncomeService.saveProductIncome(any(ProductIncomeForm.class))).thenReturn(10);
-        when(productIncomeService.saveProductIncome(any(ProductIncomeForm.class))).thenAnswer(new Answer<Integer>() {
-            @Override
-            public Integer answer(InvocationOnMock invocation) throws Throwable {
-                ProductIncomeForm form = invocation.getArgumentAt(0, ProductIncomeForm.class);
-                if (form.getProductId() == 42) {
-                    throw new DataAccessException("Can not save"){
+        when(productIncomeService.saveProductIncome(any(ProductIncomeForm.class))).thenAnswer((Answer<Integer>) invocation -> {
+            ProductIncomeForm form = invocation.getArgumentAt(0, ProductIncomeForm.class);
+            if (form.getProductId() == 42) {
+                throw new DataAccessException("Can not save"){
 
-                    };
-                } else {
-                    return 10;
-                }
+                };
+            } else {
+                return 10;
             }
         });
         return productIncomeService;
     }
 
+    @Bean
+    IProductTypeService productTypeService(){
+        IProductTypeService productTypeServiceMock = mock(IProductTypeService.class);
+        when(productTypeServiceMock.getAllProductTypes()).thenReturn(TestData.productTypes());
+        when(productTypeServiceMock.saveProductType(any(ProductType.class))).thenReturn(10);
+        when(productTypeServiceMock.saveProductType(any(ProductTypeForm.class))).thenReturn(10);
+        return productTypeServiceMock;
+    }
+
+    @Bean
+    ISupplierService supplierService() {
+        SupplierService supplierServiceMock = mock(SupplierService.class);
+        when(supplierServiceMock.getAllSuppliers()).thenReturn(TestData.suppliers());
+        when(supplierServiceMock.saveSupplier(any(Supplier.class))).thenReturn(10);
+        when(supplierServiceMock.saveSupplier(any(SupplierForm.class))).thenReturn(10);
+        return supplierServiceMock;
+    }
 
 }

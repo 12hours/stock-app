@@ -66,10 +66,10 @@ public class ProductIncomeControllerTest {
         ObjectMapper mapper = new ObjectMapper();
 
         mockMvc.perform(post("/income")
-                        .contentType(MediaType.APPLICATION_JSON_UTF8)
+                        .contentType(MediaType.APPLICATION_JSON)
                         .content(mapper.writeValueAsString(productIncomeForm)))
                     .andExpect(status().isCreated())
-                    .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8));
+                    .andExpect(content().contentType(MediaType.APPLICATION_JSON));
 //                    .andDo(print());
 
         ArgumentCaptor<ProductIncomeForm> productIncomeFormArgumentCaptor = ArgumentCaptor.forClass(ProductIncomeForm.class);
@@ -92,10 +92,10 @@ public class ProductIncomeControllerTest {
         ObjectMapper mapper = new ObjectMapper();
 
         mockMvc.perform(post("/income")
-                        .contentType(MediaType.APPLICATION_JSON_UTF8)
+                        .contentType(MediaType.APPLICATION_JSON)
                         .content(mapper.writeValueAsString(productIncomeForm)))
                     .andExpect(status().isBadRequest())
-                    .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+                    .andExpect(content().contentType(MediaType.APPLICATION_JSON))
 //                    .andDo(print())
                     .andExpect(jsonPath("$['error']", is("Can not save object")));
     }
@@ -113,10 +113,10 @@ public class ProductIncomeControllerTest {
         ObjectMapper mapper = new ObjectMapper();
 
         mockMvc.perform(post("/income")
-                .contentType(MediaType.APPLICATION_JSON_UTF8)
+                .contentType(MediaType.APPLICATION_JSON)
                 .content(mapper.writeValueAsString(productIncomeForm)))
                 .andExpect(status().isBadRequest())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
 //                    .andDo(print())
                 .andExpect(jsonPath("$['error']", is("Object validation failed")));
     }

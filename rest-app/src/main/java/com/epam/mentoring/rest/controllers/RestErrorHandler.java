@@ -3,6 +3,7 @@ package com.epam.mentoring.rest.controllers;
 import com.epam.mentoring.rest.error.CannotSaveException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -18,13 +19,16 @@ public class RestErrorHandler extends ResponseEntityExceptionHandler {
     public ResponseEntity<Object> handleCannotSaveException(CannotSaveException ex,
                                                             WebRequest request) {
         String responseBody = "{'error' : 'Can not save object'}";
-        return handleExceptionInternal(ex, responseBody, new HttpHeaders(),
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.setContentType(MediaType.APPLICATION_JSON);
+        return handleExceptionInternal(ex, responseBody, httpHeaders,
                HttpStatus.BAD_REQUEST, request );
     }
 
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException exception, HttpHeaders headers, HttpStatus status, WebRequest request) {
 //        ValidationError error = ValidationErrorBuilder.fromBindingErrors(exception.getBindingResult());
+        headers.setContentType(MediaType.APPLICATION_JSON);
         String error = "{'error': 'Object validation failed'}";
         return super.handleExceptionInternal(exception, error, headers, status, request);
     }

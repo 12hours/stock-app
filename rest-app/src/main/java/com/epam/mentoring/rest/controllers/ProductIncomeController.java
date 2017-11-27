@@ -37,7 +37,7 @@ public class ProductIncomeController {
             Integer id = productIncomeService.saveProductIncome(productIncomeForm);
             HttpHeaders headers = new HttpHeaders();
 //            headers.setLocation(ucBuilder.path("/income/{id}").buildAndExpand(id).toUri());
-            headers.setContentType(MediaType.APPLICATION_JSON_UTF8);
+            headers.setContentType(MediaType.APPLICATION_JSON);
             return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
         } catch (DataAccessException ex) {
             logger.debug("can not add new income: " + ex.getMessage());

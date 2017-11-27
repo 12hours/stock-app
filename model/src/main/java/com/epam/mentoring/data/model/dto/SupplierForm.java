@@ -1,16 +1,18 @@
 package com.epam.mentoring.data.model.dto;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+
+import javax.validation.constraints.NotNull;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode
 public class SupplierForm {
+    @NotNull
     private String name;
+    @NotNull
     private String details;
 }
