@@ -1,11 +1,9 @@
 package com.epam.mentoring.rest.controllers;
 
+import com.epam.mentoring.data.model.Product;
 import com.epam.mentoring.data.model.ProductType;
 import com.epam.mentoring.data.model.Supplier;
-import com.epam.mentoring.data.model.dto.ProductIncomeForm;
-import com.epam.mentoring.data.model.dto.ProductTypeForm;
-import com.epam.mentoring.data.model.dto.ProductWithQuantityView;
-import com.epam.mentoring.data.model.dto.SupplierForm;
+import com.epam.mentoring.data.model.dto.*;
 import com.epam.mentoring.service.*;
 import com.epam.mentoring.test.TestData;
 import org.hamcrest.CustomMatcher;
@@ -46,12 +44,6 @@ public class TestConfig {
         };
     }
 
-    @Bean
-    IProductService productService() {
-        IProductService productService = mock(IProductService.class);
-        when(productService.getAllProductsWithQuantitiesViews()).thenReturn(refProductWithQuantityViewList());
-        return productService;
-    }
 
 
     @Bean
@@ -86,6 +78,17 @@ public class TestConfig {
         when(supplierServiceMock.saveSupplier(any(Supplier.class))).thenReturn(10);
         when(supplierServiceMock.saveSupplier(any(SupplierForm.class))).thenReturn(10);
         return supplierServiceMock;
+    }
+
+    @Bean
+    IProductService productService() {
+        IProductService productServiceMock = mock(ProductService.class);
+        when(productServiceMock.getAllProductsWithQuantitiesViews()).thenReturn(refProductWithQuantityViewList());
+        when(productServiceMock.getAllProductsAsViews()).thenCallRealMethod();
+        when(productServiceMock.getAllProducts()).thenReturn(TestData.products());
+        when(productServiceMock.saveProduct(any(Product.class))).thenReturn(10);
+        when(productServiceMock.saveProduct(any(ProductForm.class))).thenReturn(10);
+        return productServiceMock;
     }
 
 }

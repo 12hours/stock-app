@@ -40,7 +40,6 @@ public class RestErrorHandler extends ResponseEntityExceptionHandler {
         headers.setContentType(MediaType.APPLICATION_JSON);
         return handleExceptionInternal(exception, responseBody, headers,
                 HttpStatus.BAD_REQUEST, request);
-
     }
 
 }
