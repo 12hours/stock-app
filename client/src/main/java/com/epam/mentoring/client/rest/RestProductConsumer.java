@@ -7,6 +7,7 @@ import com.epam.mentoring.data.model.ProductType;
 import com.epam.mentoring.data.model.dto.ProductForm;
 import com.epam.mentoring.data.model.dto.ProductView;
 import com.epam.mentoring.data.model.dto.ProductWithQuantityView;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
@@ -19,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+@Slf4j
 public class RestProductConsumer implements ProductConsumer{
 
     private static final String PRODUCTS_WITH_QUANTITES_VIEWS_URI = "localhost:8080/stock";
@@ -51,6 +53,7 @@ public class RestProductConsumer implements ProductConsumer{
 
     @Override
     public Integer saveProduct(ProductForm productForm) throws ServerDataAccessException {
+        log.debug("Saving product form: " + productForm.toString());
         URI uri = restTemplate.postForLocation(URI.create("localhost:8080/product"), ProductForm.class);
         return null;
     }
@@ -67,6 +70,7 @@ public class RestProductConsumer implements ProductConsumer{
 
     @Override
     public List<ProductView> getAllProductViews() throws ServerDataAccessException {
+        log.debug("Getting all product views");
         try {
             // It appears this is incorrect way to get list of objects
             // see https://stackoverflow.com/questions/23674046/get-list-of-json-objects-with-spring-resttemplate
@@ -81,7 +85,8 @@ public class RestProductConsumer implements ProductConsumer{
             List<ProductView> productViews = response.getBody();
             return productViews;
         } catch (RestClientException ex) {
-            throw new ServerDataAccessException("Can't get server data", ex);
+            log.error("Can't get data from server: {}", ex);
+            throw new ServerDataAccessException("Can't get data from server", ex);
         }
     }
 
@@ -97,6 +102,7 @@ public class RestProductConsumer implements ProductConsumer{
 
     @Override
     public List<ProductWithQuantityView> getAllProductsWithQuantitiesViews() throws ServerDataAccessException {
+        log.debug("Getting all products with quantities as views");
         ResponseEntity<List> productsWithQuantities;
         List<ProductWithQuantityView> body;
         try {
@@ -108,9 +114,9 @@ public class RestProductConsumer implements ProductConsumer{
             }
             body = productsWithQuantities.getBody();
             //            productsWithQuantities = restTemplate.getForEntity(PRODUCTS_WITH_QUANTITES_VIEWS_URI, List.class);
-        } catch (RestClientException e) {
-            e.printStackTrace();
-            throw new ServerDataAccessException(e.getMessage());
+        } catch (RestClientException ex) {
+            log.error("Can't get data from server: {}", ex);
+            throw new ServerDataAccessException("Can't get data from server", ex);
         }
         return body;
     }
