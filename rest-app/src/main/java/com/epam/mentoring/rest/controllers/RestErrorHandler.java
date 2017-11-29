@@ -1,6 +1,7 @@
 package com.epam.mentoring.rest.controllers;
 
 import com.epam.mentoring.rest.error.CannotSaveException;
+import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -31,6 +32,15 @@ public class RestErrorHandler extends ResponseEntityExceptionHandler {
         headers.setContentType(MediaType.APPLICATION_JSON);
         String error = "{'error': 'Object validation failed'}";
         return super.handleExceptionInternal(exception, error, headers, status, request);
+    }
+
+    @ExceptionHandler(DataAccessException.class)
+    public ResponseEntity<Object> handleDataAcessException(MethodArgumentNotValidException exception, HttpHeaders headers, HttpStatus status, WebRequest request) {
+        String responseBody = "{'error': 'Can not get data'}";
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        return handleExceptionInternal(exception, responseBody, headers,
+                HttpStatus.BAD_REQUEST, request);
+
     }
 
 }
