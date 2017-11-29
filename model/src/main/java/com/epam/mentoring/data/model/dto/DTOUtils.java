@@ -64,6 +64,16 @@ public class DTOUtils {
                 map().setDetails(source.getDetails());
              }
         });
+
+        INSTANCE.addMappings(new PropertyMap<Product, ProductView>() {
+            @Override
+            protected void configure() {
+                map().setId(source.getId());
+                map().setName(source.getName());
+                map().setPrice(source.getPrice());
+                map().setProductTypeId(source.getType().getId());
+            }
+        });
         INSTANCE.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
         INSTANCE.getConfiguration().setAmbiguityIgnored(true);
     }
