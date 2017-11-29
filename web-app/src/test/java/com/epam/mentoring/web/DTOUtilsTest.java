@@ -3,6 +3,7 @@ package com.epam.mentoring.web;
 import com.epam.mentoring.data.model.*;
 import com.epam.mentoring.data.model.dto.DTOUtils;
 import com.epam.mentoring.data.model.dto.ProductIncomeForm;
+import com.epam.mentoring.data.model.dto.ProductView;
 import org.junit.Test;
 
 import java.math.BigDecimal;
@@ -54,6 +55,16 @@ public class DTOUtilsTest {
         assertEquals(Integer.valueOf(2), form.getSupplierId());
         assertEquals(Integer.valueOf(3), form.getUserId());
 
+    }
+
+    @Test
+    public void productToProductViewTest() {
+        Product product = new Product(1, "testProduct", BigDecimal.valueOf(10L),
+                new ProductType(1,"testProductType"));
+        ProductView expectedProductView = new ProductView(1, "testProduct", BigDecimal.valueOf(10L), 1);
+
+        ProductView productView = DTOUtils.map(product, ProductView.class);
+        assertEquals(expectedProductView, productView);
     }
 
 }

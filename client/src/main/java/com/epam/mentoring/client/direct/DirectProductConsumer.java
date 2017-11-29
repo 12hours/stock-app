@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.epam.mentoring.client.ProductConsumer;
 import com.epam.mentoring.data.model.dto.ProductForm;
+import com.epam.mentoring.data.model.dto.ProductView;
 import com.epam.mentoring.data.model.dto.ProductWithQuantityView;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -78,6 +79,11 @@ public class DirectProductConsumer implements ProductConsumer {
 	@Override
 	public List<Product> getAllProducts() throws ServerDataAccessException {
 		return productService.getAllProducts();
+	}
+
+	@Override
+	public List<ProductView> getAllProductViews() throws ServerDataAccessException {
+		return null;
 	}
 
 	@Override

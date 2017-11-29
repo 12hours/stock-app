@@ -3,6 +3,7 @@ package com.epam.mentoring.test;
 import com.epam.mentoring.data.model.*;
 import com.epam.mentoring.data.model.dto.DTOUtils;
 import com.epam.mentoring.data.model.dto.ProductIncomeForm;
+import com.epam.mentoring.data.model.dto.ProductWithQuantityView;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -68,4 +69,17 @@ public class TestData {
         }
         return productIncomeForms;
     }
+
+    public static List<ProductWithQuantityView> productWithQuantityViews() {
+        List<Product> products = products();
+        ArrayList<ProductWithQuantityView> productWithQuantityViews = new ArrayList<ProductWithQuantityView>(){
+            {
+                new ProductWithQuantityView(products.get(0).getId(), products.get(0).getName(), 10);
+                new ProductWithQuantityView(products.get(1).getId(), products.get(1).getName(), 20);
+                new ProductWithQuantityView(products.get(2).getId(), products.get(2).getName(), 30);
+            }
+        };
+        return productWithQuantityViews;
+    }
+
 }
