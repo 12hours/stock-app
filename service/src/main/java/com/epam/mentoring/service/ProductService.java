@@ -1,10 +1,12 @@
 package com.epam.mentoring.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import com.epam.mentoring.data.model.dto.DTOUtils;
 import com.epam.mentoring.data.model.dto.ProductForm;
+import com.epam.mentoring.data.model.dto.ProductView;
 import com.epam.mentoring.data.model.dto.ProductWithQuantityView;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -66,6 +68,14 @@ public class ProductService implements IProductService{
 		List<Product> products = productDao.getAllProducts();
 		logger.debug("Getting all products. Found " + products.size() + " items");
 		return products;
+	}
+
+	@Override
+	public List<ProductView> getAllProductsAsViews() throws DataAccessException {
+		List<Product> productsList = getAllProducts();
+		List<ProductView> productViewsList = new ArrayList<>();
+		productsList.forEach(product -> productViewsList.add(DTOUtils.map(product, ProductView.class)));
+		return productViewsList;
 	}
 	
 	@Override

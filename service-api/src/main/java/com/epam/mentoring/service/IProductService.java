@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.epam.mentoring.data.model.dto.ProductForm;
+import com.epam.mentoring.data.model.dto.ProductView;
 import com.epam.mentoring.data.model.dto.ProductWithQuantityView;
 import org.springframework.dao.DataAccessException;
 
@@ -28,7 +29,9 @@ public interface IProductService {
     Product updateProduct(Long id, Product product) throws DataAccessException;
 	
 	List<Product> getAllProducts() throws DataAccessException;
-	
+
+	List<ProductView> getAllProductsAsViews() throws DataAccessException;
+
 	Integer getProductQuantity(Long id) throws DataAccessException;
 	
 	Map<Product, Integer> getAllProductsWithQuantities() throws DataAccessException;
