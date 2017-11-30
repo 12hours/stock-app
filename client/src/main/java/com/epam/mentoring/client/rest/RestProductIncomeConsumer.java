@@ -4,17 +4,37 @@ import com.epam.mentoring.client.ProductIncomeConsumer;
 import com.epam.mentoring.client.exception.ServerDataAccessException;
 import com.epam.mentoring.data.model.ProductIncome;
 import com.epam.mentoring.data.model.dto.ProductIncomeForm;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.client.RestClientException;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
+@Slf4j
 public class RestProductIncomeConsumer implements ProductIncomeConsumer {
+
+    private RestTemplate restTemplate;
+
+    private String productIncomeLocation = "localhost:8080/income";
+
+    public RestProductIncomeConsumer(RestTemplate restTemplate) {
+        this.restTemplate = restTemplate;
+    }
+
     @Override
-    public Integer addProductIncome(ProductIncome productIncome) throws ServerDataAccessException {
+    public Integer saveProductIncome(ProductIncome productIncome) throws ServerDataAccessException {
         return null;
     }
 
     @Override
-    public Integer addProductIncome(ProductIncomeForm productIncomeForm) throws ServerDataAccessException {
+    public Integer saveProductIncome(ProductIncomeForm productIncomeForm) throws ServerDataAccessException {
+        log.debug("Saving product income form: {}", productIncomeForm);
+        try {
+            restTemplate.postForLocation(productIncomeLocation, productIncomeForm);
+        } catch (RestClientException ex) {
+            log.error("Can not save product income form: {}", ex);
+            throw new ServerDataAccessException("Can not save product income form", ex);
+        }
         return null;
     }
 

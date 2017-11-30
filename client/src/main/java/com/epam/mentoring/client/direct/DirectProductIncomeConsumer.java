@@ -18,13 +18,13 @@ public class DirectProductIncomeConsumer implements ProductIncomeConsumer {
     }
 
     @Override
-    public Integer addProductIncome(ProductIncome productIncome) {
+    public Integer saveProductIncome(ProductIncome productIncome) {
         Assert.notNull(productIncome, "No ProductIncome object provided for saving");
         return productIncomeService.saveProductIncome(productIncome);
     }
 
     @Override
-    public Integer addProductIncome(ProductIncomeForm productIncomeForm) throws ServerDataAccessException {
+    public Integer saveProductIncome(ProductIncomeForm productIncomeForm) throws ServerDataAccessException {
         return null;
     }
 
