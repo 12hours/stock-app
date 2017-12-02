@@ -43,11 +43,11 @@ public class RestProductIncomeConsumerTest {
 
     @Test
     public void saveProductIncomeTest() {
-        mockRestServiceServer.expect(requestTo("localhost:8080/income"))
-                .andRespond(withCreatedEntity(URI.create("localhost:8080/income/10")));
+        mockRestServiceServer.expect(requestTo("http://localhost:8080/income"))
+                .andRespond(withCreatedEntity(URI.create("http://localhost:8080/income/10")));
         doAnswer(invocation -> {
             URI result = (URI) invocation.callRealMethod();
-            assertEquals("localhost:8080/income/10", result.toString());
+            assertEquals("http://localhost:8080/income/10", result.toString());
             return result;
         }).when(restTemplate).postForLocation(any(String.class), any(ProductIncomeForm.class));
 

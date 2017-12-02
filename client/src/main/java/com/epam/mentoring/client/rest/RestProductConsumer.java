@@ -74,9 +74,9 @@ public class RestProductConsumer implements ProductConsumer{
         try {
             // It appears this is incorrect way to get list of objects
             // see https://stackoverflow.com/questions/23674046/get-list-of-json-objects-with-spring-resttemplate
-            // TODO: check other controllers which have getList methods
 //            ArrayList<ProductView> productViews = restTemplate.getForObject("localhost:8080/product", ArrayList.class);
 //            return productViews;
+            // TODO: check other controllers which have getList methods
 
             ResponseEntity<List<ProductView>> response =
                     restTemplate.exchange("http://localhost:8080/product",
@@ -106,19 +106,23 @@ public class RestProductConsumer implements ProductConsumer{
         ResponseEntity<List> productsWithQuantities;
         List<ProductWithQuantityView> body;
         try {
-            productsWithQuantities = restTemplate.getForEntity(PRODUCTS_WITH_QUANTITES_VIEWS_URI,
-                    List.class);
-            if (!productsWithQuantities.getStatusCode().equals(HttpStatus.OK)) {
-                throw new ServerDataAccessException("Request denied: "+
-                        productsWithQuantities.getStatusCode().toString());
-            }
-            body = productsWithQuantities.getBody();
-            //            productsWithQuantities = restTemplate.getForEntity(PRODUCTS_WITH_QUANTITES_VIEWS_URI, List.class);
+//            productsWithQuantities = restTemplate.getForEntity(PRODUCTS_WITH_QUANTITES_VIEWS_URI,
+//                    List.class);
+//            if (!productsWithQuantities.getStatusCode().equals(HttpStatus.OK)) {
+//                throw new ServerDataAccessException("Request denied: "+
+//                        productsWithQuantities.getStatusCode().toString());
+//            }
+//            body = productsWithQuantities.getBody();
+            ResponseEntity<List<ProductWithQuantityView>> response =
+                    restTemplate.exchange(PRODUCTS_WITH_QUANTITES_VIEWS_URI,
+                            HttpMethod.GET, null, new ParameterizedTypeReference<List<ProductWithQuantityView>>() {
+                            });
+            List<ProductWithQuantityView> productViews = response.getBody();
+            return productViews;
         } catch (RestClientException ex) {
             log.error("Can't get data from server: {}", ex);
             throw new ServerDataAccessException("Can't get data from server", ex);
         }
-        return body;
     }
 
     @Override

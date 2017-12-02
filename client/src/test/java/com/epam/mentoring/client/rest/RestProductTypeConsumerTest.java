@@ -52,7 +52,7 @@ public class RestProductTypeConsumerTest {
     @Test
     public void getAllProductTypes() throws Exception {
         List<ProductType> expectedProductTypes = TestData.productTypes();
-        mockRestServiceServer.expect(requestTo("localhost:8080/product-type"))
+        mockRestServiceServer.expect(requestTo("http://localhost:8080/product-type"))
                 .andRespond(withSuccess()
                         .contentType(MediaType.APPLICATION_JSON)
                         .body(objectMapper.writeValueAsString(expectedProductTypes)));
@@ -66,8 +66,8 @@ public class RestProductTypeConsumerTest {
 
     @Test
     public void saveProductType() {
-        mockRestServiceServer.expect(requestTo("localhost:8080/product-type"))
-                .andRespond(withCreatedEntity(URI.create("localhost:8080/product-type/10")));
+        mockRestServiceServer.expect(requestTo("http://localhost:8080/product-type"))
+                .andRespond(withCreatedEntity(URI.create("http://localhost:8080/product-type/10")));
 
 
         ProductTypeForm productType = new ProductTypeForm("testProductType");

@@ -60,13 +60,14 @@ public class RestProductConsumerTest {
 
     @Test
     public void getAllProductsWithQuantitiesViewsTest() throws JsonProcessingException {
-        mockRestServiceServer.expect(MockRestRequestMatchers.requestTo("localhost:8080/stock"))
+        mockRestServiceServer.expect(MockRestRequestMatchers.requestTo("http://localhost:8080/stock"))
                 .andRespond(MockRestResponseCreators.withSuccess().contentType(MediaType.APPLICATION_JSON).body(
                         objectMapper.writeValueAsString(TestData.productWithQuantityViews())));
 
         List<ProductWithQuantityView> allProductsWithQuantitiesViews = restProductConsumer.getAllProductsWithQuantitiesViews();
         assertEquals(TestData.productWithQuantityViews(), allProductsWithQuantitiesViews);
-        verify(restTemplate, times(1)).getForEntity(any(String.class), any(Class.class));
+        verify(restTemplate, times(1))
+                .exchange(any(String.class), any(HttpMethod.class),any(HttpEntity.class), any(ParameterizedTypeReference.class));
 //        verify(restTemplate, times(1)).getForObject(any(String.class), any(Class.class));
     }
 
@@ -75,15 +76,15 @@ public class RestProductConsumerTest {
         @Override
         public T answer(InvocationOnMock invocationOnMock) throws Throwable {
             T result = (T) invocationOnMock.callRealMethod();
-            assertEquals(URI.create("localhost:8080/product/10"), result);
+            assertEquals(URI.create("http://localhost:8080/product/10"), result);
             return result;
         }
     }
 
     @Test
     public void saveProductFormTest() {
-        mockRestServiceServer.expect(MockRestRequestMatchers.requestTo("localhost:8080/product"))
-                .andRespond(MockRestResponseCreators.withCreatedEntity(URI.create("localhost:8080/product/10")));
+        mockRestServiceServer.expect(MockRestRequestMatchers.requestTo("http://localhost:8080/product"))
+                .andRespond(MockRestResponseCreators.withCreatedEntity(URI.create("http://localhost:8080/product/10")));
 //        when(restTemplate.postForLocation(any(URI.class), any(Class.class))).thenAnswer(new ResultCaptor<URI>());
         doAnswer(new ResultCaptor<URI>()).when(restTemplate).postForLocation(any(URI.class), any(Class.class));
 
@@ -102,7 +103,7 @@ public class RestProductConsumerTest {
             productViews.add(DTOUtils.map(product, ProductView.class));
         });
 
-        mockRestServiceServer.expect(requestTo("localhost:8080/product"))
+        mockRestServiceServer.expect(requestTo("http://localhost:8080/product"))
                 .andRespond(withSuccess()
                         .contentType(MediaType.APPLICATION_JSON)
                         .body(objectMapper.writeValueAsString(productViews)));
