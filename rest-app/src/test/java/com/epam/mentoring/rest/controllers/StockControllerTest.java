@@ -3,12 +3,14 @@ package com.epam.mentoring.rest.controllers;
 import com.epam.mentoring.rest.config.RestWebConfig;
 import com.epam.mentoring.service.IProductService;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.restdocs.JUnitRestDocumentation;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -25,6 +27,8 @@ import static org.junit.Assert.*;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
+import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
+import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.documentationConfiguration;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -37,6 +41,9 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppC
 @WebAppConfiguration
 public class StockControllerTest {
 
+    @Rule
+    public JUnitRestDocumentation restDocumentation = new JUnitRestDocumentation("target/asciidoc");
+
     private MockMvc mockMvc;
 
     @Autowired
@@ -47,7 +54,9 @@ public class StockControllerTest {
 
     @Before
     public void setup() {
-        this.mockMvc = webAppContextSetup(webApplicationContext).build();
+        this.mockMvc = webAppContextSetup(webApplicationContext)
+                .apply(documentationConfiguration(restDocumentation))
+                .build();
     }
 
     @Test
@@ -64,7 +73,8 @@ public class StockControllerTest {
                 .andExpect(jsonPath("$[1].quantity", is(20)))
                 .andExpect(jsonPath("$[2].id", is(2)))
                 .andExpect(jsonPath("$[2].productName", is("Core i3")))
-                .andExpect(jsonPath("$[2].quantity", is(25)));
+                .andExpect(jsonPath("$[2].quantity", is(25)))
+                .andDo(document("stocklist"));
         verify(productService, times(1)).getAllProductsWithQuantitiesViews();
         verifyNoMoreInteractions(productService);
     }

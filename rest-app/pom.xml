@@ -87,6 +87,11 @@
         </dependency>
 
         <dependency>
+            <groupId>org.springframework.restdocs</groupId>
+            <artifactId>spring-restdocs-mockmvc</artifactId>
+        </dependency>
+
+        <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
         </dependency>
@@ -163,7 +168,32 @@
                     <reload>automatic</reload>
                 </configuration>
             </plugin>
+
+            <plugin>
+                <groupId>org.asciidoctor</groupId>
+                <artifactId>asciidoctor-maven-plugin</artifactId>
+                <version>1.5.6</version>
+                <executions>
+                    <execution>
+                        <id>output-html</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>process-asciidoc</goal>
+                        </goals>
+                    </execution>
+                </executions>
+
+                <configuration>
+                    <backend>html</backend>
+                    <doctype>book</doctype>
+                    <attributes>
+                        <snippets>${project.build.directory}/asciidoc</snippets>
+                    </attributes>
+                </configuration>
+            </plugin>
         </plugins>
+
+
     </build>
 
 </project>

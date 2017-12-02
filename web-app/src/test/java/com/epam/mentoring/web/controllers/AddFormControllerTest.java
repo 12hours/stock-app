@@ -115,7 +115,7 @@ public class AddFormControllerTest {
                 .andExpect(view().name("redirect:/"));
 
         ArgumentCaptor<ProductIncome> productIncomeArgumentCaptor = ArgumentCaptor.forClass(ProductIncome.class);
-        Mockito.verify(productIncomeConsumer).addProductIncome(productIncomeArgumentCaptor.capture());
+        Mockito.verify(productIncomeConsumer).saveProductIncome(productIncomeArgumentCaptor.capture());
         assertEquals(Integer.valueOf(1), productIncomeArgumentCaptor.getValue().getProduct().getId());
         assertEquals(Integer.valueOf(2), productIncomeArgumentCaptor.getValue().getSupplier().getId());
         assertEquals(Integer.valueOf(3), productIncomeArgumentCaptor.getValue().getUser().getId());
@@ -130,7 +130,7 @@ public class AddFormControllerTest {
         assertEquals(dateGoal.get(dateGoal.MONTH), dateExtracted.get(dateExtracted.MONTH));
         assertEquals(dateGoal.get(dateGoal.DAY_OF_MONTH), dateExtracted.get(dateExtracted.DAY_OF_MONTH));
 
-        Mockito.verify(productIncomeConsumer, times(1)).addProductIncome(Mockito.any(ProductIncome.class));
+        Mockito.verify(productIncomeConsumer, times(1)).saveProductIncome(Mockito.any(ProductIncome.class));
         Mockito.verifyNoMoreInteractions(productIncomeConsumer);
     }
 

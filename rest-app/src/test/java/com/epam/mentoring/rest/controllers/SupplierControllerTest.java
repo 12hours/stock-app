@@ -7,12 +7,14 @@ import com.epam.mentoring.test.TestData;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.hamcrest.CoreMatchers;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Matchers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.restdocs.JUnitRestDocumentation;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -26,6 +28,8 @@ import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
+import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
+import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.documentationConfiguration;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -38,6 +42,9 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppC
 @ContextConfiguration(classes = {TestConfig.class})
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 public class SupplierControllerTest {
+
+    @Rule
+    public JUnitRestDocumentation restDocumentation = new JUnitRestDocumentation("target/asciidoc");
 
     MockMvc mockMvc;
 
@@ -54,7 +61,9 @@ public class SupplierControllerTest {
 
     @Before
     public void setup() {
-        this.mockMvc = webAppContextSetup(webApplicationContext).build();
+        this.mockMvc = webAppContextSetup(webApplicationContext)
+                .apply(documentationConfiguration(restDocumentation))
+                .build();
         this.supplierArgumentCaptor = ArgumentCaptor.forClass(Supplier.class);
         this.supplierFormArgumentCaptor = ArgumentCaptor.forClass(SupplierForm.class);
     }
@@ -66,7 +75,8 @@ public class SupplierControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$", hasSize(expectedSuppliers.size())))
-                .andExpect(jsonPath("$[0].name", is(expectedSuppliers.get(0).getName())));
+                .andExpect(jsonPath("$[0].name", is(expectedSuppliers.get(0).getName())))
+                .andDo(document("supplier-get-all"));
         verify(supplierServiceMock, times(1)).getAllSuppliers();
     }
 
@@ -76,7 +86,8 @@ public class SupplierControllerTest {
         mockMvc.perform(post("/supplier")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(supplierForm)))
-                .andExpect(status().isCreated());
+                .andExpect(status().isCreated())
+                .andDo(document("supplier-save"));
         verify(supplierServiceMock, times(1)).saveSupplier(Matchers.any(SupplierForm.class));
         verify(supplierServiceMock).saveSupplier(supplierFormArgumentCaptor.capture());
         assertEquals(supplierForm, supplierFormArgumentCaptor.getValue());

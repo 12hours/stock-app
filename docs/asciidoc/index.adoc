@@ -6,3 +6,5 @@ include::overview.adoc[]
 
 == Application structure
 include::structure.adoc[]
+
+include::./rest/product-get/curl-request.adoc[]

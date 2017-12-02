@@ -77,7 +77,7 @@ public class TestConfig {
     @Bean
     ProductIncomeConsumer productIncomeConsumer() {
         ProductIncomeConsumer productIncomeConsumerMock = Mockito.mock(ProductIncomeConsumer.class);
-        Mockito.when(productIncomeConsumerMock.addProductIncome(Mockito.any(ProductIncome.class))).thenReturn(1);
+        Mockito.when(productIncomeConsumerMock.saveProductIncome(Mockito.any(ProductIncome.class))).thenReturn(1);
         Mockito.when(productIncomeConsumerMock.findAll()).thenReturn(referencedProductIncomeList());
         Mockito.when(productIncomeConsumerMock.findProductIncome(Mockito.any(Integer.class))).then((Answer<ProductIncome>) invocation -> {
             Integer id = invocation.getArgumentAt( 0, Integer.class);

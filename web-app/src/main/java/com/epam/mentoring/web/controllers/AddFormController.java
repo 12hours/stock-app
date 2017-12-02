@@ -67,7 +67,7 @@ public class AddFormController {
                                     BindingResult bindingResult,
                                     Errors errors) {
         ProductIncome productIncome = DTOUtils.map(productIncomeForm, ProductIncome.class);
-        productIncomeConsumer.addProductIncome(productIncome);
+        productIncomeConsumer.saveProductIncome(productIncome);
         return "redirect:/";
     }
 
