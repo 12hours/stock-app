@@ -1,14 +1,8 @@
 package com.epam.mentoring.rest.config;
 
 import com.epam.mentoring.data.config.DaoConfig;
-import com.epam.mentoring.data.dao.IProductDao;
-import com.epam.mentoring.data.dao.IProductIncomeDao;
-import com.epam.mentoring.data.dao.ProductDaoImpl;
-import com.epam.mentoring.data.dao.ProductIncomeDaoImpl;
-import com.epam.mentoring.service.IProductIncomeService;
-import com.epam.mentoring.service.IProductService;
-import com.epam.mentoring.service.ProductIncomeService;
-import com.epam.mentoring.service.ProductService;
+import com.epam.mentoring.data.dao.*;
+import com.epam.mentoring.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -41,5 +35,25 @@ public class AppConfig {
     @Bean
     IProductIncomeService productIncomeService() {
         return new ProductIncomeService(productIncomeDao());
+    }
+
+    @Bean
+    IProductTypeDao productTypeDao() {
+        return new ProductTypeDaoImpl(dataSource);
+    }
+
+    @Bean
+    IProductTypeService productTypeService() {
+        return new ProductTypeService(productTypeDao());
+    }
+
+    @Bean
+    ISupplierDao supllierDao() {
+        return new SupplierDaoImpl(dataSource);
+    }
+
+    @Bean
+    ISupplierService supplierService() {
+        return new SupplierService(supllierDao());
     }
 }
