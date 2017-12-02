@@ -15,7 +15,7 @@ public class RestProductIncomeConsumer implements ProductIncomeConsumer {
 
     private RestTemplate restTemplate;
 
-    private String productIncomeLocation = "localhost:8080/income";
+    private String productIncomeLocation = "http://localhost:8080/income";
 
     public RestProductIncomeConsumer(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;

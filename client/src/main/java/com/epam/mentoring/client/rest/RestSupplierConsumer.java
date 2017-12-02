@@ -19,7 +19,7 @@ public class RestSupplierConsumer implements SupplierConsumer {
 
     private RestTemplate restTemplate;
 
-    private String SUPPLIER_URI = "localhost:8080/supplier";
+    private String SUPPLIER_URI = "http://localhost:8080/supplier";
 
     public RestSupplierConsumer(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;

@@ -23,7 +23,7 @@ import java.util.Map;
 @Slf4j
 public class RestProductConsumer implements ProductConsumer{
 
-    private static final String PRODUCTS_WITH_QUANTITES_VIEWS_URI = "localhost:8080/stock";
+    private static final String PRODUCTS_WITH_QUANTITES_VIEWS_URI = "http://localhost:8080/stock";
 
     private RestTemplate restTemplate;
 
@@ -54,7 +54,7 @@ public class RestProductConsumer implements ProductConsumer{
     @Override
     public Integer saveProduct(ProductForm productForm) throws ServerDataAccessException {
         log.debug("Saving product form: " + productForm.toString());
-        URI uri = restTemplate.postForLocation(URI.create("localhost:8080/product"), ProductForm.class);
+        URI uri = restTemplate.postForLocation(URI.create("http://localhost:8080/product"), ProductForm.class);
         return null;
     }
 
@@ -79,7 +79,7 @@ public class RestProductConsumer implements ProductConsumer{
 //            return productViews;
 
             ResponseEntity<List<ProductView>> response =
-                    restTemplate.exchange("localhost:8080/product",
+                    restTemplate.exchange("http://localhost:8080/product",
                             HttpMethod.GET, null, new ParameterizedTypeReference<List<ProductView>>() {
                             });
             List<ProductView> productViews = response.getBody();

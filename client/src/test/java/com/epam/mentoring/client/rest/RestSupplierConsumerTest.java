@@ -50,8 +50,8 @@ public class RestSupplierConsumerTest {
 
     @Test
     public void saveSupplierTest() throws Exception {
-        mockRestServiceServer.expect(requestTo("localhost:8080/supplier"))
-                .andRespond(MockRestResponseCreators.withCreatedEntity(URI.create("localhost:8080/supplier/10")));
+        mockRestServiceServer.expect(requestTo("http://localhost:8080/supplier"))
+                .andRespond(MockRestResponseCreators.withCreatedEntity(URI.create("http://localhost:8080/supplier/10")));
 
         SupplierForm supplierForm = new SupplierForm("testSupplierName", "testSupplierDetails");
         restSupplierConsumer.saveSupplier(supplierForm);
@@ -63,7 +63,7 @@ public class RestSupplierConsumerTest {
     @Test
     public void getAllSuppliersTest() throws Exception {
         List<Supplier> expectedSuppliers = TestData.suppliers();
-        mockRestServiceServer.expect(requestTo("localhost:8080/supplier"))
+        mockRestServiceServer.expect(requestTo("http://localhost:8080/supplier"))
                 .andRespond(MockRestResponseCreators.withSuccess()
                         .contentType(MediaType.APPLICATION_JSON)
                         .body(objectMapper.writeValueAsString(expectedSuppliers)));

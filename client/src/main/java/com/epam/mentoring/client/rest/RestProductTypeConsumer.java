@@ -17,7 +17,7 @@ import java.util.List;
 @Slf4j
 public class RestProductTypeConsumer implements ProductTypeConsumer{
 
-    private String PRODUCT_TYPE_URI = "localhost:8080/product-type";
+    private String PRODUCT_TYPE_URI = "http://localhost:8080/product-type";
 
     private RestTemplate restTemplate;
 
