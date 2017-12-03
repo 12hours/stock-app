@@ -71,14 +71,14 @@ making them flexible for changing. This file is proccessed by Maven during `dao`
 [.lead]
 *Database configuration* +
 
-Firstly, database tapy should be specified as application property, e.g.
+Firstly, database type should be specified as application property, e.g.
 ----
 app.database.type=h2
 ----
 Currently only H2 database is supported;
-`DataSource` and SQL scripts will be configured according to this property.
-
-Then database user is inclined to import `DaoConfig` into Spring configurtion class.
+SQL scripts will be configured according to this property.
+Database user is inclined to import `DaoConfig` into Spring configurtion class
+so SQL-type configuration can be performed.
 [source,java]
 ----
 ...
@@ -90,26 +90,8 @@ public class AppConfig {
 ...
 ----
 
-After that `DataSource` object can be autowired into configuration
-for using in declarations of DAO beans:
-[source,java]
-----
-...
-import com.epam.mentoring.data.config.DaoConfig;
+`DataSource` bean configured in `DataSourceConfig.java`, `DAO`, and `Sevice` beans configured in `AppConfig.java`
 
-@Configuration
-@Import(DaoConfig.class)
-public class AppConfig {
-
-    @Autowired
-    DataSource datasource;
-
-    @Bean
-    IProductDao productDao(){
-        return new ProductDaoImpl(datasource);
-    }
-...
-----
 
 
 

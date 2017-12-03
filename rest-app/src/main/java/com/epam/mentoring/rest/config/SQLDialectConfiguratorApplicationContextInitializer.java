@@ -14,7 +14,7 @@ import java.util.List;
 public class SQLDialectConfiguratorApplicationContextInitializer implements ApplicationContextInitializer<ConfigurableApplicationContext> {
 
     private static final String H2 = "h2";
-    private static final String MySQL = "sql.mysql";
+    private static final String MySQL = "mysql";
 
     @Override
     public void initialize(ConfigurableApplicationContext applicationContext) {
