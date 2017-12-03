@@ -1,6 +1,6 @@
 package com.epam.mentoring.service;
 
-import com.epam.mentoring.data.dao.IProductIncomeDao;
+import com.epam.mentoring.data.dao.ProductIncomeDao;
 import com.epam.mentoring.data.model.*;
 import com.epam.mentoring.data.model.dto.DTOUtils;
 import com.epam.mentoring.data.model.dto.ProductIncomeForm;
@@ -13,11 +13,6 @@ import org.mockito.Captor;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
 import static org.junit.Assert.*;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.times;
@@ -25,21 +20,21 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
-public class ProductIncomeServiceTest {
+public class ProductIncomeServiceImpTest {
 
     @Mock
-    IProductIncomeDao dao;
+    ProductIncomeDao dao;
 
     @Captor
     ArgumentCaptor<ProductIncome> productIncomeArgumentCaptor;
 
-    IProductIncomeService productIncomeService;
+    ProductIncomeService productIncomeService;
 
     @Before
     public void setup() {
         when(dao.getAllProductIncomes()).thenReturn(TestData.productIncomes());
         when(dao.addProductIncome(any(ProductIncome.class))).thenReturn(10);
-        productIncomeService = new ProductIncomeService(dao);
+        productIncomeService = new ProductIncomeServiceImp(dao);
     }
 
     @Test

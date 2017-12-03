@@ -12,18 +12,18 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataAccessException;
 
-import com.epam.mentoring.data.dao.IProductDao;
+import com.epam.mentoring.data.dao.ProductDao;
 import com.epam.mentoring.data.model.Product;
 import com.epam.mentoring.data.model.ProductType;
 import org.springframework.util.Assert;
 
-public class ProductService implements IProductService{
+public class ProductServiceImpl implements ProductService {
 	
-	private static final Logger logger = LoggerFactory.getLogger(ProductService.class.getName());
+	private static final Logger logger = LoggerFactory.getLogger(ProductServiceImpl.class.getName());
 	
-	private IProductDao productDao;
+	private ProductDao productDao;
 	
-	public ProductService(IProductDao productDao) {
+	public ProductServiceImpl(ProductDao productDao) {
 		this.productDao = productDao;
 	}
 	

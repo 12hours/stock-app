@@ -1,23 +1,16 @@
 package com.epam.mentoring.service;
 
-import com.epam.mentoring.data.dao.IProductDao;
+import com.epam.mentoring.data.dao.ProductDao;
 import com.epam.mentoring.data.model.Product;
 import com.epam.mentoring.data.model.ProductType;
 import com.epam.mentoring.data.model.dto.ProductForm;
 import com.epam.mentoring.data.model.dto.ProductWithQuantityView;
-import org.apache.logging.log4j.Level;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.core.Appender;
-import org.apache.logging.log4j.core.LogEvent;
-import org.apache.logging.log4j.core.Logger;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import java.math.BigDecimal;
@@ -32,15 +25,15 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
-public class ProductServiceTest {
+public class ProductServiceImplTest {
 
     @Mock
-    private IProductDao dao;
+    private ProductDao dao;
 
     @Captor
     private ArgumentCaptor<Product> productArgumentCaptor;
 
-    private IProductService productService;
+    private ProductService productService;
 
     @Before
     public void daoMock() {
@@ -67,7 +60,7 @@ public class ProductServiceTest {
             }
         });
         
-        productService = new ProductService(dao);
+        productService = new ProductServiceImpl(dao);
     }
 
     @Test

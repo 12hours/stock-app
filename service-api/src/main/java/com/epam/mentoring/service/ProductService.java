@@ -14,7 +14,7 @@ import com.epam.mentoring.data.model.ProductType;
 /**
  * Interface for Product service
  */
-public interface IProductService {
+public interface ProductService {
 	
 	Product findProductById(Integer id) throws DataAccessException;
 	

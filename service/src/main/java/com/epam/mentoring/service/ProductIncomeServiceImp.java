@@ -1,6 +1,6 @@
 package com.epam.mentoring.service;
 
-import com.epam.mentoring.data.dao.IProductIncomeDao;
+import com.epam.mentoring.data.dao.ProductIncomeDao;
 import com.epam.mentoring.data.model.ProductIncome;
 import com.epam.mentoring.data.model.dto.DTOUtils;
 import com.epam.mentoring.data.model.dto.ProductIncomeForm;
@@ -9,13 +9,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataAccessException;
 import org.springframework.util.Assert;
 
-public class ProductIncomeService implements IProductIncomeService {
+public class ProductIncomeServiceImp implements ProductIncomeService {
 
-    private static final Logger logger = LoggerFactory.getLogger(ProductIncomeService.class.getName());
+    private static final Logger logger = LoggerFactory.getLogger(ProductIncomeServiceImp.class.getName());
 
-    private final IProductIncomeDao productIncomeDao;
+    private final ProductIncomeDao productIncomeDao;
 
-    public ProductIncomeService(IProductIncomeDao productIncomeDao) {
+    public ProductIncomeServiceImp(ProductIncomeDao productIncomeDao) {
         this.productIncomeDao = productIncomeDao;
     }
 

@@ -1,6 +1,6 @@
 package com.epam.mentoring.service;
 
-import com.epam.mentoring.data.dao.ISupplierDao;
+import com.epam.mentoring.data.dao.SupplierDao;
 import com.epam.mentoring.data.model.Supplier;
 import com.epam.mentoring.data.model.dto.DTOUtils;
 import com.epam.mentoring.data.model.dto.SupplierForm;
@@ -11,13 +11,13 @@ import org.springframework.util.Assert;
 
 import java.util.List;
 
-public class SupplierService implements ISupplierService {
+public class SupplierServiceImpl implements SupplierService {
 
-    private static final Logger logger = LoggerFactory.getLogger(SupplierService.class.getName());
+    private static final Logger logger = LoggerFactory.getLogger(SupplierServiceImpl.class.getName());
 
-    ISupplierDao supplierDao;
+    SupplierDao supplierDao;
 
-    public SupplierService(ISupplierDao supplierDao) {
+    public SupplierServiceImpl(SupplierDao supplierDao) {
         this.supplierDao = supplierDao;
     }
 

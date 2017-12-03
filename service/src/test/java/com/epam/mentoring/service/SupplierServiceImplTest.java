@@ -1,8 +1,7 @@
 package com.epam.mentoring.service;
 
-import com.epam.mentoring.data.dao.ISupplierDao;
+import com.epam.mentoring.data.dao.SupplierDao;
 import com.epam.mentoring.data.model.Supplier;
-import com.epam.mentoring.data.model.dto.DTOUtils;
 import com.epam.mentoring.data.model.dto.SupplierForm;
 import com.epam.mentoring.test.TestData;
 import org.junit.Before;
@@ -17,28 +16,27 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyBoolean;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
-public class SupplierServiceTest {
+public class SupplierServiceImplTest {
 
     @Mock
-    ISupplierDao dao;
+    SupplierDao dao;
 
     @Captor
     ArgumentCaptor<Supplier> supplierArgumentCaptor;
 
-    ISupplierService supplierService;
+    SupplierService supplierService;
 
     @Before
     public void setup() {
         when(dao.getAllSuppliers()).thenReturn(TestData.suppliers());
         when(dao.addSupplier(any(Supplier.class))).thenReturn(10);
 
-        supplierService = new SupplierService(dao);
+        supplierService = new SupplierServiceImpl(dao);
     }
 
     @Test

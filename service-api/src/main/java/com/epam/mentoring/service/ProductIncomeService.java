@@ -7,7 +7,7 @@ import org.springframework.dao.DataAccessException;
 /**
  * Interface for ProductIncome service
  */
-public interface IProductIncomeService {
+public interface ProductIncomeService {
     ProductIncome getProductIncomeById(Integer id) throws DataAccessException;
     Integer saveProductIncome(ProductIncome productIncome) throws DataAccessException;
     Integer saveProductIncome(ProductIncomeForm productIncomeForm) throws DataAccessException;

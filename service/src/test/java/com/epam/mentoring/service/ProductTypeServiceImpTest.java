@@ -1,6 +1,6 @@
 package com.epam.mentoring.service;
 
-import com.epam.mentoring.data.dao.IProductTypeDao;
+import com.epam.mentoring.data.dao.ProductTypeDao;
 import com.epam.mentoring.data.model.ProductType;
 import com.epam.mentoring.data.model.dto.DTOUtils;
 import com.epam.mentoring.data.model.dto.ProductTypeForm;
@@ -22,21 +22,21 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
-public class ProductTypeServiceTest {
+public class ProductTypeServiceImpTest {
 
     @Mock
-    IProductTypeDao dao;
+    ProductTypeDao dao;
 
     @Captor
     ArgumentCaptor<ProductType> productTypeArgumentCaptor;
 
-    IProductTypeService productTypeService;
+    ProductTypeService productTypeService;
 
     @Before
     public void setup() {
         when(dao.getAllProductTypes()).thenReturn(TestData.productTypes());
         when(dao.addProductType(any(ProductType.class))).thenReturn(10);
-        productTypeService = new ProductTypeService(dao);
+        productTypeService = new ProductTypeServiceImp(dao);
     }
 
     @Test

@@ -1,6 +1,6 @@
 package com.epam.mentoring.service;
 
-import com.epam.mentoring.data.dao.IProductTypeDao;
+import com.epam.mentoring.data.dao.ProductTypeDao;
 import com.epam.mentoring.data.model.ProductType;
 import com.epam.mentoring.data.model.dto.DTOUtils;
 import com.epam.mentoring.data.model.dto.ProductTypeForm;
@@ -11,13 +11,13 @@ import org.springframework.util.Assert;
 
 import java.util.List;
 
-public class ProductTypeService implements IProductTypeService {
+public class ProductTypeServiceImp implements ProductTypeService {
 
-    private static final Logger logger = LoggerFactory.getLogger(ProductTypeService.class.getName());
+    private static final Logger logger = LoggerFactory.getLogger(ProductTypeServiceImp.class.getName());
 
-    IProductTypeDao productTypeDao;
+    ProductTypeDao productTypeDao;
 
-    public ProductTypeService(IProductTypeDao productTypeDao) {
+    public ProductTypeServiceImp(ProductTypeDao productTypeDao) {
         this.productTypeDao = productTypeDao;
     }
 

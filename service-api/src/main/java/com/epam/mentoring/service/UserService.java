@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Interface for User service
  */
-public interface IUserService {
+public interface UserService {
     User getUserById(int id) throws DataAccessException;
     List<User> getAllUsers() throws DataAccessException;
     int addUser(User user) throws DataAccessException;

@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * Interface for ProductType service
  */
-public interface IProductTypeService {
+public interface ProductTypeService {
     ProductType getProductTypeById(Integer id) throws DataAccessException;
     List<ProductType> getAllProductTypes() throws DataAccessException;
     Integer updateProductType(ProductType productType) throws DataAccessException;

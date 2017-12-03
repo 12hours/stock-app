@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * Interface for Supplier service
  */
-public interface ISupplierService {
+public interface SupplierService {
     List<Supplier> getAllSuppliers() throws DataAccessException;
     Integer saveSupplier(Supplier supplier) throws DataAccessException;
 
