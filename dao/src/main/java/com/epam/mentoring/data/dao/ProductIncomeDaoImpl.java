@@ -12,7 +12,7 @@ import com.epam.mentoring.data.util.mappers.ProductIncomeRowMapper;
 
 import java.util.List;
 
-public class ProductIncomeDaoImpl implements IProductIncomeDao{
+public class ProductIncomeDaoImpl implements ProductIncomeDao {
 
 	private JdbcTemplate jdbcTemplate;
 

@@ -2,7 +2,7 @@ package com.epam.mentoring.rest.controllers;
 
 import com.epam.mentoring.data.model.dto.ProductIncomeForm;
 import com.epam.mentoring.rest.error.CannotSaveException;
-import com.epam.mentoring.service.IProductIncomeService;
+import com.epam.mentoring.service.ProductIncomeService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataAccessException;
@@ -23,9 +23,9 @@ public class ProductIncomeController {
 
     Logger logger = LoggerFactory.getLogger(ProductIncomeController.class.getName());
 
-    private IProductIncomeService productIncomeService;
+    private ProductIncomeService productIncomeService;
 
-    public ProductIncomeController(IProductIncomeService productIncomeService) {
+    public ProductIncomeController(ProductIncomeService productIncomeService) {
         this.productIncomeService = productIncomeService;
     }
 

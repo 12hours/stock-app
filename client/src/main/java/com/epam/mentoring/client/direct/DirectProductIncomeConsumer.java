@@ -4,16 +4,16 @@ import com.epam.mentoring.client.ProductIncomeConsumer;
 import com.epam.mentoring.client.exception.ServerDataAccessException;
 import com.epam.mentoring.data.model.ProductIncome;
 import com.epam.mentoring.data.model.dto.ProductIncomeForm;
-import com.epam.mentoring.service.IProductIncomeService;
+import com.epam.mentoring.service.ProductIncomeService;
 import org.springframework.util.Assert;
 
 import java.util.List;
 
 public class DirectProductIncomeConsumer implements ProductIncomeConsumer {
 
-    private IProductIncomeService productIncomeService;
+    private ProductIncomeService productIncomeService;
 
-    public DirectProductIncomeConsumer(IProductIncomeService service) {
+    public DirectProductIncomeConsumer(ProductIncomeService service) {
         this.productIncomeService = service;
     }
 

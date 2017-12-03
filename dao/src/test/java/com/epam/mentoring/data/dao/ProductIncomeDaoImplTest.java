@@ -30,7 +30,7 @@ import com.epam.mentoring.data.model.User;
 public class ProductIncomeDaoImplTest {
 
 	@Autowired
-	private IProductIncomeDao dao;
+	private ProductIncomeDao dao;
 
 	@Autowired
 	private JdbcTemplate jdbcTemplate;

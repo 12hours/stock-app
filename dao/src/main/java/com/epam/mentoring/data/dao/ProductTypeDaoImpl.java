@@ -13,7 +13,7 @@ import com.epam.mentoring.data.model.ProductType;
 import com.epam.mentoring.data.util.mappers.ProductTypeRowMapper;
 import com.epam.mentoring.data.util.mappers.ProductTypesResultSetExtractor;
 
-public class ProductTypeDaoImpl implements IProductTypeDao {
+public class ProductTypeDaoImpl implements ProductTypeDao {
 	
 	@Value("${product_type.get.by_id}")
 	private String GET_PRODUCT_TYPE_BY_ID_SQL;

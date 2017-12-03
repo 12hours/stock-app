@@ -4,16 +4,16 @@ import com.epam.mentoring.client.SupplierConsumer;
 import com.epam.mentoring.client.exception.ServerDataAccessException;
 import com.epam.mentoring.data.model.Supplier;
 import com.epam.mentoring.data.model.dto.SupplierForm;
-import com.epam.mentoring.service.ISupplierService;
+import com.epam.mentoring.service.SupplierService;
 import org.springframework.util.Assert;
 
 import java.util.List;
 
 public class DirectSupplierConsumer implements SupplierConsumer {
 
-    private ISupplierService supplierService;
+    private SupplierService supplierService;
 
-    public DirectSupplierConsumer(ISupplierService service) {
+    public DirectSupplierConsumer(SupplierService service) {
         this.supplierService = service;
     }
 

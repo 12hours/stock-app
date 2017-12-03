@@ -3,7 +3,7 @@ package com.epam.mentoring.rest.controllers;
 import com.epam.mentoring.data.model.Supplier;
 import com.epam.mentoring.data.model.dto.SupplierForm;
 import com.epam.mentoring.rest.error.CannotSaveException;
-import com.epam.mentoring.service.ISupplierService;
+import com.epam.mentoring.service.SupplierService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataAccessException;
@@ -21,9 +21,9 @@ public class SupplierController {
 
     private static final Logger logger = LoggerFactory.getLogger(SupplierController.class.getName());
 
-    private ISupplierService supplierService;
+    private SupplierService supplierService;
 
-    public SupplierController(ISupplierService supplierService) {
+    public SupplierController(SupplierService supplierService) {
         this.supplierService = supplierService;
     }
 

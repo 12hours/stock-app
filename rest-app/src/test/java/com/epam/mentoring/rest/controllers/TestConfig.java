@@ -6,19 +6,10 @@ import com.epam.mentoring.data.model.Supplier;
 import com.epam.mentoring.data.model.dto.*;
 import com.epam.mentoring.service.*;
 import com.epam.mentoring.test.TestData;
-import org.hamcrest.CustomMatcher;
-import org.hamcrest.Matcher;
-import org.junit.Before;
-import org.mockito.ArgumentCaptor;
-import org.mockito.ArgumentMatcher;
-import org.mockito.Matchers;
-import org.mockito.Mockito;
-import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Scope;
 import org.springframework.dao.DataAccessException;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
@@ -47,8 +38,8 @@ public class TestConfig {
 
 
     @Bean
-    IProductIncomeService productIncomeService() {
-        IProductIncomeService productIncomeService = mock(IProductIncomeService.class);
+    ProductIncomeService productIncomeService() {
+        ProductIncomeService productIncomeService = mock(ProductIncomeService.class);
         when(productIncomeService.saveProductIncome(any(ProductIncomeForm.class))).thenAnswer((Answer<Integer>) invocation -> {
             ProductIncomeForm form = invocation.getArgumentAt(0, ProductIncomeForm.class);
             if (form.getProductId() == 42) {
@@ -63,8 +54,8 @@ public class TestConfig {
     }
 
     @Bean
-    IProductTypeService productTypeService(){
-        IProductTypeService productTypeServiceMock = mock(IProductTypeService.class);
+    ProductTypeService productTypeService(){
+        ProductTypeService productTypeServiceMock = mock(ProductTypeService.class);
         when(productTypeServiceMock.getAllProductTypes()).thenReturn(TestData.productTypes());
         when(productTypeServiceMock.saveProductType(any(ProductType.class))).thenReturn(10);
         when(productTypeServiceMock.saveProductType(any(ProductTypeForm.class))).thenReturn(10);
@@ -72,17 +63,17 @@ public class TestConfig {
     }
 
     @Bean
-    ISupplierService supplierService() {
-        SupplierService supplierServiceMock = mock(SupplierService.class);
-        when(supplierServiceMock.getAllSuppliers()).thenReturn(TestData.suppliers());
-        when(supplierServiceMock.saveSupplier(any(Supplier.class))).thenReturn(10);
-        when(supplierServiceMock.saveSupplier(any(SupplierForm.class))).thenReturn(10);
-        return supplierServiceMock;
+    SupplierService supplierService() {
+        SupplierServiceImpl supplierServiceImplMock = mock(SupplierServiceImpl.class);
+        when(supplierServiceImplMock.getAllSuppliers()).thenReturn(TestData.suppliers());
+        when(supplierServiceImplMock.saveSupplier(any(Supplier.class))).thenReturn(10);
+        when(supplierServiceImplMock.saveSupplier(any(SupplierForm.class))).thenReturn(10);
+        return supplierServiceImplMock;
     }
 
     @Bean
-    IProductService productService() {
-        IProductService productServiceMock = mock(ProductService.class);
+    ProductService productService() {
+        ProductService productServiceMock = mock(ProductServiceImpl.class);
         when(productServiceMock.getAllProductsWithQuantitiesViews()).thenReturn(refProductWithQuantityViewList());
         when(productServiceMock.getAllProductsAsViews()).thenCallRealMethod();
         when(productServiceMock.getAllProducts()).thenReturn(TestData.products());

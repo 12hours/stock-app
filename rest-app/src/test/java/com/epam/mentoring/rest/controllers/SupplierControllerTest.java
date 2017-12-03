@@ -2,7 +2,7 @@ package com.epam.mentoring.rest.controllers;
 
 import com.epam.mentoring.data.model.Supplier;
 import com.epam.mentoring.data.model.dto.SupplierForm;
-import com.epam.mentoring.service.ISupplierService;
+import com.epam.mentoring.service.SupplierService;
 import com.epam.mentoring.test.TestData;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.hamcrest.CoreMatchers;
@@ -49,7 +49,7 @@ public class SupplierControllerTest {
     MockMvc mockMvc;
 
     @Autowired
-    ISupplierService supplierServiceMock;
+    SupplierService supplierServiceMock;
 
     ArgumentCaptor<Supplier> supplierArgumentCaptor;
     ArgumentCaptor<SupplierForm> supplierFormArgumentCaptor;

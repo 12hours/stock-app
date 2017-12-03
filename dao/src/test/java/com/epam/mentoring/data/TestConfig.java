@@ -11,10 +11,10 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 
-import com.epam.mentoring.data.dao.IProductDao;
-import com.epam.mentoring.data.dao.IProductIncomeDao;
-import com.epam.mentoring.data.dao.IProductTypeDao;
-import com.epam.mentoring.data.dao.ISupplierDao;
+import com.epam.mentoring.data.dao.ProductDao;
+import com.epam.mentoring.data.dao.ProductIncomeDao;
+import com.epam.mentoring.data.dao.ProductTypeDao;
+import com.epam.mentoring.data.dao.SupplierDao;
 import com.epam.mentoring.data.dao.ProductDaoImpl;
 import com.epam.mentoring.data.dao.ProductIncomeDaoImpl;
 import com.epam.mentoring.data.dao.ProductTypeDaoImpl;
@@ -85,26 +85,26 @@ public class TestConfig {
 	
 	
 	@Bean(name = "ProductDaoImpl")
-	IProductDao productDao() {
-		IProductDao dao = new ProductDaoImpl(dataSource());
+    ProductDao productDao() {
+		ProductDao dao = new ProductDaoImpl(dataSource());
 		return dao;
 	}
 	
 	@Bean
-	ISupplierDao supplierDao() {
-		ISupplierDao dao = new SupplierDaoImpl(dataSource());
+	SupplierDao supplierDao() {
+		SupplierDao dao = new SupplierDaoImpl(dataSource());
 		return dao;
 	}
 	
 	@Bean
-	IProductTypeDao productTypeDao() {
-		IProductTypeDao dao = new ProductTypeDaoImpl(dataSource());
+	ProductTypeDao productTypeDao() {
+		ProductTypeDao dao = new ProductTypeDaoImpl(dataSource());
 		return dao;
 	}
 	
 	@Bean
-	IProductIncomeDao productIncomeDao() {
-		IProductIncomeDao dao = new ProductIncomeDaoImpl(dataSource());
+	ProductIncomeDao productIncomeDao() {
+		ProductIncomeDao dao = new ProductIncomeDaoImpl(dataSource());
 		return dao;
 	}
 	

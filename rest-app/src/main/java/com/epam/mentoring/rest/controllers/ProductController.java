@@ -2,7 +2,7 @@ package com.epam.mentoring.rest.controllers;
 
 import com.epam.mentoring.data.model.dto.ProductForm;
 import com.epam.mentoring.data.model.dto.ProductView;
-import com.epam.mentoring.service.IProductService;
+import com.epam.mentoring.service.ProductService;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -19,9 +19,9 @@ import java.util.List;
 @RestController
 public class ProductController {
 
-    private IProductService productService;
+    private ProductService productService;
 
-    public ProductController(IProductService productService) {
+    public ProductController(ProductService productService) {
         this.productService = productService;
     }
 

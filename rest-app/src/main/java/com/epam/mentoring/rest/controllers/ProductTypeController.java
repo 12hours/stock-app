@@ -3,7 +3,7 @@ package com.epam.mentoring.rest.controllers;
 import com.epam.mentoring.data.model.ProductType;
 import com.epam.mentoring.data.model.dto.ProductTypeForm;
 import com.epam.mentoring.rest.error.CannotSaveException;
-import com.epam.mentoring.service.IProductTypeService;
+import com.epam.mentoring.service.ProductTypeService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataAccessException;
@@ -22,11 +22,11 @@ import java.util.List;
 @RestController
 public class ProductTypeController {
 
-    private IProductTypeService productTypeService;
+    private ProductTypeService productTypeService;
 
     private static final Logger logger = LoggerFactory.getLogger(ProductTypeController.class.getName());
 
-    public ProductTypeController(IProductTypeService productTypeService) {
+    public ProductTypeController(ProductTypeService productTypeService) {
         this.productTypeService = productTypeService;
     }
 

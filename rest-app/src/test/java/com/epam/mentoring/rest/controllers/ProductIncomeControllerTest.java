@@ -1,8 +1,7 @@
 package com.epam.mentoring.rest.controllers;
 
 import com.epam.mentoring.data.model.dto.ProductIncomeForm;
-import com.epam.mentoring.rest.config.RestWebConfig;
-import com.epam.mentoring.service.IProductIncomeService;
+import com.epam.mentoring.service.ProductIncomeService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.After;
 import org.junit.Before;
@@ -10,7 +9,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.restdocs.JUnitRestDocumentation;
@@ -48,7 +46,7 @@ public class ProductIncomeControllerTest {
     private WebApplicationContext webApplicationContext;
 
     @Autowired
-    private IProductIncomeService productIncomeService;
+    private ProductIncomeService productIncomeService;
 
     @Before
     public void setup() {

@@ -8,13 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.util.Assert;
 
 import com.epam.mentoring.data.model.Supplier;
 import com.epam.mentoring.data.util.mappers.SupplierRowMapper;
 import com.epam.mentoring.data.util.mappers.SuppliersResultSetExtractor;
 
-public class SupplierDaoImpl implements ISupplierDao {
+public class SupplierDaoImpl implements SupplierDao {
 
 	@Value("${supplier.get.by_id}")
 	private String GET_SUPPLIER_BY_ID_SQL;

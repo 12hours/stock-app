@@ -41,7 +41,7 @@ public class ProductDaoImplTest {
 
 	@Autowired
 	@Qualifier("ProductDaoImpl")
-	private IProductDao dao;
+	private ProductDao dao;
 
 	@Autowired
 	private JdbcTemplate jdbcTemplate;

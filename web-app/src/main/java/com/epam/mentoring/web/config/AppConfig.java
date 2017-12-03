@@ -30,13 +30,13 @@ public class AppConfig {
 	DataSource dataSource;
 	
 	@Bean
-	IProductDao productDao() {
+    ProductDao productDao() {
 		return new ProductDaoImpl(dataSource);
 	}
 
 	@Bean
-	IProductService productService() {
-		return new ProductService(productDao());
+	ProductService productService() {
+		return new ProductServiceImpl(productDao());
 	}
 
 	@Bean
@@ -45,13 +45,13 @@ public class AppConfig {
 	}
 
 	@Bean
-	IProductTypeDao productTypeDao(){
+	ProductTypeDao productTypeDao(){
 		return new ProductTypeDaoImpl(dataSource);
 	}
 
 	@Bean
-	IProductTypeService productTypeService() {
-		return new ProductTypeService(productTypeDao());
+	ProductTypeService productTypeService() {
+		return new ProductTypeServiceImp(productTypeDao());
 	}
 
 	@Bean
@@ -60,13 +60,13 @@ public class AppConfig {
 	}
 
 	@Bean
-	IProductIncomeDao productIncomeDao() {
+	ProductIncomeDao productIncomeDao() {
 		return new ProductIncomeDaoImpl(dataSource);
 	}
 
 	@Bean
-	IProductIncomeService productIncomeService() {
-		return new ProductIncomeService(productIncomeDao());
+	ProductIncomeService productIncomeService() {
+		return new ProductIncomeServiceImp(productIncomeDao());
 	}
 
 	@Bean
@@ -75,13 +75,13 @@ public class AppConfig {
 	}
 
 	@Bean
-	ISupplierDao supplierDao() {
+	SupplierDao supplierDao() {
 		return new SupplierDaoImpl(dataSource);
 	}
 
 	@Bean
-	ISupplierService supplierService() {
-		return new SupplierService(supplierDao());
+	SupplierService supplierService() {
+		return new SupplierServiceImpl(supplierDao());
 	}
 
 	@Bean

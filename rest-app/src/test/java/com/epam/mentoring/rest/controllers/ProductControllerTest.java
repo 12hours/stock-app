@@ -2,17 +2,9 @@ package com.epam.mentoring.rest.controllers;
 
 import com.epam.mentoring.data.model.Product;
 import com.epam.mentoring.data.model.dto.ProductForm;
-import com.epam.mentoring.service.IProductService;
+import com.epam.mentoring.service.ProductService;
 import com.epam.mentoring.test.TestData;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.jayway.jsonpath.Configuration;
-import com.jayway.jsonpath.Option;
-import com.jayway.jsonpath.spi.json.JacksonJsonProvider;
-import com.jayway.jsonpath.spi.json.JsonProvider;
-import com.jayway.jsonpath.spi.json.JsonSmartJsonProvider;
-import com.jayway.jsonpath.spi.mapper.JacksonMappingProvider;
-import com.jayway.jsonpath.spi.mapper.MappingProvider;
-import net.minidev.json.parser.JSONParser;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -29,13 +21,10 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.WebApplicationContext;
 
 import java.math.BigDecimal;
-import java.util.Collections;
 import java.util.List;
-import java.util.Set;
 
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.hasSize;
@@ -65,7 +54,7 @@ public class ProductControllerTest {
     WebApplicationContext webApplicationContext;
 
     @Autowired
-    IProductService productService;
+    ProductService productService;
 
     @Captor
     ArgumentCaptor<ProductForm> productFormArgumentCaptor;

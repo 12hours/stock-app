@@ -25,7 +25,7 @@ import com.epam.mentoring.data.model.ProductType;
 public class ProductTypeDaoImplTest {
 
 	@Autowired
-	private IProductTypeDao dao;
+	private ProductTypeDao dao;
 	
 	@Autowired
 	private JdbcTemplate jdbcTemplate;

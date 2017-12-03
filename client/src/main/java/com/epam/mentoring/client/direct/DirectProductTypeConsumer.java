@@ -4,16 +4,16 @@ import com.epam.mentoring.client.ProductTypeConsumer;
 import com.epam.mentoring.client.exception.ServerDataAccessException;
 import com.epam.mentoring.data.model.ProductType;
 import com.epam.mentoring.data.model.dto.ProductTypeForm;
-import com.epam.mentoring.service.IProductTypeService;
+import com.epam.mentoring.service.ProductTypeService;
 import org.springframework.util.Assert;
 
 import java.util.List;
 
 public class DirectProductTypeConsumer implements ProductTypeConsumer {
 
-    private IProductTypeService productTypeService;
+    private ProductTypeService productTypeService;
 
-    public DirectProductTypeConsumer(IProductTypeService service) {
+    public DirectProductTypeConsumer(ProductTypeService service) {
         this.productTypeService = service;
     }
 

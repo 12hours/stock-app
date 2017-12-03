@@ -2,9 +2,8 @@ package com.epam.mentoring.rest.controllers;
 
 import com.epam.mentoring.data.model.ProductType;
 import com.epam.mentoring.data.model.dto.ProductTypeForm;
-import com.epam.mentoring.service.IProductTypeService;
+import com.epam.mentoring.service.ProductTypeService;
 import com.epam.mentoring.test.TestData;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.hamcrest.CoreMatchers;
 import org.junit.Before;
@@ -51,7 +50,7 @@ public class ProductTypeControllerTest {
     MockMvc mockMvc;
 
     @Autowired
-    IProductTypeService productTypeServiceMock;
+    ProductTypeService productTypeServiceMock;
 
     ArgumentCaptor<ProductTypeForm> productTypeFormArgumentCaptor;
 

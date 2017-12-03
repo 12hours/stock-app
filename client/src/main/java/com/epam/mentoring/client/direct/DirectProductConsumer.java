@@ -13,15 +13,15 @@ import org.slf4j.LoggerFactory;
 import com.epam.mentoring.client.exception.ServerDataAccessException;
 import com.epam.mentoring.data.model.Product;
 import com.epam.mentoring.data.model.ProductType;
-import com.epam.mentoring.service.IProductService;
+import com.epam.mentoring.service.ProductService;
 
 public class DirectProductConsumer implements ProductConsumer {
 	
 	private static final Logger logger = LoggerFactory.getLogger(DirectProductConsumer.class.getName());
 	
-	private IProductService productService;
+	private ProductService productService;
 	
-	public DirectProductConsumer(IProductService productService) {
+	public DirectProductConsumer(ProductService productService) {
 		this.productService = productService;
 	}
 	

@@ -6,7 +6,6 @@ import java.util.Map;
 
 import javax.sql.DataSource;
 
-import com.epam.mentoring.data.model.dto.DTOUtils;
 import com.epam.mentoring.data.model.dto.ProductWithQuantityView;
 import com.epam.mentoring.data.util.mappers.ProductResultSetExtractor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +17,7 @@ import com.epam.mentoring.data.model.Product;
 import com.epam.mentoring.data.util.mappers.ProductRowMapper;
 import com.epam.mentoring.data.util.mappers.ProductsWithQuantitiesResultSetExtractor;
 
-public class ProductDaoImpl implements IProductDao{
+public class ProductDaoImpl implements ProductDao {
 	
 	@Value("${product.get.by_id}")
 	private String GET_PRODUCT_BY_ID_SQL;
