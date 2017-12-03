@@ -9,5 +9,6 @@ Building app:
 Documentation can be found at `target/site/index.html`
  
 Run backend: `mvn jetty:run -pl rest-app -Djetty.http.port=8080`
+
 Run frontend: `mvn jetty:run -pl web-app -Djetty.http.port=8090`
 
