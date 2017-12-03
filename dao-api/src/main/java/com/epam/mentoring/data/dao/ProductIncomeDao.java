@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * Interface for ProductIncome DAO
  */
-public interface IProductIncomeDao {
+public interface ProductIncomeDao {
 
 	/**
 	 * Finds ProductIncome record with specified id

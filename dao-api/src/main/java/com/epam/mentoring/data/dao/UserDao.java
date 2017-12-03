@@ -10,7 +10,7 @@ import com.epam.mentoring.data.model.User;
  * Interface for {@code User} DAO;
  * Describes basic CRUD operations
  */
-public interface IUserDao {
+public interface UserDao {
 
 	/**
 	 * Finds {@code User} record with specified id

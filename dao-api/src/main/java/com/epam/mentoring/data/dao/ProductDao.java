@@ -12,7 +12,7 @@ import com.epam.mentoring.data.model.Product;
  * Product DAO interface.
  * Describes basic CRUD operations and some application specifig operations e.g. {@code getAllProductsWithQuantities()}
  */
-public interface IProductDao {
+public interface ProductDao {
 	/**
 	 * Finds {@code Product} object
 	 * @param id target product's id

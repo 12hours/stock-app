@@ -10,7 +10,7 @@ import com.epam.mentoring.data.model.Supplier;
  * Interface for {@code Supplier} DAO;
  * Describes basic CRUD operations
  */
-public interface ISupplierDao {
+public interface SupplierDao {
 
 	/**
 	 * Finds all {@code Supplier} records in database

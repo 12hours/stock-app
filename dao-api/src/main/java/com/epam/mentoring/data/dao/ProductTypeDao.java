@@ -10,7 +10,7 @@ import com.epam.mentoring.data.model.ProductType;
  * Interface for ProductType DAO.
  * Describes basic CRUD operations.
  */
-public interface IProductTypeDao {
+public interface ProductTypeDao {
 	/**
 	 * Finds ProductType record with specified id
 	 * @param id target ProductType's id
