@@ -10,30 +10,31 @@ import com.epam.mentoring.data.model.dto.ProductWithQuantityView;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 import java.net.URI;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 @Slf4j
 public class RestProductConsumer implements ProductConsumer{
 
-    private String PRODUCTS_WITH_QUANTITES_VIEWS_URI ;
+    private String STOCK_URI;
+    private String PRODUCT_URI;
 
     private RestTemplate restTemplate;
 
     public RestProductConsumer(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
-        PRODUCTS_WITH_QUANTITES_VIEWS_URI = "http://localhost:8080/stock";
+        STOCK_URI = "http://localhost:8080/stock";
+        PRODUCT_URI = "http://localhost:8080/product";
     }
 
-    public RestProductConsumer(RestTemplate restTemplate, String uri) {
-        this.PRODUCTS_WITH_QUANTITES_VIEWS_URI = uri;
+    public RestProductConsumer(RestTemplate restTemplate, String stockUri, String productUri) {
+        this.STOCK_URI = stockUri;
+        this.PRODUCT_URI = productUri;
         this.restTemplate = restTemplate;
     }
 
@@ -112,7 +113,7 @@ public class RestProductConsumer implements ProductConsumer{
         ResponseEntity<List> productsWithQuantities;
         List<ProductWithQuantityView> body;
         try {
-//            productsWithQuantities = restTemplate.getForEntity(PRODUCTS_WITH_QUANTITES_VIEWS_URI,
+//            productsWithQuantities = restTemplate.getForEntity(STOCK_URI,
 //                    List.class);
 //            if (!productsWithQuantities.getStatusCode().equals(HttpStatus.OK)) {
 //                throw new ServerDataAccessException("Request denied: "+
@@ -120,7 +121,7 @@ public class RestProductConsumer implements ProductConsumer{
 //            }
 //            body = productsWithQuantities.getBody();
             ResponseEntity<List<ProductWithQuantityView>> response =
-                    restTemplate.exchange(PRODUCTS_WITH_QUANTITES_VIEWS_URI,
+                    restTemplate.exchange(STOCK_URI,
                             HttpMethod.GET, null, new ParameterizedTypeReference<List<ProductWithQuantityView>>() {
                             });
             List<ProductWithQuantityView> productViews = response.getBody();
