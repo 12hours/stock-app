@@ -3,6 +3,7 @@ package com.epam.mentoring.test;
 import com.epam.mentoring.data.model.*;
 import com.epam.mentoring.data.model.dto.DTOUtils;
 import com.epam.mentoring.data.model.dto.ProductIncomeForm;
+import com.epam.mentoring.data.model.dto.ProductView;
 import com.epam.mentoring.data.model.dto.ProductWithQuantityView;
 
 import java.math.BigDecimal;
@@ -18,6 +19,12 @@ public class TestData {
         products.add(new Product(2, "Core i5", new BigDecimal(200.0), new ProductType(1, "CPU")));
         products.add(new Product(3, "Core i7", new BigDecimal(300.0), new ProductType(1, "CPU")));
         return products;
+    }
+
+    public static List<ProductView> productViews() {
+        List<ProductView> productViews = new ArrayList<>();
+        products().forEach(product -> productViews.add(DTOUtils.map(product, ProductView.class)));
+        return productViews;
     }
 
     public static List<ProductType> productTypes() {

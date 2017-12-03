@@ -8,6 +8,7 @@ import com.epam.mentoring.data.model.Product;
 import com.epam.mentoring.data.model.ProductIncome;
 import com.epam.mentoring.data.model.ProductType;
 import com.epam.mentoring.data.model.Supplier;
+import com.epam.mentoring.test.TestData;
 import com.epam.mentoring.web.TestConfig;
 import com.epam.mentoring.web.config.ThymeLeafConfig;
 import com.epam.mentoring.web.config.WebConfig;
@@ -26,6 +27,7 @@ import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.MediaType;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
@@ -51,6 +53,7 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppC
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {TestConfig.class, WebConfig.class, ThymeLeafConfig.class})
 @WebAppConfiguration
+@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 public class AddFormControllerTest {
 
     private MockMvc mockMvc;
@@ -94,7 +97,7 @@ public class AddFormControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(view().name("add-product-income"))
                 .andExpect(model().attribute("products", hasSize(3)))
-                .andExpect(model().attribute("products", equalTo(referencedProductList)))
+                .andExpect(model().attribute("products", equalTo(TestData.productViews())))
                 .andExpect(model().attribute("productTypes", equalTo(referencedPorductTypeList)))
                 .andExpect(model().attribute("suppliers", equalTo(referencedSupplierList)));
     }
@@ -114,11 +117,11 @@ public class AddFormControllerTest {
                 .andExpect(status().is3xxRedirection())
                 .andExpect(view().name("redirect:/"));
 
-        ArgumentCaptor<ProductIncome> productIncomeArgumentCaptor = ArgumentCaptor.forClass(ProductIncome.class);
+        ArgumentCaptor<ProductIncomeForm> productIncomeArgumentCaptor = ArgumentCaptor.forClass(ProductIncomeForm.class);
         Mockito.verify(productIncomeConsumer).saveProductIncome(productIncomeArgumentCaptor.capture());
-        assertEquals(Integer.valueOf(1), productIncomeArgumentCaptor.getValue().getProduct().getId());
-        assertEquals(Integer.valueOf(2), productIncomeArgumentCaptor.getValue().getSupplier().getId());
-        assertEquals(Integer.valueOf(3), productIncomeArgumentCaptor.getValue().getUser().getId());
+        assertEquals(Integer.valueOf(1), productIncomeArgumentCaptor.getValue().getProductId());
+        assertEquals(Integer.valueOf(2), productIncomeArgumentCaptor.getValue().getSupplierId());
+        assertEquals(Integer.valueOf(3), productIncomeArgumentCaptor.getValue().getUserId());
         assertEquals(Integer.valueOf(15), productIncomeArgumentCaptor.getValue().getQuantity());
         assertEquals(Long.valueOf(10001), productIncomeArgumentCaptor.getValue().getOrderNumber());
 
@@ -130,7 +133,7 @@ public class AddFormControllerTest {
         assertEquals(dateGoal.get(dateGoal.MONTH), dateExtracted.get(dateExtracted.MONTH));
         assertEquals(dateGoal.get(dateGoal.DAY_OF_MONTH), dateExtracted.get(dateExtracted.DAY_OF_MONTH));
 
-        Mockito.verify(productIncomeConsumer, times(1)).saveProductIncome(Mockito.any(ProductIncome.class));
+        Mockito.verify(productIncomeConsumer, times(1)).saveProductIncome(Mockito.any(ProductIncomeForm.class));
         Mockito.verifyNoMoreInteractions(productIncomeConsumer);
     }
 
@@ -158,11 +161,10 @@ public class AddFormControllerTest {
                 .andExpect(status().is3xxRedirection())
                 .andExpect(view().name("redirect:/add/add-product"));
 
-        ArgumentCaptor<ProductType> productTypeArgumentCaptor = ArgumentCaptor.forClass(ProductType.class);
+        ArgumentCaptor<ProductTypeForm> productTypeArgumentCaptor = ArgumentCaptor.forClass(ProductTypeForm.class);
         Mockito.verify(productTypeConsumer).saveProductType(productTypeArgumentCaptor.capture());
-        assertEquals(null, productTypeArgumentCaptor.getValue().getId());
         assertEquals("RAM", productTypeArgumentCaptor.getValue().getName());
-        Mockito.verify(productTypeConsumer, times(1)).saveProductType(Mockito.any(ProductType.class));
+        Mockito.verify(productTypeConsumer, times(1)).saveProductType(Mockito.any(ProductTypeForm.class));
 //        Mockito.verifyNoMoreInteractions(productTypeConsumer);
     }
 
@@ -186,13 +188,12 @@ public class AddFormControllerTest {
                 .andExpect(status().is3xxRedirection())
                 .andExpect(view().name("redirect:/add/"));
 
-        ArgumentCaptor<Product> productArgumentCaptor = ArgumentCaptor.forClass(Product.class);
+        ArgumentCaptor<ProductForm> productArgumentCaptor = ArgumentCaptor.forClass(ProductForm.class);
         Mockito.verify(productConsumer).saveProduct(productArgumentCaptor.capture());
-        assertEquals(null, productArgumentCaptor.getValue().getId());
         assertEquals("Ryzen", productArgumentCaptor.getValue().getName());
         assertEquals(BigDecimal.valueOf(111.5), productArgumentCaptor.getValue().getPrice());
-        assertEquals(Integer.valueOf(2), productArgumentCaptor.getValue().getType().getId());
-        Mockito.verify(productConsumer, times(1)).saveProduct(Mockito.any(Product.class));
+        assertEquals(Integer.valueOf(2), productArgumentCaptor.getValue().getProductTypeId());
+        Mockito.verify(productConsumer, times(1)).saveProduct(Mockito.any(ProductForm.class));
         Mockito.verifyNoMoreInteractions(productConsumer);
     }
 
@@ -215,12 +216,11 @@ public class AddFormControllerTest {
                 .andExpect(status().is3xxRedirection())
                 .andExpect(view().name("redirect:/add/"));
 
-        ArgumentCaptor<Supplier> supplierArgumentCaptor = ArgumentCaptor.forClass(Supplier.class);
+        ArgumentCaptor<SupplierForm> supplierArgumentCaptor = ArgumentCaptor.forClass(SupplierForm.class);
         Mockito.verify(supplierConsumer).saveSupplier(supplierArgumentCaptor.capture());
-        assertEquals(null, supplierArgumentCaptor.getValue().getId());
         assertEquals("Dummy Supplier", supplierArgumentCaptor.getValue().getName());
         assertEquals("Dummy Details", supplierArgumentCaptor.getValue().getDetails());
-        Mockito.verify(supplierConsumer, times(1)).saveSupplier(Mockito.any(Supplier.class));
+        Mockito.verify(supplierConsumer, times(1)).saveSupplier(Mockito.any(SupplierForm.class));
         Mockito.verifyNoMoreInteractions(supplierConsumer);
     }
 
