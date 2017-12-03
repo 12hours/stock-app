@@ -1,7 +1,9 @@
 package com.epam.mentoring.web.controllers;
 
+import java.util.List;
 import java.util.Map;
 
+import com.epam.mentoring.data.model.dto.ProductWithQuantityView;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,9 +35,10 @@ public class StockController {
 	
 	@GetMapping("/stocklist")
 	public String getStockList(Model model) {
-		Map<Product, Integer> productsWithQuantities = productConsumer.getAllProductsWithQuantites();
+//		Map<Product, Integer> productsWithQuantities = productConsumer.getAllProductsWithQuantites();
+		List<ProductWithQuantityView> productsWithQuantitiesViews = productConsumer.getAllProductsWithQuantitiesViews();
 //		logger.debug("getting products with quantities: " + productsWithQuantities.size() + " items found");
-		model.addAttribute("productsWithQuantities", productsWithQuantities);
+		model.addAttribute("productsWithQuantitiesViews", productsWithQuantitiesViews);
 		return "stocklist";
 	}
 

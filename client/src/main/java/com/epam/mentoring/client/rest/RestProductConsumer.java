@@ -54,7 +54,7 @@ public class RestProductConsumer implements ProductConsumer{
     @Override
     public Integer saveProduct(ProductForm productForm) throws ServerDataAccessException {
         log.debug("Saving product form: " + productForm.toString());
-        URI uri = restTemplate.postForLocation(URI.create("http://localhost:8080/product"), ProductForm.class);
+        URI uri = restTemplate.postForLocation(URI.create("http://localhost:8080/product"), productForm);
         return null;
     }
 

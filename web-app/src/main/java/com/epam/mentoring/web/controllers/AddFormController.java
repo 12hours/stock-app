@@ -5,11 +5,7 @@ import com.epam.mentoring.client.ProductIncomeConsumer;
 import com.epam.mentoring.client.ProductTypeConsumer;
 import com.epam.mentoring.client.SupplierConsumer;
 import com.epam.mentoring.data.model.*;
-import com.epam.mentoring.data.model.dto.DTOUtils;
-import com.epam.mentoring.data.model.dto.ProductForm;
-import com.epam.mentoring.data.model.dto.ProductIncomeForm;
-import com.epam.mentoring.data.model.dto.ProductTypeForm;
-import com.epam.mentoring.data.model.dto.SupplierForm;
+import com.epam.mentoring.data.model.dto.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -52,7 +48,8 @@ public class AddFormController {
 
     @GetMapping("/add-product-income")
     public String addProductIncomeForm(Model model) {
-        List<Product> products = productConsumer.getAllProducts();
+//        List<Product> products = productConsumer.getAllProducts();
+        List<ProductView> products = productConsumer.getAllProductViews();
         List<ProductType> productTypes = productTypeConsumer.findAll();
         List<Supplier> suppliers = supplierConsumer.findAll();
         model.addAttribute("products", products);
@@ -66,8 +63,9 @@ public class AddFormController {
     public String saveProductIncome(@ModelAttribute("productIncomeForm") ProductIncomeForm productIncomeForm,
                                     BindingResult bindingResult,
                                     Errors errors) {
-        ProductIncome productIncome = DTOUtils.map(productIncomeForm, ProductIncome.class);
-        productIncomeConsumer.saveProductIncome(productIncome);
+//        ProductIncome productIncome = DTOUtils.map(productIncomeForm, ProductIncome.class);
+//        productIncomeConsumer.saveProductIncome(productIncome);
+        productIncomeConsumer.saveProductIncome(productIncomeForm);
         return "redirect:/";
     }
 
@@ -79,8 +77,9 @@ public class AddFormController {
 
     @PostMapping("/add-product-type")
     public String addProductType(@ModelAttribute("productTypeForm") ProductTypeForm productTypeForm) {
-        ProductType productType = DTOUtils.map(productTypeForm, ProductType.class);
-        productTypeConsumer.saveProductType(productType);
+//        ProductType productType = DTOUtils.map(productTypeForm, ProductType.class);
+//        productTypeConsumer.saveProductType(productType);
+        productTypeConsumer.saveProductType(productTypeForm);
         return "redirect:/add/add-product";
     }
 
@@ -94,8 +93,9 @@ public class AddFormController {
 
     @PostMapping("/add-product")
     public String addProduct(@ModelAttribute("productForm") ProductForm productForm, Errors errors) {
-        Product product = DTOUtils.map(productForm, Product.class);
-        productConsumer.saveProduct(product);
+//        Product product = DTOUtils.map(productForm, Product.class);
+//        productConsumer.saveProduct(product);
+        productConsumer.saveProduct(productForm);
         return "redirect:/add/";
     }
 
@@ -109,8 +109,9 @@ public class AddFormController {
     public String addSupplier(@ModelAttribute("supplierForm") SupplierForm supplierForm,
                               BindingResult bindingResult,
                               Errors errors) {
-        Supplier supplier = DTOUtils.map(supplierForm, Supplier.class);
-        supplierConsumer.saveSupplier(supplier);
+//        Supplier supplier = DTOUtils.map(supplierForm, Supplier.class);
+//        supplierConsumer.saveSupplier(supplier);
+        supplierConsumer.saveSupplier(supplierForm);
         return "redirect:/add/";
     }
 }

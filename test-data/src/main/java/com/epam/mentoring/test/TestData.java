@@ -74,9 +74,9 @@ public class TestData {
         List<Product> products = products();
         ArrayList<ProductWithQuantityView> productWithQuantityViews = new ArrayList<ProductWithQuantityView>(){
             {
-                new ProductWithQuantityView(products.get(0).getId(), products.get(0).getName(), 10);
-                new ProductWithQuantityView(products.get(1).getId(), products.get(1).getName(), 20);
-                new ProductWithQuantityView(products.get(2).getId(), products.get(2).getName(), 30);
+                add(new ProductWithQuantityView(products.get(0).getId(), products.get(0).getName(), 10));
+                add(new ProductWithQuantityView(products.get(1).getId(), products.get(1).getName(), 20));
+                add(new ProductWithQuantityView(products.get(2).getId(), products.get(2).getName(), 30));
             }
         };
         return productWithQuantityViews;

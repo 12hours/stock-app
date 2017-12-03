@@ -27,7 +27,7 @@ public class AppInitializer extends AbstractAnnotationConfigDispatcherServletIni
 		return new Class[] {
 			WebConfig.class,
 			ThymeLeafConfig.class,
-			AppConfig.class
+			FrontendOnlyAppConfig.class
 		};
 	}
 

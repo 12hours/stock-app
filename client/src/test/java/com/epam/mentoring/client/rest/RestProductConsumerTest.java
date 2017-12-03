@@ -92,7 +92,7 @@ public class RestProductConsumerTest {
 //        Product product = TestData.products().get(0);
         ProductForm productForm = new ProductForm("testProduct", BigDecimal.valueOf(100L), 1);
         restProductConsumer.saveProduct(productForm);
-        verify(restTemplate, times(1)).postForLocation(any(URI.class), any(Class.class));
+        verify(restTemplate, times(1)).postForLocation(any(URI.class), any(ProductForm.class));
 
     }
 
