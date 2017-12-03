@@ -2,6 +2,7 @@ package com.epam.mentoring.rest.controllers;
 
 import com.epam.mentoring.data.model.ProductType;
 import com.epam.mentoring.data.model.dto.ProductTypeForm;
+import com.epam.mentoring.rest.config.Constants;
 import com.epam.mentoring.rest.error.CannotSaveException;
 import com.epam.mentoring.service.ProductTypeService;
 import org.slf4j.Logger;
@@ -30,7 +31,7 @@ public class ProductTypeController {
         this.productTypeService = productTypeService;
     }
 
-    @GetMapping("/product-type")
+    @GetMapping(value = Constants.URI_API_PREFIX + Constants.URI_PRODUCT_TYPE)
     public ResponseEntity<List<ProductType>> getAllProductTypes() {
         logger.debug("GET /product-type");
         List<ProductType> productTypes = productTypeService.getAllProductTypes();
@@ -41,7 +42,7 @@ public class ProductTypeController {
         return responseEntity;
     }
 
-    @PostMapping("/product-type")
+    @PostMapping(value = Constants.URI_API_PREFIX + Constants.URI_PRODUCT_TYPE)
     public ResponseEntity<Void> addProductType(@Valid @RequestBody ProductTypeForm productTypeForm) {
         try {
             logger.debug("trying to add new product type: " + productTypeForm.toString());

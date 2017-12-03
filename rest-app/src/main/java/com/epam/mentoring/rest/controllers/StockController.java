@@ -1,6 +1,7 @@
 package com.epam.mentoring.rest.controllers;
 
 import com.epam.mentoring.data.model.dto.ProductWithQuantityView;
+import com.epam.mentoring.rest.config.Constants;
 import com.epam.mentoring.service.ProductService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,7 +22,7 @@ public class StockController {
         this.productService = productService;
     }
 
-    @RequestMapping(value = "/stock", method = RequestMethod.GET)
+    @GetMapping(value = Constants.URI_API_PREFIX + Constants.URI_STOCK)
     public ResponseEntity<List<ProductWithQuantityView>> productWithQuantityViewList() {
         logger.info("GET /stock: getting products with quantities list");
         List<ProductWithQuantityView> allProductsWithQuantitiesViews = productService.getAllProductsWithQuantitiesViews();

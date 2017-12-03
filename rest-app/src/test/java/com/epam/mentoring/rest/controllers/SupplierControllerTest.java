@@ -2,6 +2,7 @@ package com.epam.mentoring.rest.controllers;
 
 import com.epam.mentoring.data.model.Supplier;
 import com.epam.mentoring.data.model.dto.SupplierForm;
+import com.epam.mentoring.rest.config.Constants;
 import com.epam.mentoring.service.SupplierService;
 import com.epam.mentoring.test.TestData;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -43,6 +44,8 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppC
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 public class SupplierControllerTest {
 
+    String SUPPLIER_URI = Constants.URI_API_PREFIX + Constants.URI_SUPPLIER;
+    
     @Rule
     public JUnitRestDocumentation restDocumentation = new JUnitRestDocumentation("target/asciidoc");
 
@@ -71,7 +74,7 @@ public class SupplierControllerTest {
     @Test
     public void getAllSuppliersTest() throws Exception {
         List<Supplier> expectedSuppliers = TestData.suppliers();
-        mockMvc.perform(get("/supplier"))
+        mockMvc.perform(get(SUPPLIER_URI))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$", hasSize(expectedSuppliers.size())))
@@ -83,7 +86,7 @@ public class SupplierControllerTest {
     @Test
     public void saveSupplierFormTest() throws Exception {
         SupplierForm supplierForm = new SupplierForm("testSupplierName", "testSupplierDetails");
-        mockMvc.perform(post("/supplier")
+        mockMvc.perform(post(SUPPLIER_URI)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(supplierForm)))
                 .andExpect(status().isCreated())
@@ -96,7 +99,7 @@ public class SupplierControllerTest {
     @Test
     public void saveSupplierFormNullFieldTest() throws Exception {
         SupplierForm supplierForm = new SupplierForm(null, "testSupplierDetails");
-        mockMvc.perform(post("/supplier")
+        mockMvc.perform(post(SUPPLIER_URI)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(supplierForm)))
                 .andExpect(status().isBadRequest())

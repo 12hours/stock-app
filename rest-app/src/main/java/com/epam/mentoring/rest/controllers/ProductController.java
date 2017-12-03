@@ -2,6 +2,7 @@ package com.epam.mentoring.rest.controllers;
 
 import com.epam.mentoring.data.model.dto.ProductForm;
 import com.epam.mentoring.data.model.dto.ProductView;
+import com.epam.mentoring.rest.config.Constants;
 import com.epam.mentoring.service.ProductService;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -25,7 +26,7 @@ public class ProductController {
         this.productService = productService;
     }
 
-    @GetMapping("/product")
+    @GetMapping(value = Constants.URI_API_PREFIX + Constants.URI_PRODUCT)
     public ResponseEntity<List<ProductView>> getAllProducts() {
         List<ProductView> productViewsList = productService.getAllProductsAsViews();
         HttpHeaders httpHeaders = new HttpHeaders();
@@ -35,7 +36,7 @@ public class ProductController {
         return responseEntity;
     }
 
-    @PostMapping("/product")
+    @PostMapping(value = Constants.URI_API_PREFIX + Constants.URI_PRODUCT)
     public ResponseEntity<Void> saveProduct(@Valid @RequestBody ProductForm productForm) {
         Integer id = productService.saveProduct(productForm);
         // It appears it is wrong way to set location header

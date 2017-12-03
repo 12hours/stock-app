@@ -1,5 +1,6 @@
 package com.epam.mentoring.rest.controllers;
 
+import com.epam.mentoring.rest.config.Constants;
 import com.epam.mentoring.service.ProductService;
 import org.junit.Before;
 import org.junit.Rule;
@@ -33,6 +34,8 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppC
 @WebAppConfiguration
 public class StockControllerTest {
 
+    String STOCK_URI = Constants.URI_API_PREFIX + Constants.URI_STOCK;
+
     @Rule
     public JUnitRestDocumentation restDocumentation = new JUnitRestDocumentation("target/asciidoc");
 
@@ -53,7 +56,7 @@ public class StockControllerTest {
 
     @Test
     public void getStockList() throws Exception {
-        mockMvc.perform(get("/stock/"))
+        mockMvc.perform(get(STOCK_URI))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
                 .andExpect(jsonPath("$", hasSize(3)))

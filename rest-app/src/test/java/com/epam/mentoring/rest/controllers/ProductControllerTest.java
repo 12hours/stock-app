@@ -2,6 +2,7 @@ package com.epam.mentoring.rest.controllers;
 
 import com.epam.mentoring.data.model.Product;
 import com.epam.mentoring.data.model.dto.ProductForm;
+import com.epam.mentoring.rest.config.Constants;
 import com.epam.mentoring.service.ProductService;
 import com.epam.mentoring.test.TestData;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -44,6 +45,8 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppC
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 public class ProductControllerTest {
 
+    String PRODUCT_URI = Constants.URI_API_PREFIX + Constants.URI_PRODUCT;
+
     @Rule
     public JUnitRestDocumentation restDocumentation =
             new JUnitRestDocumentation("target/asciidoc");
@@ -72,7 +75,7 @@ public class ProductControllerTest {
     @Test
     public void getProductViewsTest() throws Exception {
         List<Product> products = TestData.products();
-        mockMvc.perform(get("/product"))
+        mockMvc.perform(get(PRODUCT_URI))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$", hasSize(products.size())))
@@ -89,7 +92,7 @@ public class ProductControllerTest {
     @Test
     public void saveProductFormTest() throws Exception {
         ProductForm productForm = new ProductForm("testProduct", BigDecimal.valueOf(100L), 1);
-        mockMvc.perform(post("/product")
+        mockMvc.perform(post(PRODUCT_URI)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(productForm)))
                 .andExpect(status().isCreated())

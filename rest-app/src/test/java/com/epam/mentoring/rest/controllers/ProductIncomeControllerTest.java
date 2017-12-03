@@ -1,6 +1,7 @@
 package com.epam.mentoring.rest.controllers;
 
 import com.epam.mentoring.data.model.dto.ProductIncomeForm;
+import com.epam.mentoring.rest.config.Constants;
 import com.epam.mentoring.service.ProductIncomeService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.After;
@@ -35,6 +36,8 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppC
 @WebAppConfiguration
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 public class ProductIncomeControllerTest {
+
+    String INCOME_URI = Constants.URI_API_PREFIX + Constants.URI_INCOME;
 
     @Rule
     public JUnitRestDocumentation restDocumentation =
@@ -73,7 +76,7 @@ public class ProductIncomeControllerTest {
                 .build();
         ObjectMapper mapper = new ObjectMapper();
 
-        mockMvc.perform(post("/income")
+        mockMvc.perform(post(INCOME_URI)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(mapper.writeValueAsString(productIncomeForm)))
                     .andExpect(status().isCreated())
@@ -99,7 +102,7 @@ public class ProductIncomeControllerTest {
                 .build();
         ObjectMapper mapper = new ObjectMapper();
 
-        mockMvc.perform(post("/income")
+        mockMvc.perform(post(INCOME_URI)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(mapper.writeValueAsString(productIncomeForm)))
                     .andExpect(status().isBadRequest())
@@ -120,7 +123,7 @@ public class ProductIncomeControllerTest {
                 .build();
         ObjectMapper mapper = new ObjectMapper();
 
-        mockMvc.perform(post("/income")
+        mockMvc.perform(post(INCOME_URI)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(mapper.writeValueAsString(productIncomeForm)))
                 .andExpect(status().isBadRequest())

@@ -2,6 +2,7 @@ package com.epam.mentoring.rest.controllers;
 
 import com.epam.mentoring.data.model.Supplier;
 import com.epam.mentoring.data.model.dto.SupplierForm;
+import com.epam.mentoring.rest.config.Constants;
 import com.epam.mentoring.rest.error.CannotSaveException;
 import com.epam.mentoring.service.SupplierService;
 import org.slf4j.Logger;
@@ -27,7 +28,7 @@ public class SupplierController {
         this.supplierService = supplierService;
     }
 
-    @GetMapping("/supplier")
+    @GetMapping(value = Constants.URI_API_PREFIX + Constants.URI_SUPPLIER)
     public ResponseEntity<List<Supplier>> getAllSuppliers() {
         logger.debug("GET /supplier: getting supplier list");
         List<Supplier> suppliers = supplierService.getAllSuppliers();
@@ -38,7 +39,7 @@ public class SupplierController {
         return responseEntity;
     }
 
-    @PostMapping("/supplier")
+    @PostMapping(value = Constants.URI_API_PREFIX + Constants.URI_SUPPLIER)
     public ResponseEntity<Void> addSupplier(@Valid @RequestBody SupplierForm supplierForm) {
         logger.debug("POST /supplier");
         try {

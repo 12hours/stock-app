@@ -1,6 +1,7 @@
 package com.epam.mentoring.rest.controllers;
 
 import com.epam.mentoring.data.model.dto.ProductIncomeForm;
+import com.epam.mentoring.rest.config.Constants;
 import com.epam.mentoring.rest.error.CannotSaveException;
 import com.epam.mentoring.service.ProductIncomeService;
 import org.slf4j.Logger;
@@ -29,7 +30,7 @@ public class ProductIncomeController {
         this.productIncomeService = productIncomeService;
     }
 
-    @PostMapping(value = "/income")
+    @PostMapping(value = Constants.URI_API_PREFIX + Constants.URI_INCOME)
     public ResponseEntity<Void> addIncome(@Valid @RequestBody ProductIncomeForm productIncomeForm,
                                           UriComponentsBuilder ucBuilder) throws CannotSaveException {
         try {

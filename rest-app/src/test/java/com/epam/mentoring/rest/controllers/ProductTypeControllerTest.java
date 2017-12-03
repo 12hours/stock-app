@@ -2,6 +2,7 @@ package com.epam.mentoring.rest.controllers;
 
 import com.epam.mentoring.data.model.ProductType;
 import com.epam.mentoring.data.model.dto.ProductTypeForm;
+import com.epam.mentoring.rest.config.Constants;
 import com.epam.mentoring.service.ProductTypeService;
 import com.epam.mentoring.test.TestData;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -43,6 +44,8 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppC
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 public class ProductTypeControllerTest {
 
+    String PRODUCT_TYPE_URI = Constants.URI_API_PREFIX + Constants.URI_PRODUCT_TYPE;
+
     @Rule
     public JUnitRestDocumentation restDocumentation =
             new JUnitRestDocumentation("target/asciidoc");
@@ -69,7 +72,7 @@ public class ProductTypeControllerTest {
     public void getProductTypesTest() throws Exception {
         List<ProductType> productTypesExpected = TestData.productTypes();
 
-        mockMvc.perform(get("/product-type"))
+        mockMvc.perform(get(PRODUCT_TYPE_URI))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$", hasSize(productTypesExpected.size())))
@@ -85,7 +88,7 @@ public class ProductTypeControllerTest {
         ProductTypeForm productType = new ProductTypeForm("testProductType");
         ObjectMapper objectMapper = new ObjectMapper();
 
-        mockMvc.perform(post("/product-type")
+        mockMvc.perform(post(PRODUCT_TYPE_URI)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(productType)))
                 .andExpect(status().isCreated())
@@ -99,7 +102,7 @@ public class ProductTypeControllerTest {
     public void saveProductTypeFormInvalidTest() throws Exception {
         ProductTypeForm productTypeForm = new ProductTypeForm();
         ObjectMapper objectMapper = new ObjectMapper();
-        mockMvc.perform(post("/product-type")
+        mockMvc.perform(post(PRODUCT_TYPE_URI)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(productTypeForm)))
                 .andExpect(status().isBadRequest())
