@@ -15,10 +15,16 @@ public class RestProductIncomeConsumer implements ProductIncomeConsumer {
 
     private RestTemplate restTemplate;
 
-    private String productIncomeLocation = "http://localhost:8080/income";
+    private String productIncomeLocation;
 
     public RestProductIncomeConsumer(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
+        productIncomeLocation = "http://localhost:8080/income";
+    }
+
+    public RestProductIncomeConsumer(RestTemplate restTemplate, String uri) {
+        this.restTemplate = restTemplate;
+        this.productIncomeLocation = uri;
     }
 
     @Override

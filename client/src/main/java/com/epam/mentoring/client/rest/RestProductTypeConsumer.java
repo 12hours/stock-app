@@ -17,11 +17,17 @@ import java.util.List;
 @Slf4j
 public class RestProductTypeConsumer implements ProductTypeConsumer{
 
-    private String PRODUCT_TYPE_URI = "http://localhost:8080/product-type";
+    private String PRODUCT_TYPE_URI;
 
     private RestTemplate restTemplate;
 
     public RestProductTypeConsumer(RestTemplate restTemplate) {
+        this.restTemplate = restTemplate;
+        PRODUCT_TYPE_URI = "http://localhost:8080/product-type";
+    }
+
+    public RestProductTypeConsumer(RestTemplate restTemplate, String uri) {
+        this.PRODUCT_TYPE_URI = uri;
         this.restTemplate = restTemplate;
     }
 

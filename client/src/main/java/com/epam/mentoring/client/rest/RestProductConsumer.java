@@ -23,11 +23,17 @@ import java.util.Map;
 @Slf4j
 public class RestProductConsumer implements ProductConsumer{
 
-    private static final String PRODUCTS_WITH_QUANTITES_VIEWS_URI = "http://localhost:8080/stock";
+    private String PRODUCTS_WITH_QUANTITES_VIEWS_URI ;
 
     private RestTemplate restTemplate;
 
     public RestProductConsumer(RestTemplate restTemplate) {
+        this.restTemplate = restTemplate;
+        PRODUCTS_WITH_QUANTITES_VIEWS_URI = "http://localhost:8080/stock";
+    }
+
+    public RestProductConsumer(RestTemplate restTemplate, String uri) {
+        this.PRODUCTS_WITH_QUANTITES_VIEWS_URI = uri;
         this.restTemplate = restTemplate;
     }
 
