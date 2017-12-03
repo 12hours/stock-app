@@ -14,20 +14,11 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 @Configuration
-@ComponentScan
 @ComponentScan(basePackageClasses = {StockController.class})
 @EnableWebMvc
 @PropertySource("classpath:application.properties")
 //@Import(DaoConfig.class)
 public class RestWebConfig extends WebMvcConfigurerAdapter {
-
-//    @Override
-//    public org.springframework.validation.Validator getValidator() {
-//        LocalValidatorFactoryBean validator = new LocalValidatorFactoryBean();
-//        validator.setProviderClass(HibernateValidator.class);
-//        validator.setValidationMessageSource(messageSource());
-//        return validator;
-//    }
 
     private MessageSource messageSource() {
         ResourceBundleMessageSource source = new ResourceBundleMessageSource();

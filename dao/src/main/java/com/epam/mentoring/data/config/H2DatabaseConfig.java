@@ -34,18 +34,6 @@ import com.epam.mentoring.data.config.conditions.H2DatabaseCondition;
 @PropertySource("classpath:/h2-database-init.properties")
 public class H2DatabaseConfig {
 	
-	
-	@Bean(name = "H2InMemoryDataSource")
-	@Profile({"dev"})
-	DataSource devDataSource() {
-		ResourceLoader resourceLoader = new ClassRelativeResourceLoader(H2DatabaseConfig.class);
-		return new EmbeddedDatabaseBuilder(resourceLoader)
-                .setType(EmbeddedDatabaseType.H2)
-                .setName("test")
-//                .addScripts(new String[] {"/h2/create-tables.sql", "/h2/data.sql"})
-                .build();
-	}
-	
 	@Bean(name = "H2InMemoryDataSource")
 	@Profile({"test"})
 	DataSource testDataSource() {

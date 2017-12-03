@@ -6,8 +6,7 @@ Building app:
 
  `full` profile enables documentation building.
  
-Documentation can be found in `target/site` folder:
-`target/site/apidocs/index.html` - javadocs, 'target/site/index.html` - main docs
+Documentation can be found at target/site/index.html`
  
 Run backend: `mvn jetty:run -pl rest-app -Djetty.http.port=8080`
 Run frontend: `mvn jetty:run -pl web-app -Djetty.http.port=8090`
