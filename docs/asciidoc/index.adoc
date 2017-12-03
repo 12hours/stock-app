@@ -1,10 +1,14 @@
 = Stock-app
+
+link:rest.html[REST API]
+
+link:apidocs/index.html[JAVA DOCS]
+
 :toc:
+
 
 == Overview
 include::overview.adoc[]
 
 == Application structure
 include::structure.adoc[]
-
-include::./rest/product-get/curl-request.adoc[]

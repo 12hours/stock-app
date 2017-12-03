@@ -1,4 +1,4 @@
-:snippets: ../../../target/asciidoc
+:snippets: ../../target/asciidoc
 :curl-req: curl-request.adoc
 :http-req: http-request.adoc
 :http-res: http-response.adoc
