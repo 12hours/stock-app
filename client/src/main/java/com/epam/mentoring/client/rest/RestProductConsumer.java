@@ -61,7 +61,7 @@ public class RestProductConsumer implements ProductConsumer{
     @Override
     public Integer saveProduct(ProductForm productForm) throws ServerDataAccessException {
         log.debug("Saving product form: " + productForm.toString());
-        URI uri = restTemplate.postForLocation(URI.create("http://localhost:8080/product"), productForm);
+        URI uri = restTemplate.postForLocation(URI.create(PRODUCT_URI), productForm);
         return null;
     }
 
@@ -86,7 +86,7 @@ public class RestProductConsumer implements ProductConsumer{
             // TODO: check other controllers which have getList methods
 
             ResponseEntity<List<ProductView>> response =
-                    restTemplate.exchange("http://localhost:8080/product",
+                    restTemplate.exchange(PRODUCT_URI,
                             HttpMethod.GET, null, new ParameterizedTypeReference<List<ProductView>>() {
                             });
             List<ProductView> productViews = response.getBody();
