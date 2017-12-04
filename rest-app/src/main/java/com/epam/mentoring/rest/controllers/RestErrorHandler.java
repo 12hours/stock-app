@@ -19,7 +19,8 @@ public class RestErrorHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(CannotSaveException.class)
     public ResponseEntity<Object> handleCannotSaveException(CannotSaveException ex,
                                                             WebRequest request) {
-        String responseBody = "{'error' : 'Can not save object'}";
+        String responseBody = String.format("{'error' : 'Can not save object', 'message':'%s'}",
+                ex.getMessage().replace("'", "\\'"));
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.setContentType(MediaType.APPLICATION_JSON);
         return handleExceptionInternal(ex, responseBody, httpHeaders,
@@ -28,15 +29,17 @@ public class RestErrorHandler extends ResponseEntityExceptionHandler {
 
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException exception, HttpHeaders headers, HttpStatus status, WebRequest request) {
-//        ValidationError error = ValidationErrorBuilder.fromBindingErrors(exception.getBindingResult());
         headers.setContentType(MediaType.APPLICATION_JSON);
-        String error = "{'error': 'Object validation failed'}";
-        return super.handleExceptionInternal(exception, error, headers, status, request);
+        String responseBody = String.format("{'error': 'Object validation failed', 'message':'%s'}",
+                exception.getMessage().replace("'", "\\'"));
+        return super.handleExceptionInternal(exception, responseBody, headers, status, request);
     }
 
     @ExceptionHandler(DataAccessException.class)
-    public ResponseEntity<Object> handleDataAcessException(MethodArgumentNotValidException exception, HttpHeaders headers, HttpStatus status, WebRequest request) {
-        String responseBody = "{'error': 'Can not get data'}";
+    public ResponseEntity<Object> handleDataAcessException(Exception exception, WebRequest request) {
+        String responseBody = String.format("{'error': 'Can not get data', 'message': '%s'}",
+                exception.getMessage().replace("'", "\\'"));
+        HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         return handleExceptionInternal(exception, responseBody, headers,
                 HttpStatus.BAD_REQUEST, request);
