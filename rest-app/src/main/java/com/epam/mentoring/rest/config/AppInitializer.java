@@ -1,8 +1,10 @@
 package com.epam.mentoring.rest.config;
 
 import com.epam.mentoring.data.config.DaoConfig;
+import com.epam.mentoring.rest.filters.RequestLogFilter;
 import org.springframework.context.ApplicationContextInitializer;
 import org.springframework.web.filter.CharacterEncodingFilter;
+import org.springframework.web.filter.CommonsRequestLoggingFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 import javax.servlet.Filter;
@@ -38,9 +40,12 @@ public class AppInitializer extends AbstractAnnotationConfigDispatcherServletIni
 
     @Override
     protected Filter[] getServletFilters() {
+        //encoding filter
         CharacterEncodingFilter encodingFilter = new CharacterEncodingFilter();
         encodingFilter.setEncoding("UTF-8");
         encodingFilter.setForceEncoding(true);
-        return new Filter[] { encodingFilter };
+        //logging filter
+        Filter requestLoggingFilter = new RequestLogFilter();
+        return new Filter[] { requestLoggingFilter, encodingFilter };
     }
 }
