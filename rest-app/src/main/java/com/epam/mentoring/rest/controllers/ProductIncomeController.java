@@ -23,7 +23,6 @@ import javax.validation.Valid;
 @RestController
 public class ProductIncomeController {
 
-
     private ProductIncomeService productIncomeService;
 
     public ProductIncomeController(ProductIncomeService productIncomeService) {
