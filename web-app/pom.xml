@@ -138,6 +138,7 @@
     </dependencies>
     
      <build>
+		 <finalName>web-app</finalName>
         <plugins>
             <!-- embedded Jetty server, for testing -->
             <plugin>

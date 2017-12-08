@@ -92,8 +92,8 @@ public class RestProductConsumer implements ProductConsumer{
             List<ProductView> productViews = response.getBody();
             return productViews;
         } catch (RestClientException ex) {
-            log.error("Can't get data from server: {}", ex);
-            throw new ServerDataAccessException("Can't get data from server", ex);
+            log.error("Can't get data from server: {} {}", PRODUCT_URI, ex);
+            throw new ServerDataAccessException("Can't get data from server " + PRODUCT_URI, ex);
         }
     }
 
@@ -128,7 +128,7 @@ public class RestProductConsumer implements ProductConsumer{
             return productViews;
         } catch (RestClientException ex) {
             log.error("Can't get data from server: {}", ex);
-            throw new ServerDataAccessException("Can't get data from server", ex);
+            throw new ServerDataAccessException("Can't get data from server " + STOCK_URI, ex);
         }
     }
 

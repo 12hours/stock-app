@@ -11,6 +11,10 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.web.client.RestTemplate;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import java.io.FileInputStream;
 import java.util.Properties;
 
 @Configuration
@@ -20,24 +24,28 @@ public class FrontendOnlyAppConfig {
     @Autowired
     Environment env;
 
-    Properties uriProperties;
+    @Bean
+    Properties uriProperties() {
+        Properties uriProperties = new Properties();
 
-    private Properties uriProperties() {
-        if (this.uriProperties != null) return uriProperties;
+        String PROTOCOL = env.getProperty("backend.uri.protocol");
+        String HOST = env.getProperty("backend.uri.host");
+        String PORT = env.getProperty("backend.uri.port");
+        String PREFIX = env.getProperty("backend.uri.prefix");
+        String STOCK = env.getProperty("backend.uri.stock");
+        String PRODUCT = env.getProperty("backend.uri.product");
+        String INCOME = env.getProperty("backend.uri.income");
+        String SUPPLIER = env.getProperty("backend.uri.supplier");
+        String PRODUCT_TYPE = env.getProperty("backend.uri.product_type");
 
-        Properties extraProperties = new Properties();
-        String BACKEND_HOST = env.getProperty("backend.uri.protocol") + "://"
-                + env.getProperty("backend.uri.host") + ":"
-                + env.getProperty("backend.uri.port")
-                + env.getProperty("backend.uri.prefix");
+        String BACKEND_HOST = PROTOCOL + "://" + HOST + ":" + PORT + PREFIX;
 
-        extraProperties.put("STOCK_URI", BACKEND_HOST + env.getProperty("backend.uri.stock"));
-        extraProperties.put("PRODUCT_URI", BACKEND_HOST + env.getProperty("backend.uri.product"));
-        extraProperties.put("INCOME_URI", BACKEND_HOST + env.getProperty("backend.uri.income"));
-        extraProperties.put("SUPPLIER_URI", BACKEND_HOST + env.getProperty("backend.uri.supplier"));
-        extraProperties.put("PRODUCT_TYPE_URI", BACKEND_HOST + env.getProperty("backend.uri.product_type"));
-        this.uriProperties = extraProperties;
-        return extraProperties;
+        uriProperties.put("STOCK_URI", BACKEND_HOST + STOCK);
+        uriProperties.put("PRODUCT_URI", BACKEND_HOST + PRODUCT);
+        uriProperties.put("INCOME_URI", BACKEND_HOST + INCOME);
+        uriProperties.put("SUPPLIER_URI", BACKEND_HOST + SUPPLIER);
+        uriProperties.put("PRODUCT_TYPE_URI", BACKEND_HOST + PRODUCT_TYPE);
+        return uriProperties;
     }
 
     @Bean
