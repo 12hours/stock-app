@@ -21,7 +21,6 @@ public class SQLDialectConfiguratorApplicationContextInitializer implements Appl
         String[] activeProfiles = applicationContext.getEnvironment().getActiveProfiles();
         List<String> activeProfilesList = Arrays.asList(activeProfiles);
         Collections.sort(activeProfilesList, String::compareToIgnoreCase);
-        System.out.println("INIT");
 
         PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
 //        if (Collections.binarySearch(activeProfilesList, MySQL, String::compareToIgnoreCase) >= 0) {

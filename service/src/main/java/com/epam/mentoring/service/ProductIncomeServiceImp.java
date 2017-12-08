@@ -44,9 +44,7 @@ public class ProductIncomeServiceImp implements ProductIncomeService {
 
     @Override
     public Integer saveProductIncome(ProductIncomeForm productIncomeForm) throws DataAccessException {
-        System.out.println(productIncomeForm);
         ProductIncome productIncome = DTOUtils.map(productIncomeForm, ProductIncome.class);
-        System.out.println(productIncome);
         return saveProductIncome(productIncome);
     }
 }

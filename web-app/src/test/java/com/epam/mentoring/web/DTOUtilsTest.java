@@ -26,7 +26,6 @@ public class DTOUtilsTest {
                 .build();
 
         ProductIncome productIncome = DTOUtils.map(productIncomeForm, ProductIncome.class);
-        System.out.println(productIncome);
         assertEquals(date, productIncome.getDate());
         assertEquals(Long.valueOf(10000), productIncome.getOrderNumber());
         assertEquals(Integer.valueOf(125), productIncome.getQuantity());
