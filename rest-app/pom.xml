@@ -167,6 +167,14 @@
                 <artifactId>jetty-maven-plugin</artifactId>
                 <configuration>
                     <reload>automatic</reload>
+                    <httpConnector>
+                        <host>0.0.0.0</host>
+                        <port>8080</port>
+                        <name>rest-app</name>
+                    </httpConnector>
+                    <webApp>
+                        <contextPath>/rest-app</contextPath>
+                    </webApp>
                 </configuration>
             </plugin>
 
