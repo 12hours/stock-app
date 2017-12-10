@@ -4,6 +4,8 @@ App specs: https://docs.google.com/document/d/1_KPhsD6GnbbCIPebblkNeL0DC3UFxIAPM
 ####Prerequisits
 Current version was tested in following environment:
 
+Ubuntu 16.04
+
 Java 1.8
 
 Maven 3.3.9
@@ -29,7 +31,7 @@ After that you can access web application at `localhost:8090/`
 
 ####Deployment
 
-After building copy `rest-app.war` and `web-app.war` from target directory
+After building copy `rest-app.war` and `web-app.war` from `target/` directory
 to `$CATALINA_BASE/webapps` (i.e. to `webapps` folder of your Tomcat installation)
 
 By default `web-app` will try to access backend API at `http://localhost:8080/rest-app`.
