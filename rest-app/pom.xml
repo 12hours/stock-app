@@ -159,6 +159,7 @@
 
 
     <build>
+        <finalName>rest-app</finalName>
         <plugins>
             <!-- embedded Jetty server, for testing -->
             <plugin>

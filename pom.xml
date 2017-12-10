@@ -189,6 +189,32 @@
 					<trimStackTrace>false</trimStackTrace>
 				</configuration>
 			</plugin>
+				<plugin>
+					<groupId>com.coderplus.maven.plugins</groupId>
+					<artifactId>copy-rename-maven-plugin</artifactId>
+					<version>1.0</version>
+					<executions>
+						<execution>
+							<id>copy-file</id>
+							<phase>install</phase>
+							<goals>
+								<goal>copy</goal>
+							</goals>
+							<configuration>
+								<fileSets>
+									<fileSet>
+										<sourceFile>rest-app/target/rest-app.war</sourceFile>
+										<destinationFile>${project.build.directory}/rest-app.war</destinationFile>
+									</fileSet>
+									<fileSet>
+										<sourceFile>web-app/target/web-app.war</sourceFile>
+										<destinationFile>${project.build.directory}/web-app.war</destinationFile>
+									</fileSet>
+								</fileSets>
+							</configuration>
+						</execution>
+					</executions>
+				</plugin>
 		</plugins>
 	</build>
 
