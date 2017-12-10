@@ -38,7 +38,7 @@ By default `web-app` will try to access backend API at `http://localhost:8080/re
 You can change this behavior either by editing 
 `web-app/src/main/resources/application.properties`
 before building app or by using JNDI lookup without needing to rebuild app.
-If you want to use former way, create `$CATALINA_BASE/conf/[enginename]/[hostname]/web-app.xml` file
+If you want to use latter way, create `$CATALINA_BASE/conf/[enginename]/[hostname]/web-app.xml` file
 with such content:
 ```
 <?xml version="1.0" encoding="UTF-8"?>

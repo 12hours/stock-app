@@ -4,6 +4,7 @@ import com.epam.mentoring.client.rest.RestProductConsumer;
 import com.epam.mentoring.client.rest.RestProductIncomeConsumer;
 import com.epam.mentoring.client.rest.RestProductTypeConsumer;
 import com.epam.mentoring.client.rest.RestSupplierConsumer;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,6 +18,7 @@ import javax.naming.NamingException;
 import java.io.FileInputStream;
 import java.util.Properties;
 
+@Slf4j
 @Configuration
 @PropertySource("classpath:/application.properties")
 public class FrontendOnlyAppConfig {
@@ -45,6 +47,7 @@ public class FrontendOnlyAppConfig {
         uriProperties.put("INCOME_URI", BACKEND_HOST + INCOME);
         uriProperties.put("SUPPLIER_URI", BACKEND_HOST + SUPPLIER);
         uriProperties.put("PRODUCT_TYPE_URI", BACKEND_HOST + PRODUCT_TYPE);
+        log.info("Using Backend API URL: {}", BACKEND_HOST);
         return uriProperties;
     }
 
