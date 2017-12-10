@@ -16,6 +16,10 @@ Tomcat 8.5.23
 
 At least these or higher versions of software are required
 
+#### Downloading
+
+Clone project: `git clone https://github.com/12hours/stock-app`
+
 #### Building
 
  Run `mvn clean install -P full`
@@ -58,3 +62,5 @@ backend.uri.port=9000
 backend.uri.prefix=/rest-app
 ``` 
 After that `web-app` will be expecting `rest-app` is accessable at `http://localhost:9000/rest-app`
+
+Go to `http://localhost:<tomcat-port>/web-app` and test app.
