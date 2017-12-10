@@ -31,7 +31,7 @@ After that you can access web application at `localhost:8090/`
 
 ####Deployment
 
-After building copy `rest-app.war` and `web-app.war` from `target/` directory
+After building copy `rest-app/target/rest-app.war` and `web-app/target/web-app.war` 
 to `$CATALINA_BASE/webapps` (i.e. to `webapps` folder of your Tomcat installation)
 
 By default `web-app` will try to access backend API at `http://localhost:8080/rest-app`.
