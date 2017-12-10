@@ -1,7 +1,9 @@
 # stock-app
+
 App specs: https://docs.google.com/document/d/1_KPhsD6GnbbCIPebblkNeL0DC3UFxIAPMhR9oybz0lk/edit?usp=sharing
 
-####Prerequisits
+#### Prerequisits
+
 Current version was tested in following environment:
 
 Ubuntu 16.04
@@ -14,14 +16,15 @@ Tomcat 8.5.23
 
 At least these or higher versions of software are required
 
-####Building
+#### Building
+
  Run `mvn clean install -P full`
 
  `full` profile enables documentation building.
  
 Documentation can be found at `target/site/index.html`
  
-####Testing 
+#### Testing 
  
 Run backend: `mvn jetty:run -pl rest-app -Djetty.http.port=8080`
 
@@ -29,7 +32,7 @@ Run frontend: `mvn jetty:run -pl web-app -Djetty.http.port=8090`
 
 After that you can access web application at `localhost:8090/`
 
-####Deployment
+#### Deployment
 
 After building copy `rest-app/target/rest-app.war` and `web-app/target/web-app.war` 
 to `$CATALINA_BASE/webapps` (i.e. to `webapps` folder of your Tomcat installation)
