@@ -2,6 +2,7 @@ package com.epam.mentoring.rest2;
 
 //import com.epam.mentoring.data.model.Product;
 //import com.epam.mentoring.service.ProductService;
+import com.epam.mentoring.service.ProductService;
 import org.apache.camel.EndpointInject;
 import org.mockito.Mockito;
 import org.springframework.stereotype.Service;
@@ -19,8 +20,8 @@ import java.util.ArrayList;
 @Produces(MediaType.APPLICATION_JSON)
 public class RestController {
 
-//    @EndpointInject(uri = "direct-vm:productService")
-//    ProductService productService;
+    @EndpointInject(uri = "direct-vm:productService")
+    ProductService productService;
 
     public RestController() {
 //        this.productService = Mockito.mock(ProductService.class);

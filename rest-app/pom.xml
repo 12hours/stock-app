@@ -6,7 +6,7 @@
     <groupId>com.epam.mentoring</groupId>
     <artifactId>rest-app</artifactId>
     <version>1.0</version>
-
+    <packaging>bundle</packaging>
     <parent>
         <groupId>com.epam.mentoring</groupId>
         <artifactId>stock-app</artifactId>
@@ -15,6 +15,35 @@
     </parent>
 
     <dependencies>
+
+        <!--Local-->
+
+        <dependency>
+            <groupId>com.epam.mentoring</groupId>
+            <artifactId>service-api</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.epam.mentoring</groupId>
+            <artifactId>service</artifactId>
+        </dependency>
+
+        <!-- Dependencies to include into bundle-->
+        <dependency>
+            <groupId>com.epam.mentoring</groupId>
+            <artifactId>model</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.modelmapper</groupId>
+            <artifactId>modelmapper</artifactId>
+            <version>1.1.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.epam.mentoring</groupId>
+            <artifactId>dao-api</artifactId>
+        </dependency>
 
 
         <!--CFX-->
@@ -120,29 +149,27 @@
         <defaultGoal>install</defaultGoal>
 
         <plugins>
-            <plugin>
-                <artifactId>maven-jar-plugin</artifactId>
-                <version>3.0.0</version>
-                <configuration>
-                    <archive>
-                        <manifestFile>${project.build.outputDirectory}/META-INF/MANIFEST.MF</manifestFile>
-                    </archive>
-                </configuration>
-            </plugin>
+            <!--<plugin>-->
+                <!--<artifactId>maven-jar-plugin</artifactId>-->
+                <!--<version>3.0.0</version>-->
+                <!--<configuration>-->
+                    <!--<archive>-->
+                        <!--<manifestFile>${project.build.outputDirectory}/META-INF/MANIFEST.MF</manifestFile>-->
+                    <!--</archive>-->
+                <!--</configuration>-->
+            <!--</plugin>-->
             <plugin>
                 <groupId>org.apache.felix</groupId>
                 <artifactId>maven-bundle-plugin</artifactId>
                 <version>3.0.1</version>
                 <extensions>true</extensions>
-                <executions>
-                    <execution>
-                        <id>bundle-manifest</id>
-                        <phase>process-classes</phase>
-                        <goals>
-                            <goal>manifest</goal>
-                        </goals>
-                    </execution>
-                </executions>
+                <configuration>
+                    <instructions>
+                        <!--<Import-Package>com.epam.mentoring</Import-Package>-->
+                        <Embed-Dependency>service-api,service,model,dao-api,modelmapper</Embed-Dependency>
+
+                    </instructions>
+                </configuration>
                 <!--<configuration>-->
                     <!--<instructions>-->
                         <!--<Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>-->
