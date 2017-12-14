@@ -17,12 +17,12 @@
         <!--<property name="ignoreResourceNotFound" value="true"/>-->
     <!--</bean>-->
 
-    <!--<bean id="objectMapper" class="com.fasterxml.jackson.databind.ObjectMapper">-->
-        <!--<property name="serializationInclusion" value="NON_NULL"/>-->
-    <!--</bean>-->
+    <bean id="objectMapper" class="com.fasterxml.jackson.databind.ObjectMapper">
+        <property name="serializationInclusion" value="NON_NULL"/>
+    </bean>
 
-    <bean id="mainRoute" class="com.epam.mentoring.routes.MainRoute"/>
-    <bean id="productRoute" class="com.epam.mentoring.routes.ProductRoute"/>
+    <!--<bean id="mainRoute" class="com.epam.mentoring.routes.MainRoute"/>-->
+    <!--<bean id="productRoute" class="com.epam.mentoring.routes.ProductRoute"/>-->
 
     <!--<bean id="cors-filter"-->
           <!--class="org.apache.cxf.rs.security.cors.CrossOriginResourceSharingFilter"/>-->
@@ -31,6 +31,8 @@
           <!--class="com.fasterxml.jackson.jaxrs.json.JacksonJaxbJsonProvider">-->
         <!--<property name="mapper" ref="objectMapper"/>-->
     <!--</bean>-->
+
+
 
     <camel:camelContext id="serviceRoutesContext"
                         streamCache="true">
