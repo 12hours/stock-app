@@ -7,6 +7,7 @@ public class MainRoute extends RouteBuilder {
     @Override
     public void configure() throws Exception {
         onException(PathNotFoundException.class).continued(true);
+
         from(RouteNames.MAIN_ROUTE).routeId(RouteNames.MAIN_ROUTE_ID)
                 .choice()
                 .when().jsonpath("$[?(@.HEAD.type=='product')]")
