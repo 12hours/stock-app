@@ -6,7 +6,6 @@
     <groupId>com.epam.mentoring</groupId>
     <artifactId>rest-app</artifactId>
     <version>1.0</version>
-    <packaging>war</packaging>
 
     <parent>
         <groupId>com.epam.mentoring</groupId>
@@ -17,142 +16,58 @@
 
     <dependencies>
 
-        <dependency>
-            <groupId>com.epam.mentoring</groupId>
-            <artifactId>dao-api</artifactId>
-        </dependency>
 
-        <dependency>
-            <groupId>com.epam.mentoring</groupId>
-            <artifactId>dao</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.epam.mentoring</groupId>
-            <artifactId>model</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.epam.mentoring</groupId>
-            <artifactId>service-api</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.epam.mentoring</groupId>
-            <artifactId>service</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.epam.mentoring</groupId>
-            <artifactId>test-data</artifactId>
-            <scope>test</scope>
-        </dependency>
+        <!--CFX-->
 
 
         <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>commons-logging</groupId>
-                    <artifactId>commons-logging</artifactId>
-                </exclusion>
-            </exclusions>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-core</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>jcl-over-slf4j</artifactId>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-spring</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-log4j12</artifactId>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
-            <scope>runtime</scope>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-soap</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-webmvc</artifactId>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-test</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>org.springframework.restdocs</groupId>
-            <artifactId>spring-restdocs-mockmvc</artifactId>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-frontend-jaxrs</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-rs-security-cors</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.hamcrest</groupId>
-                    <artifactId>hamcrest-core</artifactId>
-                </exclusion>
-            </exclusions>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.hamcrest</groupId>
-            <artifactId>hamcrest-all</artifactId>
-            <scope>test</scope>
+            <groupId>com.fasterxml.jackson.jaxrs</groupId>
+            <artifactId>jackson-jaxrs-json-provider</artifactId>
+            <!--<version>2.3.1</version>-->
+            <!--<exclusions>-->
+                <!--<exclusion>-->
+                    <!--<groupId>com.fasterxml.jackson.core</groupId>-->
+                    <!--<artifactId>jackson-databind</artifactId>-->
+                <!--</exclusion>-->
+            <!--</exclusions>-->
         </dependency>
 
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
-            <scope>test</scope>
+            <!--<scope>test</scope>-->
         </dependency>
 
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-test</artifactId>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-validator</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.jayway.jsonpath</groupId>
-            <artifactId>json-path</artifactId>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>com.jayway.jsonpath</groupId>
-            <artifactId>json-path-assert</artifactId>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>javax.validation</groupId>
-            <artifactId>validation-api</artifactId>
-            <version>1.1.0.Final</version>
-        </dependency>
 
     </dependencies>
 
@@ -160,49 +75,127 @@
 
     <build>
         <finalName>rest-app</finalName>
+        <!--<plugins>-->
+            <!--&lt;!&ndash; embedded Jetty server, for testing &ndash;&gt;-->
+            <!--<plugin>-->
+                <!--<groupId>org.eclipse.jetty</groupId>-->
+                <!--<artifactId>jetty-maven-plugin</artifactId>-->
+                <!--<configuration>-->
+                    <!--<reload>automatic</reload>-->
+                    <!--<httpConnector>-->
+                        <!--<host>0.0.0.0</host>-->
+                        <!--<port>8080</port>-->
+                        <!--<name>rest-app</name>-->
+                    <!--</httpConnector>-->
+                    <!--<webApp>-->
+                        <!--<contextPath>/rest-app</contextPath>-->
+                    <!--</webApp>-->
+                <!--</configuration>-->
+            <!--</plugin>-->
+
+            <!--<plugin>-->
+                <!--<groupId>org.asciidoctor</groupId>-->
+                <!--<artifactId>asciidoctor-maven-plugin</artifactId>-->
+                <!--<version>1.5.6</version>-->
+                <!--<executions>-->
+                    <!--<execution>-->
+                        <!--<id>output-html</id>-->
+                        <!--<phase>prepare-package</phase>-->
+                        <!--<goals>-->
+                            <!--<goal>process-asciidoc</goal>-->
+                        <!--</goals>-->
+                    <!--</execution>-->
+                <!--</executions>-->
+
+                <!--<configuration>-->
+                    <!--<backend>html</backend>-->
+                    <!--<doctype>book</doctype>-->
+                    <!--<attributes>-->
+                        <!--<snippets>${project.build.directory}/asciidoc</snippets>-->
+                    <!--</attributes>-->
+                <!--</configuration>-->
+            <!--</plugin>-->
+        <!--</plugins>-->
+
+        <defaultGoal>install</defaultGoal>
+
         <plugins>
-            <!-- embedded Jetty server, for testing -->
             <plugin>
-                <groupId>org.eclipse.jetty</groupId>
-                <artifactId>jetty-maven-plugin</artifactId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.0.0</version>
                 <configuration>
-                    <reload>automatic</reload>
-                    <httpConnector>
-                        <host>0.0.0.0</host>
-                        <port>8080</port>
-                        <name>rest-app</name>
-                    </httpConnector>
-                    <webApp>
-                        <contextPath>/rest-app</contextPath>
-                    </webApp>
+                    <archive>
+                        <manifestFile>${project.build.outputDirectory}/META-INF/MANIFEST.MF</manifestFile>
+                    </archive>
                 </configuration>
             </plugin>
-
             <plugin>
-                <groupId>org.asciidoctor</groupId>
-                <artifactId>asciidoctor-maven-plugin</artifactId>
-                <version>1.5.6</version>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <version>3.0.1</version>
+                <extensions>true</extensions>
                 <executions>
                     <execution>
-                        <id>output-html</id>
-                        <phase>prepare-package</phase>
+                        <id>bundle-manifest</id>
+                        <phase>process-classes</phase>
                         <goals>
-                            <goal>process-asciidoc</goal>
+                            <goal>manifest</goal>
                         </goals>
                     </execution>
                 </executions>
+                <!--<configuration>-->
+                    <!--<instructions>-->
+                        <!--<Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>-->
+                        <!--<Import-Package>!com.fasterxml.jackson.core,*</Import-Package>-->
+                        <!--<Embed-Dependency>jackson-databind</Embed-Dependency>-->
+                    <!--</instructions>-->
+                <!--</configuration>-->
+            </plugin>
 
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>2.4.3</version>
                 <configuration>
-                    <backend>html</backend>
-                    <doctype>book</doctype>
-                    <attributes>
-                        <snippets>${project.build.directory}/asciidoc</snippets>
-                    </attributes>
+                    <encoding>UTF-8</encoding>
+                    <useDefaultDelimiters>false</useDefaultDelimiters>
+                    <delimiters>
+                        <delimiter>${*}</delimiter>
+                    </delimiters>
                 </configuration>
             </plugin>
+
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>3.0.0</version>
+                <executions>
+                    <execution>
+                        <id>copy-installed</id>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>copy</goal>
+                        </goals>
+                        <configuration>
+                            <artifactItems>
+                                <artifactItem>
+                                    <groupId>${project.groupId}</groupId>
+                                    <artifactId>${project.artifactId}</artifactId>
+                                    <version>${project.version}</version>
+                                    <type>${project.packaging}</type>
+                                </artifactItem>
+                            </artifactItems>
+                            <outputDirectory>
+                                /home/nm/soft/redhat-jboss-fuse-6.2.1.redhat_084-70/deploy/
+                            </outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+
         </plugins>
-
-
     </build>
 
 </project>
