@@ -15,7 +15,9 @@ public class ProductRoute extends RouteBuilder {
 
     @Override
     public void configure() throws Exception {
-        from(RouteNames.PRODUCT_ROUTE).routeId(RouteNames.PRODUCT_ROUTE_ID).process(new Processor() {
+        from(RouteNames.PRODUCT_ROUTE).routeId(RouteNames.PRODUCT_ROUTE_ID)
+                .choice()
+                .process(new Processor() {
             @Override
             public void process(Exchange exchange) throws Exception {
                 System.out.println("Product route");

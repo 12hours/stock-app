@@ -1,6 +1,8 @@
 package com.epam.mentoring.routes.util;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.jayway.jsonpath.Configuration;
+import com.jayway.jsonpath.JsonPath;
 import org.apache.camel.Exchange;
 import org.apache.camel.spi.DataFormat;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +17,7 @@ public class CustomDataFormat implements DataFormat {
 
     private Class clazz;
 
-    public CustomDataFormat(Class clazz) {
+    public CustomDataFormat(Class<?> clazz) {
         this.clazz = clazz;
     }
 
@@ -27,8 +29,10 @@ public class CustomDataFormat implements DataFormat {
 
     @Override
     public Object unmarshal(Exchange exchange, InputStream stream) throws Exception {
+        Object document = Configuration.defaultConfiguration().jsonProvider().parse(exchange.getIn().getBody().toString());
+        String head = JsonPath.read(document, "HEAD");
+        String body = JsonPath.read(document, "BODY");
 
-        Object body = objectMapper.readValue(exchange.getIn().getBody().toString(), clazz);
         return null;
     }
 }
