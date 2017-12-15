@@ -1,14 +1,16 @@
+Request:
 ```
 {
     'HEAD': {
         'method': 'GET',
-        'type': 'PRODUCT',
+        'type': 'product',
         'id': 3
     },
     'BODY': {}
 }
 
 ```
+Response:
 
 ```
 {

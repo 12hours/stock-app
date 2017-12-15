@@ -20,4 +20,7 @@ public class RouteNames {
     public static final String NOT_FOUND_ROUTE = "direct-vm:notFound";
     public static final String NOT_FOUND_ID = "notFound";
 
+    public static final String EXCEPTION_ROUTE = "direct-vm:exception";
+    public static final String EXCEPTION_ROUTE_ID = "exception";
+
 }

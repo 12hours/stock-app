@@ -31,7 +31,7 @@
         <property name="serializationInclusion" value="NON_NULL"/>
     </bean>
 
-    <bean id="usersBean" class="com.epam.mentoring.rest2.RestController"></bean>
+    <!--<bean id="usersBean" class="com.epam.mentoring.rest2.RestController"></bean>-->
 
     <bean id="cors-filter"
           class="org.apache.cxf.rs.security.cors.CrossOriginResourceSharingFilter"/>

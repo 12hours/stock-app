@@ -14,8 +14,8 @@
 
     <osgi:reference id="productService" interface="com.epam.mentoring.service.ProductService"/>
 
-    <bean id="mainRoute" class="com.epam.mentoring.routes.MainRoute"/>
-    <bean id="productRoute" class="com.epam.mentoring.routes.ProductRoute"/>
+    <!--<bean id="mainRoute" class="com.epam.mentoring.routes.MainRoute"/>-->
+    <!--<bean id="productRoute" class="com.epam.mentoring.routes.ProductRoute"/>-->
 
 
 </beans>
