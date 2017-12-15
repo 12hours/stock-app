@@ -122,9 +122,7 @@
                 <extensions>true</extensions>
                 <configuration>
                     <instructions>
-                        <!--<Import-Package>com.epam.mentoring</Import-Package>-->
                         <Embed-Dependency>service-api,model,dao-api,modelmapper</Embed-Dependency>
-
                     </instructions>
                 </configuration>
             </plugin>
