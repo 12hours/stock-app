@@ -5,6 +5,7 @@
 
     <groupId>com.epam.mentoring</groupId>
     <artifactId>service</artifactId>
+    <packaging>bundle</packaging>
 
     <parent>
         <groupId>com.epam.mentoring</groupId>
@@ -33,6 +34,11 @@
             <groupId>com.epam.mentoring</groupId>
             <artifactId>test-data</artifactId>
             <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-blueprint</artifactId>
         </dependency>
 
         <dependency>
@@ -97,6 +103,32 @@
             <artifactId>camel-test</artifactId>
         </dependency>
 
+        <!-- Transitive dependencies to include into bundle-->
+
+        <dependency>
+            <groupId>org.modelmapper</groupId>
+            <artifactId>modelmapper</artifactId>
+            <version>1.1.0</version>
+        </dependency>
+
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <version>3.0.1</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <instructions>
+                        <!--<Import-Package>com.epam.mentoring</Import-Package>-->
+                        <Embed-Dependency>service-api,model,dao-api,modelmapper</Embed-Dependency>
+
+                    </instructions>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>
