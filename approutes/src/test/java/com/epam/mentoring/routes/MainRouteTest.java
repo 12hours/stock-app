@@ -13,7 +13,7 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 
 @RunWith(CamelSpringJUnit4ClassRunner.class)
-@ContextConfiguration(value = "classpath:/META-INF/spring/approutes-context.xml")
+@ContextConfiguration(value = {"classpath:/test-context.xml"})
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 public class MainRouteTest{
 

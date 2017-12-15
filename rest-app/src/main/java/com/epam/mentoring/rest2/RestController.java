@@ -16,6 +16,8 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 @Service
 @Path("/rest")
@@ -36,14 +38,12 @@ public class RestController {
     @Consumes(MediaType.APPLICATION_JSON)
     @Path("/product")
     public Response getProducts(String body) throws Exception {
-        System.out.println(
-                "Services! " + productService.getAllProducts()
-        );
-        String answer = (String) mainRoute.requestBody(body);
+        final Map<String, Object> headers = new HashMap<>();
+        String answer = (String) mainRoute.requestBodyAndHeaders(body, headers);
         return Response.status(Response.Status.OK)
                 .type(MediaType.APPLICATION_JSON_TYPE)
 //                        .entity(productService.getAllProducts())
-                .entity("Hello world" + answer)
+                .entity("Answer: " + answer)
                 .build();
     }
 

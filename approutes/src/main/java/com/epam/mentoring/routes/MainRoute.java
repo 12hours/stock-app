@@ -1,6 +1,8 @@
 package com.epam.mentoring.routes;
 
 import com.jayway.jsonpath.PathNotFoundException;
+import org.apache.camel.Exchange;
+import org.apache.camel.Processor;
 import org.apache.camel.builder.RouteBuilder;
 
 public class MainRoute extends RouteBuilder {
@@ -9,6 +11,13 @@ public class MainRoute extends RouteBuilder {
         onException(PathNotFoundException.class).continued(true);
 
         from(RouteNames.MAIN_ROUTE).routeId(RouteNames.MAIN_ROUTE_ID)
+                .process(new Processor() {
+                    @Override
+                    public void process(Exchange exchange) throws Exception {
+                        System.out.println("Main route");
+                        System.out.println(exchange.getIn().getBody());
+                    }
+                })
                 .choice()
                 .when().jsonpath("$[?(@.HEAD.type=='product')]")
                    .to(RouteNames.PRODUCT_ROUTE)

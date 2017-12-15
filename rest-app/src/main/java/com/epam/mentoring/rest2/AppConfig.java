@@ -11,28 +11,4 @@ import javax.sql.DataSource;
 
 public class AppConfig {
 
-    @Bean
-    public DataSource dataSource() {
-        return null;
-    }
-
-    @Bean
-    public ProductService productService() {
-        return null;
-    }
-
-    @Bean
-    public ProductIncomeService productIncomeService() {
-        return null;
-    }
-
-    @Bean
-    public ProductTypeService productTypeService() {
-        return null;
-    }
-
-    @Bean
-    public SupplierService supplierService() {
-        return null;
-    }
 }
