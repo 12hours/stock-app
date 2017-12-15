@@ -23,11 +23,6 @@
             <artifactId>service-api</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>com.epam.mentoring</groupId>
-            <artifactId>service</artifactId>
-        </dependency>
-
 
         <!--CFX-->
 
@@ -149,7 +144,7 @@
                 <configuration>
                     <instructions>
                         <!--<Import-Package>com.epam.mentoring</Import-Package>-->
-                        <Embed-Dependency>service-api,service,model,dao-api,modelmapper</Embed-Dependency>
+                        <!--<Embed-Dependency>service-api,service,model,dao-api,modelmapper</Embed-Dependency>-->
 
                     </instructions>
                 </configuration>
