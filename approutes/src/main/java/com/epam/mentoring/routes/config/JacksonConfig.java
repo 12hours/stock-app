@@ -1,5 +1,6 @@
 package com.epam.mentoring.routes.config;
 
+import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import my.soapjr.deserialization.reuest.RequestBodyDeserializer;
@@ -15,7 +16,7 @@ import org.springframework.context.annotation.Primary;
 @Configuration
 public class JacksonConfig {
 
-    @Bean(name="objectMapper")
+    @Bean
     @Primary
     ObjectMapper objectMapper() {
         ObjectMapper objectMapper = new ObjectMapper();
@@ -24,6 +25,8 @@ public class JacksonConfig {
         simpleModule.addDeserializer(RequestHead.class, new RequestHeadDeserializer());
         simpleModule.addDeserializer(RequestObject.class, new RequestDeserializer());
         objectMapper.registerModule(simpleModule);
+        objectMapper.configure(JsonParser.Feature.ALLOW_UNQUOTED_FIELD_NAMES, true);
+        objectMapper.configure(JsonParser.Feature.ALLOW_SINGLE_QUOTES, true);
         return objectMapper;
     }
 }
