@@ -1,9 +1,11 @@
 package com.epam.mentoring.routes;
 
 import com.jayway.jsonpath.PathNotFoundException;
+import my.soapjr.model.RequestObject;
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
 import org.apache.camel.builder.RouteBuilder;
+import org.apache.camel.component.jackson.JacksonDataFormat;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -14,6 +16,7 @@ public class MainRoute extends RouteBuilder {
         onException(Exception.class).to(RouteNames.EXCEPTION_ROUTE);
 
         from(RouteNames.MAIN_ROUTE).routeId(RouteNames.MAIN_ROUTE_ID)
+                .unmarshal(new JacksonDataFormat(RequestObject.class))
                 .process(new Processor() {
                     @Override
                     public void process(Exchange exchange) throws Exception {

@@ -2,17 +2,28 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:camel="http://camel.apache.org/schema/spring"
+       xmlns:context="http://www.springframework.org/schema/context"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-
+http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
          http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd">
 
 
     <bean class="org.mockito.Mockito" factory-method="mock">
-        <constructor-arg value="com.epam.mentoring.service.ProductService" />
+        <constructor-arg
+                value="com.epam.mentoring.service.ProductService" />
     </bean>
 
-    <bean id="mainRoute" class="com.epam.mentoring.routes.MainRoute"/>
-    <bean id="productRoute" class="com.epam.mentoring.routes.ProductRoute"/>
+    <!--<bean id="mainRoute" class="com.epam.mentoring.routes.MainRoute"/>-->
+    <!--<bean id="productRoute" class="com.epam.mentoring.routes.ProductRoute"/>-->
+
+    <bean id="jsonProvider"
+        class="com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider">
+        <property name="mapper" ref="objectMapper"/>
+    </bean>
+
+
+    <context:component-scan base-package="com.epam.mentoring.routes"/>
+    <context:annotation-config/>
 
 
     <camel:camelContext id="serviceRoutesContext"

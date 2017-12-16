@@ -7,7 +7,6 @@ import org.apache.camel.builder.RouteBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-@Component
 public class ProductRoute extends RouteBuilder {
 
     @Autowired
@@ -16,7 +15,6 @@ public class ProductRoute extends RouteBuilder {
     @Override
     public void configure() throws Exception {
         from(RouteNames.PRODUCT_ROUTE).routeId(RouteNames.PRODUCT_ROUTE_ID)
-                .choice()
                 .process(new Processor() {
             @Override
             public void process(Exchange exchange) throws Exception {

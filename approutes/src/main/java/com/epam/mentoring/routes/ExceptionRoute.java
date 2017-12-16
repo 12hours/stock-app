@@ -3,7 +3,9 @@ package com.epam.mentoring.routes;
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
 import org.apache.camel.builder.RouteBuilder;
+import org.springframework.stereotype.Component;
 
+@Component
 public class ExceptionRoute extends RouteBuilder {
     @Override
     public void configure() throws Exception {
