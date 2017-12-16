@@ -16,10 +16,10 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
     <!--<bean id="mainRoute" class="com.epam.mentoring.routes.MainRoute"/>-->
     <!--<bean id="productRoute" class="com.epam.mentoring.routes.ProductRoute"/>-->
 
-    <bean id="jsonProvider"
-        class="com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider">
-        <property name="mapper" ref="objectMapper"/>
-    </bean>
+    <!--<bean id="jsonProvider"-->
+        <!--class="com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider">-->
+        <!--<property name="mapper" ref="objectMapper"/>-->
+    <!--</bean>-->
 
 
     <context:component-scan base-package="com.epam.mentoring.routes"/>

@@ -36,7 +36,7 @@ public class MainRouteTest{
         });
 
         mockOut.setExpectedMessageCount(1);
-        template.sendBody(RouteNames.MAIN_ROUTE, "{'HEAD':{'type':'product'}}");
+        template.sendBody(RouteNames.MAIN_ROUTE, "{\"HEAD\":{\"type\":\"product\", \"method\":\"get\", \"id\":\"12\"}, \"BODY\":{}}");
         MockEndpoint.assertIsSatisfied(context);
     }
 

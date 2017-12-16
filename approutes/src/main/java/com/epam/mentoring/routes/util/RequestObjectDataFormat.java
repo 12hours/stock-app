@@ -14,12 +14,17 @@ import org.springframework.stereotype.Component;
 import java.io.*;
 import java.util.Scanner;
 
+@Component
 public class RequestObjectDataFormat implements DataFormat {
 
     @Autowired
     private ObjectMapper objectMapper;
 
     private Class<?> clazz;
+
+    public RequestObjectDataFormat() {
+        this(null);
+    }
 
     public RequestObjectDataFormat(Class<?> clazz) {
         this.clazz = clazz;
@@ -47,6 +52,7 @@ public class RequestObjectDataFormat implements DataFormat {
             out.append(buffer, 0, sz);
         }
         String json = out.toString();
+        System.out.println("Processing: " + json);
         RequestObject requestObject = objectMapper.readValue(json, RequestObject.class);
         return requestObject;
     }
