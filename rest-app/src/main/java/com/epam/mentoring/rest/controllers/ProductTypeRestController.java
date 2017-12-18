@@ -1,4 +1,4 @@
-package com.epam.mentoring.rest;
+package com.epam.mentoring.rest.controllers;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -12,7 +12,7 @@ public class ProductTypeRestController {
     public Response getProductIncome() {
 
         return Response.status(Response.Status.OK)
-                .entity("Get product type income")
+                .entity("Get product type")
                 .build();
     }
 
@@ -22,7 +22,7 @@ public class ProductTypeRestController {
     public Response postProductIncome() {
 
         return Response.status(Response.Status.OK)
-                .entity("Post product type income")
+                .entity("Post product type")
                 .build();
     }
 }

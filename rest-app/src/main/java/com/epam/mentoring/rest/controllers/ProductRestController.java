@@ -1,4 +1,4 @@
-package com.epam.mentoring.rest;
+package com.epam.mentoring.rest.controllers;
 
 import org.apache.camel.EndpointInject;
 import org.apache.camel.ProducerTemplate;

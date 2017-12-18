@@ -1,11 +1,11 @@
-package com.epam.mentoring.rest;
+package com.epam.mentoring.rest.controllers;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 @Path("/rest/stock")
-public class StockController {
+public class StockRestController {
 
     @GET
     @Path("/list")

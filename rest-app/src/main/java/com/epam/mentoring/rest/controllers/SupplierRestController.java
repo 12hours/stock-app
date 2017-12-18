@@ -1,4 +1,4 @@
-package com.epam.mentoring.rest;
+package com.epam.mentoring.rest.controllers;
 
 import org.springframework.stereotype.Service;
 
