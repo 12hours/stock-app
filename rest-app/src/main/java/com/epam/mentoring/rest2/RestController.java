@@ -36,7 +36,7 @@ public class RestController {
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    @Path("/product")
+    @Path("/product/")
     public Response getProducts(String body) throws Exception {
         final Map<String, Object> headers = new HashMap<>();
         String answer = (String) mainRoute.requestBodyAndHeaders(body, headers);

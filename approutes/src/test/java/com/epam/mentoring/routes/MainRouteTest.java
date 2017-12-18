@@ -6,6 +6,7 @@ import org.apache.camel.builder.AdviceWithRouteBuilder;
 import org.apache.camel.component.mock.MockEndpoint;
 import org.apache.camel.model.ModelCamelContext;
 import org.apache.camel.test.spring.CamelSpringJUnit4ClassRunner;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,15 +27,20 @@ public class MainRouteTest{
     @EndpointInject(uri = "mock:test", context = "serviceRoutesContext")
     MockEndpoint mockOut;
 
-    @Test
-    public void testMainToProductRouting() throws Exception {
+
+    @Before
+    public void setup() throws Exception {
         context.getRouteDefinition(RouteNames.MAIN_ROUTE_ID).adviceWith(context, new AdviceWithRouteBuilder() {
             @Override
             public void configure() throws Exception {
+//                weaveByToString("To[sdsdsd]").after().to(mock);
                 interceptSendToEndpoint(RouteNames.PRODUCT_ROUTE).skipSendToOriginalEndpoint().to(mockOut);
             }
         });
+    }
 
+    @Test
+    public void testMainToProductRouting() throws Exception {
         mockOut.setExpectedMessageCount(1);
         template.sendBody(RouteNames.MAIN_ROUTE, "{\"HEAD\":{\"type\":\"product\", \"method\":\"get\", \"id\":\"12\"}, \"BODY\":{}}");
         MockEndpoint.assertIsSatisfied(context);

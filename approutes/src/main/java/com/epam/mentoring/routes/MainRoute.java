@@ -2,6 +2,7 @@ package com.epam.mentoring.routes;
 
 import com.epam.mentoring.routes.util.RequestObjectDataFormat;
 import com.jayway.jsonpath.PathNotFoundException;
+import my.soapjr.config.SoapjrObjectMapper;
 import my.soapjr.model.RequestObject;
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
@@ -14,7 +15,7 @@ import org.springframework.stereotype.Component;
 public class MainRoute extends RouteBuilder {
 
     @Autowired
-    RequestObjectDataFormat requestObjectDataFormat;
+    JacksonDataFormat requestObjectDataFormat;
 
     @Override
     public void configure() throws Exception {
@@ -22,9 +23,10 @@ public class MainRoute extends RouteBuilder {
         onException(Exception.class).to(RouteNames.EXCEPTION_ROUTE);
 
         from(RouteNames.MAIN_ROUTE).routeId(RouteNames.MAIN_ROUTE_ID)
-                .unmarshal(requestObjectDataFormat)
-//                .unmarshal(new JacksonDataFormat(RequestObject.class))
+//                .unmarshal(requestObjectDataFormat)
+//                .unmarshal(new JacksonDataFormat(new SoapjrObjectMapper(), RequestObject.class))
                 .process(new Processor() {
+                    // debug
                     @Override
                     public void process(Exchange exchange) throws Exception {
                         System.out.println(exchange.getContext().getTypeConverter());
