@@ -1,4 +1,4 @@
-package com.epam.mentoring.routes;
+package com.epam.mentoring.routes.constants;
 
 public class RouteNames {
 

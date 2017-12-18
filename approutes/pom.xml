@@ -82,6 +82,13 @@
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.epam.mentoring</groupId>
+            <artifactId>test-data</artifactId>
+            <scope>test</scope>
         </dependency>
 
     </dependencies>

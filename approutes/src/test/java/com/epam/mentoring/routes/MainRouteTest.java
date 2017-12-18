@@ -1,5 +1,6 @@
 package com.epam.mentoring.routes;
 
+import com.epam.mentoring.routes.constants.RouteNames;
 import org.apache.camel.EndpointInject;
 import org.apache.camel.ProducerTemplate;
 import org.apache.camel.builder.AdviceWithRouteBuilder;

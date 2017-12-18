@@ -1,9 +1,9 @@
 package com.epam.mentoring.routes;
 
+import com.epam.mentoring.routes.constants.RouteNames;
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
 import org.apache.camel.builder.RouteBuilder;
-import org.springframework.stereotype.Component;
 
 public class NotFoundRoute extends RouteBuilder {
 
