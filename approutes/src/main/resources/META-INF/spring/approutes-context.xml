@@ -27,11 +27,11 @@
     <!--<bean id="cors-filter"-->
           <!--class="org.apache.cxf.rs.security.cors.CrossOriginResourceSharingFilter"/>-->
 
-    <bean id="jsonProvider"
-          class="com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider">
-        <constructor-arg type="com.fasterxml.jackson.databind.ObjectMapper">
-            <ref bean="objectMapper"></ref></constructor-arg>
-    </bean>
+    <!--<bean id="jsonProvider"-->
+          <!--class="com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider">-->
+        <!--<constructor-arg type="com.fasterxml.jackson.databind.ObjectMapper">-->
+            <!--<ref bean="objectMapper"></ref></constructor-arg>-->
+    <!--</bean>-->
 
 
     <context:component-scan base-package="com.epam.mentoring.routes"/>
