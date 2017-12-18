@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:camel="http://camel.apache.org/schema/spring"
+       xmlns:jaxrs="http://cxf.apache.org/jaxrs"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+http://cxf.apache.org/jaxrs http://cxf.apache.org/schemas/jaxrs.xsd
+         http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd">
+
+
+    <bean class="org.mockito.Mockito" factory-method="mock">
+        <constructor-arg
+                value="com.epam.mentoring.service.ProductService"/>
+    </bean>
+
+    <!--<bean id="mainRoute" class="com.epam.mentoring.routes.MainRoute"/>-->
+    <!--<bean id="productRoute" class="com.epam.mentoring.routes.ProductRoute"/>-->
+
+    <!--<bean id="jsonProvider"-->
+    <!--class="com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider">-->
+    <!--<constructor-arg ref="objectMapper"></constructor-arg>-->
+    <!--</bean>-->
+
+    <context:component-scan base-package="com.epam.mentoring.rest"/>
+    <context:annotation-config/>
+
+
+    <bean id="productRestController" class="com.epam.mentoring.rest.controllers.ProductRestController"/>
+
+    <bean id="supplierRestController" class="com.epam.mentoring.rest.controllers.SupplierRestController"/>
+
+    <bean id="productIncomeRestController" class="com.epam.mentoring.rest.controllers.ProductIncomeRestController"/>
+
+    <bean id="productTypeRestController" class="com.epam.mentoring.rest.controllers.ProductTypeRestController"/>
+
+    <bean id="stockRestController" class="com.epam.mentoring.rest.controllers.StockRestController"/>
+
+
+    <jaxrs:server serviceName="stockRestService"
+                  address="${http.server.endpoint.url}/service">
+        <jaxrs:serviceBeans>
+            <ref bean="productRestController"/>
+            <ref bean="supplierRestController"/>
+            <ref bean="productIncomeRestController"/>
+            <ref bean="productTypeRestController"/>
+            <ref bean="stockRestController"/>
+        </jaxrs:serviceBeans>
+        <jaxrs:features>
+            <!--<cxf:logging/>-->
+        </jaxrs:features>
+        <jaxrs:providers>
+            <!--<ref bean="jsonProvider"/>-->
+            <!--<ref bean="cors-filter"/>-->
+        </jaxrs:providers>
+    </jaxrs:server>
+
+
+    <camel:camelContext id="serviceRoutesContext"
+                        streamCache="true">
+        <camel:contextScan/>
+        <camel:streamCaching id="cacheConfigId" spoolThreshold="-1"/>
+    </camel:camelContext>
+
+</beans>

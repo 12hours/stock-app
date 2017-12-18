@@ -15,7 +15,8 @@ import java.util.Map;
 
 //@Service
 @Path("/rest")
-public class ProductRestController {
+public class
+ProductRestController {
 
 
     static {
