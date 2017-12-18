@@ -31,9 +31,7 @@
         <property name="serializationInclusion" value="NON_NULL"/>
     </bean>
 
-    <bean id="productRestController" class="com.epam.mentoring.rest.ProductRestController">
-        <constructor-arg ref="productService"/>
-    </bean>
+    <bean id="productRestController" class="com.epam.mentoring.rest.ProductRestController"/>
 
     <bean id="supplierRestController" class="com.epam.mentoring.rest.SupplierRestController"/>
 

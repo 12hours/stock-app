@@ -1,13 +1,7 @@
 package com.epam.mentoring.rest;
 
-//import com.epam.mentoring.data.model.Product;
-//import com.epam.mentoring.service.ProductService;
-
-import com.epam.mentoring.service.ProductService;
 import org.apache.camel.EndpointInject;
 import org.apache.camel.ProducerTemplate;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -21,13 +15,6 @@ public class ProductRestController {
 
     @EndpointInject(uri = "direct-vm:mainRoute")
     private ProducerTemplate mainRoute;
-
-    ProductService productService;
-
-    @Autowired
-    public ProductRestController(ProductService productService) {
-        this.productService = productService;
-    }
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
