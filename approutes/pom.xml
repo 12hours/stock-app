@@ -145,7 +145,7 @@
                 <configuration>
                     <instructions>
                         <Embed-Dependency>service-api,dao-api,model,modelmapper</Embed-Dependency>
-                        <Import-Package>*,org.springframework.core</Import-Package>
+                        <Import-Package>*,org.springframework.core,org.springframework.cglib.core,org.springframework.cglib.proxy,org.springframework.beans.factory</Import-Package>
                             <!--net.sf.cglib.proxy,-->
                             <!--net.sf.cglib.reflect,-->
                             <!--*</Import-Package>-->
