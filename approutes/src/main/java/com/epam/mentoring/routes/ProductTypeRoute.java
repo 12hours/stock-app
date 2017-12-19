@@ -31,12 +31,7 @@ public class ProductTypeRoute extends RouteBuilder {
                 .when(header(Headers.METHOD).isEqualTo(Headers.POST))
                     .unmarshal().json(JsonLibrary.Jackson, ProductTypeForm.class)
                     .process(new SaveProductTypeProcessor(productTypeService))
-                .process(new Processor() {
-                    @Override
-                    public void process(Exchange exchange) throws Exception {
-
-                    }
-                })
+                .otherwise().throwException(new UnsupportedOperationException())
                 .end()
                 .marshal().json(JsonLibrary.Jackson)
                 .convertBodyTo(String.class)

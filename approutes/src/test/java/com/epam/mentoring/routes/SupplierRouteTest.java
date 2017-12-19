@@ -1,9 +1,10 @@
 package com.epam.mentoring.routes;
 
-import com.epam.mentoring.data.model.dto.ProductTypeForm;
+import com.epam.mentoring.data.model.dto.SupplierForm;
+import com.epam.mentoring.data.model.dto.SupplierForm;
 import com.epam.mentoring.routes.constants.Headers;
 import com.epam.mentoring.routes.constants.RouteNames;
-import com.epam.mentoring.service.ProductTypeService;
+import com.epam.mentoring.service.SupplierService;
 import com.epam.mentoring.test.TestData;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -28,7 +29,7 @@ import static org.junit.Assert.assertEquals;
 @RunWith(CamelSpringJUnit4ClassRunner.class)
 @ContextConfiguration(value = {"classpath:/test-context.xml"})
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
-public class ProductTypeRouteTest {
+public class SupplierRouteTest {
 
     @Autowired
     ModelCamelContext context;
@@ -40,52 +41,53 @@ public class ProductTypeRouteTest {
     ObjectMapper objectMapper;
 
     @Autowired
-    ProductTypeService productTypeServiceMock;
+    SupplierService supplierServiceMock;
 
-    ArgumentCaptor<ProductTypeForm> productTypeFormArgumentCaptor;
+    ArgumentCaptor<SupplierForm> supplierFormArgumentCaptor;
 
     @Before
     public void setUp() {
-        productTypeFormArgumentCaptor = ArgumentCaptor.forClass(ProductTypeForm.class);
+        supplierFormArgumentCaptor = ArgumentCaptor.forClass(SupplierForm.class);
     }
 
     @Test
-    public void getAllProductTypesTest() throws JsonProcessingException {
+    public void getAllSuppliersTest() throws JsonProcessingException {
         Exchange exchange = new DefaultExchange(context);
         Message in = new DefaultMessage();
         in.setHeader(Headers.METHOD, Headers.GET_ALL);
         exchange.setIn(in);
 
-        Exchange response = template.send(RouteNames.PRODUCT_TYPE_ROUTE, exchange);
+        Exchange response = template.send(RouteNames.SUPPLIER_ROUTE, exchange);
         System.out.println(response.getIn().getBody());
-        assertEquals(objectMapper.writeValueAsString(TestData.productTypes()), response.getIn().getBody());
+        assertEquals(objectMapper.writeValueAsString(TestData.suppliers()), response.getIn().getBody());
     }
 
     @Test
-    public void getProductTypeByIdTest() throws JsonProcessingException {
+    public void getSupplierByIdTest() throws JsonProcessingException {
         Exchange exchange = new DefaultExchange(context);
         Message in = new DefaultMessage();
         in.setHeader(Headers.METHOD, Headers.GET_BY_ID);
         in.setHeader(Headers.ID, Integer.valueOf(42));
         exchange.setIn(in);
 
-        Exchange response = template.send(RouteNames.PRODUCT_TYPE_ROUTE, exchange);
-        assertEquals(objectMapper.writeValueAsString(TestData.productTypes().get(0)), response.getIn().getBody());
+        Exchange response = template.send(RouteNames.SUPPLIER_ROUTE, exchange);
+        assertEquals(objectMapper.writeValueAsString(TestData.suppliers().get(0)), response.getIn().getBody());
     }
 
     @Test
-    public void saveProductTypeTest() {
+    public void saveSupplierTest() {
         Exchange exchange = new DefaultExchange(context);
         Message in = new DefaultMessage();
         in.setHeader(Headers.METHOD, Headers.POST);
-        in.setBody("{\"name\":\"testProductType\"}");
+        in.setBody("{\"name\":\"testSupplierName\",\"details\":\"testSupplierDetails\"}");
         exchange.setIn(in);
 
-        Exchange response = template.send(RouteNames.PRODUCT_TYPE_ROUTE, exchange);
-        Mockito.verify(productTypeServiceMock).saveProductType(productTypeFormArgumentCaptor.capture());
-        assertEquals(productTypeFormArgumentCaptor.getValue(), new ProductTypeForm("testProductType"));
-        assertEquals("{\"id\":43}", response.getIn().getBody());
+        Exchange response = template.send(RouteNames.SUPPLIER_ROUTE, exchange);
+        Mockito.verify(supplierServiceMock).saveSupplier(supplierFormArgumentCaptor.capture());
+        assertEquals(supplierFormArgumentCaptor.getValue(), new SupplierForm("testSupplierName", "testSupplierDetails"));
+        assertEquals("{\"id\":44}", response.getIn().getBody());
     }
+
 
 
 }
