@@ -63,9 +63,7 @@ public class ProductTypeRouteTest {
 
         Exchange response = template.send(RouteNames.PRODUCT_TYPE_ROUTE, exchange);
         System.out.println(response.getIn().getBody());
-        HashMap<String, Object> expectedHashMap = new HashMap<>();
-        expectedHashMap.put("productTypes", TestData.productTypes());
-        assertEquals(objectMapper.writeValueAsString(expectedHashMap), response.getIn().getBody());
+        assertEquals(objectMapper.writeValueAsString(TestData.productTypes()), response.getIn().getBody());
     }
 
     @Test
@@ -77,9 +75,7 @@ public class ProductTypeRouteTest {
         exchange.setIn(in);
 
         Exchange response = template.send(RouteNames.PRODUCT_TYPE_ROUTE, exchange);
-        HashMap<String, Object> expectedHashMap = new HashMap<>();
-        expectedHashMap.put("productType", TestData.products().get(0));
-        assertEquals(objectMapper.writeValueAsString(expectedHashMap), response.getIn().getBody());
+        assertEquals(objectMapper.writeValueAsString(TestData.productTypes().get(0)), response.getIn().getBody());
     }
 
     @Test
@@ -87,13 +83,13 @@ public class ProductTypeRouteTest {
         Exchange exchange = new DefaultExchange(context);
         Message in = new DefaultMessage();
         in.setHeader(Headers.METHOD, Headers.POST);
-        in.setBody("{\"name\":\"testProduct\",\"price\":100,\"productTypeId\":1}");
+        in.setBody("{\"name\":\"testProductType\"}");
         exchange.setIn(in);
 
-        Exchange response = template.send(RouteNames.PRODUCT_ROUTE, exchange);
+        Exchange response = template.send(RouteNames.PRODUCT_TYPE_ROUTE, exchange);
         Mockito.verify(productTypeServiceMock).saveProductType(productTypeFormArgumentCaptor.capture());
-        assertEquals(productTypeFormArgumentCaptor.getValue(), new ProductForm("testProduct", BigDecimal.valueOf(100), Integer.valueOf(1)));
-        assertEquals("{\"id\":42}", response.getIn().getBody());
+        assertEquals(productTypeFormArgumentCaptor.getValue(), new ProductTypeForm("testProductType"));
+        assertEquals("{\"id\":43}", response.getIn().getBody());
     }
 
 
