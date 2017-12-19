@@ -15,8 +15,8 @@ http://cxf.apache.org/jaxrs http://cxf.apache.org/schemas/jaxrs.xsd
                 value="com.epam.mentoring.service.ProductService"/>
     </bean>
 
-    <!--<bean id="mainRoute" class="com.epam.mentoring.routes.MainRoute"/>-->
-    <!--<bean id="productRoute" class="com.epam.mentoring.routes.ProductRoute"/>-->
+    <!--<bean id="mainRoute" class="com.epam.mentoring.approutestes.MainRoute"/>-->
+    <!--<bean id="productRoute" class="com.epam.mentoring.approutestes.ProductRoute"/>-->
 
     <!--<bean id="jsonProvider"-->
     <!--class="com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider">-->

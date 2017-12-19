@@ -8,9 +8,6 @@
         http://www.springframework.org/schema/osgi http://www.springframework.org/schema/osgi/spring-osgi.xsd">
 
 
-    <context:component-scan base-package="com.epam.mentoring.routes"/>
-    <context:annotation-config/>
-
 
     <osgi:reference id="productService" interface="com.epam.mentoring.service.ProductService"/>
     <osgi:reference id="productTypeService" interface="com.epam.mentoring.service.ProductTypeService"/>

@@ -16,7 +16,7 @@ import java.util.Map;
 public class DummyProductService implements ProductService{
     @Override
     public Product findProductById(Integer id) throws DataAccessException {
-        return null;
+        return new Product(0, "Hello", BigDecimal.ZERO, null);
     }
 
     @Override
@@ -31,7 +31,7 @@ public class DummyProductService implements ProductService{
 
     @Override
     public Integer saveProduct(Product product) throws DataAccessException {
-        return null;
+        return 12;
     }
 
     @Override

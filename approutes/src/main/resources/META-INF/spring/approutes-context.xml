@@ -9,8 +9,12 @@
 
 
 
-    <context:component-scan base-package="com.epam.mentoring.routes"/>
+    <context:component-scan base-package="com.epam.mentoring.approutes"/>
     <context:annotation-config/>
+
+    <bean class="com.epam.mentoring.approutes.config.RoutesConfig"/>
+
+
 
     <camel:camelContext id="serviceRoutesContext"
                         streamCache="true">

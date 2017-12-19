@@ -2,14 +2,19 @@
        xmlns:osgi="http://www.springframework.org/schema/osgi"
        xmlns="http://www.springframework.org/schema/beans"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-
-
-
-
         http://www.springframework.org/schema/osgi
        http://www.springframework.org/schema/osgi/spring-osgi.xsd">
 
     <bean class="com.epam.mentoring.service.dummy.DummyProductService" id="dummyProductService"/>
     <osgi:service interface="com.epam.mentoring.service.ProductService" id="productService" ref="dummyProductService"/>
+
+    <bean class="com.epam.mentoring.service.dummy.DummySupplierService" id="dummySupplierService"/>
+    <osgi:service interface="com.epam.mentoring.service.SupplierService" id="supplierService" ref="dummySupplierService"/>
+
+    <bean class="com.epam.mentoring.service.dummy.DummyProductTypeService" id="dummyProductTypeService"/>
+    <osgi:service interface="com.epam.mentoring.service.ProductTypeService" id="productTypeService" ref="dummyProductTypeService"/>
+
+    <bean class="com.epam.mentoring.service.dummy.DummyProductIncomeService" id="dummyProductIncomeService"/>
+    <osgi:service interface="com.epam.mentoring.service.ProductIncomeService" id="productIncomeService" ref="dummyProductIncomeService"/>
 
 </beans>
