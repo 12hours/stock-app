@@ -133,6 +133,9 @@
                 <extensions>true</extensions>
                 <configuration>
                     <instructions>
+                        <Export-Package>com.epam.mentoring.service;uses:="org.springframework.da
+                            o";version="1.0.0",com.epam.mentoring.service.dummy;uses:="com.epam.men
+                            toring.service,org.springframework.dao";version="1.0.0",com.epam.mentoring.data.model.*</Export-Package>
                         <Embed-Dependency>service-api,model,dao-api,modelmapper</Embed-Dependency>
                     </instructions>
                 </configuration>
