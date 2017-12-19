@@ -1,9 +1,11 @@
 package com.epam.mentoring.routes;
 
 import com.epam.mentoring.data.model.dto.ProductForm;
+import com.epam.mentoring.data.model.dto.ProductTypeForm;
 import com.epam.mentoring.routes.constants.Headers;
 import com.epam.mentoring.routes.constants.RouteNames;
 import com.epam.mentoring.service.ProductService;
+import com.epam.mentoring.service.ProductTypeService;
 import com.epam.mentoring.test.TestData;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -26,12 +28,12 @@ import org.springframework.test.context.ContextConfiguration;
 import java.math.BigDecimal;
 import java.util.HashMap;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 @RunWith(CamelSpringJUnit4ClassRunner.class)
 @ContextConfiguration(value = {"classpath:/test-context.xml"})
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
-public class ProductRouteTest {
+public class ProductTypeRouteTest {
 
     @Autowired
     ModelCamelContext context;
@@ -43,40 +45,45 @@ public class ProductRouteTest {
     ObjectMapper objectMapper;
 
     @Autowired
-    ProductService productServiceMock;
+    ProductTypeService productTypeServiceMock;
 
-    ArgumentCaptor<ProductForm> productFormArgumentCaptor;
+    ArgumentCaptor<ProductTypeForm> productTypeFormArgumentCaptor;
 
     @Before
     public void setUp() {
-        productFormArgumentCaptor = ArgumentCaptor.forClass(ProductForm.class);
+        productTypeFormArgumentCaptor = ArgumentCaptor.forClass(ProductTypeForm.class);
     }
 
     @Test
-    public void getAllProductsTest() throws Exception {
+    public void getAllProductTypesTest() throws JsonProcessingException {
         Exchange exchange = new DefaultExchange(context);
         Message in = new DefaultMessage();
         in.setHeader(Headers.METHOD, Headers.GET_ALL);
         exchange.setIn(in);
 
-        Exchange response = template.send(RouteNames.PRODUCT_ROUTE, exchange);
-        assertEquals(objectMapper.writeValueAsString( TestData.products()), response.getIn().getBody());
+        Exchange response = template.send(RouteNames.PRODUCT_TYPE_ROUTE, exchange);
+        System.out.println(response.getIn().getBody());
+        HashMap<String, Object> expectedHashMap = new HashMap<>();
+        expectedHashMap.put("productTypes", TestData.productTypes());
+        assertEquals(objectMapper.writeValueAsString(expectedHashMap), response.getIn().getBody());
     }
 
     @Test
-    public void getProductByIdTest() throws JsonProcessingException {
+    public void getProductTypeByIdTest() throws JsonProcessingException {
         Exchange exchange = new DefaultExchange(context);
         Message in = new DefaultMessage();
         in.setHeader(Headers.METHOD, Headers.GET_BY_ID);
         in.setHeader(Headers.ID, Integer.valueOf(42));
         exchange.setIn(in);
 
-        Exchange response = template.send(RouteNames.PRODUCT_ROUTE, exchange);
-        assertEquals(objectMapper.writeValueAsString(TestData.products().get(0)), response.getIn().getBody());
+        Exchange response = template.send(RouteNames.PRODUCT_TYPE_ROUTE, exchange);
+        HashMap<String, Object> expectedHashMap = new HashMap<>();
+        expectedHashMap.put("productType", TestData.products().get(0));
+        assertEquals(objectMapper.writeValueAsString(expectedHashMap), response.getIn().getBody());
     }
 
     @Test
-    public void saveProductTest() throws Exception {
+    public void saveProductTypeTest() {
         Exchange exchange = new DefaultExchange(context);
         Message in = new DefaultMessage();
         in.setHeader(Headers.METHOD, Headers.POST);
@@ -84,9 +91,10 @@ public class ProductRouteTest {
         exchange.setIn(in);
 
         Exchange response = template.send(RouteNames.PRODUCT_ROUTE, exchange);
-        Mockito.verify(productServiceMock).saveProduct(productFormArgumentCaptor.capture());
-        assertEquals(productFormArgumentCaptor.getValue(), new ProductForm("testProduct", BigDecimal.valueOf(100), Integer.valueOf(1)));
+        Mockito.verify(productTypeServiceMock).saveProductType(productTypeFormArgumentCaptor.capture());
+        assertEquals(productTypeFormArgumentCaptor.getValue(), new ProductForm("testProduct", BigDecimal.valueOf(100), Integer.valueOf(1)));
         assertEquals("{\"id\":42}", response.getIn().getBody());
     }
+
 
 }

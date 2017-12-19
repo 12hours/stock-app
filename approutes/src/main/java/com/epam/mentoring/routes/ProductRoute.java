@@ -35,9 +35,7 @@ public class ProductRoute extends RouteBuilder {
                     @Override
                     public void process(Exchange exchange) throws Exception {
                         List<Product> allProducts = productService.getAllProducts();
-                        HashMap<String, Object> map = new HashMap<>();
-                        map.put("products", allProducts);
-                        exchange.getIn().setBody(map);
+                        exchange.getIn().setBody(allProducts);
                         exchange.getIn().setHeader(Headers.STATUS, Response.Status.OK);
                     }
                 })
@@ -48,9 +46,7 @@ public class ProductRoute extends RouteBuilder {
                         Integer id = (Integer) exchange.getIn().getHeader(Headers.ID);
 
                         Product product = productService.findProductById(id);
-                        HashMap<String, Product> productMap = new HashMap<>();
-                        productMap.put("product", product);
-                        exchange.getIn().setBody(productMap);
+                        exchange.getIn().setBody(product);
                         exchange.getIn().setHeader(Headers.STATUS, Response.Status.OK);
                     }
                 })
@@ -68,9 +64,9 @@ public class ProductRoute extends RouteBuilder {
                     }
                 })
                 .otherwise().process(new Processor() {
-                @Override
-                public void process(Exchange exchange) throws Exception {
-
+                    @Override
+                    public void process(Exchange exchange) throws Exception {
+                        throw new UnsupportedOperationException();
                     }
                 })
                 .end()
