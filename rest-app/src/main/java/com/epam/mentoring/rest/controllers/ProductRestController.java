@@ -18,7 +18,6 @@ import java.util.Map;
 public class
 ProductRestController {
 
-
     static {
         org.slf4j.MDC.put("app.name","rest-app");
     }
@@ -35,7 +34,6 @@ ProductRestController {
         log.debug("GET: /rest/product");
         final Map<String, Object> headers = new HashMap<>();
         headers.put(Headers.METHOD, Headers.GET_ALL);
-//        return Response.status(Response.Status.OK).build();
         return handleRequest(null, headers);
     }
 
@@ -46,10 +44,8 @@ ProductRestController {
     public Response getProduct(@PathParam("id") Integer id) {
         log.debug("GET: /rest/product/" + id);
         final Map<String, Object> headers = new HashMap<>();
-        System.out.println(id == null);
         headers.put(Headers.METHOD, Headers.GET_BY_ID);
         headers.put(Headers.ID, id);
-//        return Response.status(Response.Status.OK).build();
         return handleRequest(null, headers);
     }
 
