@@ -17,6 +17,9 @@ public class RouteNames {
     public static final String PRODUCT_TYPE_ROUTE = "direct-vm:productTypeRoute";
     public static final String PRODUCT_TYPE_ROUTE_ID = "productTypeRoute";
 
+    public static final String PRODUCT_INCOME_ROUTE = "direct-vm:productIncomeRoute";
+    public static final String PRODUCT_INCOME_ROUTE_ID = "productIncomeRoute";
+
     public static final String NOT_FOUND_ROUTE = "direct-vm:notFound";
     public static final String NOT_FOUND_ID = "notFound";
 
