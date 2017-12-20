@@ -13,32 +13,15 @@
     <artifactId>app-routes</artifactId>
 
     <properties>
-        <!--&lt;!&ndash;<camel.osgi.export.pkg>org.apache.camel.example.spring.javaconfig</camel.osgi.export.pkg>&ndash;&gt;-->
-        <!--&lt;!&ndash;We need to import the cglib packages here, and spring-core 3.2.x includes cglib  &ndash;&gt;-->
-        <!--&lt;!&ndash;If the spring version is below 3.2.x, the import package should be changed to start with org.sf &ndash;&gt;-->
-        <!--<camel.osgi.import>-->
-            <!--org.springframework.cglib.core,-->
-            <!--org.springframework.cglib.proxy,-->
-            <!--org.springframework.cglib.reflect,-->
-            <!--*-->
-        <!--</camel.osgi.import>-->
     </properties>
 
     <dependencies>
-
-
-        <!-- https://mvnrepository.com/artifact/cglib/cglib -->
-        <!--<dependency>-->
-            <!--<groupId>cglib</groupId>-->
-            <!--<artifactId>cglib</artifactId>-->
-            <!--<version>3.2.5</version>-->
-        <!--</dependency>-->
 
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-core</artifactId>
             <version>${spring.version}</version>
-            <scope>provided</scope>
+            <!--<scope>provided</scope>-->
         </dependency>
 
         <!--Local-->
@@ -47,26 +30,17 @@
             <artifactId>service-api</artifactId>
         </dependency>
 
-        <!--<dependency>-->
-            <!--<groupId>com.epam.mentoring</groupId>-->
-            <!--<artifactId>dao-api</artifactId>-->
-        <!--</dependency>-->
-
         <dependency>
             <groupId>com.epam.mentoring</groupId>
             <artifactId>model</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework</groupId>
+                    <artifactId>spring-context</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
-        <!--<dependency>-->
-            <!--<groupId>org.modelmapper</groupId>-->
-            <!--<artifactId>modelmapper</artifactId>-->
-            <!--<version>1.1.0</version>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-            <!--<groupId>my</groupId>-->
-            <!--<artifactId>soapjr</artifactId>-->
-            <!--<version>1.0-SNAPSHOT</version>-->
-        <!--</dependency>-->
 
         <!--Jackson-->
         <dependency>
@@ -144,11 +118,12 @@
                 <extensions>true</extensions>
                 <configuration>
                     <instructions>
-                        <!--<Embed-Dependency>dao-api,model,modelmapper</Embed-Dependency>-->
-                        <Import-Package>*,org.springframework.core,org.springframework.cglib.core,org.springframework.cglib.proxy,org.springframework.cglib.reflect,org.springframework.beans.factory</Import-Package>
-                            <!--net.sf.cglib.proxy,-->
-                            <!--net.sf.cglib.reflect,-->
-                            <!--*</Import-Package>-->
+                        <Import-Package>*,
+                            org.springframework.cglib.core,
+                            org.springframework.cglib.proxy,
+                            org.springframework.cglib.reflect,
+                            org.springframework.beans.factory
+                        </Import-Package>
                     </instructions>
                 </configuration>
             </plugin>

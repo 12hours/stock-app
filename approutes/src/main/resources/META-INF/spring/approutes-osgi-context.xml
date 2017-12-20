@@ -7,4 +7,10 @@
        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
         http://www.springframework.org/schema/osgi http://www.springframework.org/schema/osgi/spring-osgi.xsd">
 
+
+    <osgi:reference id="productService" interface="com.epam.mentoring.service.ProductService"/>
+    <osgi:reference id="productTypeService" interface="com.epam.mentoring.service.ProductTypeService"/>
+    <osgi:reference id="productIncomeService" interface="com.epam.mentoring.service.ProductIncomeService"/>
+    <osgi:reference id="supplierService" interface="com.epam.mentoring.service.SupplierService"/>
+
 </beans>

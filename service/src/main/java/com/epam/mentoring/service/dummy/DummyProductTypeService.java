@@ -31,12 +31,12 @@ public class DummyProductTypeService implements ProductTypeService {
 
     @Override
     public Integer saveProductType(ProductType productType) throws DataAccessException {
-        return 13;
+        return null;
     }
 
     @Override
     public Integer saveProductType(ProductTypeForm productTypeForm) throws DataAccessException {
-        return null;
+        return 14;
     }
 
     @Override

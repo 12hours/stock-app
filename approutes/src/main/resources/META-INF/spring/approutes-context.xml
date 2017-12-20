@@ -9,12 +9,8 @@
          http://www.springframework.org/schema/osgi http://www.springframework.org/schema/osgi/spring-osgi.xsd
          http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd">
 
-    <osgi:reference id="productService" interface="com.epam.mentoring.service.ProductService"/>
-    <osgi:reference id="productTypeService" interface="com.epam.mentoring.service.ProductTypeService"/>
-    <osgi:reference id="productIncomeService" interface="com.epam.mentoring.service.ProductIncomeService"/>
-    <osgi:reference id="supplierService" interface="com.epam.mentoring.service.SupplierService"/>
 
-    <context:component-scan base-package="com.epam.mentoring.approutes"/>
+    <!--<context:component-scan base-package="com.epam.mentoring.approutes"/>-->
     <context:annotation-config/>
 
     <bean class="com.epam.mentoring.approutes.config.RoutesConfig"/>

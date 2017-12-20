@@ -27,7 +27,7 @@ public class RoutesConfig {
         objectMapper.configure(DeserializationFeature.ADJUST_DATES_TO_CONTEXT_TIME_ZONE, false);
         objectMapper.configure(DeserializationFeature.READ_DATE_TIMESTAMPS_AS_NANOSECONDS, false);
 
-        objectMapper.setDateFormat(new SimpleDateFormat("dd-MM-yyyy"));
+        objectMapper.setDateFormat(new SimpleDateFormat("yyyy-MM-dd"));
 
         objectMapper.configure(JsonParser.Feature.ALLOW_UNQUOTED_FIELD_NAMES, true);
         objectMapper.configure(JsonParser.Feature.ALLOW_SINGLE_QUOTES, true);
@@ -35,10 +35,10 @@ public class RoutesConfig {
         return objectMapper;
     }
 
-    @Bean
-    JacksonJsonProvider jsonProvider() {
-        return new com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider(objectMapper());
-    }
+//    @Bean
+//    JacksonJsonProvider jsonProvider() {
+//        return new com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider(objectMapper());
+//    }
 
     @Bean(name = "json-jackson")
     @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)

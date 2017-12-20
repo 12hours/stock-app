@@ -25,8 +25,9 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
         <!--<constructor-arg ref="objectMapper"></constructor-arg>-->
     <!--</bean>-->
 
-    <context:component-scan base-package="com.epam.mentoring.approutes"/>
+    <!--<context:component-scan base-package="com.epam.mentoring.approutes"/>-->
     <context:annotation-config/>
+    <bean class="com.epam.mentoring.approutes.config.RoutesConfig"/>
 
 
     <camel:camelContext id="serviceRoutesContext"
