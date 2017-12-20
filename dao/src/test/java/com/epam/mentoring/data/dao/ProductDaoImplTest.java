@@ -40,7 +40,6 @@ public class ProductDaoImplTest {
 	Logger logger = LoggerFactory.getLogger(ProductDaoImplTest.class);
 
 	@Autowired
-	@Qualifier("ProductDaoImpl")
 	private ProductDao dao;
 
 	@Autowired

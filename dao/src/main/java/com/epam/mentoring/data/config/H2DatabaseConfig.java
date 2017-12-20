@@ -28,14 +28,14 @@ import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
 
 import com.epam.mentoring.data.config.conditions.H2DatabaseCondition;
 
-@Conditional(H2DatabaseCondition.class)
+//@Conditional(H2DatabaseCondition.class)
 @Configuration
 @PropertySource("classpath:/h2-database-sql.properties")
 @PropertySource("classpath:/h2-database-init.properties")
 public class H2DatabaseConfig {
 	
 	@Bean(name = "H2InMemoryDataSource")
-	@Profile({"test"})
+//	@Profile({"test"})
 	DataSource testDataSource() {
 		try {
 			Class.forName("org.h2.Driver");

@@ -17,6 +17,7 @@ import com.epam.mentoring.data.model.Product;
 import com.epam.mentoring.data.util.mappers.ProductRowMapper;
 import com.epam.mentoring.data.util.mappers.ProductsWithQuantitiesResultSetExtractor;
 
+
 public class ProductDaoImpl implements ProductDao {
 	
 	@Value("${product.get.by_id}")
