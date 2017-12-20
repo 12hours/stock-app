@@ -16,8 +16,9 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import com.epam.mentoring.data.model.Product;
 import com.epam.mentoring.data.util.mappers.ProductRowMapper;
 import com.epam.mentoring.data.util.mappers.ProductsWithQuantitiesResultSetExtractor;
+import org.springframework.stereotype.Repository;
 
-
+@Repository
 public class ProductDaoImpl implements ProductDao {
 	
 	@Value("${product.get.by_id}")
@@ -51,7 +52,8 @@ public class ProductDaoImpl implements ProductDao {
 	
 	@Autowired
 	ProductsWithQuantitiesResultSetExtractor productsWithQuantitiesMapper;
-	
+
+	@Autowired
 	public ProductDaoImpl(DataSource dataSource) {
 		jdbcTemplate = new JdbcTemplate(dataSource);
 	}

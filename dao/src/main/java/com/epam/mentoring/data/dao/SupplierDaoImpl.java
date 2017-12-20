@@ -12,7 +12,9 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import com.epam.mentoring.data.model.Supplier;
 import com.epam.mentoring.data.util.mappers.SupplierRowMapper;
 import com.epam.mentoring.data.util.mappers.SuppliersResultSetExtractor;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public class SupplierDaoImpl implements SupplierDao {
 
 	@Value("${supplier.get.by_id}")
@@ -31,7 +33,8 @@ public class SupplierDaoImpl implements SupplierDao {
 	
 	@Autowired
 	private SuppliersResultSetExtractor suppliersResultSetExtractor;
-	
+
+	@Autowired
 	public SupplierDaoImpl(DataSource dataSource) {
 		jdbcTemplate = new JdbcTemplate(dataSource);
 	}

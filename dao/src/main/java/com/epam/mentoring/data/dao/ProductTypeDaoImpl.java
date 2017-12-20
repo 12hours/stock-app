@@ -12,7 +12,9 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import com.epam.mentoring.data.model.ProductType;
 import com.epam.mentoring.data.util.mappers.ProductTypeRowMapper;
 import com.epam.mentoring.data.util.mappers.ProductTypesResultSetExtractor;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public class ProductTypeDaoImpl implements ProductTypeDao {
 	
 	@Value("${product_type.get.by_id}")
@@ -30,7 +32,8 @@ public class ProductTypeDaoImpl implements ProductTypeDao {
 
 	@Autowired
 	private ProductTypesResultSetExtractor productTypeResultSetExtractor;
-	
+
+	@Autowired
 	public ProductTypeDaoImpl(DataSource dataSource) {
 		this.jdbcTemplate = new JdbcTemplate(dataSource);
 	}

@@ -9,9 +9,11 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 import com.epam.mentoring.data.model.ProductIncome;
 import com.epam.mentoring.data.util.mappers.ProductIncomeRowMapper;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public class ProductIncomeDaoImpl implements ProductIncomeDao {
 
 	private JdbcTemplate jdbcTemplate;
@@ -25,6 +27,7 @@ public class ProductIncomeDaoImpl implements ProductIncomeDao {
 	@Autowired
 	private ProductIncomeRowMapper productIncomeRowMapper;
 
+	@Autowired
 	public ProductIncomeDaoImpl(DataSource datasource) {
 		this.jdbcTemplate = new JdbcTemplate(datasource);
 	}
