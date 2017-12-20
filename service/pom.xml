@@ -22,6 +22,11 @@
 
         <dependency>
             <groupId>com.epam.mentoring</groupId>
+            <artifactId>dao</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.epam.mentoring</groupId>
             <artifactId>dao-api</artifactId>
         </dependency>
 
@@ -143,7 +148,7 @@
                             com.epam.mentoring.service.dummy;uses:="com.epam.mentoring.service,org.springframework.dao";version="1.0.0",
                             com.epam.mentoring.data.model.*
                         </Export-Package>
-                        <Embed-Dependency>service-api,model,dao-api,modelmapper</Embed-Dependency>
+                        <Embed-Dependency>service-api,model,dao-api,dao,modelmapper</Embed-Dependency>
                     </instructions>
                 </configuration>
             </plugin>
