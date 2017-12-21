@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.epam.mentoring</groupId>
     <artifactId>dao</artifactId>
-
     <packaging>bundle</packaging>
 
     <parent>
@@ -25,6 +24,11 @@
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
         </dependency>
 
         <dependency>
@@ -75,9 +79,9 @@
 
 
         <!--<dependency>-->
-            <!--<groupId>org.slf4j</groupId>-->
-            <!--<artifactId>jcl-over-slf4j</artifactId>-->
-            <!--<scope>runtime</scope>-->
+        <!--<groupId>org.slf4j</groupId>-->
+        <!--<artifactId>jcl-over-slf4j</artifactId>-->
+        <!--<scope>runtime</scope>-->
         <!--</dependency>-->
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -85,14 +89,14 @@
             <!--<scope>runtime</scope>-->
         </dependency>
         <!--<dependency>-->
-            <!--<groupId>org.slf4j</groupId>-->
-            <!--<artifactId>slf4j-log4j12</artifactId>-->
-            <!--<scope>runtime</scope>-->
+        <!--<groupId>org.slf4j</groupId>-->
+        <!--<artifactId>slf4j-log4j12</artifactId>-->
+        <!--<scope>runtime</scope>-->
         <!--</dependency>-->
 
         <!--<dependency>-->
-            <!--<groupId>org.apache.logging.log4j</groupId>-->
-            <!--<artifactId>log4j-core</artifactId>-->
+        <!--<groupId>org.apache.logging.log4j</groupId>-->
+        <!--<artifactId>log4j-core</artifactId>-->
         <!--</dependency>-->
 
         <dependency>
@@ -156,37 +160,6 @@
                 </configuration>
             </plugin>
 
-            <plugin>
-                <groupId>org.apache.felix</groupId>
-                <artifactId>maven-bundle-plugin</artifactId>
-                <version>3.0.1</version>
-                <extensions>true</extensions>
-                <configuration>
-                    <instructions>
-                        <Export-Package>
-                            org.h2.*,com.epam.mentoring.data.*
-                        </Export-Package>
-                        <Embed-Dependency>h2,dao-api,model,modelmapper</Embed-Dependency>
-                        <Import-Package>
-                            <!--*,-->
-                            *;version="0";resolution:=optional,
-                            org.springframework.dao.*,
-                            org.springframework.context.*,
-                            org.slf4j.*,
-                            org.springframework.jdbc.core.*,
-                            org.springframework.cglib.core,
-                            org.springframework.cglib.proxy,
-                            org.springframework.cglib.reflect,
-                            org.springframework.beans.factory,
-                            <!--com.epam.mentoring.data.model,-->
-                            <!--org.springframework.core.io,-->
-                            <!--org.springframework.jdbc.datasource.init,-->
-                            <!--javax.sql,-->
-                            <!--resolution:=optional-->
-                        </Import-Package>
-                    </instructions>
-                </configuration>
-            </plugin>
 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -221,5 +194,102 @@
 
 
     </build>
+
+
+    <profiles>
+        <profile>
+            <id>h2</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <dependencies>
+
+                <dependency>
+                    <groupId>com.h2database</groupId>
+                    <artifactId>h2</artifactId>
+                </dependency>
+
+            </dependencies>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.felix</groupId>
+                        <artifactId>maven-bundle-plugin</artifactId>
+                        <version>3.0.1</version>
+                        <extensions>true</extensions>
+                        <configuration>
+                            <instructions>
+                                <Export-Package>
+                                    org.h2.*,com.epam.mentoring.data.*
+                                </Export-Package>
+                                <Embed-Dependency>h2,dao-api,model,modelmapper</Embed-Dependency>
+                                <Import-Package>
+                                    <!--*,-->
+                                    *;version="0";resolution:=optional,
+                                    org.springframework.dao.*,
+                                    org.springframework.context.*,
+                                    org.slf4j.*,
+                                    org.springframework.jdbc.core.*,
+                                    org.springframework.cglib.core,
+                                    org.springframework.cglib.proxy,
+                                    org.springframework.cglib.reflect,
+                                    org.springframework.beans.factory,
+                                    <!--com.epam.mentoring.data.model,-->
+                                    <!--org.springframework.core.io,-->
+                                    <!--org.springframework.jdbc.datasource.init,-->
+                                    <!--javax.sql,-->
+                                    <!--resolution:=optional-->
+                                </Import-Package>
+                            </instructions>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>mysql</id>
+            <dependencies>
+                <dependency>
+                    <groupId>mysql</groupId>
+                    <artifactId>mysql-connector-java</artifactId>
+                </dependency>
+            </dependencies>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.felix</groupId>
+                        <artifactId>maven-bundle-plugin</artifactId>
+                        <version>3.0.1</version>
+                        <extensions>true</extensions>
+                        <configuration>
+                            <instructions>
+                                <Export-Package>
+                                    com.mysql.*,com.mysql.jdbc.*,com.epam.mentoring.data.*
+                                </Export-Package>
+                                <Embed-Dependency>mysql-connector-java,dao-api,model,modelmapper</Embed-Dependency>
+                                <Import-Package>
+                                    <!--*,-->
+                                    *;version="0";resolution:=optional,
+                                    org.springframework.dao.*,
+                                    org.springframework.context.*,
+                                    org.slf4j.*,
+                                    org.springframework.jdbc.core.*,
+                                    org.springframework.cglib.core,
+                                    org.springframework.cglib.proxy,
+                                    org.springframework.cglib.reflect,
+                                    org.springframework.beans.factory,
+                                    <!--com.epam.mentoring.data.model,-->
+                                    <!--org.springframework.core.io,-->
+                                    <!--org.springframework.jdbc.datasource.init,-->
+                                    <!--javax.sql,-->
+                                    <!--resolution:=optional-->
+                                </Import-Package>
+                            </instructions>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 
 </project>

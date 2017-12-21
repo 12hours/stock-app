@@ -17,10 +17,10 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.PropertySource;
 
-import com.epam.mentoring.data.config.DaoConfig;
+import com.epam.mentoring.data.config.PreConfig;
 
 @Configuration
-@Import(DaoConfig.class)
+@Import(PreConfig.class)
 @PropertySource("classpath:/application.properties")
 public class AppConfig {
 

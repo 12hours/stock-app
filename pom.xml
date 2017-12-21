@@ -21,7 +21,7 @@
         <cxf.version>3.0.4</cxf.version>
         <jackson.version>2.3.0</jackson.version>
         <spring.version>3.2.12.RELEASE</spring.version>
-        <spring-version>3.2.12.RELEASE</spring-version>
+        <!--<spring-version>3.2.12.RELEASE</spring-version>-->
     </properties>
 
 
@@ -84,6 +84,12 @@
                 <groupId>com.h2database</groupId>
                 <artifactId>h2</artifactId>
                 <version>1.4.196</version>
+            </dependency>
+
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>5.1.34</version>
             </dependency>
 
             <!--Jackson-->
@@ -281,11 +287,6 @@
                 <version>${camel.version}</version>
             </dependency>
 
-            <dependency>
-                <groupId>org.apache.camel</groupId>
-                <artifactId>camel-jackson</artifactId>
-                <version>${camel.version}</version>
-            </dependency>
             <dependency>
                 <groupId>org.apache.camel</groupId>
                 <artifactId>camel-jdbc</artifactId>

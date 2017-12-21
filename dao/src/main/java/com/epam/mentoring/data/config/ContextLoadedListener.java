@@ -21,5 +21,10 @@ public class ContextLoadedListener implements ApplicationListener<ContextRefresh
         for (String name : context.getBeanDefinitionNames()) {
             log.debug("Bean created: " + name);
         }
+        for (String profile : context.getEnvironment().getActiveProfiles()) {
+            System.out.println("Found profile "+profile);
+        }
+
+        System.out.println("spring.profiles.active= "+context.getEnvironment().getProperty("spring.profiles.active"));
     }
 }
