@@ -162,7 +162,7 @@
                         </Export-Package>
                         <Embed-Dependency>h2</Embed-Dependency>
                         <Import-Package>
-                            *;version="0";resolution:=optional,
+                            <!--*;version="0";resolution:=optional,-->
                             org.springframework.dao.*,
                             <!--com.epam.mentoring.data.model,-->
                             org.springframework.context.*,
