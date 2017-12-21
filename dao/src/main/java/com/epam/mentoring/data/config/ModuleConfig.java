@@ -33,13 +33,13 @@ public class ModuleConfig {
     @Value("${database.populate.tables}")
     private String dataScript;
 
-    @Value("${database.init")
+    @Value("${database.init}")
     private String databaseInit;
 
-    @Value("${database.clean.tables")
+    @Value("${database.clean.tables}")
     private String databaseClean;
 
-    @Value("${database.delete.tables")
+    @Value("${database.delete.tables}")
     private String databaseDrop;
 
     @Bean
@@ -56,13 +56,17 @@ public class ModuleConfig {
         final ResourceDatabasePopulator populator = new ResourceDatabasePopulator();
         try {
             if (databaseClean.equalsIgnoreCase("true")) {
+                log.debug("Cleaning database");
                 populator.addScript(new InputStreamResource(new ByteArrayInputStream(dataScript.getBytes(StandardCharsets.UTF_8.name()))));
             }
             if (databaseDrop.equalsIgnoreCase("true")) {
+                log.debug("Dropping tables");
                 populator.addScript(new InputStreamResource(new ByteArrayInputStream(dataScript.getBytes(StandardCharsets.UTF_8.name()))));
             }
+            // create schema if not exists
             populator.addScript(new InputStreamResource(new ByteArrayInputStream(schemaScript.getBytes(StandardCharsets.UTF_8.name()))));
             if (databaseInit.equalsIgnoreCase("true")) {
+                log.debug("Populating database");
                 populator.addScript(new InputStreamResource(new ByteArrayInputStream(dataScript.getBytes(StandardCharsets.UTF_8.name()))));
             }
         } catch (UnsupportedEncodingException e) {

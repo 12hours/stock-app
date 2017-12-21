@@ -10,8 +10,8 @@
          http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd">
 
     <context:annotation-config/>
-    <context:property-placeholder location="classpath:/h2-database-sql.properties" ignore-unresolvable="true" />
-    <context:property-placeholder location="classpath:/h2-database-init.properties" ignore-unresolvable="true" />
+    <context:property-placeholder location="classpath:/database-sql.properties" ignore-unresolvable="true" />
+    <context:property-placeholder location="classpath:/database-init.properties" ignore-unresolvable="true" />
     <context:property-placeholder location="classpath:/application.properties" ignore-unresolvable="true"/>
 
     <!--<beans profile="h2">-->

@@ -124,6 +124,9 @@
             <resource>
                 <directory>src/main/resources</directory>
                 <filtering>true</filtering>
+                <excludes>
+                    <exclude>sql/**</exclude>
+                </excludes>
             </resource>
         </resources>
         <testResources>
@@ -202,15 +205,22 @@
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
-            <dependencies>
+            <properties>
+            </properties>
 
+            <dependencies>
                 <dependency>
                     <groupId>com.h2database</groupId>
                     <artifactId>h2</artifactId>
                 </dependency>
-
             </dependencies>
             <build>
+                <resources>
+                    <resource>
+                        <directory>src/main/resources/sql/h2</directory>
+                        <filtering>true</filtering>
+                    </resource>
+                </resources>
                 <plugins>
                     <plugin>
                         <groupId>org.apache.felix</groupId>
@@ -255,6 +265,12 @@
                 </dependency>
             </dependencies>
             <build>
+                <resources>
+                    <resource>
+                        <directory>src/main/resources/sql/mysql</directory>
+                        <filtering>true</filtering>
+                    </resource>
+                </resources>
                 <plugins>
                     <plugin>
                         <groupId>org.apache.felix</groupId>
