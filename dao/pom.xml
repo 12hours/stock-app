@@ -30,6 +30,7 @@
         <dependency>
             <groupId>com.epam.mentoring</groupId>
             <artifactId>model</artifactId>
+            <scope>provided</scope>
         </dependency>
 
         <dependency>
@@ -40,11 +41,19 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-core</artifactId>
+            <scope>provided</scope>
         </dependency>
 
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-beans</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-tx</artifactId>
+            <scope>provided</scope>
         </dependency>
 
         <dependency>
@@ -149,19 +158,23 @@
                 <configuration>
                     <instructions>
                         <Export-Package>
+                            org.h2
                         </Export-Package>
                         <Embed-Dependency>h2</Embed-Dependency>
                         <Import-Package>
-                            <!--*,-->
+                            *;version="0";resolution:=optional,
+                            org.springframework.dao.*,
+                            <!--com.epam.mentoring.data.model,-->
+                            org.springframework.context.*,
                             org.slf4j.*,
                             org.springframework.jdbc.core.*,
-                            org.springframework.core.io,
-                            org.springframework.jdbc.datasource.init,
-                            javax.sql,
+                            <!--org.springframework.core.io,-->
+                            <!--org.springframework.jdbc.datasource.init,-->
+                            <!--javax.sql,-->
                             org.springframework.cglib.core,
                             org.springframework.cglib.proxy,
                             org.springframework.cglib.reflect,
-                            org.springframework.beans.factory
+                            org.springframework.beans.factory,
                             <!--resolution:=optional-->
                         </Import-Package>
                     </instructions>

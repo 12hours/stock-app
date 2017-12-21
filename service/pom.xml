@@ -141,8 +141,8 @@
                         <Export-Package>
                             com.epam.mentoring.service;uses:="org.springframework.dao";version="1.0.0",
                             com.epam.mentoring.service.dummy;uses:="com.epam.mentoring.service,org.springframework.dao";version="1.0.0",
-                            com.epam.mentoring.data.model.*,
-                            com.epam.mentoring.data.model
+                            com.epam.mentoring.data.model.*;provide=true,
+                            com.epam.mentoring.data.model;provide=true
                         </Export-Package>
                         <Embed-Dependency>service-api,model,dao-api,modelmapper</Embed-Dependency>
                         <Import-Package>

@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
@@ -45,6 +46,13 @@ public class H2DatabaseConfig {
 //                .addScripts(new String[] {"h2/create-tables.sql", "h2/data.sql"})
                 .build();
     }
+
+//    @Bean
+//    public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
+//        PropertySourcesPlaceholderConfigurer configurer = new PropertySourcesPlaceholderConfigurer();
+//        configurer.setIgnoreUnresolvablePlaceholders(true);
+//        return configurer;
+//    }
 
     @Value("${database.create.tables}")
     private String schemaScript;
