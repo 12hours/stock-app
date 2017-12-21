@@ -6,8 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementCreator;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
 
 import javax.sql.DataSource;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.List;
 
 public class ProductIncomeDaoImpl implements ProductIncomeDao {
@@ -35,9 +41,29 @@ public class ProductIncomeDaoImpl implements ProductIncomeDao {
 
 	@Override
 	public Integer addProductIncome(ProductIncome productIncome) throws DataAccessException {
-		return jdbcTemplate.update(ADD_PRODUCT_INCOME_SQL, productIncome.getDate(), productIncome.getOrderNumber(),
-				productIncome.getQuantity(), productIncome.getProduct().getId(), productIncome.getSupplier().getId(),
-				productIncome.getUser().getId());
+        GeneratedKeyHolder keyHolder = new GeneratedKeyHolder();
+        jdbcTemplate.update(new PreparedStatementCreator() {
+            @Override
+            public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
+                PreparedStatement preparedStatement = con.prepareStatement(ADD_PRODUCT_INCOME_SQL, Statement.RETURN_GENERATED_KEYS);
+                preparedStatement.setDate(1, new java.sql.Date(productIncome.getDate().getTime()));
+                preparedStatement.setLong(2, productIncome.getOrderNumber());
+                preparedStatement.setInt(3, productIncome.getQuantity());
+                preparedStatement.setInt(4, productIncome.getProduct().getId());
+                preparedStatement.setInt(5, productIncome.getSupplier().getId());
+                preparedStatement.setInt(6, productIncome.getUser().getId());
+                return preparedStatement;
+            }
+        }, keyHolder);
+        return keyHolder.getKey().intValue();
+//
+//        return jdbcTemplate.update(ADD_PRODUCT_INCOME_SQL,
+//                productIncome.getDate(),
+//                productIncome.getOrderNumber(),
+//				productIncome.getQuantity(),
+//                productIncome.getProduct().getId(),
+//                productIncome.getSupplier().getId(),
+//				productIncome.getUser().getId());
 	}
 
 	@Override

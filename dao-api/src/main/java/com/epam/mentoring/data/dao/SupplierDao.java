@@ -25,7 +25,7 @@ public interface SupplierDao {
 	 * @return not specified
 	 * @throws DataAccessException
 	 */
-	int addSupplier(Supplier supplier) throws DataAccessException;
+	Integer addSupplier(Supplier supplier) throws DataAccessException;
 
 	/**
 	 * Updates {@code Supplier} record;

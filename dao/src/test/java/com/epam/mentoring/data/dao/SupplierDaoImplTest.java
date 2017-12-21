@@ -64,8 +64,9 @@ public class SupplierDaoImplTest {
 		Supplier supplier = new Supplier();
 		supplier.setName("test supplier");
 		supplier.setDetails("details D");
-		dao.addSupplier(supplier);
-		
+		Integer id = dao.addSupplier(supplier);
+		assertEquals(Integer.valueOf(4), id);
+
 		Supplier extractedSupplier = dao.getSupplierById(4);
 		assertThat(extractedSupplier, notNullValue());
 		assertThat(extractedSupplier.getId(), equalTo(4));

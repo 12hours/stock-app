@@ -176,8 +176,8 @@ public class ProductDaoImplTest {
 		product.setName("dummy_product");
 		product.setType(productType);
 
-		int ra = dao.addProduct(product);
-		assertThat(Integer.valueOf(ra), equalTo(Integer.valueOf(1)));
+		Integer id = dao.addProduct(product);
+		assertEquals(Integer.valueOf(10), id);
 
 		Product extractedProduct = dao.getProductById(10);
 		assertThat(extractedProduct, notNullValue());

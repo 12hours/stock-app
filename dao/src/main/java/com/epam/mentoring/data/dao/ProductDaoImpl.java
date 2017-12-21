@@ -9,8 +9,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementCreator;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
 
 import javax.sql.DataSource;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -66,8 +72,20 @@ public class ProductDaoImpl implements ProductDao {
 	}
 
 	@Override
-	public int addProduct(Product product) {
-		return jdbcTemplate.update(ADD_PRODUCT_SQL, product.getName(), product.getPrice(), product.getType().getId());
+	public Integer addProduct(Product product) {
+        GeneratedKeyHolder keyHolder = new GeneratedKeyHolder();
+        jdbcTemplate.update(new PreparedStatementCreator() {
+            @Override
+            public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
+                PreparedStatement preparedStatement = con.prepareStatement(ADD_PRODUCT_SQL, Statement.RETURN_GENERATED_KEYS);
+                preparedStatement.setString(1, product.getName());
+                preparedStatement.setBigDecimal(2, product.getPrice());
+                preparedStatement.setInt(3, product.getType().getId());
+                return preparedStatement;
+            }
+        }, keyHolder);
+        return keyHolder.getKey().intValue();
+//        return jdbcTemplate.update(ADD_PRODUCT_SQL, product.getName(), product.getPrice(), product.getType().getId());
 	}
 
 	@Override

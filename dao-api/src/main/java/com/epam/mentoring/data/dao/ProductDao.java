@@ -49,7 +49,7 @@ public interface ProductDao {
 	 * @return not specified
 	 * @throws DataAccessException
 	 */
-	int addProduct(Product product) throws DataAccessException;
+	Integer addProduct(Product product) throws DataAccessException;
 
 	/**
 	 * Updates product.

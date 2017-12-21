@@ -128,10 +128,11 @@ public class ProductIncomeDaoImplTest {
 		productIncome.setProduct(product);
 		productIncome.setSupplier(supplier);
 		productIncome.setUser(user);
-		
-		dao.addProductIncome(productIncome);
-		
-		
+
+		Integer id = dao.addProductIncome(productIncome);
+		assertEquals(Integer.valueOf(13), id);
+
+
 		ProductIncome productIncomeExtracted = dao.getProductIncomeById(Integer.valueOf(13));
 		assertNotNull(productIncomeExtracted);
 		assertEquals(Integer.valueOf(13), productIncomeExtracted.getId());

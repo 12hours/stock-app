@@ -7,8 +7,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementCreator;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
 
 import javax.sql.DataSource;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.List;
 
 public class SupplierDaoImpl implements SupplierDao {
@@ -47,8 +53,18 @@ public class SupplierDaoImpl implements SupplierDao {
 	}
 
 	@Override
-	public int addSupplier(Supplier supplier) throws DataAccessException {
-		return jdbcTemplate.update(ADD_SUPPLIER_SQL, supplier.getName(), supplier.getDetails());
+	public Integer addSupplier(Supplier supplier) throws DataAccessException {
+        GeneratedKeyHolder keyHolder = new GeneratedKeyHolder();
+        jdbcTemplate.update(new PreparedStatementCreator() {
+            @Override
+            public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
+                PreparedStatement preparedStatement = con.prepareStatement(ADD_SUPPLIER_SQL, Statement.RETURN_GENERATED_KEYS);
+                preparedStatement.setString(1, supplier.getName());
+                preparedStatement.setString(2, supplier.getDetails());
+                return preparedStatement;
+            }
+        }, keyHolder);
+        return keyHolder.getKey().intValue();
 	}
 
 	@Override
