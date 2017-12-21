@@ -22,11 +22,6 @@
 
         <dependency>
             <groupId>com.epam.mentoring</groupId>
-            <artifactId>dao</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.epam.mentoring</groupId>
             <artifactId>dao-api</artifactId>
         </dependency>
 
@@ -122,6 +117,11 @@
         </dependency>
 
         <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+        </dependency>
+
+        <dependency>
             <groupId>org.apache.camel</groupId>
             <artifactId>camel-bean-validator</artifactId>
             <version>${camel.version}</version>
@@ -138,17 +138,20 @@
                 <extensions>true</extensions>
                 <configuration>
                     <instructions>
-                        <Private-Packsge>
-                            com.epam.mentoring.data.dao,
-                            com.epam.mentoring.data.config,
-                            com.epam.mentoring.data.util.mappers
-                        </Private-Packsge>
                         <Export-Package>
                             com.epam.mentoring.service;uses:="org.springframework.dao";version="1.0.0",
                             com.epam.mentoring.service.dummy;uses:="com.epam.mentoring.service,org.springframework.dao";version="1.0.0",
-                            com.epam.mentoring.data.model.*
+                            com.epam.mentoring.data.model.*,
+                            com.epam.mentoring.data.model
                         </Export-Package>
-                        <Embed-Dependency>service-api,model,dao-api,dao,modelmapper</Embed-Dependency>
+                        <Embed-Dependency>service-api,model,dao-api,modelmapper</Embed-Dependency>
+                        <Import-Package>
+                            *,
+                            org.springframework.cglib.core,
+                            org.springframework.cglib.proxy,
+                            org.springframework.cglib.reflect,
+                            org.springframework.beans.factory
+                        </Import-Package>
                     </instructions>
                 </configuration>
             </plugin>

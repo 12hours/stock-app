@@ -1,17 +1,11 @@
 package com.epam.mentoring.data.dao;
 
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.notNullValue;
-import static org.junit.Assert.*;
-
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
+import com.epam.mentoring.data.TestConfig;
+import com.epam.mentoring.data.model.Product;
+import com.epam.mentoring.data.model.ProductType;
 import com.epam.mentoring.data.model.dto.ProductWithQuantityView;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,17 +13,24 @@ import org.junit.runners.MethodSorters;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.jdbc.Sql;
-import org.springframework.test.context.jdbc.Sql.ExecutionPhase;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.epam.mentoring.data.TestConfig;
-import com.epam.mentoring.data.model.Product;
-import com.epam.mentoring.data.model.ProductType;
+import javax.sql.DataSource;
+import java.math.BigDecimal;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import static org.hamcrest.CoreMatchers.*;
+import static org.junit.Assert.*;
 
 @ContextConfiguration(classes = {TestConfig.class})
 @ActiveProfiles("test")
@@ -45,10 +46,33 @@ public class ProductDaoImplTest {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 
+	@Autowired
+	DataSource dataSource;
+
+	@Before
+	public void setUp() throws SQLException {
+		Resource resource = new ClassPathResource("create_tables.sql");
+		Resource resource2 = new ClassPathResource("data.sql");
+		ResourceDatabasePopulator databasePopulator = new ResourceDatabasePopulator();
+		databasePopulator.addScript(resource);
+		databasePopulator.addScript(resource2);
+		databasePopulator.populate(dataSource.getConnection());
+	}
+
+
+	@After
+	public void cleanUp() throws SQLException {
+		Resource resource = new ClassPathResource("delete_tables.sql");
+		ResourceDatabasePopulator databasePopulator = new ResourceDatabasePopulator();
+		databasePopulator.addScript(resource);
+		databasePopulator.populate(dataSource.getConnection());
+	}
+
+
 	@Test
-	@Sql("classpath:/h2/create_tables.sql")
-	@Sql("classpath:/h2/data.sql")
-	@Sql(value = "classpath:/h2/delete_tables.sql", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
+//	@Sql("classpath:/h2/create_tables.sql")
+//	@Sql("classpath:/h2/data.sql")
+//	@Sql(value = "classpath:/h2/delete_tables.sql", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	public void getAllProductsWithQuantitesTest() {
 		logger.info("getAllProductsWithQuantitesTest run");
 		Map<Integer, Integer> expectedQuantitiesMap = new HashMap<Integer, Integer>() {
@@ -74,9 +98,9 @@ public class ProductDaoImplTest {
 	}
 
 	@Test
-	@Sql("classpath:/create_tables.sql")
-	@Sql("classpath:/data.sql")
-	@Sql(value = "classpath:/delete_tables.sql", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
+//	@Sql("classpath:/create_tables.sql")
+//	@Sql("classpath:/data.sql")
+//	@Sql(value = "classpath:/delete_tables.sql", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	public void getAllProductsWithQuantitesUpdateValuesTest() {
 		Map<Integer, Integer> expectedQuantitiesMap = new HashMap<Integer, Integer>() {
 			{
@@ -110,9 +134,9 @@ public class ProductDaoImplTest {
 	}
 
 	@Test
-	@Sql("classpath:/create_tables.sql")
-	@Sql("classpath:/data.sql")
-	@Sql(value = "classpath:/delete_tables.sql", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
+//	@Sql("classpath:/create_tables.sql")
+//	@Sql("classpath:/data.sql")
+//	@Sql(value = "classpath:/delete_tables.sql", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	public void getAllProductsWithQuantitesOnlyIncomeTest() {
 		Map<Integer, Integer> expectedQuantitiesMap = new HashMap<Integer, Integer>() {
 			{
@@ -139,9 +163,9 @@ public class ProductDaoImplTest {
 	}
 
 	@Test
-	@Sql("classpath:/create_tables.sql")
-	@Sql("classpath:/data.sql")
-	@Sql(value = "classpath:/delete_tables.sql", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
+//	@Sql("classpath:/create_tables.sql")
+//	@Sql("classpath:/data.sql")
+//	@Sql(value = "classpath:/delete_tables.sql", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	public void addProductGetProductTest() {
 
 		ProductType productType = new ProductType();
@@ -166,9 +190,9 @@ public class ProductDaoImplTest {
 
 
 	@Test
-	@Sql("classpath:/create_tables.sql")
-	@Sql("classpath:/data.sql")
-	@Sql(value = "classpath:/delete_tables.sql", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
+//	@Sql("classpath:/create_tables.sql")
+//	@Sql("classpath:/data.sql")
+//	@Sql(value = "classpath:/delete_tables.sql", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	public void getAllProductsTest() {
 		List<Product> products = dao.getAllProducts();
 		assertNotNull(products);
@@ -185,9 +209,9 @@ public class ProductDaoImplTest {
 
 
 	@Test
-	@Sql("classpath:/create_tables.sql")
-	@Sql("classpath:/data.sql")
-	@Sql(value = "classpath:/delete_tables.sql", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
+//	@Sql("classpath:/create_tables.sql")
+//	@Sql("classpath:/data.sql")
+//	@Sql(value = "classpath:/delete_tables.sql", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	public void getAllProductsWithQuantitesAsViewsTest() throws Exception {
 		List<ProductWithQuantityView> productWithQuantityViews = dao.getAllProductsWithQuantitesAsViews();
 		assertNotNull(productWithQuantityViews);

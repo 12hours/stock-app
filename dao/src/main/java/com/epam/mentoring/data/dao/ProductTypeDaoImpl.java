@@ -14,7 +14,6 @@ import com.epam.mentoring.data.util.mappers.ProductTypeRowMapper;
 import com.epam.mentoring.data.util.mappers.ProductTypesResultSetExtractor;
 import org.springframework.stereotype.Repository;
 
-@Repository
 public class ProductTypeDaoImpl implements ProductTypeDao {
 	
 	@Value("${product_type.get.by_id}")

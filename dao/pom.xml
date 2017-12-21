@@ -6,6 +6,8 @@
     <groupId>com.epam.mentoring</groupId>
     <artifactId>dao</artifactId>
 
+    <packaging>bundle</packaging>
+
     <parent>
         <groupId>com.epam.mentoring</groupId>
         <artifactId>stock-app</artifactId>
@@ -17,6 +19,7 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-jdbc</artifactId>
+            <scope>provided</scope>
         </dependency>
 
         <dependency>
@@ -61,31 +64,37 @@
             <scope>test</scope>
         </dependency>
 
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>jcl-over-slf4j</artifactId>
-            <scope>runtime</scope>
-        </dependency>
+
+        <!--<dependency>-->
+            <!--<groupId>org.slf4j</groupId>-->
+            <!--<artifactId>jcl-over-slf4j</artifactId>-->
+            <!--<scope>runtime</scope>-->
+        <!--</dependency>-->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
-            <scope>runtime</scope>
+            <!--<scope>runtime</scope>-->
         </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-log4j12</artifactId>
-            <scope>runtime</scope>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>org.slf4j</groupId>-->
+            <!--<artifactId>slf4j-log4j12</artifactId>-->
+            <!--<scope>runtime</scope>-->
+        <!--</dependency>-->
 
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-core</artifactId>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>org.apache.logging.log4j</groupId>-->
+            <!--<artifactId>log4j-core</artifactId>-->
+        <!--</dependency>-->
 
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-blueprint</artifactId>
         </dependency>
 
     </dependencies>
@@ -141,13 +150,19 @@
                     <instructions>
                         <Export-Package>
                         </Export-Package>
-                        <Embed-Dependency></Embed-Dependency>
+                        <Embed-Dependency>h2</Embed-Dependency>
                         <Import-Package>
                             <!--*,-->
-                            <!--org.springframework.cglib.core,-->
-                            <!--org.springframework.cglib.proxy,-->
-                            <!--org.springframework.cglib.reflect,-->
-                            <!--org.springframework.beans.factory-->
+                            org.slf4j.*,
+                            org.springframework.jdbc.core.*,
+                            org.springframework.core.io,
+                            org.springframework.jdbc.datasource.init,
+                            javax.sql,
+                            org.springframework.cglib.core,
+                            org.springframework.cglib.proxy,
+                            org.springframework.cglib.reflect,
+                            org.springframework.beans.factory
+                            <!--resolution:=optional-->
                         </Import-Package>
                     </instructions>
                 </configuration>

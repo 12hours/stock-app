@@ -14,7 +14,6 @@ import com.epam.mentoring.data.util.mappers.SupplierRowMapper;
 import com.epam.mentoring.data.util.mappers.SuppliersResultSetExtractor;
 import org.springframework.stereotype.Repository;
 
-@Repository
 public class SupplierDaoImpl implements SupplierDao {
 
 	@Value("${supplier.get.by_id}")
