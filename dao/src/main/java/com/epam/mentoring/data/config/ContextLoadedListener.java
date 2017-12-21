@@ -1,5 +1,7 @@
 package com.epam.mentoring.data.config;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -7,14 +9,17 @@ import org.springframework.context.event.ContextRefreshedEvent;
 
 public class ContextLoadedListener implements ApplicationListener<ContextRefreshedEvent> {
 
+    Logger log = LoggerFactory.getLogger(ContextLoadedListener.class);
+
     @Autowired
     ConfigurableApplicationContext context;
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
-        System.out.println("Context active: "+context.isActive());
+        // debug purposes
+        log.debug("Application context created");
         for (String name : context.getBeanDefinitionNames()) {
-            System.out.println(name);
+            log.debug("Bean created: " + name);
         }
     }
 }

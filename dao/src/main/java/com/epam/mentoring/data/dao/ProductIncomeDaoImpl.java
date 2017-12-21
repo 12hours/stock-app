@@ -1,16 +1,13 @@
 package com.epam.mentoring.data.dao;
 
-import javax.sql.DataSource;
-
+import com.epam.mentoring.data.model.ProductIncome;
+import com.epam.mentoring.data.util.mappers.ProductIncomeRowMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 
-import com.epam.mentoring.data.model.ProductIncome;
-import com.epam.mentoring.data.util.mappers.ProductIncomeRowMapper;
-import org.springframework.stereotype.Repository;
-
+import javax.sql.DataSource;
 import java.util.List;
 
 public class ProductIncomeDaoImpl implements ProductIncomeDao {

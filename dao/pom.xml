@@ -158,23 +158,24 @@
                 <configuration>
                     <instructions>
                         <Export-Package>
-                            org.h2
+                            org.h2.*
                         </Export-Package>
                         <Embed-Dependency>h2</Embed-Dependency>
                         <Import-Package>
-                            <!--*;version="0";resolution:=optional,-->
+                            <!--*,-->
+                            *;version="0";resolution:=optional,
                             org.springframework.dao.*,
-                            <!--com.epam.mentoring.data.model,-->
                             org.springframework.context.*,
                             org.slf4j.*,
                             org.springframework.jdbc.core.*,
-                            <!--org.springframework.core.io,-->
-                            <!--org.springframework.jdbc.datasource.init,-->
-                            <!--javax.sql,-->
                             org.springframework.cglib.core,
                             org.springframework.cglib.proxy,
                             org.springframework.cglib.reflect,
                             org.springframework.beans.factory,
+                            <!--com.epam.mentoring.data.model,-->
+                            <!--org.springframework.core.io,-->
+                            <!--org.springframework.jdbc.datasource.init,-->
+                            <!--javax.sql,-->
                             <!--resolution:=optional-->
                         </Import-Package>
                     </instructions>

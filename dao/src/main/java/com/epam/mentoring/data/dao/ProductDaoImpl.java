@@ -1,24 +1,19 @@
 package com.epam.mentoring.data.dao;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
-import javax.sql.DataSource;
-
+import com.epam.mentoring.data.model.Product;
 import com.epam.mentoring.data.model.dto.ProductWithQuantityView;
 import com.epam.mentoring.data.util.mappers.ProductResultSetExtractor;
+import com.epam.mentoring.data.util.mappers.ProductRowMapper;
+import com.epam.mentoring.data.util.mappers.ProductsWithQuantitiesResultSetExtractor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 
-import com.epam.mentoring.data.model.Product;
-import com.epam.mentoring.data.util.mappers.ProductRowMapper;
-import com.epam.mentoring.data.util.mappers.ProductsWithQuantitiesResultSetExtractor;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Repository;
+import javax.sql.DataSource;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 public class ProductDaoImpl implements ProductDao {
 	
