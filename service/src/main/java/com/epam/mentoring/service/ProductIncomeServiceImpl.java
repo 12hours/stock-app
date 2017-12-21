@@ -7,15 +7,16 @@ import com.epam.mentoring.data.model.dto.ProductIncomeForm;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataAccessException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.util.Assert;
 
-public class ProductIncomeServiceImp implements ProductIncomeService {
+public class ProductIncomeServiceImpl implements ProductIncomeService {
 
-    private static final Logger logger = LoggerFactory.getLogger(ProductIncomeServiceImp.class.getName());
+    private static final Logger logger = LoggerFactory.getLogger(ProductIncomeServiceImpl.class.getName());
 
     private final ProductIncomeDao productIncomeDao;
 
-    public ProductIncomeServiceImp(ProductIncomeDao productIncomeDao) {
+    public ProductIncomeServiceImpl(ProductIncomeDao productIncomeDao) {
         this.productIncomeDao = productIncomeDao;
     }
 
@@ -23,7 +24,13 @@ public class ProductIncomeServiceImp implements ProductIncomeService {
     public ProductIncome getProductIncomeById(Integer id) throws DataAccessException {
         Assert.notNull(id, "No id for ProductIncome provided");
         logger.debug("Getting ProductIncome with id " + id);
-        return productIncomeDao.getProductIncomeById(id);
+        try {
+            ProductIncome productIncome = productIncomeDao.getProductIncomeById(id);
+            return productIncome;
+        } catch (EmptyResultDataAccessException e) {
+            logger.debug("No object found");
+            return null;
+        }
     }
 
     @Override

@@ -15,6 +15,7 @@ import org.springframework.dao.DataAccessException;
 import com.epam.mentoring.data.dao.ProductDao;
 import com.epam.mentoring.data.model.Product;
 import com.epam.mentoring.data.model.ProductType;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.util.Assert;
 
 public class ProductServiceImpl implements ProductService {
@@ -29,7 +30,15 @@ public class ProductServiceImpl implements ProductService {
 	
 	@Override
 	public Product findProductById(Integer id) throws DataAccessException {
-		return null;
+		Assert.notNull(id, "No id provided");
+		logger.debug("Getting product with id: " + id);
+		try {
+			Product product = productDao.getProductById(id);
+			return product;
+		} catch (EmptyResultDataAccessException e) {
+			logger.debug("No object found");
+			return null;
+		}
 	}
 	
 	@Override

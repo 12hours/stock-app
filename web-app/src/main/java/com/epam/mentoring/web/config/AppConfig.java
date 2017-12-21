@@ -18,7 +18,6 @@ import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.PropertySource;
 
 import com.epam.mentoring.data.config.DaoConfig;
-import org.springframework.core.env.Environment;
 
 @Configuration
 @Import(DaoConfig.class)
@@ -52,7 +51,7 @@ public class AppConfig {
 
 	@Bean
 	ProductTypeService productTypeService() {
-		return new ProductTypeServiceImp(productTypeDao());
+		return new ProductTypeServiceImpl(productTypeDao());
 	}
 
 	@Bean
@@ -67,7 +66,7 @@ public class AppConfig {
 
 	@Bean
 	ProductIncomeService productIncomeService() {
-		return new ProductIncomeServiceImp(productIncomeDao());
+		return new ProductIncomeServiceImpl(productIncomeDao());
 	}
 
 	@Bean

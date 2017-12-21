@@ -6,17 +6,31 @@
        http://www.springframework.org/schema/osgi/spring-osgi.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
 
-    <bean class="com.epam.mentoring.service.dummy.DummyProductService" id="dummyProductService"/>
-    <osgi:service interface="com.epam.mentoring.service.ProductService" id="productService" ref="dummyProductService"/>
+    <osgi:reference id="productDao" interface="com.epam.mentoring.data.dao.ProductDao"/>
+    <osgi:reference id="productTypeDao" interface="com.epam.mentoring.data.dao.ProductTypeDao"/>
+    <osgi:reference id="productIncomeDao" interface="com.epam.mentoring.data.dao.ProductIncomeDao"/>
+    <osgi:reference id="supplierDao" interface="com.epam.mentoring.data.dao.SupplierDao"/>
 
-    <bean class="com.epam.mentoring.service.dummy.DummySupplierService" id="dummySupplierService"/>
-    <osgi:service interface="com.epam.mentoring.service.SupplierService" id="supplierService" ref="dummySupplierService"/>
 
-    <bean class="com.epam.mentoring.service.dummy.DummyProductTypeService" id="dummyProductTypeService"/>
-    <osgi:service interface="com.epam.mentoring.service.ProductTypeService" id="productTypeService" ref="dummyProductTypeService"/>
+    <bean class="com.epam.mentoring.service.ProductServiceImpl" id="ProductService">
+        <constructor-arg ref="productDao"/>
+    </bean>
+    <osgi:service interface="com.epam.mentoring.service.ProductService" id="productService" ref="ProductService"/>
 
-    <bean class="com.epam.mentoring.service.dummy.DummyProductIncomeService" id="dummyProductIncomeService"/>
-    <osgi:service interface="com.epam.mentoring.service.ProductIncomeService" id="productIncomeService" ref="dummyProductIncomeService"/>
+    <bean class="com.epam.mentoring.service.SupplierServiceImpl" id="SupplierService">
+        <constructor-arg ref="supplierDao"/>
+    </bean>
+    <osgi:service interface="com.epam.mentoring.service.SupplierService" id="supplierService" ref="SupplierService"/>
+
+    <bean class="com.epam.mentoring.service.ProductTypeServiceImpl" id="ProductTypeService">
+        <constructor-arg ref="productTypeDao"/>
+    </bean>
+    <osgi:service interface="com.epam.mentoring.service.ProductTypeService" id="productTypeService" ref="ProductTypeService"/>
+
+    <bean class="com.epam.mentoring.service.ProductIncomeServiceImpl" id="ProductIncomeServiceImpl">
+        <constructor-arg ref="productIncomeDao"/>
+    </bean>
+    <osgi:service interface="com.epam.mentoring.service.ProductIncomeService" id="productIncomeService" ref="ProductIncomeServiceImpl"/>
 
 
 </beans>

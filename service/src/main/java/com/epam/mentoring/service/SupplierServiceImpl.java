@@ -7,6 +7,7 @@ import com.epam.mentoring.data.model.dto.SupplierForm;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataAccessException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.util.Assert;
 
 import java.util.List;
@@ -57,6 +58,12 @@ public class SupplierServiceImpl implements SupplierService {
     public Supplier getSupplierById(Integer id) throws DataAccessException {
         Assert.notNull(id, "No id provided for Supplier");
         logger.debug("Getting Supplier with id " + id);
-        return supplierDao.getSupplierById(id);
+        try {
+            Supplier supplier = supplierDao.getSupplierById(id);
+            return supplier;
+        } catch (EmptyResultDataAccessException e) {
+            logger.debug("No object found");
+            return null;
+        }
     }
 }

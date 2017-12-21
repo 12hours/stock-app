@@ -106,6 +106,12 @@
             <artifactId>camel-blueprint</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>org.modelmapper</groupId>
+            <artifactId>modelmapper</artifactId>
+            <version>1.1.0</version>
+        </dependency>
+
     </dependencies>
 
 
@@ -158,9 +164,9 @@
                 <configuration>
                     <instructions>
                         <Export-Package>
-                            org.h2.*
+                            org.h2.*,com.epam.mentoring.data.*
                         </Export-Package>
-                        <Embed-Dependency>h2</Embed-Dependency>
+                        <Embed-Dependency>h2,dao-api,model,modelmapper</Embed-Dependency>
                         <Import-Package>
                             <!--*,-->
                             *;version="0";resolution:=optional,

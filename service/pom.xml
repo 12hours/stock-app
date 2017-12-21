@@ -106,22 +106,6 @@
         <!-- Transitive dependencies to include into bundle-->
 
         <dependency>
-            <groupId>org.modelmapper</groupId>
-            <artifactId>modelmapper</artifactId>
-            <version>1.1.0</version>
-            <exclusions>
-                <!--<exclusion>-->
-                    <!--<artifactId>javax.</artifactId>-->
-                <!--</exclusion>-->
-            </exclusions>
-        </dependency>
-
-        <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
-        </dependency>
-
-        <dependency>
             <groupId>org.apache.camel</groupId>
             <artifactId>camel-bean-validator</artifactId>
             <version>${camel.version}</version>
@@ -140,11 +124,9 @@
                     <instructions>
                         <Export-Package>
                             com.epam.mentoring.service;uses:="org.springframework.dao";version="1.0.0",
-                            com.epam.mentoring.service.dummy;uses:="com.epam.mentoring.service,org.springframework.dao";version="1.0.0",
-                            com.epam.mentoring.data.model.*;provide=true,
-                            com.epam.mentoring.data.model;provide=true
+                            <!--com.epam.mentoring.service.dummy;uses:="com.epam.mentoring.service,org.springframework.dao";version="1.0.0",-->
                         </Export-Package>
-                        <Embed-Dependency>service-api,model,dao-api,modelmapper</Embed-Dependency>
+                        <Embed-Dependency>service-api</Embed-Dependency>
                         <Import-Package>
                             *,
                             org.springframework.cglib.core,

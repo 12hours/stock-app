@@ -34,7 +34,7 @@ public class ProductIncomeServiceImpTest {
     public void setup() {
         when(dao.getAllProductIncomes()).thenReturn(TestData.productIncomes());
         when(dao.addProductIncome(any(ProductIncome.class))).thenReturn(10);
-        productIncomeService = new ProductIncomeServiceImp(dao);
+        productIncomeService = new ProductIncomeServiceImpl(dao);
     }
 
     @Test

@@ -16,7 +16,6 @@
     <bean class="com.epam.mentoring.approutes.config.RoutesConfig"/>
 
 
-
     <camel:camelContext id="serviceRoutesContext"
                         streamCache="true">
         <camel:contextScan/>

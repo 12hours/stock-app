@@ -7,17 +7,18 @@ import com.epam.mentoring.data.model.dto.ProductTypeForm;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataAccessException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.util.Assert;
 
 import java.util.List;
 
-public class ProductTypeServiceImp implements ProductTypeService {
+public class ProductTypeServiceImpl implements ProductTypeService {
 
-    private static final Logger logger = LoggerFactory.getLogger(ProductTypeServiceImp.class.getName());
+    private static final Logger logger = LoggerFactory.getLogger(ProductTypeServiceImpl.class.getName());
 
     ProductTypeDao productTypeDao;
 
-    public ProductTypeServiceImp(ProductTypeDao productTypeDao) {
+    public ProductTypeServiceImpl(ProductTypeDao productTypeDao) {
         this.productTypeDao = productTypeDao;
     }
 
@@ -25,7 +26,13 @@ public class ProductTypeServiceImp implements ProductTypeService {
     public ProductType getProductTypeById(Integer id) throws DataAccessException {
         Assert.notNull(id, "No id provided for ProductType");
         logger.debug("Getting ProductType with id "+ id);
-        return productTypeDao.getProductTypeById(id);
+        try {
+            ProductType productType = productTypeDao.getProductTypeById(id);
+            return productType;
+        } catch (EmptyResultDataAccessException e) {
+            logger.debug("No object found");
+            return null;
+        }
     }
 
     @Override

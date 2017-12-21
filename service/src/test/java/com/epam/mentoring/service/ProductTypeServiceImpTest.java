@@ -36,7 +36,7 @@ public class ProductTypeServiceImpTest {
     public void setup() {
         when(dao.getAllProductTypes()).thenReturn(TestData.productTypes());
         when(dao.addProductType(any(ProductType.class))).thenReturn(10);
-        productTypeService = new ProductTypeServiceImp(dao);
+        productTypeService = new ProductTypeServiceImpl(dao);
     }
 
     @Test
