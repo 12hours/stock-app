@@ -69,7 +69,7 @@
         <!--Test-->
         <dependency>
             <groupId>org.apache.camel</groupId>
-            <artifactId>camel-test-spring</artifactId>
+            <artifactId>camel-test-spring3</artifactId>
 
         </dependency>
 
