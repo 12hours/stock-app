@@ -85,7 +85,6 @@ public class ProductDaoImpl implements ProductDao {
             }
         }, keyHolder);
         return keyHolder.getKey().intValue();
-//        return jdbcTemplate.update(ADD_PRODUCT_SQL, product.getName(), product.getPrice(), product.getType().getId());
 	}
 
 	@Override

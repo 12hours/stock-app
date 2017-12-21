@@ -64,6 +64,17 @@ public class ProductRouteTest {
     }
 
     @Test
+    public void getAllProductsWithQuantitiesTest() throws Exception {
+        Exchange exchange = new DefaultExchange(context);
+        Message in = new DefaultMessage();
+        in.setHeader(Headers.METHOD, Headers.GET_ALL_WITH_QAUNT);
+        exchange.setIn(in);
+
+        Exchange response = template.send(RouteNames.PRODUCT_ROUTE, exchange);
+        assertEquals(objectMapper.writeValueAsString(TestData.productWithQuantityViews()), response.getIn().getBody());
+    }
+
+    @Test
     public void getProductByIdTest() throws JsonProcessingException {
         Exchange exchange = new DefaultExchange(context);
         Message in = new DefaultMessage();

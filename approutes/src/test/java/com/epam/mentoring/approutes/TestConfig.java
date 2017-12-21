@@ -27,6 +27,7 @@ public class TestConfig {
     ProductService productService() {
         ProductService productService = mock(ProductService.class);
         when(productService.getAllProducts()).thenReturn(TestData.products());
+        when(productService.getAllProductsWithQuantitiesViews()).thenReturn(TestData.productWithQuantityViews());
         when(productService.findProductById(anyInt())).thenReturn(TestData.products().get(0));
         when(productService.saveProduct(any(ProductForm.class))).thenReturn(42);
         return productService;

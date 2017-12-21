@@ -1,5 +1,6 @@
 package com.epam.mentoring.approutes.routes;
 
+import com.epam.mentoring.approutes.processors.product.GetAllProductsWithQuantitiesProcessor;
 import com.epam.mentoring.data.model.dto.ProductForm;
 import com.epam.mentoring.approutes.constants.Headers;
 import com.epam.mentoring.approutes.constants.RouteNames;
@@ -24,12 +25,14 @@ public class ProductRoute extends RouteBuilder {
         from(RouteNames.PRODUCT_ROUTE).routeId(RouteNames.PRODUCT_ROUTE_ID)
                 .choice()
                 .when(header(Headers.METHOD).isEqualTo(Headers.GET_ALL))
-                    .process(new GetAllProductsProcessor(productService))
+                .process(new GetAllProductsProcessor(productService))
                 .when(header(Headers.METHOD).isEqualTo(Headers.GET_BY_ID))
-                    .process(new GetProductByIdProcessor(productService))
+                .process(new GetProductByIdProcessor(productService))
                 .when(header(Headers.METHOD).isEqualTo(Headers.POST))
-                    .unmarshal().json(JsonLibrary.Jackson, ProductForm.class)
-                    .process(new SaveProductProcessor(productService))
+                .unmarshal().json(JsonLibrary.Jackson, ProductForm.class)
+                .process(new SaveProductProcessor(productService))
+                .when(header(Headers.METHOD).isEqualTo(Headers.GET_ALL_WITH_QAUNT))
+                .process(new GetAllProductsWithQuantitiesProcessor(productService))
                 .otherwise().throwException(new UnsupportedOperationException())
                 .end()
                 .marshal(new JsonDataFormat(JsonLibrary.Jackson))

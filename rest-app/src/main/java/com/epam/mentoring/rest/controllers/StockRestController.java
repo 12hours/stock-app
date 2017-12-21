@@ -18,7 +18,7 @@ public class StockRestController {
 
     Logger log = LoggerFactory.getLogger(StockRestController.class);
 
-    @EndpointInject(uri = RouteNames.STOCK_ROUTE)
+    @EndpointInject(uri = RouteNames.PRODUCT_ROUTE)
     ProducerTemplate stockRoute;
 
     @GET
@@ -27,7 +27,7 @@ public class StockRestController {
     public Response getProductIncome() {
         log.info("GET: /rest/stock/list");
         HashMap<String, Object> headers = new HashMap<>();
-        headers.put(Headers.METHOD, Headers.GET_ALL);
+        headers.put(Headers.METHOD, Headers.GET_ALL_WITH_QAUNT);
         return handleRequest(null, headers);
     }
 
