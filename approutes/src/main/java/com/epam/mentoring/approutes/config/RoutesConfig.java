@@ -31,7 +31,7 @@ public class RoutesConfig {
 
         objectMapper.configure(JsonParser.Feature.ALLOW_UNQUOTED_FIELD_NAMES, true);
         objectMapper.configure(JsonParser.Feature.ALLOW_SINGLE_QUOTES, true);
-
+//        objectMapper.configure(SerializationFeature.WRITE_NULL_MAP_VALUES, false);
         return objectMapper;
     }
 
