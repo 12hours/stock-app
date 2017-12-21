@@ -1,15 +1,23 @@
 package com.epam.mentoring.data.dao;
 
-import com.epam.mentoring.data.model.ProductType;
-import com.epam.mentoring.data.util.mappers.ProductTypeRowMapper;
-import com.epam.mentoring.data.util.mappers.ProductTypesResultSetExtractor;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.List;
+
+import javax.sql.DataSource;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 
-import javax.sql.DataSource;
-import java.util.List;
+import com.epam.mentoring.data.model.ProductType;
+import com.epam.mentoring.data.util.mappers.ProductTypeRowMapper;
+import com.epam.mentoring.data.util.mappers.ProductTypesResultSetExtractor;
+import org.springframework.jdbc.core.PreparedStatementCreator;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
 
 public class ProductTypeDaoImpl implements ProductTypeDao {
 	
@@ -28,8 +36,7 @@ public class ProductTypeDaoImpl implements ProductTypeDao {
 
 	@Autowired
 	private ProductTypesResultSetExtractor productTypeResultSetExtractor;
-
-	@Autowired
+	
 	public ProductTypeDaoImpl(DataSource dataSource) {
 		this.jdbcTemplate = new JdbcTemplate(dataSource);
 	}
@@ -54,7 +61,17 @@ public class ProductTypeDaoImpl implements ProductTypeDao {
 
 	@Override
 	public int addProductType(ProductType productType) throws DataAccessException {
-		return jdbcTemplate.update(ADD_PRODUCT_TYPE_SQL, productType.getName());
+        GeneratedKeyHolder keyHolder = new GeneratedKeyHolder();
+        jdbcTemplate.update(new PreparedStatementCreator() {
+            @Override
+            public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
+                PreparedStatement preparedStatement = con.prepareStatement(ADD_PRODUCT_TYPE_SQL, Statement.RETURN_GENERATED_KEYS);
+                preparedStatement.setString(1, productType.getName());
+                return preparedStatement;
+            }
+        }, keyHolder);
+        return keyHolder.getKey().intValue();
+//        return jdbcTemplate.update(ADD_PRODUCT_TYPE_SQL, productType.getName());
 	}
 
 	@Override

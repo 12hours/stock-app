@@ -17,10 +17,10 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.PropertySource;
 
-import com.epam.mentoring.data.config.PreConfig;
+import com.epam.mentoring.data.config.DaoConfig;
 
 @Configuration
-@Import(PreConfig.class)
+@Import(DaoConfig.class)
 @PropertySource("classpath:/application.properties")
 public class AppConfig {
 
@@ -66,7 +66,7 @@ public class AppConfig {
 
 	@Bean
 	ProductIncomeService productIncomeService() {
-		return new ProductIncomeServiceImpl(productIncomeDao());
+		return new ProductIncomeServiceImp(productIncomeDao());
 	}
 
 	@Bean
