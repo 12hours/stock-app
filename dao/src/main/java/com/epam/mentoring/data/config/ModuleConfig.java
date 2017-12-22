@@ -33,13 +33,19 @@ public class ModuleConfig {
     @Value("${database.populate.tables}")
     private String dataScript;
 
+    @Value("${database.delete.tables}")
+    private String dropScript;
+
+    @Value("${database.clean.tables}")
+    private String cleanScript;
+
     @Value("${database.init}")
     private String databaseInit;
 
-    @Value("${database.clean.tables}")
+    @Value("${database.clean}")
     private String databaseClean;
 
-    @Value("${database.delete.tables}")
+    @Value("${database.drop}")
     private String databaseDrop;
 
     @Bean
@@ -57,11 +63,11 @@ public class ModuleConfig {
         try {
             if (databaseClean.equalsIgnoreCase("true")) {
                 log.debug("Cleaning database");
-                populator.addScript(new InputStreamResource(new ByteArrayInputStream(dataScript.getBytes(StandardCharsets.UTF_8.name()))));
+                populator.addScript(new InputStreamResource(new ByteArrayInputStream(cleanScript.getBytes(StandardCharsets.UTF_8.name()))));
             }
             if (databaseDrop.equalsIgnoreCase("true")) {
                 log.debug("Dropping tables");
-                populator.addScript(new InputStreamResource(new ByteArrayInputStream(dataScript.getBytes(StandardCharsets.UTF_8.name()))));
+                populator.addScript(new InputStreamResource(new ByteArrayInputStream(dropScript.getBytes(StandardCharsets.UTF_8.name()))));
             }
             // create schema if not exists
             populator.addScript(new InputStreamResource(new ByteArrayInputStream(schemaScript.getBytes(StandardCharsets.UTF_8.name()))));
