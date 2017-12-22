@@ -1,6 +1,7 @@
 package com.epam.mentoring.rest.controllers;
 
 import com.epam.mentoring.rest.Headers;
+import com.epam.mentoring.rest.Paths;
 import com.epam.mentoring.rest.RouteNames;
 import org.apache.camel.EndpointInject;
 import org.apache.camel.ProducerTemplate;
@@ -13,7 +14,7 @@ import javax.ws.rs.core.Response;
 import java.util.HashMap;
 import java.util.Map;
 
-@Path("/rest/stock")
+@Path(Paths.STOCK_URI)
 public class StockRestController {
 
     Logger log = LoggerFactory.getLogger(StockRestController.class);
@@ -25,7 +26,7 @@ public class StockRestController {
     @Path("/list")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getProductIncome() {
-        log.info("GET: /rest/stock/list");
+        log.debug("GET: {}/list", Paths.STOCK_URI);
         HashMap<String, Object> headers = new HashMap<>();
         headers.put(Headers.METHOD, Headers.GET_ALL_WITH_QAUNT);
         return handleRequest(null, headers);

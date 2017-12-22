@@ -1,6 +1,7 @@
 package com.epam.mentoring.rest.controllers;
 
 import com.epam.mentoring.rest.Headers;
+import com.epam.mentoring.rest.Paths;
 import com.epam.mentoring.rest.RouteNames;
 import org.apache.camel.EndpointInject;
 import org.apache.camel.ProducerTemplate;
@@ -13,7 +14,7 @@ import javax.ws.rs.core.Response;
 import java.util.HashMap;
 import java.util.Map;
 
-@Path("/rest")
+@Path(Paths.SUPPLIER_URI)
 public class SupplierRestController {
 
     Logger log = LoggerFactory.getLogger(SupplierRestController.class);
@@ -22,20 +23,19 @@ public class SupplierRestController {
     ProducerTemplate supplierRoute;
 
     @GET
-    @Path("/supplier")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAllSuppliers() {
-        log.info("GET: /rest/supplier");
+        log.debug("GET: {}", Paths.SUPPLIER_URI);
         HashMap<String, Object> headers = new HashMap<>();
         headers.put(Headers.METHOD, Headers.GET_ALL);
         return handleRequest(null, headers);
     }
 
     @GET
-    @Path("/supplier/{id}")
+    @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getSupplierById(@PathParam("id") Integer id) {
-        log.info("GET: /rest/supplier/" + id);
+        log.debug("GET: {}/{}", Paths.SUPPLIER_URI, id);
         HashMap<String, Object> headers = new HashMap<>();
         headers.put(Headers.METHOD, Headers.GET_BY_ID);
         headers.put(Headers.ID, id);
@@ -43,13 +43,21 @@ public class SupplierRestController {
     }
 
     @POST
-    @Path("/supplier")
     @Produces(MediaType.APPLICATION_JSON)
     public Response postSupplier(String body) {
-        log.info("POST: /rest/supplier");
+        log.debug("POST: {}", Paths.SUPPLIER_URI);
         HashMap<String, Object> headers = new HashMap<>();
         headers.put(Headers.METHOD, Headers.POST);
         return handleRequest(body, headers);
+    }
+
+    @DELETE
+    @Path("/{id}")
+    public Response deleteProductIncome(@PathParam("id") Integer id) {
+        log.debug("DELETE: {}/{}", Paths.SUPPLIER_URI, id);
+        HashMap<String, Object> headers = new HashMap<>();
+        headers.put(Headers.METHOD, Headers.DELETE);
+        return handleRequest(null, headers);
     }
 
     private Response handleRequest(Object body, Map<String, Object> headers) {

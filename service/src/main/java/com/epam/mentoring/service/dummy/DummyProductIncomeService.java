@@ -27,4 +27,9 @@ public class DummyProductIncomeService implements ProductIncomeService {
     public Integer saveProductIncome(ProductIncomeForm productIncomeForm) throws DataAccessException {
         return 14;
     }
+
+    @Override
+    public void deleteProductIncome(Integer id) throws DataAccessException {
+
+    }
 }

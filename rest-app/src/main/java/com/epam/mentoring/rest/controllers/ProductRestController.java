@@ -1,6 +1,7 @@
 package com.epam.mentoring.rest.controllers;
 
 import com.epam.mentoring.rest.Headers;
+import com.epam.mentoring.rest.Paths;
 import com.epam.mentoring.rest.RouteNames;
 import org.apache.camel.EndpointInject;
 import org.apache.camel.ProducerTemplate;
@@ -14,7 +15,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 //@Service
-@Path("/rest")
+@Path(Paths.PRODUCT_URI)
 public class
 ProductRestController {
 
@@ -29,9 +30,8 @@ ProductRestController {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    @Path("/product")
     public Response getAllProducts() {
-        log.debug("GET: /rest/product");
+        log.debug("GET: {}", Paths.PRODUCT_URI);
         final Map<String, Object> headers = new HashMap<>();
         headers.put(Headers.METHOD, Headers.GET_ALL);
         return handleRequest(null, headers);
@@ -40,9 +40,9 @@ ProductRestController {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    @Path("/product/{id}")
+    @Path("/{id}")
     public Response getProduct(@PathParam("id") Integer id) {
-        log.debug("GET: /rest/product/" + id);
+        log.debug("GET: {}/{}", Paths.PRODUCT_URI, id);
         final Map<String, Object> headers = new HashMap<>();
         headers.put(Headers.METHOD, Headers.GET_BY_ID);
         headers.put(Headers.ID, id);
@@ -51,12 +51,20 @@ ProductRestController {
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    @Path("/product/")
     public Response postProduct(String body) throws Exception {
-        log.debug("POST: /rest/product");
+        log.debug("POST: {}", Paths.PRODUCT_URI);
         final Map<String, Object> headers = new HashMap<>();
         headers.put(Headers.METHOD, Headers.POST);
         return handleRequest(body, headers);
+    }
+
+    @DELETE
+    @Path("/{id}")
+    public Response deleteProductIncome(@PathParam("id") Integer id) {
+        log.info("DELETE: {}/{}", Paths.PRODUCT_URI, id);
+        HashMap<String, Object> headers = new HashMap<>();
+        headers.put(Headers.METHOD, Headers.DELETE);
+        return handleRequest(null, headers);
     }
 
     private Response handleRequest(Object body, Map<String, Object> headers) {
