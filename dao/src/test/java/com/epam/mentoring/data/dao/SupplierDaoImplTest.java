@@ -108,4 +108,20 @@ public class SupplierDaoImplTest {
         dao.updateSupplier(supplier);
     }
 
+    @Test
+    public void deleteSupplierTest() {
+        assertNotNull(dao.getSupplierById(3));
+        dao.deleteSupplier(3);
+        try {
+            dao.getSupplierById(3);
+        } catch (DataAccessException e) {
+            return;
+        }
+        fail();
+    }
+
+    @Test(expected = DataAccessException.class)
+    public void deleteSupplierExceptionTest() {
+        dao.deleteSupplier(999);
+    }
 }

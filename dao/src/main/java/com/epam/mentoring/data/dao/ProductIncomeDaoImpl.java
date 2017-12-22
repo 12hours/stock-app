@@ -29,6 +29,9 @@ public class ProductIncomeDaoImpl implements ProductIncomeDao {
 	@Value("${product_income.update}")
 	private String UPDATE_PRODUCT_INCOME_SQL;
 
+	@Value("${product_income.delete}")
+	private String DELETE_PRODUCT_INCOME_SQL;
+
 	@Autowired
 	private ProductIncomeRowMapper productIncomeRowMapper;
 
@@ -59,19 +62,13 @@ public class ProductIncomeDaoImpl implements ProductIncomeDao {
             }
         }, keyHolder);
         return keyHolder.getKey().intValue();
-//
-//        return jdbcTemplate.update(ADD_PRODUCT_INCOME_SQL,
-//                productIncome.getDate(),
-//                productIncome.getOrderNumber(),
-//				productIncome.getQuantity(),
-//                productIncome.getProduct().getId(),
-//                productIncome.getSupplier().getId(),
-//				productIncome.getUser().getId());
 	}
 
 	@Override
 	public Integer deleteProductIncome(Integer id) throws DataAccessException {
-		return null;
+        int delete = jdbcTemplate.update(DELETE_PRODUCT_INCOME_SQL, id);
+        if (delete != 1) throw new DataAccessException("Can not perform deletion"){};
+        return null;
 	}
 
 	@Override

@@ -102,6 +102,21 @@ public class ProductTypeDaoImplTest {
         productType.setId(999);
         dao.updateProductType(productType);
     }
-	
-	
+
+    @Test
+    public void deleteProductTypeTest() {
+        assertNotNull(dao.getProductTypeById(3));
+        dao.deleteProductType(3);
+        try {
+            dao.getProductTypeById(3);
+        } catch (DataAccessException e) {
+            return;
+        }
+        fail();
+    }
+
+    @Test(expected = DataAccessException.class)
+    public void deleteProductTypeExceptionTest() {
+        dao.deleteProductType(999);
+    }
 }

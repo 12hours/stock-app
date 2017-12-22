@@ -31,6 +31,10 @@ public class SupplierDaoImpl implements SupplierDao {
 	@Value("${supplier.update}")
 	private String UPDATE_SUPPLIER_SQL;
 
+
+	@Value("${supplier.delete}")
+	private String DELETE_SUPPLIER_SQL;
+
 	private JdbcTemplate jdbcTemplate;
 	
 	@Autowired
@@ -79,8 +83,9 @@ public class SupplierDaoImpl implements SupplierDao {
 
 	@Override
 	public int deleteSupplier(Integer id) throws DataAccessException {
-		// TODO Auto-generated method stub
-		return 0;
+        int delete = jdbcTemplate.update(DELETE_SUPPLIER_SQL, id);
+        if (delete != 1) throw new DataAccessException("Can not perform deletion"){};
+        return 0;
 	}
 
 }

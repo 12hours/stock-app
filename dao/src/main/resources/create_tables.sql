@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS ${product.table.name}
 	 ${product.column.price.name} ${product.column.price.type},
 	 ${product.column.product_type_id.name} ${product.column.product_type_id.type},
 	 FOREIGN KEY (${product.column.product_type_id.name}) 
-	 REFERENCES ${product_type.table.name}(${product_type.column.id.name})
+	 REFERENCES ${product_type.table.name}(${product_type.column.id.name}) ON DELETE CASCADE 
 	 );
 	 
 
@@ -34,11 +34,11 @@ CREATE TABLE IF NOT EXISTS ${product_income.table.name}
 	 ${product_income.column.supplier_id.name} ${product_income.column.supplier_id.type},
 	 ${product_income.column.user_id.name} ${product_income.column.user_id.type},
 	 FOREIGN KEY (${product_income.column.product_id.name})
-	 REFERENCES ${product.table.name}(${product.column.id.name}),
+	 REFERENCES ${product.table.name}(${product.column.id.name}) ON DELETE CASCADE ,
 	 FOREIGN KEY (${product_income.column.supplier_id.name})
-	 REFERENCES ${supplier.table.name}(${supplier.column.id.name}),
+	 REFERENCES ${supplier.table.name}(${supplier.column.id.name}) ON DELETE CASCADE ,
 	 FOREIGN KEY (${product_income.column.user_id.name})
-	 REFERENCES ${user.table.name}(${user.column.id.name})
+	 REFERENCES ${user.table.name}(${user.column.id.name}) ON DELETE CASCADE 
 	 );
 	 
 CREATE TABLE IF NOT EXISTS ${product_outcome.table.name}
@@ -48,8 +48,8 @@ CREATE TABLE IF NOT EXISTS ${product_outcome.table.name}
 	 ${product_outcome.column.product_id.name} ${product_outcome.column.product_id.type},
 	 ${product_outcome.column.user_id.name} ${product_outcome.column.user_id.type},
 	 FOREIGN KEY (${product_outcome.column.product_id.name})
-	 REFERENCES ${product.table.name}(${product.column.id.name}),
+	 REFERENCES ${product.table.name}(${product.column.id.name}) ON DELETE CASCADE ,
 	 FOREIGN KEY (${product_outcome.column.user_id.name})
-	 REFERENCES ${user.table.name}(${user.column.id.name})
+	 REFERENCES ${user.table.name}(${user.column.id.name}) ON DELETE CASCADE 
 	 );
 	 

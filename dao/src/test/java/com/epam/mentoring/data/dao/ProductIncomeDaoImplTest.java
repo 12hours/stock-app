@@ -2,6 +2,7 @@ package com.epam.mentoring.data.dao;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.fail;
 
 import java.math.BigDecimal;
 import java.sql.SQLException;
@@ -207,4 +208,20 @@ public class ProductIncomeDaoImplTest {
         dao.updateProductIncome(productIncomeById);
     }
 
+    @Test
+    public void deleteProductIncomeTest() {
+        assertNotNull(dao.getProductIncomeById(4));
+        dao.deleteProductIncome(4);
+        try {
+            dao.getProductIncomeById(4);
+        } catch (DataAccessException e) {
+            return;
+        }
+        fail();
+    }
+
+@Test(expected = DataAccessException.class)
+    public void deleteProductIncomeExceptionTest() {
+        dao.deleteProductIncome(999);
+    }
 }

@@ -253,4 +253,20 @@ public class ProductDaoImplTest {
         dao.updateProduct(expectedProduct);
     }
 
+    @Test
+    public void deleteProductTest() {
+        assertNotNull(dao.getProductById(3));
+        dao.deleteProduct(3);
+        try {
+            dao.getProductById(3);
+        } catch (DataAccessException e){
+            return;
+        }
+        fail();
+    }
+
+    @Test(expected = DataAccessException.class)
+    public void deleteProductExceptionTest() {
+        dao.deleteProduct(999);
+    }
 }

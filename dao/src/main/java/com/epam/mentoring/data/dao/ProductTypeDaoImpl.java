@@ -33,6 +33,9 @@ public class ProductTypeDaoImpl implements ProductTypeDao {
 	@Value("${product_type.update}")
 	private String UPDATE_PRODUCT_TYPE_SQL;
 
+	@Value("${product_type.delete}")
+	private String DELETE_PRODUCT_TYPE_SQL;
+
 	private JdbcTemplate jdbcTemplate;
 	@Autowired
 	private ProductTypeRowMapper productTypeRowMapper;
@@ -79,8 +82,9 @@ public class ProductTypeDaoImpl implements ProductTypeDao {
 
 	@Override
 	public int deleteProductType(Integer id) throws DataAccessException {
-
-		return 0;
+        int delete = jdbcTemplate.update(DELETE_PRODUCT_TYPE_SQL, id);
+        if (delete != 1) throw new DataAccessException("Can not perform deletion"){};
+        return 0;
 	}
 
 }

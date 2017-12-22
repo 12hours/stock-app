@@ -98,8 +98,9 @@ public class ProductDaoImpl implements ProductDao {
 
 	@Override
 	public int deleteProduct(Integer id) {
-		// TODO Auto-generated method stub
-		return 0;
+        int delete = jdbcTemplate.update(DELETE_PRODUCT_SQL, id);
+        if (delete != 1) throw new DataAccessException("Can not perform deletion"){};
+        return 0;
 	}
 
 	@Override
