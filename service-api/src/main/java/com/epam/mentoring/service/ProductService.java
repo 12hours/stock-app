@@ -24,9 +24,9 @@ public interface ProductService {
 
     void updateProduct(Product product) throws DataAccessException;
 
-    void updateProduct(ProductForm product) throws DataAccessException;
+    void updateProduct(Integer id, ProductForm productForm) throws DataAccessException;
 
-	List<Product> getAllProducts() throws DataAccessException;
+    List<Product> getAllProducts() throws DataAccessException;
 
 	Map<Product, Integer> getAllProductsWithQuantities() throws DataAccessException;
 	

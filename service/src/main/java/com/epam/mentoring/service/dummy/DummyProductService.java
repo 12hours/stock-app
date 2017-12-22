@@ -35,9 +35,10 @@ public class DummyProductService implements ProductService{
     }
 
     @Override
-    public void updateProduct(ProductForm product) throws DataAccessException {
+    public void updateProduct(Integer id, ProductForm productForm) throws DataAccessException {
 
     }
+
 
     @Override
     public List<Product> getAllProducts() throws DataAccessException {

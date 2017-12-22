@@ -67,8 +67,9 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public void updateProduct(ProductForm productForm) throws DataAccessException {
+    public void updateProduct(Integer id, ProductForm productForm) throws DataAccessException {
         Product product = DTOUtils.map(productForm, Product.class);
+        product.setId(id);
         updateProduct(product);
     }
 

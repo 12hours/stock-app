@@ -143,8 +143,9 @@ public class ProductServiceImplTest {
 
     @Test
     public void updateProductTest() {
-        ProductForm productForm = DTOUtils.map(TestData.products().get(0), ProductForm.class);
-        productService.updateProduct(productForm);
+        Product product = TestData.products().get(0);
+        ProductForm productForm = DTOUtils.map(product, ProductForm.class);
+        productService.updateProduct(product.getId(), productForm);
         verify(dao, times(1)).updateProduct(any(Product.class));
         verify(dao).updateProduct(productArgumentCaptor.capture());
     }
