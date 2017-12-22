@@ -58,7 +58,7 @@ public class ProductTypeDaoImpl implements ProductTypeDao {
 
 	@Override
 	public int updateProductType(ProductType productType) throws DataAccessException {
-        int update = jdbcTemplate.update(UPDATE_PRODUCT_TYPE_SQL, productType.getName());
+        int update = jdbcTemplate.update(UPDATE_PRODUCT_TYPE_SQL, productType.getName(), productType.getId());
         if (update != 1) throw new DataAccessException("Can not perform update"){};
         return 0;
 	}
