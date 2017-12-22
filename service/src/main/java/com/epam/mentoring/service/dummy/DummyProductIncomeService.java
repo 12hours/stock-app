@@ -32,4 +32,9 @@ public class DummyProductIncomeService implements ProductIncomeService {
     public void deleteProductIncome(Integer id) throws DataAccessException {
 
     }
+
+    @Override
+    public void updateProductIncome(ProductIncomeForm productIncomeForm) throws DataAccessException {
+
+    }
 }

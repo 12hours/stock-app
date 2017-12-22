@@ -16,7 +16,7 @@ public class ProductTypeServiceImpl implements ProductTypeService {
 
     private static final Logger logger = LoggerFactory.getLogger(ProductTypeServiceImpl.class.getName());
 
-    ProductTypeDao productTypeDao;
+    private ProductTypeDao productTypeDao;
 
     public ProductTypeServiceImpl(ProductTypeDao productTypeDao) {
         this.productTypeDao = productTypeDao;
@@ -43,8 +43,12 @@ public class ProductTypeServiceImpl implements ProductTypeService {
     }
 
     @Override
-    public Integer updateProductType(ProductType productType) throws DataAccessException {
-        return 0;
+    public void updateProductType(ProductType productType) throws DataAccessException {
+        Assert.notNull(productType, "No ProductType provided for saving");
+        Assert.notNull(productType.getId(), "No ProductType id for saving");
+        Assert.notNull(productType.getName(), "No name for product type provided");
+        logger.debug("Updating ProductType with id: {}", productType.getId());
+        productTypeDao.updateProductType(productType);
     }
 
     @Override

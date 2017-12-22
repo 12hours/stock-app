@@ -114,4 +114,13 @@ public class SupplierServiceImplTest {
         verify(dao).deleteSupplier(integerArgumentCaptor.capture());
         assertEquals(3, integerArgumentCaptor.getValue().intValue());
     }
+
+    @Test
+    public void updateSupplierTest() {
+        Supplier supplier = TestData.suppliers().get(0);
+        supplierService.updateSupplier(supplier);
+        verify(dao, times(1)).updateSupplier(any(Supplier.class));
+        verify(dao).updateSupplier(supplierArgumentCaptor.capture());
+        assertEquals(supplier, supplierArgumentCaptor.getValue());
+    }
 }

@@ -3,8 +3,10 @@ package com.epam.mentoring.service;
 import com.epam.mentoring.data.dao.ProductDao;
 import com.epam.mentoring.data.model.Product;
 import com.epam.mentoring.data.model.ProductType;
+import com.epam.mentoring.data.model.dto.DTOUtils;
 import com.epam.mentoring.data.model.dto.ProductForm;
 import com.epam.mentoring.data.model.dto.ProductWithQuantityView;
+import com.epam.mentoring.test.TestData;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -22,9 +24,7 @@ import java.util.Map;
 import static org.junit.Assert.*;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ProductServiceImplTest {
@@ -139,5 +139,13 @@ public class ProductServiceImplTest {
         verify(dao, times(1)).deleteProduct(anyInt());
         verify(dao).deleteProduct(integerArgumentCaptor.capture());
         assertEquals(3, integerArgumentCaptor.getValue().intValue());
+    }
+
+    @Test
+    public void updateProductTest() {
+        ProductForm productForm = DTOUtils.map(TestData.products().get(0), ProductForm.class);
+        productService.updateProduct(productForm);
+        verify(dao, times(1)).updateProduct(any(Product.class));
+        verify(dao).updateProduct(productArgumentCaptor.capture());
     }
 }

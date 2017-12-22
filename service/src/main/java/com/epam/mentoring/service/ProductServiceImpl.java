@@ -1,9 +1,7 @@
 package com.epam.mentoring.service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
+import com.epam.mentoring.data.dao.ProductDao;
+import com.epam.mentoring.data.model.Product;
 import com.epam.mentoring.data.model.dto.DTOUtils;
 import com.epam.mentoring.data.model.dto.ProductForm;
 import com.epam.mentoring.data.model.dto.ProductView;
@@ -11,12 +9,12 @@ import com.epam.mentoring.data.model.dto.ProductWithQuantityView;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataAccessException;
-
-import com.epam.mentoring.data.dao.ProductDao;
-import com.epam.mentoring.data.model.Product;
-import com.epam.mentoring.data.model.ProductType;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.util.Assert;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 public class ProductServiceImpl implements ProductService {
 	
@@ -42,16 +40,6 @@ public class ProductServiceImpl implements ProductService {
 	}
 	
 	@Override
-	public Product findProductByName(String name) throws DataAccessException {
-		return null;
-	}
-	
-	@Override
-	public List<Product> findAllProductsByType(ProductType type) throws DataAccessException {
-		return null;
-	}
-	
-	@Override
 	public Integer saveProduct(Product product) throws DataAccessException {
 		Assert.notNull(product, "No product provided");
 		Assert.notNull(product.getName(), "No product name provided");
@@ -66,30 +54,36 @@ public class ProductServiceImpl implements ProductService {
 		Product product = DTOUtils.map(productForm, Product.class);
 		return saveProduct(product);
 	}
-	
-	@Override
-	public Product updateProduct(Long id, Product product) throws DataAccessException {
-		return null;
-	}
-	
-	@Override
+
+    @Override
+    public void updateProduct(Product product) throws DataAccessException {
+        Assert.notNull(product, "No product provided");
+        Assert.notNull(product.getId(), "No product id provided");
+        Assert.notNull(product.getName(), "No product name provided");
+        Assert.notNull(product.getPrice(), "No product price provided");
+        Assert.notNull(product.getType().getId(), "No product type id provided");
+        logger.debug("Updating product with id: {}", product.getId());
+        productDao.updateProduct(product);
+    }
+
+    @Override
+    public void updateProduct(ProductForm productForm) throws DataAccessException {
+        Product product = DTOUtils.map(productForm, Product.class);
+        updateProduct(product);
+    }
+
+    @Override
 	public List<Product> getAllProducts() throws DataAccessException {
 		List<Product> products = productDao.getAllProducts();
 		logger.debug("Getting all products. Found " + products.size() + " items");
 		return products;
 	}
 
-	@Override
 	public List<ProductView> getAllProductsAsViews() throws DataAccessException {
 		List<Product> productsList = getAllProducts();
 		List<ProductView> productViewsList = new ArrayList<>();
 		productsList.forEach(product -> productViewsList.add(DTOUtils.map(product, ProductView.class)));
 		return productViewsList;
-	}
-	
-	@Override
-	public Integer getProductQuantity(Long id) throws DataAccessException {
-		return null;
 	}
 	
 	@Override

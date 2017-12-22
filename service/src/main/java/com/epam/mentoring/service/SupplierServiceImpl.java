@@ -45,8 +45,12 @@ public class SupplierServiceImpl implements SupplierService {
     }
 
     @Override
-    public int updateSupplier(Supplier supplier) throws DataAccessException {
-        return 0;
+    public void updateSupplier(Supplier supplier) throws DataAccessException {
+        Assert.notNull(supplier, "No supplier provided for updating");
+        Assert.notNull(supplier.getId(), "No supplier id for updating");
+        Assert.notNull(supplier.getName(), "No name for supplier updating");
+        logger.debug("Updating Supplier with id: {}", supplier.getId());
+        supplierDao.updateSupplier(supplier);
     }
 
     @Override

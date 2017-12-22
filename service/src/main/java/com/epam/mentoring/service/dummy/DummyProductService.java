@@ -20,16 +20,6 @@ public class DummyProductService implements ProductService{
     }
 
     @Override
-    public Product findProductByName(String name) throws DataAccessException {
-        return null;
-    }
-
-    @Override
-    public List<Product> findAllProductsByType(ProductType type) throws DataAccessException {
-        return null;
-    }
-
-    @Override
     public Integer saveProduct(Product product) throws DataAccessException {
         return 12;
     }
@@ -40,8 +30,13 @@ public class DummyProductService implements ProductService{
     }
 
     @Override
-    public Product updateProduct(Long id, Product product) throws DataAccessException {
-        return null;
+    public void updateProduct(Product product) throws DataAccessException {
+
+    }
+
+    @Override
+    public void updateProduct(ProductForm product) throws DataAccessException {
+
     }
 
     @Override
@@ -52,16 +47,6 @@ public class DummyProductService implements ProductService{
                 add(new Product(0, "Hello", BigDecimal.ZERO, null));
             }
         };
-    }
-
-    @Override
-    public List<ProductView> getAllProductsAsViews() throws DataAccessException {
-        return null;
-    }
-
-    @Override
-    public Integer getProductQuantity(Long id) throws DataAccessException {
-        return null;
     }
 
     @Override

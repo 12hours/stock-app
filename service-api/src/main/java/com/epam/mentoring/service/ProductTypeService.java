@@ -12,7 +12,7 @@ import java.util.List;
 public interface ProductTypeService {
     ProductType getProductTypeById(Integer id) throws DataAccessException;
     List<ProductType> getAllProductTypes() throws DataAccessException;
-    Integer updateProductType(ProductType productType) throws DataAccessException;
+    void updateProductType(ProductType productType) throws DataAccessException;
     Integer saveProductType(ProductType productType) throws DataAccessException;
 
     Integer saveProductType(ProductTypeForm productTypeForm) throws DataAccessException;

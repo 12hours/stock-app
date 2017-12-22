@@ -61,4 +61,22 @@ public class ProductIncomeServiceImpl implements ProductIncomeService {
         logger.debug("Deleting item with id: {}", id);
         productIncomeDao.deleteProductIncome(id);
     }
+
+    @Override
+    public void updateProductIncome(ProductIncomeForm productIncomeForm) throws DataAccessException {
+        ProductIncome productIncome = DTOUtils.map(productIncomeForm, ProductIncome.class);
+        Assert.notNull(productIncome, "No ProductIncome provided");
+        Assert.notNull(productIncome.getProduct(), "No Product for product income");
+        Assert.notNull(productIncome.getProduct().getId(), "No Product id for product income");
+        Assert.notNull(productIncome.getDate(), "No date for product income");
+        Assert.notNull(productIncome.getOrderNumber(), "No date for product income");
+        Assert.notNull(productIncome.getQuantity(), "No quantity provided for product income");
+        Assert.notNull(productIncome.getSupplier(), "No supplier provided for product income");
+        Assert.notNull(productIncome.getSupplier().getId(), "No supplier id provided for product income");
+        Assert.notNull(productIncome.getUser(), "No user provided for product income");
+        Assert.notNull(productIncome.getUser().getId(), "No user id provided for product income");
+
+        logger.debug("Updating item with id: {}", productIncome.getId());
+        productIncomeDao.updateProductIncome(productIncome);
+    }
 }

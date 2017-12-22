@@ -11,11 +11,14 @@ import java.util.List;
  */
 public interface SupplierService {
     List<Supplier> getAllSuppliers() throws DataAccessException;
+
     Integer saveSupplier(Supplier supplier) throws DataAccessException;
 
     Integer saveSupplier(SupplierForm supplierForm);
 
-    int updateSupplier(Supplier supplier) throws DataAccessException;
+    void updateSupplier(Supplier supplier) throws DataAccessException;
+
     int deleteSupplier(Integer id) throws DataAccessException;
+
     Supplier getSupplierById(Integer id) throws DataAccessException;
 }

@@ -18,22 +18,16 @@ public interface ProductService {
 	
 	Product findProductById(Integer id) throws DataAccessException;
 	
-	Product findProductByName(String name) throws DataAccessException;
-	
-	List<Product> findAllProductsByType(ProductType type) throws DataAccessException;
-	
 	Integer saveProduct(Product product) throws DataAccessException;
 
     Integer saveProduct(ProductForm productForm) throws DataAccessException;
 
-    Product updateProduct(Long id, Product product) throws DataAccessException;
-	
+    void updateProduct(Product product) throws DataAccessException;
+
+    void updateProduct(ProductForm product) throws DataAccessException;
+
 	List<Product> getAllProducts() throws DataAccessException;
 
-	List<ProductView> getAllProductsAsViews() throws DataAccessException;
-
-	Integer getProductQuantity(Long id) throws DataAccessException;
-	
 	Map<Product, Integer> getAllProductsWithQuantities() throws DataAccessException;
 	
 	void deleteProductById(Integer id) throws DataAccessException;

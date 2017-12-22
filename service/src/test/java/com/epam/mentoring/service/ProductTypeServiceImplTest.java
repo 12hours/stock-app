@@ -100,4 +100,13 @@ public class ProductTypeServiceImplTest {
         verify(dao).deleteProductType(integerArgumentCaptor.capture());
         assertEquals(3, integerArgumentCaptor.getValue().intValue());
     }
+
+    @Test
+    public void updateProductTypeTest() {
+        ProductType productType = TestData.productTypes().get(2);
+        productTypeService.updateProductType(productType);
+        verify(dao, times(1)).updateProductType(any(ProductType.class));
+        verify(dao).updateProductType(productTypeArgumentCaptor.capture());
+        assertEquals(productType, productTypeArgumentCaptor.getValue());
+    }
 }

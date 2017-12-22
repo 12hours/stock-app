@@ -17,4 +17,6 @@ public interface ProductIncomeService {
 
     void deleteProductIncome(Integer id) throws DataAccessException;
 
+    void updateProductIncome(ProductIncomeForm productIncomeForm) throws DataAccessException;
+
 }

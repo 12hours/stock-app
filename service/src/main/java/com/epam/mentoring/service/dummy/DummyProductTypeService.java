@@ -25,8 +25,7 @@ public class DummyProductTypeService implements ProductTypeService {
     }
 
     @Override
-    public Integer updateProductType(ProductType productType) throws DataAccessException {
-        return null;
+    public void updateProductType(ProductType productType) throws DataAccessException {
     }
 
     @Override

@@ -28,8 +28,7 @@ public class DummySupplierService implements SupplierService {
     }
 
     @Override
-    public int updateSupplier(Supplier supplier) throws DataAccessException {
-        return 0;
+    public void updateSupplier(Supplier supplier) throws DataAccessException {
     }
 
     @Override
