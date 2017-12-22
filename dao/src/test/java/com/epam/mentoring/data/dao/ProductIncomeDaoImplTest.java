@@ -175,7 +175,9 @@ public class ProductIncomeDaoImplTest {
 	@Test
 	public void updateProductIncomeTest() {
         ProductIncome expectedProductIncome = dao.getProductIncomeById(7);
-        expectedProductIncome.setDate(new java.util.Date(System.currentTimeMillis()));
+        Calendar date = Calendar.getInstance();
+        date.set(2017, 9, 25);
+        expectedProductIncome.setDate(new Date(date.getTimeInMillis()));
         expectedProductIncome.setOrderNumber(44L);
         expectedProductIncome.setProduct(new Product(1, null, null, null));
         expectedProductIncome.setQuantity(76);
@@ -185,12 +187,17 @@ public class ProductIncomeDaoImplTest {
 
         ProductIncome realProductIncome = dao.getProductIncomeById(7);
         assertEquals(expectedProductIncome.getUser().getId(), realProductIncome.getUser().getId());
-        assertEquals(expectedProductIncome.getProduct().getId(), realProductIncome.getUser().getId());
+        assertEquals(expectedProductIncome.getProduct().getId(), realProductIncome.getProduct().getId());
         assertEquals(expectedProductIncome.getSupplier().getId(), realProductIncome.getSupplier().getId());
         assertEquals(expectedProductIncome.getOrderNumber(), realProductIncome.getOrderNumber());
         assertEquals(expectedProductIncome.getQuantity(), realProductIncome.getQuantity());
-        assertEquals(expectedProductIncome.getDate(), realProductIncome.getDate());
         assertEquals(expectedProductIncome.getId(), realProductIncome.getId());
+
+        Calendar dateExtracted = Calendar.getInstance();
+        dateExtracted.setTime(realProductIncome.getDate());
+        assertEquals(date.get(date.YEAR), dateExtracted.get(dateExtracted.YEAR));
+        assertEquals(date.get(date.MONTH), dateExtracted.get(dateExtracted.MONTH));
+        assertEquals(date.get(date.DAY_OF_MONTH), dateExtracted.get(dateExtracted.DAY_OF_MONTH));
     }
 
     @Test(expected = DataAccessException.class)
