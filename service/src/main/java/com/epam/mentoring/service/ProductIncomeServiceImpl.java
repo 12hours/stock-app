@@ -54,4 +54,10 @@ public class ProductIncomeServiceImpl implements ProductIncomeService {
         ProductIncome productIncome = DTOUtils.map(productIncomeForm, ProductIncome.class);
         return saveProductIncome(productIncome);
     }
+
+    @Override
+    public void deleteProductIncome(Integer id) throws DataAccessException {
+        Assert.notNull(id, "No id provided");
+        productIncomeDao.deleteProductIncome(id);
+    }
 }

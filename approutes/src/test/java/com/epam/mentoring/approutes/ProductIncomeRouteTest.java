@@ -23,6 +23,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 
+import javax.ws.rs.core.Response;
 import java.util.Date;
 
 import static org.junit.Assert.assertEquals;
@@ -77,5 +78,15 @@ public class ProductIncomeRouteTest {
         assertEquals("{\"id\":45}", response.getIn().getBody());
     }
 
+    @Test
+    public void deleteProductTest() {
+        DefaultExchange exchange = new DefaultExchange(context);
+        DefaultMessage in = new DefaultMessage();
+        in.setHeader(Headers.METHOD, Headers.DELETE);
+        exchange.setIn(in);
 
+        Exchange response = template.send(RouteNames.PRODUCT_INCOME_ROUTE, exchange);
+        Mockito.verify(productIncomeServiceMock, Mockito.times(1)).deleteProductIncome(Mockito.anyInt());
+        assertEquals(Response.Status.OK, response.getIn().getHeader(Headers.STATUS));
+    }
 }

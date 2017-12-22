@@ -24,7 +24,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 
+import javax.ws.rs.core.Response;
+
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Matchers.anyInt;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
 @RunWith(CamelSpringJUnit4ClassRunner.class)
 @ContextConfiguration(value = {"classpath:/test-context.xml"})
@@ -83,11 +88,21 @@ public class SupplierRouteTest {
         exchange.setIn(in);
 
         Exchange response = template.send(RouteNames.SUPPLIER_ROUTE, exchange);
-        Mockito.verify(supplierServiceMock).saveSupplier(supplierFormArgumentCaptor.capture());
+        verify(supplierServiceMock).saveSupplier(supplierFormArgumentCaptor.capture());
         assertEquals(supplierFormArgumentCaptor.getValue(), new SupplierForm("testSupplierName", "testSupplierDetails"));
         assertEquals("{\"id\":44}", response.getIn().getBody());
     }
 
+    @Test
+    public void deleteSupplierTest() {
+        Exchange exchange = new DefaultExchange(context);
+        Message in = new DefaultMessage();
+        in.setHeader(Headers.METHOD, Headers.DELETE);
+        exchange.setIn(in);
 
+        Exchange response = template.send(RouteNames.SUPPLIER_ROUTE, exchange);
+        verify(supplierServiceMock, times(1)).deleteSupplier(anyInt());
+        assertEquals(Response.Status.OK, response.getIn().getHeader(Headers.STATUS));
 
+    }
 }

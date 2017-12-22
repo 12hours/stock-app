@@ -23,10 +23,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 
+import javax.ws.rs.core.Response;
 import java.math.BigDecimal;
 import java.util.HashMap;
 
 import static org.junit.Assert.*;
+import static org.mockito.Matchers.anyLong;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
 @RunWith(CamelSpringJUnit4ClassRunner.class)
 @ContextConfiguration(value = {"classpath:/test-context.xml"})
@@ -95,9 +99,20 @@ public class ProductRouteTest {
         exchange.setIn(in);
 
         Exchange response = template.send(RouteNames.PRODUCT_ROUTE, exchange);
-        Mockito.verify(productServiceMock).saveProduct(productFormArgumentCaptor.capture());
+        verify(productServiceMock).saveProduct(productFormArgumentCaptor.capture());
         assertEquals(productFormArgumentCaptor.getValue(), new ProductForm("testProduct", BigDecimal.valueOf(100), Integer.valueOf(1)));
         assertEquals("{\"id\":42}", response.getIn().getBody());
     }
 
+    @Test
+    public void deleteProductTest() {
+        Exchange exchange = new DefaultExchange(context);
+        DefaultMessage in = new DefaultMessage();
+        in.setHeader(Headers.METHOD, Headers.DELETE);
+        exchange.setIn(in);
+
+        Exchange response = template.send(RouteNames.PRODUCT_ROUTE, exchange);
+        verify(productServiceMock, times(1)).deleteProductById(anyLong());
+        assertEquals(Response.Status.OK, response.getIn().getHeader(Headers.STATUS));
+    }
 }

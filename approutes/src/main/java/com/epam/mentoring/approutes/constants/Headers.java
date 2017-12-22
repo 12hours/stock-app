@@ -9,7 +9,8 @@ public class Headers {
     public static final String GET_BY_ID = "get_by_id";
     public static final String GET_ALL_WITH_QAUNT = "get_all_with_quantities";
     public static final String POST = "post";
-
+    public static final String DELETE = "delete";
+    public static final String UPDATE = "update";
 
     public static final String STATUS = "status";
 }

@@ -1,5 +1,6 @@
 package com.epam.mentoring.approutes.routes;
 
+import com.epam.mentoring.approutes.processors.supplier.DeleteSupplierProcessor;
 import com.epam.mentoring.data.model.dto.SupplierForm;
 import com.epam.mentoring.approutes.constants.Headers;
 import com.epam.mentoring.approutes.constants.RouteNames;
@@ -31,6 +32,8 @@ public class SupplierRoute extends RouteBuilder {
                 .when(header(Headers.METHOD).isEqualTo(Headers.POST))
                     .unmarshal().json(JsonLibrary.Jackson, SupplierForm.class)
                     .process(new SaveSupplierProcessor(supplierService))
+                .when(header(Headers.METHOD).isEqualTo(Headers.DELETE))
+                    .process(new DeleteSupplierProcessor(supplierService))
                 .otherwise().throwException(new UnsupportedOperationException())
                 .end()
                 .marshal().json(JsonLibrary.Jackson)

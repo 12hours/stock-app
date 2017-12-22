@@ -15,4 +15,6 @@ public interface ProductIncomeService {
 
     Integer saveProductIncome(ProductIncomeForm productIncomeForm) throws DataAccessException;
 
+    void deleteProductIncome(Integer id) throws DataAccessException;
+
 }

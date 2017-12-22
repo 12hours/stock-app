@@ -1,5 +1,6 @@
 package com.epam.mentoring.approutes.routes;
 
+import com.epam.mentoring.approutes.processors.producttype.DeleteProductTypeProcessor;
 import com.epam.mentoring.data.model.dto.ProductTypeForm;
 import com.epam.mentoring.approutes.constants.Headers;
 import com.epam.mentoring.approutes.constants.RouteNames;
@@ -31,6 +32,8 @@ public class ProductTypeRoute extends RouteBuilder {
                 .when(header(Headers.METHOD).isEqualTo(Headers.POST))
                     .unmarshal().json(JsonLibrary.Jackson, ProductTypeForm.class)
                     .process(new SaveProductTypeProcessor(productTypeService))
+                .when(header(Headers.METHOD).isEqualTo(Headers.DELETE))
+                    .process(new DeleteProductTypeProcessor(productTypeService))
                 .otherwise().throwException(new UnsupportedOperationException())
                 .end()
                 .marshal().json(JsonLibrary.Jackson)

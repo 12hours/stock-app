@@ -1,5 +1,6 @@
 package com.epam.mentoring.approutes.routes;
 
+import com.epam.mentoring.approutes.processors.productincome.DeleteProductIncomeProcesoor;
 import com.epam.mentoring.data.model.dto.ProductIncomeForm;
 import com.epam.mentoring.approutes.constants.Headers;
 import com.epam.mentoring.approutes.constants.RouteNames;
@@ -22,10 +23,12 @@ public class ProductIncomeRoute extends RouteBuilder {
         from(RouteNames.PRODUCT_INCOME_ROUTE).routeId(RouteNames.PRODUCT_INCOME_ROUTE_ID)
                 .choice()
                 .when(header(Headers.METHOD).isEqualTo(Headers.GET_BY_ID))
-                .process(new GetProductIncomeByIdProcessor(productIncomeService))
+                   .process(new GetProductIncomeByIdProcessor(productIncomeService))
                 .when(header(Headers.METHOD).isEqualTo(Headers.POST))
-                .unmarshal().json(JsonLibrary.Jackson, ProductIncomeForm.class)
-                .process(new SaveProductIncomeProcessor(productIncomeService))
+                    .unmarshal().json(JsonLibrary.Jackson, ProductIncomeForm.class)
+                    .process(new SaveProductIncomeProcessor(productIncomeService))
+                .when(header(Headers.METHOD).isEqualTo(Headers.DELETE))
+                    .process(new DeleteProductIncomeProcesoor(productIncomeService))
                 .otherwise().throwException(new UnsupportedOperationException())
                 .end()
                 .marshal().json(JsonLibrary.Jackson)
