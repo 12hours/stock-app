@@ -7,6 +7,7 @@ import com.epam.mentoring.approutes.constants.RouteNames;
 import com.epam.mentoring.approutes.processors.productincome.GetProductIncomeByIdProcessor;
 import com.epam.mentoring.approutes.processors.productincome.SaveProductIncomeProcessor;
 import com.epam.mentoring.service.ProductIncomeService;
+import org.apache.camel.LoggingLevel;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.model.dataformat.JsonLibrary;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,7 @@ public class ProductIncomeRoute extends RouteBuilder {
     @Override
     public void configure() throws Exception {
         from(RouteNames.PRODUCT_INCOME_ROUTE).routeId(RouteNames.PRODUCT_INCOME_ROUTE_ID)
+                .log(LoggingLevel.DEBUG, "Method: " + header(Headers.METHOD))
                 .choice()
                 .when(header(Headers.METHOD).isEqualTo(Headers.GET_BY_ID))
                    .process(new GetProductIncomeByIdProcessor(productIncomeService))

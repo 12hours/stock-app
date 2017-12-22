@@ -9,6 +9,7 @@ import com.epam.mentoring.approutes.processors.product.GetAllProductsProcessor;
 import com.epam.mentoring.approutes.processors.product.GetProductByIdProcessor;
 import com.epam.mentoring.approutes.processors.product.SaveProductProcessor;
 import com.epam.mentoring.service.ProductService;
+import org.apache.camel.LoggingLevel;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.model.dataformat.JsonDataFormat;
 import org.apache.camel.model.dataformat.JsonLibrary;
@@ -24,6 +25,7 @@ public class ProductRoute extends RouteBuilder {
     @Override
     public void configure() throws Exception {
         from(RouteNames.PRODUCT_ROUTE).routeId(RouteNames.PRODUCT_ROUTE_ID)
+                .log(LoggingLevel.DEBUG, "Method: " + header(Headers.METHOD))
                 .choice()
                 .when(header(Headers.METHOD).isEqualTo(Headers.GET_ALL))
                    .process(new GetAllProductsProcessor(productService))

@@ -1,15 +1,14 @@
 package com.epam.mentoring.approutes.routes;
 
-import com.epam.mentoring.approutes.processors.supplier.DeleteSupplierProcessor;
-import com.epam.mentoring.data.model.dto.SupplierForm;
 import com.epam.mentoring.approutes.constants.Headers;
 import com.epam.mentoring.approutes.constants.RouteNames;
+import com.epam.mentoring.approutes.processors.supplier.DeleteSupplierProcessor;
 import com.epam.mentoring.approutes.processors.supplier.GetAllSuppliersProcessor;
 import com.epam.mentoring.approutes.processors.supplier.GetSupplierByIdProcessor;
 import com.epam.mentoring.approutes.processors.supplier.SaveSupplierProcessor;
+import com.epam.mentoring.data.model.dto.SupplierForm;
 import com.epam.mentoring.service.SupplierService;
-import org.apache.camel.Exchange;
-import org.apache.camel.Processor;
+import org.apache.camel.LoggingLevel;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.model.dataformat.JsonLibrary;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +23,7 @@ public class SupplierRoute extends RouteBuilder {
     @Override
     public void configure() throws Exception {
         from(RouteNames.SUPPLIER_ROUTE).routeId(RouteNames.SUPPLIER_ROUTE_ID)
+                .log(LoggingLevel.DEBUG, "Method: " + header(Headers.METHOD))
                 .choice()
                 .when(header(Headers.METHOD).isEqualTo(Headers.GET_ALL))
                     .process(new GetAllSuppliersProcessor(supplierService))

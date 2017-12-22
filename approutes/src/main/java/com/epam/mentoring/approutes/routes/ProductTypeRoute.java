@@ -9,6 +9,7 @@ import com.epam.mentoring.approutes.processors.producttype.GetProductTypeByIdPro
 import com.epam.mentoring.approutes.processors.producttype.SaveProductTypeProcessor;
 import com.epam.mentoring.service.ProductTypeService;
 import org.apache.camel.Exchange;
+import org.apache.camel.LoggingLevel;
 import org.apache.camel.Processor;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.model.dataformat.JsonLibrary;
@@ -24,6 +25,7 @@ public class ProductTypeRoute extends RouteBuilder {
     @Override
     public void configure() throws Exception {
         from(RouteNames.PRODUCT_TYPE_ROUTE).routeId(RouteNames.PRODUCT_TYPE_ROUTE_ID)
+                .log(LoggingLevel.DEBUG, "Method: " + header(Headers.METHOD))
                 .choice()
                 .when(header(Headers.METHOD).isEqualTo(Headers.GET_ALL))
                     .process(new GetAllProductTypesProcessor(productTypeService))
