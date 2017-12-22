@@ -15,4 +15,8 @@ public interface SupplierConsumer {
     Supplier findSupplier(Integer id) throws ServerDataAccessException;
 
     List<Supplier> findAll() throws ServerDataAccessException;
+
+    void updateSupplier(Integer id, SupplierForm supplierForm) throws ServerDataAccessException;
+
+    void deleteSupplier(Integer id) throws ServerDataAccessException;
 }

@@ -15,26 +15,20 @@ public interface ProductConsumer {
 	
 	Product findProductById(Long id) throws ServerDataAccessException;
 	
-	Product findProductByName(String name) throws ServerDataAccessException;
-	
-	List<Product> findAllProductsByType(ProductType type) throws ServerDataAccessException;
-	
 	Integer saveProduct(Product product) throws ServerDataAccessException;
 
 	Integer saveProduct(ProductForm productForm) throws ServerDataAccessException;
-	
-	Product updateProduct(Long id, Product product) throws ServerDataAccessException;
 	
 	List<Product> getAllProducts() throws ServerDataAccessException;
 
     List<ProductView> getAllProductViews() throws ServerDataAccessException;
 
-    Integer getProductQuantity(Long id) throws ServerDataAccessException;
-	
 	Map<Product, Integer> getAllProductsWithQuantites() throws ServerDataAccessException;
 
 	List<ProductWithQuantityView> getAllProductsWithQuantitiesViews() throws ServerDataAccessException;
-	
-	void deleteProductById(Long id) throws ServerDataAccessException;
-	
+
+	void updateProduct(Integer id, Product product) throws ServerDataAccessException;
+
+	void deleteProductById(Integer id) throws ServerDataAccessException;
+
 }
