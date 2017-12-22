@@ -29,7 +29,10 @@ public class ProductTypeDaoImpl implements ProductTypeDao {
 
 	@Value("${product_type.add}")
 	private String ADD_PRODUCT_TYPE_SQL;
-	
+
+	@Value("${product_type.update}")
+	private String UPDATE_PRODUCT_TYPE_SQL;
+
 	private JdbcTemplate jdbcTemplate;
 	@Autowired
 	private ProductTypeRowMapper productTypeRowMapper;
@@ -55,8 +58,9 @@ public class ProductTypeDaoImpl implements ProductTypeDao {
 
 	@Override
 	public int updateProductType(ProductType productType) throws DataAccessException {
-		// TODO Auto-generated method stub
-		return 0;
+        int update = jdbcTemplate.update(UPDATE_PRODUCT_TYPE_SQL, productType.getName());
+        if (update != 1) throw new DataAccessException("Can not perform update"){};
+        return 0;
 	}
 
 	@Override
@@ -75,7 +79,7 @@ public class ProductTypeDaoImpl implements ProductTypeDao {
 
 	@Override
 	public int deleteProductType(Integer id) throws DataAccessException {
-		// TODO Auto-generated method stub
+
 		return 0;
 	}
 

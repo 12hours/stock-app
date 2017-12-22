@@ -9,6 +9,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
 import org.springframework.test.context.ActiveProfiles;
@@ -85,6 +86,22 @@ public class ProductTypeDaoImplTest {
 
 		assertTrue(productTypes.contains(productTypeToFind));
 	}
+
+	@Test
+	public void updateProductTypeTest() {
+        ProductType expectedProductType = dao.getProductTypeById(3);
+        expectedProductType.setName("updatedName");
+        dao.updateProductType(expectedProductType);
+        ProductType realProductType = dao.getProductTypeById(3);
+        assertEquals(expectedProductType.getName(), realProductType.getName());
+    }
+
+    @Test(expected = DataAccessException.class)
+    public void updateProductTypeExceptionTest() {
+        ProductType productType = dao.getProductTypeById(3);
+        productType.setId(999);
+        dao.updateProductType(productType);
+    }
 	
 	
 }
