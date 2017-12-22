@@ -70,7 +70,7 @@ public class DummyProductService implements ProductService{
     }
 
     @Override
-    public void deleteProductById(Long id) throws DataAccessException {
+    public void deleteProductById(Integer id) throws DataAccessException {
 
     }
 

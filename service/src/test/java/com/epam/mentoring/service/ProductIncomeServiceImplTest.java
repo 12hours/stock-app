@@ -15,18 +15,22 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import static org.junit.Assert.*;
 import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
-public class ProductIncomeServiceImpTest {
+public class ProductIncomeServiceImplTest {
 
     @Mock
     ProductIncomeDao dao;
 
     @Captor
     ArgumentCaptor<ProductIncome> productIncomeArgumentCaptor;
+
+    @Captor
+    ArgumentCaptor<Integer> integerArgumentCaptor;
 
     ProductIncomeService productIncomeService;
 
@@ -85,4 +89,11 @@ public class ProductIncomeServiceImpTest {
         Integer id = productIncomeService.saveProductIncome(productIncomeForm);
     }
 
+    @Test
+    public void deleteProductIncome() {
+        productIncomeService.deleteProductIncome(3);
+        verify(dao, times(1)).deleteProductIncome(anyInt());
+        verify(dao).deleteProductIncome(integerArgumentCaptor.capture());
+        assertEquals(3, integerArgumentCaptor.getValue().intValue());
+    }
 }

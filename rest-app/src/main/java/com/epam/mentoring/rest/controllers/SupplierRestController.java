@@ -57,6 +57,7 @@ public class SupplierRestController {
         log.debug("DELETE: {}/{}", Paths.SUPPLIER_URI, id);
         HashMap<String, Object> headers = new HashMap<>();
         headers.put(Headers.METHOD, Headers.DELETE);
+        headers.put(Headers.ID, id);
         return handleRequest(null, headers);
     }
 

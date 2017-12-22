@@ -28,6 +28,7 @@ import java.math.BigDecimal;
 import java.util.HashMap;
 
 import static org.junit.Assert.*;
+import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anyLong;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -112,7 +113,7 @@ public class ProductRouteTest {
         exchange.setIn(in);
 
         Exchange response = template.send(RouteNames.PRODUCT_ROUTE, exchange);
-        verify(productServiceMock, times(1)).deleteProductById(anyLong());
+        verify(productServiceMock, times(1)).deleteProductById(anyInt());
         assertEquals(Response.Status.OK, response.getIn().getHeader(Headers.STATUS));
     }
 }

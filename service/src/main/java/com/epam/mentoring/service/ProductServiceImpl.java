@@ -100,8 +100,10 @@ public class ProductServiceImpl implements ProductService {
 	}
 	
 	@Override
-	public void deleteProductById(Long id) throws DataAccessException {
-		
+	public void deleteProductById(Integer id) throws DataAccessException {
+		Assert.notNull(id, "No id provided");
+		logger.debug("Deleting item with id: {}", id);
+		productDao.deleteProduct(id);
 	}
 
 	@Override

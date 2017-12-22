@@ -17,18 +17,22 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
-public class ProductTypeServiceImpTest {
+public class ProductTypeServiceImplTest {
 
     @Mock
     ProductTypeDao dao;
 
     @Captor
     ArgumentCaptor<ProductType> productTypeArgumentCaptor;
+
+    @Captor
+    ArgumentCaptor<Integer> integerArgumentCaptor;
 
     ProductTypeService productTypeService;
 
@@ -89,7 +93,11 @@ public class ProductTypeServiceImpTest {
     }
 
 
-
-
-
+    @Test
+    public void deleteProductTypeTest() {
+        productTypeService.deleteProductType(3);
+        verify(dao, times(1)).deleteProductType(anyInt());
+        verify(dao).deleteProductType(integerArgumentCaptor.capture());
+        assertEquals(3, integerArgumentCaptor.getValue().intValue());
+    }
 }

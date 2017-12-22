@@ -16,7 +16,7 @@ public class DeleteProductProcessor implements Processor {
 
     @Override
     public void process(Exchange exchange) throws Exception {
-        Long id = (Long) exchange.getIn().getHeader(Headers.ID);
+        Integer id = (Integer) exchange.getIn().getHeader(Headers.ID);
         productService.deleteProductById(id);
         exchange.getIn().setHeader(Headers.STATUS, Response.Status.OK);
     }

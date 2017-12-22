@@ -21,6 +21,8 @@ import java.util.Map;
 
 import static org.junit.Assert.*;
 import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyInt;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -32,6 +34,9 @@ public class ProductServiceImplTest {
 
     @Captor
     private ArgumentCaptor<Product> productArgumentCaptor;
+
+    @Captor
+    private ArgumentCaptor<Integer> integerArgumentCaptor;
 
     private ProductService productService;
 
@@ -52,14 +57,14 @@ public class ProductServiceImplTest {
                 add(new Product(3, "Core i7", new BigDecimal(300.0), new ProductType(1, "CPU")));
             }
         });
-        when(dao.getAllProductsWithQuantities()).thenReturn(new HashMap<Product, Integer>(){
+        when(dao.getAllProductsWithQuantities()).thenReturn(new HashMap<Product, Integer>() {
             {
                 put(new Product(1, "Core i3", new BigDecimal(100.0), new ProductType(1, "CPU")), 15);
                 put(new Product(2, "Core i5", new BigDecimal(200.0), new ProductType(1, "CPU")), 20);
                 put(new Product(3, "Core i7", new BigDecimal(300.0), new ProductType(1, "CPU")), 25);
             }
         });
-        
+
         productService = new ProductServiceImpl(dao);
     }
 
@@ -124,8 +129,15 @@ public class ProductServiceImplTest {
         Map<Product, Integer> products = productService.getAllProductsWithQuantities();
         assertNotNull(products);
         assertEquals(3, products.size());
-        assertEquals( Integer.valueOf(15),
-                products.get(new Product(1, "Core i3", new BigDecimal(100.0), new ProductType(1,"CPU"))));
+        assertEquals(Integer.valueOf(15),
+                products.get(new Product(1, "Core i3", new BigDecimal(100.0), new ProductType(1, "CPU"))));
     }
 
+    @Test
+    public void deleteProductTets() {
+        productService.deleteProductById(3);
+        verify(dao, times(1)).deleteProduct(anyInt());
+        verify(dao).deleteProduct(integerArgumentCaptor.capture());
+        assertEquals(3, integerArgumentCaptor.getValue().intValue());
+    }
 }

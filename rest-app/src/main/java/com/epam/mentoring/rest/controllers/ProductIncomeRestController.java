@@ -59,6 +59,7 @@ public class ProductIncomeRestController {
         log.debug("DELETE: {}/{}", Paths.PRODUCT_INCOME_URI, id);
         HashMap<String, Object> headers = new HashMap<>();
         headers.put(Headers.METHOD, Headers.DELETE);
+        headers.put(Headers.ID, id);
         return handleRequest(null, headers);
     }
 

@@ -36,7 +36,7 @@ public interface ProductService {
 	
 	Map<Product, Integer> getAllProductsWithQuantities() throws DataAccessException;
 	
-	void deleteProductById(Long id) throws DataAccessException;
+	void deleteProductById(Integer id) throws DataAccessException;
 
     List<ProductWithQuantityView> getAllProductsWithQuantitiesViews();
 }

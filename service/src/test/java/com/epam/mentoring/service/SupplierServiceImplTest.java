@@ -16,6 +16,7 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -28,6 +29,9 @@ public class SupplierServiceImplTest {
 
     @Captor
     ArgumentCaptor<Supplier> supplierArgumentCaptor;
+
+    @Captor
+    ArgumentCaptor<Integer> integerArgumentCaptor;
 
     SupplierService supplierService;
 
@@ -103,8 +107,11 @@ public class SupplierServiceImplTest {
         Integer id = supplierService.saveSupplier(supplierForm);
     }
 
-
-
-
-
+    @Test
+    public void deleteSupplierTets() {
+        supplierService.deleteSupplier(3);
+        verify(dao, times(1)).deleteSupplier(anyInt());
+        verify(dao).deleteSupplier(integerArgumentCaptor.capture());
+        assertEquals(3, integerArgumentCaptor.getValue().intValue());
+    }
 }

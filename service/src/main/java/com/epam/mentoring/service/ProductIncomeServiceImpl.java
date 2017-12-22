@@ -58,6 +58,7 @@ public class ProductIncomeServiceImpl implements ProductIncomeService {
     @Override
     public void deleteProductIncome(Integer id) throws DataAccessException {
         Assert.notNull(id, "No id provided");
+        logger.debug("Deleting item with id: {}", id);
         productIncomeDao.deleteProductIncome(id);
     }
 }
