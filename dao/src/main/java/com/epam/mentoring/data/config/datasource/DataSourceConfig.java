@@ -7,13 +7,11 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
-import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.jdbc.datasource.SimpleDriverDataSource;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 
 import javax.sql.DataSource;
-import java.sql.Driver;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
@@ -56,7 +54,7 @@ public class DataSourceConfig {
 
     private DataSource createMySqlDataSource() {
         try {
-            Class.forName(com.mysql.jdbc.Driver.class.getName());
+            Class.forName("com.mysql.jdbc.Driver");
         } catch (ClassNotFoundException e) {
             log.error("Mysql driver not found: {}", e);
         }
@@ -79,7 +77,7 @@ public class DataSourceConfig {
 
     private DataSource createH2MemDataSource() {
         try {
-            Class.forName(org.h2.Driver.class.getName());
+            Class.forName("org.h2.Driver");
         } catch (ClassNotFoundException e) {
             log.error("H2 Driver not found: {}", e);
         }
