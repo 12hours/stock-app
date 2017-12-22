@@ -134,6 +134,12 @@
             <testResource>
                 <directory>src/test/resources</directory>
                 <filtering>true</filtering>
+                <excludes>
+                    <exclude>sql/**</exclude>
+                </excludes>
+                <includes>
+                    <include>sql/h2/*</include>
+                </includes>
             </testResource>
         </testResources>
         <plugins>

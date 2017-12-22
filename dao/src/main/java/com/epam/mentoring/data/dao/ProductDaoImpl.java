@@ -89,7 +89,10 @@ public class ProductDaoImpl implements ProductDao {
 
 	@Override
 	public int updateProduct(Product product) {
-		// TODO Auto-generated method stub
+		int update = jdbcTemplate.update(UPDATE_PRODUCT_SQL, product.getName(), product.getPrice(), product.getType().getId(), product.getId());
+		if (update != 1) {
+			throw new DataAccessException("Can not perform update"){};
+		}
 		return 0;
 	}
 

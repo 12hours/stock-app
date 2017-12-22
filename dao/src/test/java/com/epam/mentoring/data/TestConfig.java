@@ -21,7 +21,7 @@ import com.epam.mentoring.data.dao.SupplierDaoImpl;
 
 @Configuration
 @Profile("test")
-@PropertySource("classpath:/h2/h2-database-sql.properties")
+@PropertySource("classpath:/database-sql.properties")
 @ComponentScan(basePackages = {"com.epam.mentoring.data.dao","com.epam.mentoring.data.util.mappers"})
 public class TestConfig {
     //

@@ -15,6 +15,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
 import org.springframework.test.context.ActiveProfiles;
@@ -233,4 +234,23 @@ public class ProductDaoImplTest {
 
 		assertTrue(productWithQuantityViews.containsAll(expectedQuantitiesList));
 	}
+
+
+	@Test
+	public void updateProductTest() {
+        Product expectedProduct = dao.getProductById(3);
+        expectedProduct.setName("updatedName");
+        expectedProduct.setPrice(BigDecimal.valueOf(12345L));
+        ProductType type = expectedProduct.getType();
+        expectedProduct.setType(new ProductType(1, "CPU"));
+        dao.updateProduct(expectedProduct);
+        assertEquals(expectedProduct, dao.getProductById(3));
+	}
+
+	@Test(expected = DataAccessException.class)
+    public void updateProductExceptionTest() {
+        Product expectedProduct = new Product(999, "UpdatedName", BigDecimal.valueOf(12345L), new ProductType(1, null));
+        dao.updateProduct(expectedProduct);
+    }
+
 }
