@@ -15,6 +15,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
 import org.springframework.test.context.ActiveProfiles;
@@ -170,5 +171,33 @@ public class ProductIncomeDaoImplTest {
 		assertEquals(userGoal, productIncomeExtracted.getUser());
 		
 	}
+
+	@Test
+	public void updateProductIncomeTest() {
+        ProductIncome expectedProductIncome = dao.getProductIncomeById(7);
+        expectedProductIncome.setDate(new java.util.Date(System.currentTimeMillis()));
+        expectedProductIncome.setOrderNumber(44L);
+        expectedProductIncome.setProduct(new Product(1, null, null, null));
+        expectedProductIncome.setQuantity(76);
+        expectedProductIncome.setUser(new User(2, null, null, true));
+        expectedProductIncome.setSupplier(new Supplier(3, null, null));
+        dao.updateProductIncome(expectedProductIncome);
+
+        ProductIncome realProductIncome = dao.getProductIncomeById(7);
+        assertEquals(expectedProductIncome.getUser().getId(), realProductIncome.getUser().getId());
+        assertEquals(expectedProductIncome.getProduct().getId(), realProductIncome.getUser().getId());
+        assertEquals(expectedProductIncome.getSupplier().getId(), realProductIncome.getSupplier().getId());
+        assertEquals(expectedProductIncome.getOrderNumber(), realProductIncome.getOrderNumber());
+        assertEquals(expectedProductIncome.getQuantity(), realProductIncome.getQuantity());
+        assertEquals(expectedProductIncome.getDate(), realProductIncome.getDate());
+        assertEquals(expectedProductIncome.getId(), realProductIncome.getId());
+    }
+
+    @Test(expected = DataAccessException.class)
+    public void updateProductIncomeExceptionTest() {
+        ProductIncome productIncomeById = dao.getProductIncomeById(7);
+        productIncomeById.setId(999);
+        dao.updateProductIncome(productIncomeById);
+    }
 
 }

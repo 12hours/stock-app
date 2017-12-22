@@ -25,7 +25,10 @@ public class ProductIncomeDaoImpl implements ProductIncomeDao {
 	
 	@Value("${product_income.add}")
 	private String ADD_PRODUCT_INCOME_SQL;
-	
+
+	@Value("${product_income.update}")
+	private String UPDATE_PRODUCT_INCOME_SQL;
+
 	@Autowired
 	private ProductIncomeRowMapper productIncomeRowMapper;
 
@@ -73,6 +76,14 @@ public class ProductIncomeDaoImpl implements ProductIncomeDao {
 
 	@Override
 	public Integer updateProductIncome(ProductIncome productIncome) throws DataAccessException {
+		int update = jdbcTemplate.update(UPDATE_PRODUCT_INCOME_SQL, productIncome.getDate(),
+				productIncome.getOrderNumber(),
+				productIncome.getQuantity(),
+				productIncome.getProduct().getId(),
+				productIncome.getSupplier().getId(),
+				productIncome.getUser().getId(),
+				productIncome.getId());
+		if (update != 1) throw new DataAccessException("Can not perform update"){};
 		return null;
 	}
 
