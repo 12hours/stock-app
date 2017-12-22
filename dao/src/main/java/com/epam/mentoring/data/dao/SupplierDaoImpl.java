@@ -27,7 +27,10 @@ public class SupplierDaoImpl implements SupplierDao {
 	
 	@Value("${supplier.add}")
 	private String ADD_SUPPLIER_SQL;
-	
+
+	@Value("${supplier.update}")
+	private String UPDATE_SUPPLIER_SQL;
+
 	private JdbcTemplate jdbcTemplate;
 	
 	@Autowired
@@ -69,8 +72,9 @@ public class SupplierDaoImpl implements SupplierDao {
 
 	@Override
 	public int updateSupplier(Supplier supplier) throws DataAccessException {
-		// TODO Auto-generated method stub
-		return 0;
+        int update = jdbcTemplate.update(UPDATE_SUPPLIER_SQL, supplier.getName(), supplier.getDetails(), supplier.getId());
+        if (update != 1) throw new DataAccessException("Can not perform update"){};
+        return 0;
 	}
 
 	@Override

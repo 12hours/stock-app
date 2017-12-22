@@ -9,6 +9,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
 import org.springframework.test.context.ActiveProfiles;
@@ -89,5 +90,22 @@ public class SupplierDaoImplTest {
 		supplierToFind.setDetails("");
 		assertTrue(suppliers.contains(supplierToFind));
 	}
-	
+
+	@Test
+	public void updateSupplierTest() {
+        Supplier expectedSupplier = dao.getSupplierById(2);
+        expectedSupplier.setName("updatedName");
+        expectedSupplier.setDetails("updateDetails");
+        dao.updateSupplier(expectedSupplier);
+        Supplier realSupplier = dao.getSupplierById(2);
+        assertEquals(expectedSupplier, realSupplier);
+    }
+
+    @Test(expected = DataAccessException.class)
+    public void updateSupplierExceptionTest() {
+        Supplier supplier = dao.getSupplierById(2);
+        supplier.setId(999);
+        dao.updateSupplier(supplier);
+    }
+
 }
