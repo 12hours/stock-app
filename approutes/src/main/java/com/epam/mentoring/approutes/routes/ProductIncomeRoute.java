@@ -22,7 +22,7 @@ public class ProductIncomeRoute extends RouteBuilder {
     @Override
     public void configure() throws Exception {
         from(RouteNames.PRODUCT_INCOME_ROUTE).routeId(RouteNames.PRODUCT_INCOME_ROUTE_ID)
-                .log(LoggingLevel.DEBUG, "Method: " + header(Headers.METHOD))
+                .to("log:" + this.getClass().getName() + "?level=DEBUG&showHeaders=true&showBody=false&showBodyType=false")
                 .choice()
                 .when(header(Headers.METHOD).isEqualTo(Headers.GET_BY_ID))
                    .process(new GetProductIncomeByIdProcessor(productIncomeService))
