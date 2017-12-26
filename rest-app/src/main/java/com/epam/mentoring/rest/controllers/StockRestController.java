@@ -1,5 +1,6 @@
 package com.epam.mentoring.rest.controllers;
 
+import com.epam.mentoring.data.model.dto.ProductWithQuantityView;
 import com.epam.mentoring.rest.Headers;
 import com.epam.mentoring.rest.Paths;
 import com.epam.mentoring.rest.RouteNames;
@@ -30,7 +31,7 @@ public class StockRestController {
     @GET
     @Path("/list")
     @Produces(MediaType.APPLICATION_JSON)
-    @ApiOperation(value = "Retrieve list of products on stock", response = java.util.List.class)
+    @ApiOperation(value = "Retrieve list of products on stock", responseContainer = "List", response = ProductWithQuantityView.class)
     @ApiResponses({
             @ApiResponse(code = 500, message = "Internal server error"),
             @ApiResponse(code = 200, message = "Stock list returned.")
