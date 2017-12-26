@@ -1,13 +1,12 @@
 package com.epam.mentoring.approutes.routes;
 
-import com.epam.mentoring.approutes.processors.productincome.DeleteProductIncomeProcesoor;
-import com.epam.mentoring.data.model.dto.ProductIncomeForm;
 import com.epam.mentoring.approutes.constants.Headers;
 import com.epam.mentoring.approutes.constants.RouteNames;
+import com.epam.mentoring.approutes.processors.productincome.DeleteProductIncomeProcesoor;
 import com.epam.mentoring.approutes.processors.productincome.GetProductIncomeByIdProcessor;
 import com.epam.mentoring.approutes.processors.productincome.SaveProductIncomeProcessor;
+import com.epam.mentoring.data.model.dto.ProductIncomeForm;
 import com.epam.mentoring.service.ProductIncomeService;
-import org.apache.camel.LoggingLevel;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.model.dataformat.JsonLibrary;
 import org.springframework.beans.factory.annotation.Autowired;

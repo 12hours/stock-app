@@ -3,6 +3,10 @@ package com.epam.mentoring.rest.controllers;
 import com.epam.mentoring.rest.Headers;
 import com.epam.mentoring.rest.Paths;
 import com.epam.mentoring.rest.RouteNames;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import org.apache.camel.EndpointInject;
 import org.apache.camel.ProducerTemplate;
 import org.slf4j.Logger;
@@ -14,6 +18,7 @@ import javax.ws.rs.core.Response;
 import java.util.HashMap;
 import java.util.Map;
 
+@Api(value = "Stock service", description = "Operations with stock")
 @Path(Paths.STOCK_URI)
 public class StockRestController {
 
@@ -25,6 +30,11 @@ public class StockRestController {
     @GET
     @Path("/list")
     @Produces(MediaType.APPLICATION_JSON)
+    @ApiOperation(value = "Retrieve list of products on stock", response = java.util.List.class)
+    @ApiResponses({
+            @ApiResponse(code = 500, message = "Internal server error"),
+            @ApiResponse(code = 200, message = "Stock list returned.")
+    })
     public Response getProductIncome() {
         log.debug("GET: {}/list", Paths.STOCK_URI);
         HashMap<String, Object> headers = new HashMap<>();

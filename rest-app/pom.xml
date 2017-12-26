@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.epam.mentoring</groupId>
@@ -89,66 +89,106 @@
             <artifactId>javax.servlet-api</artifactId>
         </dependency>
 
-    </dependencies>
+        <dependency>
+            <groupId>io.swagger</groupId>
+            <artifactId>swagger-annotations</artifactId>
+            <version>1.5.7</version>
+        </dependency>
 
+    </dependencies>
 
 
     <build>
         <finalName>rest-app</finalName>
         <!--<plugins>-->
-            <!--&lt;!&ndash; embedded Jetty server, for testing &ndash;&gt;-->
-            <!--<plugin>-->
-                <!--<groupId>org.eclipse.jetty</groupId>-->
-                <!--<artifactId>jetty-maven-plugin</artifactId>-->
-                <!--<configuration>-->
-                    <!--<reload>automatic</reload>-->
-                    <!--<httpConnector>-->
-                        <!--<host>0.0.0.0</host>-->
-                        <!--<port>8080</port>-->
-                        <!--<name>rest-app</name>-->
-                    <!--</httpConnector>-->
-                    <!--<webApp>-->
-                        <!--<contextPath>/rest-app</contextPath>-->
-                    <!--</webApp>-->
-                <!--</configuration>-->
-            <!--</plugin>-->
+        <!--&lt;!&ndash; embedded Jetty server, for testing &ndash;&gt;-->
+        <!--<plugin>-->
+        <!--<groupId>org.eclipse.jetty</groupId>-->
+        <!--<artifactId>jetty-maven-plugin</artifactId>-->
+        <!--<configuration>-->
+        <!--<reload>automatic</reload>-->
+        <!--<httpConnector>-->
+        <!--<host>0.0.0.0</host>-->
+        <!--<port>8080</port>-->
+        <!--<name>rest-app</name>-->
+        <!--</httpConnector>-->
+        <!--<webApp>-->
+        <!--<contextPath>/rest-app</contextPath>-->
+        <!--</webApp>-->
+        <!--</configuration>-->
+        <!--</plugin>-->
 
-            <!--<plugin>-->
-                <!--<groupId>org.asciidoctor</groupId>-->
-                <!--<artifactId>asciidoctor-maven-plugin</artifactId>-->
-                <!--<version>1.5.6</version>-->
-                <!--<executions>-->
-                    <!--<execution>-->
-                        <!--<id>output-html</id>-->
-                        <!--<phase>prepare-package</phase>-->
-                        <!--<goals>-->
-                            <!--<goal>process-asciidoc</goal>-->
-                        <!--</goals>-->
-                    <!--</execution>-->
-                <!--</executions>-->
+        <!--<plugin>-->
+        <!--<groupId>org.asciidoctor</groupId>-->
+        <!--<artifactId>asciidoctor-maven-plugin</artifactId>-->
+        <!--<version>1.5.6</version>-->
+        <!--<executions>-->
+        <!--<execution>-->
+        <!--<id>output-html</id>-->
+        <!--<phase>prepare-package</phase>-->
+        <!--<goals>-->
+        <!--<goal>process-asciidoc</goal>-->
+        <!--</goals>-->
+        <!--</execution>-->
+        <!--</executions>-->
 
-                <!--<configuration>-->
-                    <!--<backend>html</backend>-->
-                    <!--<doctype>book</doctype>-->
-                    <!--<attributes>-->
-                        <!--<snippets>${project.build.directory}/asciidoc</snippets>-->
-                    <!--</attributes>-->
-                <!--</configuration>-->
-            <!--</plugin>-->
+        <!--<configuration>-->
+        <!--<backend>html</backend>-->
+        <!--<doctype>book</doctype>-->
+        <!--<attributes>-->
+        <!--<snippets>${project.build.directory}/asciidoc</snippets>-->
+        <!--</attributes>-->
+        <!--</configuration>-->
+        <!--</plugin>-->
         <!--</plugins>-->
 
         <defaultGoal>install</defaultGoal>
 
         <plugins>
             <!--<plugin>-->
-                <!--<artifactId>maven-jar-plugin</artifactId>-->
-                <!--<version>3.0.0</version>-->
-                <!--<configuration>-->
-                    <!--<archive>-->
-                        <!--<manifestFile>${project.build.outputDirectory}/META-INF/MANIFEST.MF</manifestFile>-->
-                    <!--</archive>-->
-                <!--</configuration>-->
+            <!--<artifactId>maven-jar-plugin</artifactId>-->
+            <!--<version>3.0.0</version>-->
+            <!--<configuration>-->
+            <!--<archive>-->
+            <!--<manifestFile>${project.build.outputDirectory}/META-INF/MANIFEST.MF</manifestFile>-->
+            <!--</archive>-->
+            <!--</configuration>-->
             <!--</plugin>-->
+
+            <plugin>
+                <groupId>com.github.kongchen</groupId>
+                <artifactId>swagger-maven-plugin</artifactId>
+                <version>3.1.4</version>
+                <configuration>
+                    <apiSources>
+                        <apiSource>
+                            <springmvc>false</springmvc>
+                            <locations>
+                                <location>com.epam.mentoring.rest.controllers</location>
+                            </locations>
+                            <schemes>http</schemes>
+                            <host>0.0.0.0:8080</host>
+                            <swaggerDirectory>${project.build.directory}/swagger</swaggerDirectory>
+                            <outputFormats>json</outputFormats>
+                            <info>
+                                <title>swagger api</title>
+                                <description>rest-app api</description>
+                                <contact></contact>
+                                <version>1.0</version>
+                            </info>
+                        </apiSource>
+                    </apiSources>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
             <plugin>
                 <groupId>org.apache.felix</groupId>
                 <artifactId>maven-bundle-plugin</artifactId>
@@ -162,11 +202,11 @@
                     </instructions>
                 </configuration>
                 <!--<configuration>-->
-                    <!--<instructions>-->
-                        <!--<Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>-->
-                        <!--<Import-Package>!com.fasterxml.jackson.core,*</Import-Package>-->
-                        <!--<Embed-Dependency>jackson-databind</Embed-Dependency>-->
-                    <!--</instructions>-->
+                <!--<instructions>-->
+                <!--<Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>-->
+                <!--<Import-Package>!com.fasterxml.jackson.core,*</Import-Package>-->
+                <!--<Embed-Dependency>jackson-databind</Embed-Dependency>-->
+                <!--</instructions>-->
                 <!--</configuration>-->
             </plugin>
 
