@@ -21,11 +21,6 @@ import java.util.Map;
 @Path(Paths.SUPPLIER_URI)
 public class SupplierRestController {
 
-    Logger log = LoggerFactory.getLogger(SupplierRestController.class);
-
-    @EndpointInject(uri = RouteNames.SUPPLIER_ROUTE)
-    ProducerTemplate supplierRoute;
-
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @ApiOperation(value = "Retrieve list of all suppliers")
@@ -34,10 +29,7 @@ public class SupplierRestController {
             @ApiResponse(code = 500, message = "Server error")
     })
     public Response getAllSuppliers() {
-        log.debug("GET: {}", Paths.SUPPLIER_URI);
-        HashMap<String, Object> headers = new HashMap<>();
-        headers.put(Headers.METHOD, Headers.GET_ALL);
-        return handleRequest(null, headers);
+        return null;
     }
 
     @GET
@@ -51,11 +43,7 @@ public class SupplierRestController {
     public Response getSupplierById(
             @ApiParam(value = "Supplier id", required = true)
             @PathParam("id") Integer id) {
-        log.debug("GET: {}/{}", Paths.SUPPLIER_URI, id);
-        HashMap<String, Object> headers = new HashMap<>();
-        headers.put(Headers.METHOD, Headers.GET_BY_ID);
-        headers.put(Headers.ID, id);
-        return handleRequest(null, headers);
+        return null;
     }
 
     @POST
@@ -66,10 +54,7 @@ public class SupplierRestController {
             @ApiResponse(code = 500, message = "Server error")
     })
     public Response postSupplier(@ApiParam(value = "Supplier object", required = true) String body) {
-        log.debug("POST: {}", Paths.SUPPLIER_URI);
-        HashMap<String, Object> headers = new HashMap<>();
-        headers.put(Headers.METHOD, Headers.POST);
-        return handleRequest(body, headers);
+        return null;
     }
 
     @DELETE
@@ -81,19 +66,7 @@ public class SupplierRestController {
     })
     public Response deleteSupplier(@ApiParam(value = "Supplier id", required = true)
             @PathParam("id") Integer id) {
-        log.debug("DELETE: {}/{}", Paths.SUPPLIER_URI, id);
-        HashMap<String, Object> headers = new HashMap<>();
-        headers.put(Headers.METHOD, Headers.DELETE);
-        headers.put(Headers.ID, id);
-        return handleRequest(null, headers);
-    }
-
-    private Response handleRequest(Object body, Map<String, Object> headers) {
-        String answer = (String) supplierRoute.requestBodyAndHeaders(body, headers);
-        return Response.status(Response.Status.OK)
-                .type(MediaType.APPLICATION_JSON_TYPE)
-                .entity(answer)
-                .build();
+        return null;
     }
 
 }

@@ -1,5 +1,6 @@
 package com.epam.mentoring.approutes.routes;
 
+import com.epam.mentoring.approutes.constants.Headers;
 import com.epam.mentoring.approutes.constants.RouteNames;
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
@@ -15,6 +16,11 @@ public class StockRoute extends RouteBuilder {
             public void process(Exchange exchange) throws Exception {
 
             }
-        }).end();
+        })
+//                .choice()
+//                .when(header(Headers.OPERATION).isEqualTo(Headers.STOCK_LIST))
+//                    .setHeader(Headers.OPERATION, simple(Headers.PRODUCT_GET_ALL_WITH_QAUNT))
+//                    .to("cxfrs:bean:productRestService")
+                .end();
     }
 }

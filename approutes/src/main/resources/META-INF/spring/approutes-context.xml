@@ -93,9 +93,25 @@
         </cxf:providers>
     </cxf:rsServer>
 
+    <cxf:rsServer
+            bus="cxf"
+            id="stockRestService"
+            address="http://localhost:8080/api/stock"
+            serviceClass="com.epam.mentoring.rest.controllers.StockRestController">
+        <cxf:providers>
+            <ref bean="cors-filter"/>
+        </cxf:providers>
+    </cxf:rsServer>
 
-
-
+    <cxf:rsServer
+            bus="cxf"
+            id="supplierRestService"
+            address="http://localhost:8080/api/supplier"
+            serviceClass="com.epam.mentoring.rest.controllers.SupplierRestController">
+        <cxf:providers>
+            <ref bean="cors-filter"/>
+        </cxf:providers>
+    </cxf:rsServer>
 
     <camel:camelContext id="serviceRoutesContext"
                         streamCache="true">

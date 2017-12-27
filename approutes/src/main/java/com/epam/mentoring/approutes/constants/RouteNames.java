@@ -8,10 +8,10 @@ public class RouteNames {
     public static final String PRODUCT_ROUTE = "cxfrs:bean:productRestService?bindingStyle=SimpleConsumer";
     public static final String PRODUCT_ROUTE_ID = "productRoute";
 
-    public static final String SUPPLIER_ROUTE = "direct-vm:supplierRoute";
+    public static final String SUPPLIER_ROUTE = "cxfrs:bean:supplierRestService?bindingStyle=SimpleConsumer";;
     public static final String SUPPLIER_ROUTE_ID = "supplierRoute";
 
-    public static final String STOCK_ROUTE = "direct-vm:stockRoute";
+    public static final String STOCK_ROUTE = "cxfrs:bean:stockRestService?bindingStyle=SimpleConsumer";
     public static final String STOCK_ROUTE_ID = "stockRoute";
 
     public static final String PRODUCT_TYPE_ROUTE = "cxfrs:bean:productTypeRestService?bindingStyle=SimpleConsumer";
