@@ -18,7 +18,6 @@
         <property name="ignoreResourceNotFound" value="true"/>
     </bean>
 
-
     <bean id="cors-filter"
           class="org.apache.cxf.rs.security.cors.CrossOriginResourceSharingFilter"/>
 
@@ -27,45 +26,10 @@
 
     <bean class="com.epam.mentoring.approutes.config.RoutesConfig"/>
 
-    <!--<jaxrs:server serviceName="stockRestService"-->
-                  <!--address="${http.server.endpoint.url}/service">-->
-        <!--<jaxrs:serviceBeans>-->
-            <!--<ref bean="productRestController"/>-->
-            <!--<ref bean="supplierRestController"/>-->
-            <!--<ref bean="productIncomeRestController"/>-->
-            <!--<ref bean="productTypeRestController"/>-->
-            <!--<ref bean="stockRestController"/>-->
-        <!--</jaxrs:serviceBeans>-->
-        <!--<jaxrs:features>-->
-            <!--<cxf:logging/>-->
-        <!--</jaxrs:features>-->
-        <!--<jaxrs:providers>-->
-            <!--<ref bean="cors-filter"/>-->
-        <!--</jaxrs:providers>-->
-    <!--</jaxrs:server>-->
-
-    <!--<bean id="productRestController" class="com.epam.mentoring.rest.controllers.ProductRestController"/>-->
-
-    <!--<jaxrs:server id="restService"-->
-                  <!--address="http://localhost:8081/rest"-->
-                  <!--staticSubresourceResolution="true">-->
-        <!--<jaxrs:serviceBeans>-->
-            <!--<ref bean="productRestController"/>-->
-        <!--</jaxrs:serviceBeans>-->
-    <!--</jaxrs:server>-->
-
-    <!--<httpj:engine-factory bus="cxf">-->
-        <!--<httpj:engine port="8080">-->
-            <!--<httpj:threadingParameters minThreads="20"-->
-                                       <!--maxThreads="100"/>-->
-        <!--</httpj:engine>-->
-    <!--</httpj:engine-factory>-->
-
-
     <cxf:rsServer
             bus="cxf"
             id="productRestService"
-            address="http://localhost:8080/api/product"
+            address="${http.server.endpoint.url}/api/product"
             serviceClass="com.epam.mentoring.rest.controllers.ProductRestController">
         <cxf:providers>
             <ref bean="cors-filter"/>
@@ -75,18 +39,17 @@
     <cxf:rsServer
             bus="cxf"
             id="productTypeRestService"
-            address="http://localhost:8080/api/product_type"
+            address="${http.server.endpoint.url}/api/product_type"
             serviceClass="com.epam.mentoring.rest.controllers.ProductTypeRestController">
         <cxf:providers>
             <ref bean="cors-filter"/>
         </cxf:providers>
     </cxf:rsServer>
 
-
     <cxf:rsServer
             bus="cxf"
             id="productIncomeRestService"
-            address="http://localhost:8080/api/product_income"
+            address="${http.server.endpoint.url}/api/product_income"
             serviceClass="com.epam.mentoring.rest.controllers.ProductIncomeRestController">
         <cxf:providers>
             <ref bean="cors-filter"/>
@@ -96,7 +59,7 @@
     <cxf:rsServer
             bus="cxf"
             id="stockRestService"
-            address="http://localhost:8080/api/stock"
+            address="${http.server.endpoint.url}/api/stock"
             serviceClass="com.epam.mentoring.rest.controllers.StockRestController">
         <cxf:providers>
             <ref bean="cors-filter"/>
@@ -106,7 +69,7 @@
     <cxf:rsServer
             bus="cxf"
             id="supplierRestService"
-            address="http://localhost:8080/api/supplier"
+            address="${http.server.endpoint.url}/api/supplier"
             serviceClass="com.epam.mentoring.rest.controllers.SupplierRestController">
         <cxf:providers>
             <ref bean="cors-filter"/>
