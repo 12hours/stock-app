@@ -16,6 +16,7 @@ import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.model.dataformat.JsonDataFormat;
 import org.apache.camel.model.dataformat.JsonLibrary;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -24,9 +25,12 @@ public class ProductRoute extends RouteBuilder {
     @Autowired
     ProductService productService;
 
+    @Value("${product.route.endpoint}")
+    private String productRouteEndpoint;
+
     @Override
     public void configure() throws Exception {
-        from(RouteNames.PRODUCT_ROUTE).routeId(RouteNames.PRODUCT_ROUTE_ID)
+        from(productRouteEndpoint).routeId(RouteNames.PRODUCT_ROUTE_ID)
                 .process(new Processor() {
                     @Override
                     public void process(Exchange exchange) throws Exception {

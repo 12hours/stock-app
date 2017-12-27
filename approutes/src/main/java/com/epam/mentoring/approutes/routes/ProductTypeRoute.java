@@ -12,6 +12,7 @@ import org.apache.camel.LoggingLevel;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.model.dataformat.JsonLibrary;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -20,9 +21,12 @@ public class ProductTypeRoute extends RouteBuilder {
     @Autowired
     ProductTypeService productTypeService;
 
+    @Value("${productType.route.endpoint}")
+    private String productTypeRouteEndpoint;
+
     @Override
     public void configure() throws Exception {
-        from(RouteNames.PRODUCT_TYPE_ROUTE).routeId(RouteNames.PRODUCT_TYPE_ROUTE_ID)
+        from(productTypeRouteEndpoint).routeId(RouteNames.PRODUCT_TYPE_ROUTE_ID)
                 .log(LoggingLevel.DEBUG, "Method: " + header(Headers.OPERATION))
                 .choice()
                 .when(header(Headers.OPERATION).isEqualTo(Headers.PRODUCT_TYPE_GET_ALL))

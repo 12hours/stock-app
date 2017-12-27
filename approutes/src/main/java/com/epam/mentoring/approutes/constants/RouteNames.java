@@ -5,10 +5,10 @@ public class RouteNames {
     public static final String MAIN_ROUTE = "direct-vm:mainRoute";
     public static final String MAIN_ROUTE_ID = "mainRoute";
 
-    public static final String PRODUCT_ROUTE = "cxfrs:bean:productRestService?bindingStyle=SimpleConsumer";
+    public static final String PRODUCT_ROUTE = "${product.route.endpoint}";
     public static final String PRODUCT_ROUTE_ID = "productRoute";
 
-    public static final String SUPPLIER_ROUTE = "cxfrs:bean:supplierRestService?bindingStyle=SimpleConsumer";;
+    public static final String SUPPLIER_ROUTE = "cxfrs:bean:supplierRestService?bindingStyle=SimpleConsumer";
     public static final String SUPPLIER_ROUTE_ID = "supplierRoute";
 
     public static final String STOCK_ROUTE = "cxfrs:bean:stockRestService?bindingStyle=SimpleConsumer";

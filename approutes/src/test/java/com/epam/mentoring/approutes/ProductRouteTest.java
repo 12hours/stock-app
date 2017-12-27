@@ -19,6 +19,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 
@@ -33,6 +35,7 @@ import static org.mockito.Mockito.verify;
 @RunWith(CamelSpringJUnit4ClassRunner.class)
 @ContextConfiguration(value = {"classpath:/test-context.xml"})
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
+@PropertySource("classpath:/test-application.properties")
 public class ProductRouteTest {
 
     @Autowired
@@ -47,6 +50,9 @@ public class ProductRouteTest {
     @Autowired
     ProductService productServiceMock;
 
+    @Value("${product.route.endpoint}")
+    private String productRouteEndpoint;
+
     ArgumentCaptor<ProductForm> productFormArgumentCaptor;
 
     @Before
@@ -58,10 +64,10 @@ public class ProductRouteTest {
     public void getAllProductsTest() throws Exception {
         Exchange exchange = new DefaultExchange(context);
         Message in = new DefaultMessage();
-        in.setHeader(Headers.OPERATION, Headers.GET_ALL);
+        in.setHeader(Headers.OPERATION, Headers.PRODUCT_GET_ALL);
         exchange.setIn(in);
 
-        Exchange response = template.send(RouteNames.PRODUCT_ROUTE, exchange);
+        Exchange response = template.send(productRouteEndpoint, exchange);
         assertEquals(objectMapper.writeValueAsString( TestData.products()), response.getIn().getBody());
     }
 
@@ -72,7 +78,7 @@ public class ProductRouteTest {
         in.setHeader(Headers.OPERATION, Headers.PRODUCT_GET_ALL_WITH_QAUNT);
         exchange.setIn(in);
 
-        Exchange response = template.send(RouteNames.PRODUCT_ROUTE, exchange);
+        Exchange response = template.send(productRouteEndpoint, exchange);
         assertEquals(objectMapper.writeValueAsString(TestData.productWithQuantityViews()), response.getIn().getBody());
     }
 
@@ -80,11 +86,11 @@ public class ProductRouteTest {
     public void getProductByIdTest() throws JsonProcessingException {
         Exchange exchange = new DefaultExchange(context);
         Message in = new DefaultMessage();
-        in.setHeader(Headers.OPERATION, Headers.GET_BY_ID);
+        in.setHeader(Headers.OPERATION, Headers.PRODUCT_GET_BY_ID);
         in.setHeader(Headers.ID, Integer.valueOf(42));
         exchange.setIn(in);
 
-        Exchange response = template.send(RouteNames.PRODUCT_ROUTE, exchange);
+        Exchange response = template.send(productRouteEndpoint, exchange);
         assertEquals(objectMapper.writeValueAsString(TestData.products().get(0)), response.getIn().getBody());
     }
 
@@ -92,11 +98,11 @@ public class ProductRouteTest {
     public void saveProductTest() throws Exception {
         Exchange exchange = new DefaultExchange(context);
         Message in = new DefaultMessage();
-        in.setHeader(Headers.OPERATION, Headers.POST);
+        in.setHeader(Headers.OPERATION, Headers.PRODUCT_POST);
         in.setBody("{\"name\":\"testProduct\",\"price\":100,\"productTypeId\":1}");
         exchange.setIn(in);
 
-        Exchange response = template.send(RouteNames.PRODUCT_ROUTE, exchange);
+        Exchange response = template.send(productRouteEndpoint, exchange);
         verify(productServiceMock).saveProduct(productFormArgumentCaptor.capture());
         assertEquals(productFormArgumentCaptor.getValue(), new ProductForm("testProduct", BigDecimal.valueOf(100), Integer.valueOf(1)));
         assertEquals("{\"id\":42}", response.getIn().getBody());
@@ -106,10 +112,10 @@ public class ProductRouteTest {
     public void deleteProductTest() {
         Exchange exchange = new DefaultExchange(context);
         DefaultMessage in = new DefaultMessage();
-        in.setHeader(Headers.OPERATION, Headers.DELETE);
+        in.setHeader(Headers.OPERATION, Headers.PRODUCT_DELETE);
         exchange.setIn(in);
 
-        Exchange response = template.send(RouteNames.PRODUCT_ROUTE, exchange);
+        Exchange response = template.send(productRouteEndpoint, exchange);
         verify(productServiceMock, times(1)).deleteProductById(anyInt());
         assertEquals(Response.Status.OK, response.getIn().getHeader(Headers.STATUS));
     }

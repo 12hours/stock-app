@@ -19,6 +19,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 
@@ -46,6 +47,9 @@ public class ProductTypeRouteTest {
     @Autowired
     ProductTypeService productTypeServiceMock;
 
+    @Value("${productType.route.endpoint}")
+    private String productTypeRouteEndpoint;
+
     ArgumentCaptor<ProductTypeForm> productTypeFormArgumentCaptor;
 
     @Before
@@ -57,10 +61,10 @@ public class ProductTypeRouteTest {
     public void getAllProductTypesTest() throws JsonProcessingException {
         Exchange exchange = new DefaultExchange(context);
         Message in = new DefaultMessage();
-        in.setHeader(Headers.OPERATION, Headers.GET_ALL);
+        in.setHeader(Headers.OPERATION, Headers.PRODUCT_TYPE_GET_ALL);
         exchange.setIn(in);
 
-        Exchange response = template.send(RouteNames.PRODUCT_TYPE_ROUTE, exchange);
+        Exchange response = template.send(productTypeRouteEndpoint, exchange);
         System.out.println(response.getIn().getBody());
         assertEquals(objectMapper.writeValueAsString(TestData.productTypes()), response.getIn().getBody());
     }
@@ -69,11 +73,11 @@ public class ProductTypeRouteTest {
     public void getProductTypeByIdTest() throws JsonProcessingException {
         Exchange exchange = new DefaultExchange(context);
         Message in = new DefaultMessage();
-        in.setHeader(Headers.OPERATION, Headers.GET_BY_ID);
+        in.setHeader(Headers.OPERATION, Headers.PRODUCT_TYPE_GET_BY_ID);
         in.setHeader(Headers.ID, Integer.valueOf(42));
         exchange.setIn(in);
 
-        Exchange response = template.send(RouteNames.PRODUCT_TYPE_ROUTE, exchange);
+        Exchange response = template.send(productTypeRouteEndpoint, exchange);
         assertEquals(objectMapper.writeValueAsString(TestData.productTypes().get(0)), response.getIn().getBody());
     }
 
@@ -81,11 +85,11 @@ public class ProductTypeRouteTest {
     public void saveProductTypeTest() {
         Exchange exchange = new DefaultExchange(context);
         Message in = new DefaultMessage();
-        in.setHeader(Headers.OPERATION, Headers.POST);
+        in.setHeader(Headers.OPERATION, Headers.PRODUCT_TYPE_POST);
         in.setBody("{\"name\":\"testProductType\"}");
         exchange.setIn(in);
 
-        Exchange response = template.send(RouteNames.PRODUCT_TYPE_ROUTE, exchange);
+        Exchange response = template.send(productTypeRouteEndpoint, exchange);
         verify(productTypeServiceMock).saveProductType(productTypeFormArgumentCaptor.capture());
         assertEquals(productTypeFormArgumentCaptor.getValue(), new ProductTypeForm("testProductType"));
         assertEquals("{\"id\":43}", response.getIn().getBody());
@@ -95,10 +99,10 @@ public class ProductTypeRouteTest {
     public void deleteProductTypeTest() {
         Exchange exchange = new DefaultExchange(context);
         Message in = new DefaultMessage();
-        in.setHeader(Headers.OPERATION, Headers.DELETE);
+        in.setHeader(Headers.OPERATION, Headers.PRODUCT_TYPE_DELETE);
         exchange.setIn(in);
 
-        Exchange response = template.send(RouteNames.PRODUCT_TYPE_ROUTE, exchange);
+        Exchange response = template.send(productTypeRouteEndpoint, exchange);
         verify(productTypeServiceMock, times(1)).deleteProductType(anyInt());
         assertEquals(Response.Status.OK, response.getIn().getHeader(Headers.STATUS));
     }

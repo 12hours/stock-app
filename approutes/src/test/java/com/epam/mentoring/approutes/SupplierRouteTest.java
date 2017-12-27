@@ -19,6 +19,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 
@@ -46,6 +47,9 @@ public class SupplierRouteTest {
     @Autowired
     SupplierService supplierServiceMock;
 
+    @Value("${supplier.route.endpoint}")
+    private String supplierRouteEndpoint;
+
     ArgumentCaptor<SupplierForm> supplierFormArgumentCaptor;
 
     @Before
@@ -57,10 +61,10 @@ public class SupplierRouteTest {
     public void getAllSuppliersTest() throws JsonProcessingException {
         Exchange exchange = new DefaultExchange(context);
         Message in = new DefaultMessage();
-        in.setHeader(Headers.OPERATION, Headers.GET_ALL);
+        in.setHeader(Headers.OPERATION, Headers.SUPPLIER_GET_ALL);
         exchange.setIn(in);
 
-        Exchange response = template.send(RouteNames.SUPPLIER_ROUTE, exchange);
+        Exchange response = template.send(supplierRouteEndpoint, exchange);
         System.out.println(response.getIn().getBody());
         assertEquals(objectMapper.writeValueAsString(TestData.suppliers()), response.getIn().getBody());
     }
@@ -69,11 +73,11 @@ public class SupplierRouteTest {
     public void getSupplierByIdTest() throws JsonProcessingException {
         Exchange exchange = new DefaultExchange(context);
         Message in = new DefaultMessage();
-        in.setHeader(Headers.OPERATION, Headers.GET_BY_ID);
+        in.setHeader(Headers.OPERATION, Headers.SUPPLIER_GET_BY_ID);
         in.setHeader(Headers.ID, Integer.valueOf(42));
         exchange.setIn(in);
 
-        Exchange response = template.send(RouteNames.SUPPLIER_ROUTE, exchange);
+        Exchange response = template.send(supplierRouteEndpoint, exchange);
         assertEquals(objectMapper.writeValueAsString(TestData.suppliers().get(0)), response.getIn().getBody());
     }
 
@@ -81,11 +85,11 @@ public class SupplierRouteTest {
     public void saveSupplierTest() {
         Exchange exchange = new DefaultExchange(context);
         Message in = new DefaultMessage();
-        in.setHeader(Headers.OPERATION, Headers.POST);
+        in.setHeader(Headers.OPERATION, Headers.SUPPLIER_POST);
         in.setBody("{\"name\":\"testSupplierName\",\"details\":\"testSupplierDetails\"}");
         exchange.setIn(in);
 
-        Exchange response = template.send(RouteNames.SUPPLIER_ROUTE, exchange);
+        Exchange response = template.send(supplierRouteEndpoint, exchange);
         verify(supplierServiceMock).saveSupplier(supplierFormArgumentCaptor.capture());
         assertEquals(supplierFormArgumentCaptor.getValue(), new SupplierForm("testSupplierName", "testSupplierDetails"));
         assertEquals("{\"id\":44}", response.getIn().getBody());
@@ -95,10 +99,10 @@ public class SupplierRouteTest {
     public void deleteSupplierTest() {
         Exchange exchange = new DefaultExchange(context);
         Message in = new DefaultMessage();
-        in.setHeader(Headers.OPERATION, Headers.DELETE);
+        in.setHeader(Headers.OPERATION, Headers.SUPPLIER_DELETE);
         exchange.setIn(in);
 
-        Exchange response = template.send(RouteNames.SUPPLIER_ROUTE, exchange);
+        Exchange response = template.send(supplierRouteEndpoint, exchange);
         verify(supplierServiceMock, times(1)).deleteSupplier(anyInt());
         assertEquals(Response.Status.OK, response.getIn().getHeader(Headers.STATUS));
 

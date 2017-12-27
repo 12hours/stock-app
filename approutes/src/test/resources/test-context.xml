@@ -25,8 +25,15 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
         <!--<constructor-arg ref="objectMapper"></constructor-arg>-->
     <!--</bean>-->
 
-    <!--<context:component-scan base-package="com.epam.mentoring.approutes"/>-->
+
+    <!--<context:property-placeholder location="classpath:/application.properties" ignore-unresolvable="false"/>-->
     <context:annotation-config/>
+
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="location" value="/test-application.properties"/>
+        <property name="ignoreResourceNotFound" value="false"/>
+    </bean>
+
     <bean class="com.epam.mentoring.approutes.config.RoutesConfig"/>
 
 

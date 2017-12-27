@@ -8,12 +8,14 @@ import org.apache.camel.component.mock.MockEndpoint;
 import org.apache.camel.model.ModelCamelContext;
 import org.apache.camel.test.spring.CamelSpringJUnit4ClassRunner;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 
+@Ignore
 @RunWith(CamelSpringJUnit4ClassRunner.class)
 @ContextConfiguration(value = {"classpath:/test-context.xml"})
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
@@ -24,6 +26,8 @@ public class MainRouteTest{
 
     @Autowired
     ProducerTemplate template;
+
+
 
     @EndpointInject(uri = "mock:test", context = "serviceRoutesContext")
     MockEndpoint mockOut;
@@ -42,6 +46,7 @@ public class MainRouteTest{
 
     @Test
     public void testMainToProductRouting() throws Exception {
+
         mockOut.setExpectedMessageCount(1);
         template.sendBody(RouteNames.MAIN_ROUTE, "{\"HEAD\":{\"type\":\"product\", \"method\":\"get\", \"id\":\"12\"}, \"BODY\":{}}");
         MockEndpoint.assertIsSatisfied(context);
