@@ -3,12 +3,14 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:jaxrs="http://cxf.apache.org/jaxrs"
-       xmlns:cxf="http://cxf.apache.org/core"
+       xmlns:httpj="http://cxf.apache.org/transports/http-jetty/configuration"
+       xmlns:cxf="http://camel.apache.org/schema/cxf"
        xmlns:camel="http://camel.apache.org/schema/spring"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
          http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
-         http://cxf.apache.org/core http://cxf.apache.org/schemas/core.xsd
+        http://camel.apache.org/schema/cxf http://camel.apache.org/schema/cxf/camel-cxf.xsd
          http://cxf.apache.org/jaxrs http://cxf.apache.org/schemas/jaxrs.xsd
+         http://cxf.apache.org/transports/http-jetty/configuration http://cxf.apache.org/schemas/configuration/http-jetty.xsd
          http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd">
 
     <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
@@ -25,23 +27,53 @@
 
     <bean class="com.epam.mentoring.approutes.config.RoutesConfig"/>
 
-    <jaxrs:server serviceName="stockRestService"
-                  address="${http.server.endpoint.url}/service">
-        <jaxrs:serviceBeans>
-            <ref bean="productRestController"/>
-            <ref bean="supplierRestController"/>
-            <ref bean="productIncomeRestController"/>
-            <ref bean="productTypeRestController"/>
-            <ref bean="stockRestController"/>
-        </jaxrs:serviceBeans>
-        <jaxrs:features>
-            <cxf:logging/>
-        </jaxrs:features>
-        <jaxrs:providers>
-            <ref bean="cors-filter"/>
-        </jaxrs:providers>
-    </jaxrs:server>
+    <!--<jaxrs:server serviceName="stockRestService"-->
+                  <!--address="${http.server.endpoint.url}/service">-->
+        <!--<jaxrs:serviceBeans>-->
+            <!--<ref bean="productRestController"/>-->
+            <!--<ref bean="supplierRestController"/>-->
+            <!--<ref bean="productIncomeRestController"/>-->
+            <!--<ref bean="productTypeRestController"/>-->
+            <!--<ref bean="stockRestController"/>-->
+        <!--</jaxrs:serviceBeans>-->
+        <!--<jaxrs:features>-->
+            <!--<cxf:logging/>-->
+        <!--</jaxrs:features>-->
+        <!--<jaxrs:providers>-->
+            <!--<ref bean="cors-filter"/>-->
+        <!--</jaxrs:providers>-->
+    <!--</jaxrs:server>-->
 
+    <bean id="productRestController" class="com.epam.mentoring.rest.controllers.ProductRestController"/>
+
+    <!--<jaxrs:server id="restService"-->
+                  <!--address="http://localhost:8081/rest"-->
+                  <!--staticSubresourceResolution="true">-->
+        <!--<jaxrs:serviceBeans>-->
+            <!--<ref bean="productRestController"/>-->
+        <!--</jaxrs:serviceBeans>-->
+    <!--</jaxrs:server>-->
+
+    <!--<httpj:engine-factory bus="cxf">-->
+        <!--<httpj:engine port="8080">-->
+            <!--<httpj:threadingParameters minThreads="20"-->
+                                       <!--maxThreads="100"/>-->
+        <!--</httpj:engine>-->
+    <!--</httpj:engine-factory>-->
+
+
+    <cxf:rsServer
+            bus="cxf"
+            id="productRestService"
+            address="http://localhost:8080/product"
+            serviceClass="com.epam.mentoring.rest.controllers.ProductRestController">
+        <cxf:providers>
+            <!-- Add CORS filter to cxf endpoint -->
+            <ref bean="cors-filter"/>
+            <!--<ref bean="jsonProvider"/>-->
+            <!--<ref bean="ihgHeaderRequestInterceptor"/>-->
+        </cxf:providers>
+    </cxf:rsServer>
 
 
     <camel:camelContext id="serviceRoutesContext"

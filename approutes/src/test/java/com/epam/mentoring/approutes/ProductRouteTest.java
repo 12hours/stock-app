@@ -18,18 +18,15 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 
 import javax.ws.rs.core.Response;
 import java.math.BigDecimal;
-import java.util.HashMap;
 
 import static org.junit.Assert.*;
 import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.anyLong;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
@@ -72,7 +69,7 @@ public class ProductRouteTest {
     public void getAllProductsWithQuantitiesTest() throws Exception {
         Exchange exchange = new DefaultExchange(context);
         Message in = new DefaultMessage();
-        in.setHeader(Headers.METHOD, Headers.GET_ALL_WITH_QAUNT);
+        in.setHeader(Headers.METHOD, Headers.PRODUCT_GET_ALL_WITH_QAUNT);
         exchange.setIn(in);
 
         Exchange response = template.send(RouteNames.PRODUCT_ROUTE, exchange);

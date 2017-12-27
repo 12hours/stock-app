@@ -9,7 +9,9 @@ import com.epam.mentoring.approutes.processors.product.GetAllProductsProcessor;
 import com.epam.mentoring.approutes.processors.product.GetProductByIdProcessor;
 import com.epam.mentoring.approutes.processors.product.SaveProductProcessor;
 import com.epam.mentoring.service.ProductService;
+import org.apache.camel.Exchange;
 import org.apache.camel.LoggingLevel;
+import org.apache.camel.Processor;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.model.dataformat.JsonDataFormat;
 import org.apache.camel.model.dataformat.JsonLibrary;
@@ -25,20 +27,26 @@ public class ProductRoute extends RouteBuilder {
     @Override
     public void configure() throws Exception {
         from(RouteNames.PRODUCT_ROUTE).routeId(RouteNames.PRODUCT_ROUTE_ID)
-                .log(LoggingLevel.DEBUG, "Method: " + header(Headers.METHOD))
+                .process(new Processor() {
+                    @Override
+                    public void process(Exchange exchange) throws Exception {
+
+                    }
+                })
+                .log(LoggingLevel.DEBUG, "Method: " + header("operationName"))
                 .choice()
-                .when(header(Headers.METHOD).isEqualTo(Headers.GET_ALL))
-                   .process(new GetAllProductsProcessor(productService))
-                .when(header(Headers.METHOD).isEqualTo(Headers.GET_BY_ID))
-                    .process(new GetProductByIdProcessor(productService))
-                .when(header(Headers.METHOD).isEqualTo(Headers.POST))
-                    .unmarshal().json(JsonLibrary.Jackson, ProductForm.class)
-                    .process(new SaveProductProcessor(productService))
-                .when(header(Headers.METHOD).isEqualTo(Headers.GET_ALL_WITH_QAUNT))
-                    .process(new GetAllProductsWithQuantitiesProcessor(productService))
-                .when(header(Headers.METHOD).isEqualTo(Headers.DELETE))
-                    .process(new DeleteProductProcessor(productService))
-                .otherwise().throwException(new UnsupportedOperationException())
+                    .when(header("operationName").isEqualTo(Headers.PRODUCT_GET_ALL))
+                        .process(new GetAllProductsProcessor(productService))
+                    .when(header("operationName").isEqualTo(Headers.PRODUCT_GET_BY_ID))
+                        .process(new GetProductByIdProcessor(productService))
+                    .when(header("operationName").isEqualTo(Headers.PRODUCT_POST))
+                        .unmarshal().json(JsonLibrary.Jackson, ProductForm.class)
+                        .process(new SaveProductProcessor(productService))
+                    .when(header("operationName").isEqualTo(Headers.PRODUCT_GET_ALL_WITH_QAUNT))
+                        .process(new GetAllProductsWithQuantitiesProcessor(productService))
+                    .when(header("operationName").isEqualTo(Headers.PRODUCT_DELETE))
+                        .process(new DeleteProductProcessor(productService))
+                    .otherwise().throwException(new UnsupportedOperationException())
                 .end()
                 .marshal(new JsonDataFormat(JsonLibrary.Jackson))
                 .convertBodyTo(String.class)

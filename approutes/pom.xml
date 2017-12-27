@@ -69,6 +69,11 @@
 
         <dependency>
             <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-core</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
             <artifactId>cxf-rt-rs-security-cors</artifactId>
         </dependency>
 <!---->
@@ -76,6 +81,11 @@
         <dependency>
             <groupId>org.apache.camel</groupId>
             <artifactId>camel-core</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-cxf</artifactId>
         </dependency>
 
         <dependency>
@@ -112,6 +122,27 @@
             <groupId>com.epam.mentoring</groupId>
             <artifactId>test-data</artifactId>
             <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-jetty</artifactId>
+        </dependency>
+
+
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-transports-http-jetty</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.eclipse.jetty</groupId>
+                    <artifactId>jetty-security</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.eclipse.jetty</groupId>
+                    <artifactId>jetty-server</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
     </dependencies>
@@ -165,7 +196,8 @@
                             org.springframework.cglib.core,
                             org.springframework.cglib.proxy,
                             org.springframework.cglib.reflect,
-                            org.springframework.beans.factory
+                            org.springframework.beans.factory,
+                            org.apache.cxf.bus.spring
                         </Import-Package>
                     </instructions>
                 </configuration>

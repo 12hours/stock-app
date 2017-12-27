@@ -5,7 +5,7 @@ public class RouteNames {
     public static final String MAIN_ROUTE = "direct-vm:mainRoute";
     public static final String MAIN_ROUTE_ID = "mainRoute";
 
-    public static final String PRODUCT_ROUTE = "direct-vm:productRoute";
+    public static final String PRODUCT_ROUTE = "cxfrs:bean:productRestService?bindingStyle=SimpleConsumer";
     public static final String PRODUCT_ROUTE_ID = "productRoute";
 
     public static final String SUPPLIER_ROUTE = "direct-vm:supplierRoute";
