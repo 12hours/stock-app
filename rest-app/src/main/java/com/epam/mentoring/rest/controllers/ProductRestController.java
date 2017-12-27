@@ -21,10 +21,6 @@ import java.util.Map;
 public class
 ProductRestController {
 
-    static {
-        org.slf4j.MDC.put("app.name","rest-app");
-    }
-
     Logger log = LoggerFactory.getLogger(ProductRestController.class);
 
     @EndpointInject(uri = RouteNames.PRODUCT_ROUTE)
