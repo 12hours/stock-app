@@ -38,23 +38,23 @@ http://cxf.apache.org/jaxrs http://cxf.apache.org/schemas/jaxrs.xsd
     <bean id="stockRestController" class="com.epam.mentoring.rest.controllers.StockRestController"/>
 
 
-    <jaxrs:server serviceName="stockRestService"
-                  address="${http.server.endpoint.url}/service">
-        <jaxrs:serviceBeans>
-            <ref bean="productRestController"/>
-            <ref bean="supplierRestController"/>
-            <ref bean="productIncomeRestController"/>
-            <ref bean="productTypeRestController"/>
-            <ref bean="stockRestController"/>
-        </jaxrs:serviceBeans>
-        <jaxrs:features>
-            <!--<cxf:logging/>-->
-        </jaxrs:features>
-        <jaxrs:providers>
-            <!--<ref bean="jsonProvider"/>-->
-            <!--<ref bean="cors-filter"/>-->
-        </jaxrs:providers>
-    </jaxrs:server>
+    <!--<jaxrs:server serviceName="stockRestService"-->
+                  <!--address="${http.server.endpoint.url}/service">-->
+        <!--<jaxrs:serviceBeans>-->
+            <!--<ref bean="productRestController"/>-->
+            <!--<ref bean="supplierRestController"/>-->
+            <!--<ref bean="productIncomeRestController"/>-->
+            <!--<ref bean="productTypeRestController"/>-->
+            <!--<ref bean="stockRestController"/>-->
+        <!--</jaxrs:serviceBeans>-->
+        <!--<jaxrs:features>-->
+            <!--&lt;!&ndash;<cxf:logging/>&ndash;&gt;-->
+        <!--</jaxrs:features>-->
+        <!--<jaxrs:providers>-->
+            <!--&lt;!&ndash;<ref bean="jsonProvider"/>&ndash;&gt;-->
+            <!--&lt;!&ndash;<ref bean="cors-filter"/>&ndash;&gt;-->
+        <!--</jaxrs:providers>-->
+    <!--</jaxrs:server>-->
 
 
     <camel:camelContext id="serviceRoutesContext"

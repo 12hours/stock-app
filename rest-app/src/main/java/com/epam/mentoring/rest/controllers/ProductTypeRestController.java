@@ -3,6 +3,7 @@ package com.epam.mentoring.rest.controllers;
 import com.epam.mentoring.rest.Headers;
 import com.epam.mentoring.rest.Paths;
 import com.epam.mentoring.rest.RouteNames;
+import io.swagger.annotations.*;
 import org.apache.camel.EndpointInject;
 import org.apache.camel.ProducerTemplate;
 import org.slf4j.Logger;
@@ -14,6 +15,7 @@ import javax.ws.rs.core.Response;
 import java.util.HashMap;
 import java.util.Map;
 
+@Api(value = "Product type service", description = "Operations on product types")
 @Path(Paths.PRODUCT_TYPE_URI)
 public class ProductTypeRestController {
 
@@ -24,7 +26,11 @@ public class ProductTypeRestController {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getAllProductIncomes() {
+    @ApiOperation(value = "Retrieve all product types")
+    @ApiResponses(
+            @ApiResponse(code = 200, message = "List of product types returned")
+    )
+    public Response getAllProductTypes() {
         log.debug("GET: {}", Paths.PRODUCT_TYPE_URI);
         Map<String, Object> headers = new HashMap<>();
         headers.put(Headers.METHOD, Headers.GET_ALL);
@@ -34,7 +40,12 @@ public class ProductTypeRestController {
     @GET
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getProductTypeById(@PathParam("id") Integer id) {
+    @ApiOperation(value = "Retrieve product type with specific id")
+    @ApiResponses(
+            @ApiResponse(code = 200, message = "Product type object returned")
+    )
+    public Response getProductTypeById(@ApiParam(value = "Product type id" ,required = true)
+            @PathParam("id") Integer id) {
         log.debug("GET: {}/{}", Paths.PRODUCT_TYPE_URI, id);
         Map<String, Object> headers = new HashMap<>();
         headers.put(Headers.METHOD, Headers.GET_BY_ID);
@@ -45,7 +56,11 @@ public class ProductTypeRestController {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response postProductType(String body) {
+    @ApiOperation(value = "Save product type")
+    @ApiResponses(
+        @ApiResponse(code = 201, message = "Product type saved")
+    )
+    public Response postProductType(@ApiParam(value = "Product type object", required = true) String body) {
         log.debug("POST: {}", Paths.PRODUCT_TYPE_URI);
         Map<String, Object> headers = new HashMap<>();
         headers.put(Headers.METHOD, Headers.POST);
@@ -54,7 +69,12 @@ public class ProductTypeRestController {
 
     @DELETE
     @Path("/{id}")
-    public Response deleteProductIncome(@PathParam("id") Integer id) {
+    @ApiOperation(value = "Delete product type with specific id")
+    @ApiResponses(
+            @ApiResponse(code = 200, message = "Product type deleted")
+    )
+    public Response deleteProductIncome(@ApiParam(value = "Product type id", required = true)
+            @PathParam("id") Integer id) {
         log.debug("DELETE: {}/{}", Paths.PRODUCT_TYPE_URI, id);
         HashMap<String, Object> headers = new HashMap<>();
         headers.put(Headers.METHOD, Headers.DELETE);

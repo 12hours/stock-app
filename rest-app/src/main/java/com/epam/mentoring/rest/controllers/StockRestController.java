@@ -36,7 +36,7 @@ public class StockRestController {
             @ApiResponse(code = 500, message = "Internal server error"),
             @ApiResponse(code = 200, message = "Stock list returned.")
     })
-    public Response getProductIncome() {
+    public Response getStockList() {
         log.debug("GET: {}/list", Paths.STOCK_URI);
         HashMap<String, Object> headers = new HashMap<>();
         headers.put(Headers.METHOD, Headers.GET_ALL_WITH_QAUNT);

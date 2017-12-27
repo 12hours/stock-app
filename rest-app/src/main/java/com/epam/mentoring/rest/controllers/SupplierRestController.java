@@ -3,6 +3,7 @@ package com.epam.mentoring.rest.controllers;
 import com.epam.mentoring.rest.Headers;
 import com.epam.mentoring.rest.Paths;
 import com.epam.mentoring.rest.RouteNames;
+import io.swagger.annotations.*;
 import org.apache.camel.EndpointInject;
 import org.apache.camel.ProducerTemplate;
 import org.slf4j.Logger;
@@ -14,6 +15,7 @@ import javax.ws.rs.core.Response;
 import java.util.HashMap;
 import java.util.Map;
 
+@Api(value = "Supplier service", description = "Operations on suppliers")
 @Path(Paths.SUPPLIER_URI)
 public class SupplierRestController {
 
@@ -24,6 +26,11 @@ public class SupplierRestController {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
+    @ApiOperation(value = "Retrieve list of all suppliers")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "List of suppliers returned"),
+            @ApiResponse(code = 500, message = "Server error")
+    })
     public Response getAllSuppliers() {
         log.debug("GET: {}", Paths.SUPPLIER_URI);
         HashMap<String, Object> headers = new HashMap<>();
@@ -34,7 +41,14 @@ public class SupplierRestController {
     @GET
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getSupplierById(@PathParam("id") Integer id) {
+    @ApiOperation(value = "Retrieve supplier with specific id")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "Supplier object returned"),
+            @ApiResponse(code = 500, message = "Server error")
+    })
+    public Response getSupplierById(
+            @ApiParam(value = "Supplier id", required = true)
+            @PathParam("id") Integer id) {
         log.debug("GET: {}/{}", Paths.SUPPLIER_URI, id);
         HashMap<String, Object> headers = new HashMap<>();
         headers.put(Headers.METHOD, Headers.GET_BY_ID);
@@ -44,7 +58,12 @@ public class SupplierRestController {
 
     @POST
     @Produces(MediaType.APPLICATION_JSON)
-    public Response postSupplier(String body) {
+    @ApiOperation(value = "Save supplier object")
+    @ApiResponses({
+            @ApiResponse(code = 201, message = "Supplier object saved"),
+            @ApiResponse(code = 500, message = "Server error")
+    })
+    public Response postSupplier(@ApiParam(value = "Supplier object", required = true) String body) {
         log.debug("POST: {}", Paths.SUPPLIER_URI);
         HashMap<String, Object> headers = new HashMap<>();
         headers.put(Headers.METHOD, Headers.POST);
@@ -53,7 +72,13 @@ public class SupplierRestController {
 
     @DELETE
     @Path("/{id}")
-    public Response deleteProductIncome(@PathParam("id") Integer id) {
+    @ApiOperation(value = "Delete supplier with specific id")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "Supplier deleted"),
+            @ApiResponse(code = 500, message = "Server error")
+    })
+    public Response deleteSupplier(@ApiParam(value = "Supplier id", required = true)
+            @PathParam("id") Integer id) {
         log.debug("DELETE: {}/{}", Paths.SUPPLIER_URI, id);
         HashMap<String, Object> headers = new HashMap<>();
         headers.put(Headers.METHOD, Headers.DELETE);

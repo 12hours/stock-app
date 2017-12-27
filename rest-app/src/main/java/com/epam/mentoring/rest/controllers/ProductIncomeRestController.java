@@ -3,6 +3,7 @@ package com.epam.mentoring.rest.controllers;
 import com.epam.mentoring.rest.Headers;
 import com.epam.mentoring.rest.Paths;
 import com.epam.mentoring.rest.RouteNames;
+import io.swagger.annotations.*;
 import org.apache.camel.EndpointInject;
 import org.apache.camel.ProducerTemplate;
 import org.slf4j.Logger;
@@ -15,6 +16,7 @@ import javax.ws.rs.core.Response;
 import java.util.HashMap;
 import java.util.Map;
 
+@Api(value = "Product income service", description = "Operations on product incomes")
 @Path(Paths.PRODUCT_INCOME_URI)
 public class ProductIncomeRestController {
 
@@ -25,6 +27,11 @@ public class ProductIncomeRestController {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
+    @ApiOperation(value = "Retrieve list of all product incomes")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "List of product incomes returned"),
+            @ApiResponse(code = 500, message = "Server error")
+    })
     public Response getAllProductIncomes() {
         log.debug("GET: {}", Paths.PRODUCT_INCOME_URI);
         HashMap<String, Object> headers = new HashMap<>();
@@ -35,7 +42,13 @@ public class ProductIncomeRestController {
     @GET
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getProductIncomeById(@PathParam("id") Integer id) {
+    @ApiOperation(value = "Retrieve product income with specific id")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "Product income returned"),
+            @ApiResponse(code = 500, message = "Server error")
+    })
+    public Response getProductIncomeById(@ApiParam(value = "Product income id", required = true)
+            @PathParam("id") Integer id) {
         log.debug("GET: {}/{}", Paths.PRODUCT_INCOME_URI, id);
         HashMap<String, Object> headers = new HashMap<>();
         headers.put(Headers.METHOD, Headers.GET_BY_ID);
@@ -46,7 +59,14 @@ public class ProductIncomeRestController {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response postProductIncome(String body) {
+    @ApiOperation(value = "Save product income")
+    @ApiResponses({
+            @ApiResponse(code = 201, message = "Product income saved"),
+            @ApiResponse(code = 500, message = "Server error")
+    })
+    public Response postProductIncome(@ApiParam(value = "Product income form object", required = true,
+            example = "{'orderNumber':10000,'date':1513609404711,'quantity':128,'productId':1,'supplierId':2,'userId':3}")
+                                                  String body) {
         log.debug("POST: {}", Paths.PRODUCT_INCOME_URI);
         HashMap<String, Object> headers = new HashMap<>();
         headers.put(Headers.METHOD, Headers.POST);
@@ -55,7 +75,12 @@ public class ProductIncomeRestController {
 
     @DELETE
     @Path("/{id}")
-    public Response deleteProductIncome(@PathParam("id") Integer id) {
+    @ApiOperation(value = "Delete product income with specific id")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "Product income deleted"),
+            @ApiResponse(code = 500, message = "Server error")
+    })
+    public Response deleteProductIncome(@ApiParam(value = "Product income id", required = true) @PathParam("id") Integer id) {
         log.debug("DELETE: {}/{}", Paths.PRODUCT_INCOME_URI, id);
         HashMap<String, Object> headers = new HashMap<>();
         headers.put(Headers.METHOD, Headers.DELETE);
