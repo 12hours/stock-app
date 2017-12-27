@@ -35,7 +35,7 @@
         <!--<module>client</module>-->
         <module>client-api</module>
         <module>test-data</module>
-        <module>rest-app</module>
+        <!--<module>rest-app</module>-->
         <module>approutes</module>
     </modules>
 
@@ -195,11 +195,11 @@
                 <version>${project.version}</version>
             </dependency>
 
-            <dependency>
-                <groupId>com.epam.mentoring</groupId>
-                <artifactId>rest-app</artifactId>
-                <version>${project.version}</version>
-            </dependency>
+            <!--<dependency>-->
+                <!--<groupId>com.epam.mentoring</groupId>-->
+                <!--<artifactId>rest-app</artifactId>-->
+                <!--<version>${project.version}</version>-->
+            <!--</dependency>-->
 
             <!--<dependency>-->
                 <!--<groupId>com.epam.mentoring</groupId>-->
