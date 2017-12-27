@@ -2,18 +2,48 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:jaxrs="http://cxf.apache.org/jaxrs"
+       xmlns:cxf="http://cxf.apache.org/core"
        xmlns:osgi="http://www.springframework.org/schema/osgi"
        xmlns:camel="http://camel.apache.org/schema/spring"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
          http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+         http://cxf.apache.org/core http://cxf.apache.org/schemas/core.xsd
+         http://cxf.apache.org/jaxrs http://cxf.apache.org/schemas/jaxrs.xsd
          http://www.springframework.org/schema/osgi http://www.springframework.org/schema/osgi/spring-osgi.xsd
          http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd">
 
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="location" value="/application.properties"/>
+        <property name="ignoreResourceNotFound" value="true"/>
+    </bean>
 
-    <!--<context:component-scan base-package="com.epam.mentoring.approutes"/>-->
+
+    <bean id="cors-filter"
+          class="org.apache.cxf.rs.security.cors.CrossOriginResourceSharingFilter"/>
+
+    <context:component-scan base-package="com.epam.mentoring.rest"/>
     <context:annotation-config/>
 
     <bean class="com.epam.mentoring.approutes.config.RoutesConfig"/>
+
+    <jaxrs:server serviceName="stockRestService"
+                  address="${http.server.endpoint.url}/service">
+        <jaxrs:serviceBeans>
+            <ref bean="productRestController"/>
+            <ref bean="supplierRestController"/>
+            <ref bean="productIncomeRestController"/>
+            <ref bean="productTypeRestController"/>
+            <ref bean="stockRestController"/>
+        </jaxrs:serviceBeans>
+        <jaxrs:features>
+            <cxf:logging/>
+        </jaxrs:features>
+        <jaxrs:providers>
+            <ref bean="cors-filter"/>
+        </jaxrs:providers>
+    </jaxrs:server>
+
 
 
     <camel:camelContext id="serviceRoutesContext"
