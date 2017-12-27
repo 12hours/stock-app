@@ -14,7 +14,6 @@
         http://www.springframework.org/schema/osgi
        http://www.springframework.org/schema/osgi/spring-osgi.xsd">
 
-    <!--<import resource="classpath*:spring-service-osgi-context.xml"/>-->
 
         <context:component-scan base-package="com.epam.mentoring.rest"/>
         <context:annotation-config/>
@@ -27,30 +26,8 @@
         <property name="ignoreResourceNotFound" value="true"/>
     </bean>
 
-    <!--<bean id="objectMapper" class="com.fasterxml.jackson.databind.ObjectMapper">-->
-        <!--<property name="serializationInclusion" value="NON_NULL"/>-->
-    <!--</bean>-->
-
-    <bean id="productRestController" class="com.epam.mentoring.rest.controllers.ProductRestController"/>
-
-    <bean id="supplierRestController" class="com.epam.mentoring.rest.controllers.SupplierRestController"/>
-
-    <bean id="productIncomeRestController" class="com.epam.mentoring.rest.controllers.ProductIncomeRestController"/>
-
-    <bean id="productTypeRestController" class="com.epam.mentoring.rest.controllers.ProductTypeRestController"/>
-
-    <bean id="stockRestController" class="com.epam.mentoring.rest.controllers.StockRestController"/>
-
-
     <bean id="cors-filter"
           class="org.apache.cxf.rs.security.cors.CrossOriginResourceSharingFilter"/>
-
-    <!--<bean id="jsonProvider"-->
-          <!--class="com.fasterxml.jackson.jaxrs.json.JacksonJaxbJsonProvider">-->
-        <!--<property name="mapper" ref="objectMapper"/>-->
-    <!--</bean>-->
-
-
 
     <jaxrs:server serviceName="stockRestService"
                   address="${http.server.endpoint.url}/service">
@@ -65,7 +42,6 @@
             <cxf:logging/>
         </jaxrs:features>
         <jaxrs:providers>
-            <!--<ref bean="jsonProvider"/>-->
             <ref bean="cors-filter"/>
         </jaxrs:providers>
     </jaxrs:server>

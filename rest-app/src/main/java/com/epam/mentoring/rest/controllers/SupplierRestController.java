@@ -8,6 +8,7 @@ import org.apache.camel.EndpointInject;
 import org.apache.camel.ProducerTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -15,6 +16,7 @@ import javax.ws.rs.core.Response;
 import java.util.HashMap;
 import java.util.Map;
 
+@Service
 @Api(value = "Supplier service", description = "Operations on suppliers")
 @Path(Paths.SUPPLIER_URI)
 public class SupplierRestController {

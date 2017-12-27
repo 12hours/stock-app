@@ -16,6 +16,7 @@ import javax.ws.rs.core.Response;
 import java.util.HashMap;
 import java.util.Map;
 
+@Service
 @Api(value = "Product income service", description = "Operations on product incomes")
 @Path(Paths.PRODUCT_INCOME_URI)
 public class ProductIncomeRestController {
