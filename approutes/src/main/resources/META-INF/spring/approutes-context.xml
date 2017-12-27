@@ -83,6 +83,20 @@
     </cxf:rsServer>
 
 
+    <cxf:rsServer
+            bus="cxf"
+            id="productIncomeRestService"
+            address="http://localhost:8080/api/product_income"
+            serviceClass="com.epam.mentoring.rest.controllers.ProductIncomeRestController">
+        <cxf:providers>
+            <ref bean="cors-filter"/>
+        </cxf:providers>
+    </cxf:rsServer>
+
+
+
+
+
     <camel:camelContext id="serviceRoutesContext"
                         streamCache="true">
         <camel:contextScan/>

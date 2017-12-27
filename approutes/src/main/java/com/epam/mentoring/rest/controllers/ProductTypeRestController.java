@@ -60,7 +60,7 @@ public class ProductTypeRestController {
     @ApiResponses(
             @ApiResponse(code = 200, message = "Product type deleted")
     )
-    public Response deleteProductIncome(@ApiParam(value = "Product type id", required = true)
+    public Response deleteProductType(@ApiParam(value = "Product type id", required = true)
             @PathParam("id") Integer id) {
         return null;
     }
