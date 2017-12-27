@@ -70,7 +70,6 @@
         <dependency>
             <groupId>org.apache.camel</groupId>
             <artifactId>camel-test-spring3</artifactId>
-
         </dependency>
 
         <dependency>
@@ -126,61 +125,10 @@
 
     <build>
         <finalName>rest-app</finalName>
-        <!--<plugins>-->
-        <!--&lt;!&ndash; embedded Jetty server, for testing &ndash;&gt;-->
-        <!--<plugin>-->
-        <!--<groupId>org.eclipse.jetty</groupId>-->
-        <!--<artifactId>jetty-maven-plugin</artifactId>-->
-        <!--<configuration>-->
-        <!--<reload>automatic</reload>-->
-        <!--<httpConnector>-->
-        <!--<host>0.0.0.0</host>-->
-        <!--<port>8080</port>-->
-        <!--<name>rest-app</name>-->
-        <!--</httpConnector>-->
-        <!--<webApp>-->
-        <!--<contextPath>/rest-app</contextPath>-->
-        <!--</webApp>-->
-        <!--</configuration>-->
-        <!--</plugin>-->
-
-        <!--<plugin>-->
-        <!--<groupId>org.asciidoctor</groupId>-->
-        <!--<artifactId>asciidoctor-maven-plugin</artifactId>-->
-        <!--<version>1.5.6</version>-->
-        <!--<executions>-->
-        <!--<execution>-->
-        <!--<id>output-html</id>-->
-        <!--<phase>prepare-package</phase>-->
-        <!--<goals>-->
-        <!--<goal>process-asciidoc</goal>-->
-        <!--</goals>-->
-        <!--</execution>-->
-        <!--</executions>-->
-
-        <!--<configuration>-->
-        <!--<backend>html</backend>-->
-        <!--<doctype>book</doctype>-->
-        <!--<attributes>-->
-        <!--<snippets>${project.build.directory}/asciidoc</snippets>-->
-        <!--</attributes>-->
-        <!--</configuration>-->
-        <!--</plugin>-->
-        <!--</plugins>-->
 
         <defaultGoal>install</defaultGoal>
 
         <plugins>
-            <!--<plugin>-->
-            <!--<artifactId>maven-jar-plugin</artifactId>-->
-            <!--<version>3.0.0</version>-->
-            <!--<configuration>-->
-            <!--<archive>-->
-            <!--<manifestFile>${project.build.outputDirectory}/META-INF/MANIFEST.MF</manifestFile>-->
-            <!--</archive>-->
-            <!--</configuration>-->
-            <!--</plugin>-->
-
             <plugin>
                 <groupId>com.github.kongchen</groupId>
                 <artifactId>swagger-maven-plugin</artifactId>
@@ -224,16 +172,8 @@
                     <instructions>
                         <!--<Import-Package>com.epam.mentoring</Import-Package>-->
                         <!--<Embed-Dependency>service-api,service,model,dao-api,modelmapper</Embed-Dependency>-->
-
                     </instructions>
                 </configuration>
-                <!--<configuration>-->
-                <!--<instructions>-->
-                <!--<Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>-->
-                <!--<Import-Package>!com.fasterxml.jackson.core,*</Import-Package>-->
-                <!--<Embed-Dependency>jackson-databind</Embed-Dependency>-->
-                <!--</instructions>-->
-                <!--</configuration>-->
             </plugin>
 
             <plugin>
