@@ -58,7 +58,7 @@ public class ProductRouteTest {
     public void getAllProductsTest() throws Exception {
         Exchange exchange = new DefaultExchange(context);
         Message in = new DefaultMessage();
-        in.setHeader(Headers.METHOD, Headers.GET_ALL);
+        in.setHeader(Headers.OPERATION, Headers.GET_ALL);
         exchange.setIn(in);
 
         Exchange response = template.send(RouteNames.PRODUCT_ROUTE, exchange);
@@ -69,7 +69,7 @@ public class ProductRouteTest {
     public void getAllProductsWithQuantitiesTest() throws Exception {
         Exchange exchange = new DefaultExchange(context);
         Message in = new DefaultMessage();
-        in.setHeader(Headers.METHOD, Headers.PRODUCT_GET_ALL_WITH_QAUNT);
+        in.setHeader(Headers.OPERATION, Headers.PRODUCT_GET_ALL_WITH_QAUNT);
         exchange.setIn(in);
 
         Exchange response = template.send(RouteNames.PRODUCT_ROUTE, exchange);
@@ -80,7 +80,7 @@ public class ProductRouteTest {
     public void getProductByIdTest() throws JsonProcessingException {
         Exchange exchange = new DefaultExchange(context);
         Message in = new DefaultMessage();
-        in.setHeader(Headers.METHOD, Headers.GET_BY_ID);
+        in.setHeader(Headers.OPERATION, Headers.GET_BY_ID);
         in.setHeader(Headers.ID, Integer.valueOf(42));
         exchange.setIn(in);
 
@@ -92,7 +92,7 @@ public class ProductRouteTest {
     public void saveProductTest() throws Exception {
         Exchange exchange = new DefaultExchange(context);
         Message in = new DefaultMessage();
-        in.setHeader(Headers.METHOD, Headers.POST);
+        in.setHeader(Headers.OPERATION, Headers.POST);
         in.setBody("{\"name\":\"testProduct\",\"price\":100,\"productTypeId\":1}");
         exchange.setIn(in);
 
@@ -106,7 +106,7 @@ public class ProductRouteTest {
     public void deleteProductTest() {
         Exchange exchange = new DefaultExchange(context);
         DefaultMessage in = new DefaultMessage();
-        in.setHeader(Headers.METHOD, Headers.DELETE);
+        in.setHeader(Headers.OPERATION, Headers.DELETE);
         exchange.setIn(in);
 
         Exchange response = template.send(RouteNames.PRODUCT_ROUTE, exchange);

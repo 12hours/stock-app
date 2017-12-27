@@ -1,7 +1,6 @@
 package com.epam.mentoring.approutes;
 
 import com.epam.mentoring.data.model.dto.SupplierForm;
-import com.epam.mentoring.data.model.dto.SupplierForm;
 import com.epam.mentoring.approutes.constants.Headers;
 import com.epam.mentoring.approutes.constants.RouteNames;
 import com.epam.mentoring.service.SupplierService;
@@ -19,7 +18,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
@@ -59,7 +57,7 @@ public class SupplierRouteTest {
     public void getAllSuppliersTest() throws JsonProcessingException {
         Exchange exchange = new DefaultExchange(context);
         Message in = new DefaultMessage();
-        in.setHeader(Headers.METHOD, Headers.GET_ALL);
+        in.setHeader(Headers.OPERATION, Headers.GET_ALL);
         exchange.setIn(in);
 
         Exchange response = template.send(RouteNames.SUPPLIER_ROUTE, exchange);
@@ -71,7 +69,7 @@ public class SupplierRouteTest {
     public void getSupplierByIdTest() throws JsonProcessingException {
         Exchange exchange = new DefaultExchange(context);
         Message in = new DefaultMessage();
-        in.setHeader(Headers.METHOD, Headers.GET_BY_ID);
+        in.setHeader(Headers.OPERATION, Headers.GET_BY_ID);
         in.setHeader(Headers.ID, Integer.valueOf(42));
         exchange.setIn(in);
 
@@ -83,7 +81,7 @@ public class SupplierRouteTest {
     public void saveSupplierTest() {
         Exchange exchange = new DefaultExchange(context);
         Message in = new DefaultMessage();
-        in.setHeader(Headers.METHOD, Headers.POST);
+        in.setHeader(Headers.OPERATION, Headers.POST);
         in.setBody("{\"name\":\"testSupplierName\",\"details\":\"testSupplierDetails\"}");
         exchange.setIn(in);
 
@@ -97,7 +95,7 @@ public class SupplierRouteTest {
     public void deleteSupplierTest() {
         Exchange exchange = new DefaultExchange(context);
         Message in = new DefaultMessage();
-        in.setHeader(Headers.METHOD, Headers.DELETE);
+        in.setHeader(Headers.OPERATION, Headers.DELETE);
         exchange.setIn(in);
 
         Exchange response = template.send(RouteNames.SUPPLIER_ROUTE, exchange);

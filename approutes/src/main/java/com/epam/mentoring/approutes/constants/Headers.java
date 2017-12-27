@@ -9,7 +9,7 @@ import java.util.Collections;
 
 public class Headers {
 
-    public static final String METHOD = "method";
+    public static final String OPERATION = "operationName";
     public static final String ID = "id";
 
     public static final String GET_ALL = "getAllProducts";
@@ -27,5 +27,10 @@ public class Headers {
     public static final String PRODUCT_POST = "postProduct";
     public static final String PRODUCT_DELETE = "deleteProduct";
     public static final String PRODUCT_GET_ALL_WITH_QAUNT = "getAllProductsWithQuantities";
+
+    public static final String PRODUCT_TYPE_GET_ALL = "getAllProductTypes";
+    public static final String PRODUCT_TYPE_GET_BY_ID = "getProductTypeById";
+    public static final String PRODUCT_TYPE_POST = "postProductType";
+    public static final String PRODUCT_TYPE_DELETE = "deleteProductIncome";
 
 }

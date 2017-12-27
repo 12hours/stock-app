@@ -14,7 +14,7 @@ public class RouteNames {
     public static final String STOCK_ROUTE = "direct-vm:stockRoute";
     public static final String STOCK_ROUTE_ID = "stockRoute";
 
-    public static final String PRODUCT_TYPE_ROUTE = "direct-vm:productTypeRoute";
+    public static final String PRODUCT_TYPE_ROUTE = "cxfrs:bean:productTypeRestService?bindingStyle=SimpleConsumer";
     public static final String PRODUCT_TYPE_ROUTE_ID = "productTypeRoute";
 
     public static final String PRODUCT_INCOME_ROUTE = "direct-vm:productIncomeRoute";

@@ -8,9 +8,7 @@ import com.epam.mentoring.approutes.processors.producttype.GetAllProductTypesPro
 import com.epam.mentoring.approutes.processors.producttype.GetProductTypeByIdProcessor;
 import com.epam.mentoring.approutes.processors.producttype.SaveProductTypeProcessor;
 import com.epam.mentoring.service.ProductTypeService;
-import org.apache.camel.Exchange;
 import org.apache.camel.LoggingLevel;
-import org.apache.camel.Processor;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.model.dataformat.JsonLibrary;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,16 +23,16 @@ public class ProductTypeRoute extends RouteBuilder {
     @Override
     public void configure() throws Exception {
         from(RouteNames.PRODUCT_TYPE_ROUTE).routeId(RouteNames.PRODUCT_TYPE_ROUTE_ID)
-                .log(LoggingLevel.DEBUG, "Method: " + header(Headers.METHOD))
+                .log(LoggingLevel.DEBUG, "Method: " + header(Headers.OPERATION))
                 .choice()
-                .when(header(Headers.METHOD).isEqualTo(Headers.GET_ALL))
+                .when(header(Headers.OPERATION).isEqualTo(Headers.PRODUCT_TYPE_GET_ALL))
                     .process(new GetAllProductTypesProcessor(productTypeService))
-                .when(header(Headers.METHOD).isEqualTo(Headers.GET_BY_ID))
+                .when(header(Headers.OPERATION).isEqualTo(Headers.PRODUCT_TYPE_GET_BY_ID))
                     .process(new GetProductTypeByIdProcessor(productTypeService))
-                .when(header(Headers.METHOD).isEqualTo(Headers.POST))
+                .when(header(Headers.OPERATION).isEqualTo(Headers.PRODUCT_POST))
                     .unmarshal().json(JsonLibrary.Jackson, ProductTypeForm.class)
                     .process(new SaveProductTypeProcessor(productTypeService))
-                .when(header(Headers.METHOD).isEqualTo(Headers.DELETE))
+                .when(header(Headers.OPERATION).isEqualTo(Headers.PRODUCT_DELETE))
                     .process(new DeleteProductTypeProcessor(productTypeService))
                 .otherwise().throwException(new UnsupportedOperationException())
                 .end()

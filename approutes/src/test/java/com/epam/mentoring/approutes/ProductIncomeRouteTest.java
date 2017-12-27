@@ -56,7 +56,7 @@ public class ProductIncomeRouteTest {
     public void getAllProductIncomeByIdTest() throws JsonProcessingException {
         Exchange exchange = new DefaultExchange(context);
         Message in = new DefaultMessage();
-        in.setHeader(Headers.METHOD, Headers.GET_BY_ID);
+        in.setHeader(Headers.OPERATION, Headers.GET_BY_ID);
         in.setHeader(Headers.ID, Integer.valueOf(42));
         exchange.setIn(in);
 
@@ -68,7 +68,7 @@ public class ProductIncomeRouteTest {
     public void saveProductIncomeTest() {
         Exchange exchange = new DefaultExchange(context);
         Message in = new DefaultMessage();
-        in.setHeader(Headers.METHOD, Headers.POST);
+        in.setHeader(Headers.OPERATION, Headers.POST);
         in.setBody("{\"orderNumber\":10000,\"date\":1513609404711,\"quantity\":128,\"productId\":1,\"supplierId\":2,\"userId\":3}");
         exchange.setIn(in);
 
@@ -82,7 +82,7 @@ public class ProductIncomeRouteTest {
     public void deleteProductTest() {
         DefaultExchange exchange = new DefaultExchange(context);
         DefaultMessage in = new DefaultMessage();
-        in.setHeader(Headers.METHOD, Headers.DELETE);
+        in.setHeader(Headers.OPERATION, Headers.DELETE);
         exchange.setIn(in);
 
         Exchange response = template.send(RouteNames.PRODUCT_INCOME_ROUTE, exchange);

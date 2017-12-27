@@ -18,7 +18,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
@@ -58,7 +57,7 @@ public class ProductTypeRouteTest {
     public void getAllProductTypesTest() throws JsonProcessingException {
         Exchange exchange = new DefaultExchange(context);
         Message in = new DefaultMessage();
-        in.setHeader(Headers.METHOD, Headers.GET_ALL);
+        in.setHeader(Headers.OPERATION, Headers.GET_ALL);
         exchange.setIn(in);
 
         Exchange response = template.send(RouteNames.PRODUCT_TYPE_ROUTE, exchange);
@@ -70,7 +69,7 @@ public class ProductTypeRouteTest {
     public void getProductTypeByIdTest() throws JsonProcessingException {
         Exchange exchange = new DefaultExchange(context);
         Message in = new DefaultMessage();
-        in.setHeader(Headers.METHOD, Headers.GET_BY_ID);
+        in.setHeader(Headers.OPERATION, Headers.GET_BY_ID);
         in.setHeader(Headers.ID, Integer.valueOf(42));
         exchange.setIn(in);
 
@@ -82,7 +81,7 @@ public class ProductTypeRouteTest {
     public void saveProductTypeTest() {
         Exchange exchange = new DefaultExchange(context);
         Message in = new DefaultMessage();
-        in.setHeader(Headers.METHOD, Headers.POST);
+        in.setHeader(Headers.OPERATION, Headers.POST);
         in.setBody("{\"name\":\"testProductType\"}");
         exchange.setIn(in);
 
@@ -96,7 +95,7 @@ public class ProductTypeRouteTest {
     public void deleteProductTypeTest() {
         Exchange exchange = new DefaultExchange(context);
         Message in = new DefaultMessage();
-        in.setHeader(Headers.METHOD, Headers.DELETE);
+        in.setHeader(Headers.OPERATION, Headers.DELETE);
         exchange.setIn(in);
 
         Exchange response = template.send(RouteNames.PRODUCT_TYPE_ROUTE, exchange);

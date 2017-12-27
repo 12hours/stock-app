@@ -44,7 +44,7 @@
         <!--</jaxrs:providers>-->
     <!--</jaxrs:server>-->
 
-    <bean id="productRestController" class="com.epam.mentoring.rest.controllers.ProductRestController"/>
+    <!--<bean id="productRestController" class="com.epam.mentoring.rest.controllers.ProductRestController"/>-->
 
     <!--<jaxrs:server id="restService"-->
                   <!--address="http://localhost:8081/rest"-->
@@ -65,13 +65,20 @@
     <cxf:rsServer
             bus="cxf"
             id="productRestService"
-            address="http://localhost:8080/product"
+            address="http://localhost:8080/api/product"
             serviceClass="com.epam.mentoring.rest.controllers.ProductRestController">
         <cxf:providers>
-            <!-- Add CORS filter to cxf endpoint -->
             <ref bean="cors-filter"/>
-            <!--<ref bean="jsonProvider"/>-->
-            <!--<ref bean="ihgHeaderRequestInterceptor"/>-->
+        </cxf:providers>
+    </cxf:rsServer>
+
+    <cxf:rsServer
+            bus="cxf"
+            id="productTypeRestService"
+            address="http://localhost:8080/api/product_type"
+            serviceClass="com.epam.mentoring.rest.controllers.ProductTypeRestController">
+        <cxf:providers>
+            <ref bean="cors-filter"/>
         </cxf:providers>
     </cxf:rsServer>
 
