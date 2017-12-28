@@ -3,11 +3,8 @@ package com.epam.mentoring.service.jpa;
 import com.epam.mentoring.data.model.ProductIncome;
 import com.epam.mentoring.data.model.dto.ProductIncomeForm;
 import com.epam.mentoring.service.ProductIncomeService;
-import com.epam.mentoring.service.jpa.config.EntityManagerFactoryWrapper;
 import com.epam.mentoring.service.jpa.dao.AbstractDao;
 import org.springframework.dao.DataAccessException;
-
-import javax.persistence.EntityManager;
 
 public class ProductIncomeServiceJpa extends AbstractDao<ProductIncome> implements ProductIncomeService {
 

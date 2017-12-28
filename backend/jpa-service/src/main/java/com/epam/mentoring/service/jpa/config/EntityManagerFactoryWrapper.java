@@ -26,14 +26,14 @@ public class EntityManagerFactoryWrapper implements BundleActivator {
 
     public EntityManager getEntityManager() {
         if (emf == null) {
-            log.debug("Creating emf");
+            log.debug("Creating EntityManagerFactory...");
             Bundle thisBundle = FrameworkUtil.getBundle(EntityManagerFactoryWrapper.class);
             BundleContext context = thisBundle.getBundleContext();
 
             ServiceReference serviceReference = context.getServiceReference(PersistenceProvider.class.getName());
             PersistenceProvider persistenceProvider = (PersistenceProvider) context.getService(serviceReference);
             emf = persistenceProvider.createEntityManagerFactory("PU", null);
-            log.debug("Emf created: " + emf.toString());
+            log.debug("EntityManagerFactory created: " + emf.toString());
         }
         return emf.createEntityManager();
     }
@@ -46,14 +46,15 @@ public class EntityManagerFactoryWrapper implements BundleActivator {
     @Override
     public void stop(BundleContext context) throws Exception {
         if (emf != null) {
-            log.debug("Closing emf");
+            log.debug("Closing EntityManagerFactory");
             try {
                 emf.close();
-                if (!emf.isOpen()) log.debug("emf successfully closed");
+                if (!emf.isOpen()) log.debug("EntityManagerFactory successfully closed");
             } catch (Exception e) {
-                log.error("Can not close emf");
+                log.error("Can not close EntityManagerFactory");
                 e.printStackTrace();
             }
         }
     }
+
 }

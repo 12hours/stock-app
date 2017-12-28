@@ -62,4 +62,8 @@ public class ProductServiceJpa extends AbstractDao<Product> implements ProductSe
     public List<ProductWithQuantityView> getAllProductsWithQuantitiesViews() {
         return null;
     }
+
+    private void destroy(){
+        System.out.println("DESTROY");
+    }
 }
