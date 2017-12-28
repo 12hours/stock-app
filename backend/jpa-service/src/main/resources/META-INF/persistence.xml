@@ -7,7 +7,8 @@
     <persistence-unit name="PU">
         <description>My Persistence Unit</description>
         <!--<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>-->
-        <provider>org.hibernate.osgi.OsgiPersistenceProvider</provider>
+        <!--<provider>org.hibernate.osgi.OsgiPersistenceProvider</provider>-->
+        <provider>org.hibernate.ejb.HibernatePersistence</provider>
         <!--<mapping-file></mapping-file>-->
         <!--<jar-file></jar-file>-->
         <!--<class></class>-->

@@ -4,16 +4,19 @@
         xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0">
 
 
-    <bean id="properties" class="com.epam.mentoring.service.jpa.config.PUProperties"
-        factory-method="getProperties">
-    </bean>
+    <!--<bean id="properties" class="com.epam.mentoring.service.jpa.config.PUProperties"-->
+        <!--factory-method="getProperties">-->
+    <!--</bean>-->
 
-    <bean id="persistence" class="javax.persistence.Persistence"/>
+    <!--<bean id="persistence" class="javax.persistence.Persistence"/>-->
 
-    <bean id="entityManagerFactory" class="javax.persistence.Persistence"
-        factory-method="createEntityManagerFactory">
-        <argument value="PU"/>
-        <argument ref="properties"/>
-    </bean>
+    <!--<bean id="entityManagerFactory" class="javax.persistence.Persistence"-->
+        <!--factory-method="createEntityManagerFactory">-->
+        <!--<argument value="PU"/>-->
+        <!--<argument ref="properties"/>-->
+    <!--</bean>-->
+
+    <bean id="dpService" class="com.epam.mentoring.service.jpa.ProductServiceJpa"/>
+    <service ref="dpService" interface="com.epam.mentoring.service.ProductService" />
 
 </blueprint>
