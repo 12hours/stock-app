@@ -5,12 +5,12 @@
 
     <groupId>com.epam.mentoring</groupId>
     <artifactId>test-data</artifactId>
-    <version>1.0</version>
+    <version>2.0</version>
 
     <parent>
         <groupId>com.epam.mentoring</groupId>
         <artifactId>stock-app</artifactId>
-        <version>1.0</version>
+        <version>2.0</version>
         <relativePath>..</relativePath>
     </parent>
 
