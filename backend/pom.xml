@@ -21,6 +21,7 @@
         <cxf.version>3.0.4</cxf.version>
         <jackson.version>2.3.0</jackson.version>
         <spring.version>3.2.12.RELEASE</spring.version>
+        <osgi.version>5.0.0</osgi.version>
         <!--<spring-version>3.2.12.RELEASE</spring-version>-->
     </properties>
 
@@ -37,10 +38,32 @@
         <module>test-data</module>
         <!--<module>rest-app</module>-->
         <module>approutes</module>
+        <module>jpa-service</module>
     </modules>
 
     <dependencyManagement>
         <dependencies>
+
+            <!-- OSGi -->
+            <dependency>
+                <groupId>org.osgi</groupId>
+                <artifactId>org.osgi.core</artifactId>
+                <version>${osgi.version}</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.osgi</groupId>
+                <artifactId>org.osgi.compendium</artifactId>
+                <version>${osgi.version}</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.osgi</groupId>
+                <artifactId>org.osgi.enterprise</artifactId>
+                <version>${osgi.version}</version>
+                <scope>provided</scope>
+            </dependency>
+
 
             <!--<dependency>-->
                 <!--<groupId>org.apache.camel</groupId>-->

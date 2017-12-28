@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<blueprint
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0">
+
+
+    <bean id="properties" class="com.epam.mentoring.service.jpa.config.PUProperties"
+        factory-method="getProperties">
+    </bean>
+
+    <bean id="persistence" class="javax.persistence.Persistence"/>
+
+    <bean id="entityManagerFactory" class="javax.persistence.Persistence"
+        factory-method="createEntityManagerFactory">
+        <argument value="PU"/>
+        <argument ref="properties"/>
+    </bean>
+
+</blueprint>
