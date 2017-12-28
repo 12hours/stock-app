@@ -3,9 +3,11 @@ package com.epam.mentoring.service.jpa;
 import com.epam.mentoring.data.model.Supplier;
 import com.epam.mentoring.data.model.dto.SupplierForm;
 import com.epam.mentoring.service.SupplierService;
+import com.epam.mentoring.service.jpa.config.EntityManagerFactoryWrapper;
 import com.epam.mentoring.service.jpa.dao.AbstractDao;
 import org.springframework.dao.DataAccessException;
 
+import javax.persistence.EntityManager;
 import java.util.List;
 
 public class SupplierServiceJpa extends AbstractDao<Supplier> implements SupplierService {
@@ -16,6 +18,7 @@ public class SupplierServiceJpa extends AbstractDao<Supplier> implements Supplie
 
     @Override
     public List<Supplier> getAllSuppliers() throws DataAccessException {
+
         return null;
     }
 

@@ -1,5 +1,7 @@
 package com.epam.mentoring.service.jpa.dao;
 
+import com.epam.mentoring.service.jpa.config.EntityManagerFactoryWrapper;
+
 import javax.persistence.EntityManager;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -15,6 +17,8 @@ public class AbstractDao<T> {
 
     public AbstractDao(Class<T> entityClass) {
         this.entityClass = entityClass;
+        EntityManager em = EntityManagerFactoryWrapper.getInstance().getEntityManager();
+        setEntityManager(em);
     }
 
     public EntityManager getEntityManager() {

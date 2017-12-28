@@ -75,6 +75,11 @@
             <version>5.1.34</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+        </dependency>
+
     </dependencies>
 
 
@@ -98,6 +103,7 @@
                             org.hibernate.proxy,
                             javassist.util.proxy
                         </Import-Package>
+                        <Bundle-Activator>com.epam.mentoring.service.jpa.config.EntityManagerFactoryWrapper</Bundle-Activator>
                     </instructions>
                 </configuration>
             </plugin>

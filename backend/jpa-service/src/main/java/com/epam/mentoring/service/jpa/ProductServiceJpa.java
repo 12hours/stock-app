@@ -4,7 +4,7 @@ import com.epam.mentoring.data.model.Product;
 import com.epam.mentoring.data.model.dto.ProductForm;
 import com.epam.mentoring.data.model.dto.ProductWithQuantityView;
 import com.epam.mentoring.service.ProductService;
-import com.epam.mentoring.service.jpa.config.HibernateUtil;
+import com.epam.mentoring.service.jpa.config.EntityManagerFactoryWrapper;
 import com.epam.mentoring.service.jpa.dao.AbstractDao;
 import org.springframework.dao.DataAccessException;
 
@@ -14,13 +14,8 @@ import java.util.Map;
 
 public class ProductServiceJpa extends AbstractDao<Product> implements ProductService {
 
-    private HibernateUtil hibernateUtil = new HibernateUtil();
-
     public ProductServiceJpa() {
         super(Product.class);
-        EntityManager entityManager = hibernateUtil.getEntityManager();
-        setEntityManager(entityManager);
-        System.out.println("Entity manager: " + entityManager.toString());
     }
 
     @Override
