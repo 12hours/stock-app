@@ -43,23 +43,23 @@
             <artifactId>org.osgi.enterprise</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>org.apache.geronimo.specs</groupId>
-            <artifactId>geronimo-jpa_2.0_spec</artifactId>
-            <version>1.1</version>
-            <scope>provided</scope>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>org.apache.geronimo.specs</groupId>-->
+            <!--<artifactId>geronimo-jpa_2.0_spec</artifactId>-->
+            <!--<version>1.1</version>-->
+            <!--<scope>provided</scope>-->
+        <!--</dependency>-->
 
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
             <version>4.2.20.Final</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.hibernate.javax.persistence</groupId>
-                    <artifactId>hibernate-jpa-2.0-api</artifactId>
-                </exclusion>
-            </exclusions>
+            <!--<exclusions>-->
+                <!--<exclusion>-->
+                    <!--<groupId>org.hibernate.javax.persistence</groupId>-->
+                    <!--<artifactId>hibernate-jpa-2.0-api</artifactId>-->
+                <!--</exclusion>-->
+            <!--</exclusions>-->
         </dependency>
 
 
@@ -93,9 +93,9 @@
                 <extensions>true</extensions>
                 <configuration>
                     <instructions>
-                        <!--<Export-Package>com.mysql.jdbc.*</Export-Package>-->
+                        <Export-Package>com.epam.mentoring.data.model.*</Export-Package>
                         <DynamicImport-Package>*</DynamicImport-Package>
-                        <Embed-Dependency>service-api,model,modelmapper</Embed-Dependency>
+                        <Embed-Dependency>service-api,modelmapper</Embed-Dependency>
                         <Import-Package>
                             *,
                             <!--javax.persistence,-->

@@ -18,6 +18,7 @@ public class ProductServiceJpa extends AbstractDao<Product> implements ProductSe
         super(Product.class);
     }
 
+
     @Override
     public Product findProductById(Integer id) throws DataAccessException {
         return null;
@@ -61,9 +62,5 @@ public class ProductServiceJpa extends AbstractDao<Product> implements ProductSe
     @Override
     public List<ProductWithQuantityView> getAllProductsWithQuantitiesViews() {
         return null;
-    }
-
-    private void destroy(){
-        System.out.println("DESTROY");
     }
 }

@@ -3,17 +3,20 @@ package com.epam.mentoring.service.jpa;
 import com.epam.mentoring.data.model.ProductType;
 import com.epam.mentoring.data.model.dto.ProductTypeForm;
 import com.epam.mentoring.service.ProductTypeService;
-import com.epam.mentoring.service.jpa.config.EntityManagerFactoryWrapper;
 import com.epam.mentoring.service.jpa.dao.AbstractDao;
 import org.springframework.dao.DataAccessException;
 
-import javax.persistence.EntityManager;
 import java.util.List;
 
 public class ProductTypeServiceJpa extends AbstractDao<ProductType> implements ProductTypeService {
 
     public ProductTypeServiceJpa() {
         super(ProductType.class);
+    }
+
+    public void init(){
+        ProductType productType = find(1);
+        System.out.println("ProductType found: " + productType);
     }
 
     @Override
