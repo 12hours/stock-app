@@ -1,27 +1,31 @@
 package com.epam.mentoring.data.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Transient;
+import java.util.Collection;
+import java.util.HashSet;
 
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity
-@Table(name = "productType")
+@Table(name = "product_type")
 public class ProductType {
 	@Id
 	private Integer id;
 	private String name;
 
-	@Override
+	@OneToMany(mappedBy = "type")
+	private Collection<Product> products = new HashSet<>();
+
+    public ProductType() {
+    }
+
+    public ProductType(Integer id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+    @Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
@@ -51,7 +55,29 @@ public class ProductType {
 	public String toString() {
 		return "ProductType [id=" + id + ", name=" + name + "]";
 	}
-	
-	
 
+
+	public Integer getId() {
+		return this.id;
+	}
+
+	public String getName() {
+		return this.name;
+	}
+
+	public Collection<Product> getProducts() {
+		return this.products;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setProducts(Collection<Product> products) {
+		this.products = products;
+	}
 }

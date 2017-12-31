@@ -53,7 +53,7 @@
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
-            <version>4.2.20.Final</version>
+            <!--<version>4.2.20.Final</version>-->
             <!--<exclusions>-->
                 <!--<exclusion>-->
                     <!--<groupId>org.hibernate.javax.persistence</groupId>-->
@@ -66,7 +66,7 @@
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-osgi</artifactId>
-            <version>4.2.20.Final</version>
+            <!--<version>4.2.20.Final</version>-->
         </dependency>
 
         <dependency>
@@ -93,7 +93,7 @@
                 <extensions>true</extensions>
                 <configuration>
                     <instructions>
-                        <Export-Package>com.epam.mentoring.data.model.*</Export-Package>
+                        <Export-Package>com.epam.mentoring.data.model.*,com.epam.mentoring.service</Export-Package>
                         <DynamicImport-Package>*</DynamicImport-Package>
                         <Embed-Dependency>service-api,modelmapper</Embed-Dependency>
                         <Import-Package>
@@ -129,7 +129,7 @@
                                 </artifactItem>
                             </artifactItems>
                             <outputDirectory>
-                                /home/nm/soft/redhat-jboss-fuse-6.2.1.redhat_084-70/deploy/
+                                ${fuse.deploy.folder}
                             </outputDirectory>
                         </configuration>
                     </execution>

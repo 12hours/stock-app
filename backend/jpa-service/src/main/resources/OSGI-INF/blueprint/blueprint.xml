@@ -5,18 +5,31 @@
 
 
     <!--<bean id="properties" class="com.epam.mentoring.service.jpa.config.PUProperties"-->
-        <!--factory-method="getProperties">-->
+    <!--factory-method="getProperties">-->
     <!--</bean>-->
 
     <!--<bean id="persistence" class="javax.persistence.Persistence"/>-->
 
     <!--<bean id="entityManagerFactory" class="javax.persistence.Persistence"-->
-        <!--factory-method="createEntityManagerFactory">-->
-        <!--<argument value="PU"/>-->
-        <!--<argument ref="properties"/>-->
+    <!--factory-method="createEntityManagerFactory">-->
+    <!--<argument value="PU"/>-->
+    <!--<argument ref="properties"/>-->
     <!--</bean>-->
 
     <bean id="dpService" class="com.epam.mentoring.service.jpa.ProductTypeServiceJpa" init-method="init"/>
-    <service ref="dpService" interface="com.epam.mentoring.service.ProductTypeService" />
+    <bean id="dpService2" class="com.epam.mentoring.service.jpa.ProductServiceJpa" init-method="init"/>
+    <!--<service ref="dpService" interface="com.epam.mentoring.service.ProductTypeService"/>-->
+
+    <bean id="productService" class="com.epam.mentoring.service.jpa.dummy.DummyProductService"/>
+    <service ref="productService" interface="com.epam.mentoring.service.ProductService"/>
+
+    <bean id="productTypeService" class="com.epam.mentoring.service.jpa.dummy.DummyProductTypeService"/>
+    <service ref="productTypeService" interface="com.epam.mentoring.service.ProductTypeService"/>
+
+    <bean id="productIncomeService" class="com.epam.mentoring.service.jpa.dummy.DummyProductIncomeService"/>
+    <service ref="productIncomeService" interface="com.epam.mentoring.service.ProductIncomeService"/>
+
+    <bean id="supplierService" class="com.epam.mentoring.service.jpa.dummy.DummySupplierService"/>
+    <service ref="supplierService" interface="com.epam.mentoring.service.SupplierService"/>
 
 </blueprint>

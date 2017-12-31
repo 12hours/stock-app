@@ -1,16 +1,13 @@
 package com.epam.mentoring.data.model;
 
-import lombok.*;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.Collection;
+import java.util.HashSet;
 
-//@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@ToString
-@Builder
+@Entity
+@Table(name = "product")
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -23,28 +20,28 @@ public class Product {
     @Column(name = "price")
 	private BigDecimal price;
 
-    @Transient
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "product_type_id", nullable = false, updatable = true)
 	private ProductType type;
 
-    @Transient
-	public ProductType getType(){
-        return type;
-    }
+    @OneToMany(mappedBy = "product")
+    private Collection<ProductIncome> productIncomes = new HashSet<>();
 
+	public Product() {
+	}
 
-    public Integer getId() {
-        return id;
-    }
+	public Product(Integer id, String name, BigDecimal price, ProductType type) {
+		this.id = id;
+		this.name = name;
+		this.price = price;
+		this.type = type;
+	}
 
-    public String getName() {
-        return name;
-    }
+	public static ProductBuilder builder() {
+		return new ProductBuilder();
+	}
 
-    public BigDecimal getPrice() {
-        return price;
-    }
-
-    @Override
+	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
@@ -61,5 +58,94 @@ public class Product {
 		int result = name != null ? name.hashCode() : 0;
 		result = 31 * result + (price != null ? price.hashCode() : 0);
 		return result;
+	}
+
+	public Integer getId() {
+		return this.id;
+	}
+
+	public String getName() {
+		return this.name;
+	}
+
+	public BigDecimal getPrice() {
+		return this.price;
+	}
+
+	public ProductType getType() {
+		return this.type;
+	}
+
+	public Collection<ProductIncome> getProductIncomes() {
+		return this.productIncomes;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setPrice(BigDecimal price) {
+		this.price = price;
+	}
+
+	public void setType(ProductType type) {
+		this.type = type;
+	}
+
+	public void setProductIncomes(Collection<ProductIncome> productIncomes) {
+		this.productIncomes = productIncomes;
+	}
+
+	public String toString() {
+		return "Product(id=" + this.getId() + ", name=" + this.getName() + ", price=" + this.getPrice() + ", type=" +
+				this.getType() + ")";
+	}
+
+	public static class ProductBuilder {
+		private Integer id;
+		private String name;
+		private BigDecimal price;
+		private ProductType type;
+		private Collection<ProductIncome> productIncomes;
+
+		ProductBuilder() {
+		}
+
+		public Product.ProductBuilder id(Integer id) {
+			this.id = id;
+			return this;
+		}
+
+		public Product.ProductBuilder name(String name) {
+			this.name = name;
+			return this;
+		}
+
+		public Product.ProductBuilder price(BigDecimal price) {
+			this.price = price;
+			return this;
+		}
+
+		public Product.ProductBuilder type(ProductType type) {
+			this.type = type;
+			return this;
+		}
+
+		public Product.ProductBuilder productIncomes(Collection<ProductIncome> productIncomes) {
+			this.productIncomes = productIncomes;
+			return this;
+		}
+
+		public Product build() {
+			return new Product(id, name, price, type);
+		}
+
+		public String toString() {
+			return "Product.ProductBuilder(id=" + this.id + ", name=" + this.name + ", price=" + this.price + ", type=" + this.type + ", productIncomes=" + this.productIncomes + ")";
+		}
 	}
 }

@@ -1,21 +1,32 @@
 package com.epam.mentoring.data.model;
 
-import java.util.Date;
+import javax.persistence.*;
+import java.util.Collection;
+import java.util.HashSet;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
+@Entity
+@Table(name = "user")
 public class User {
+
+	@Id
 	private Integer id;
 	private String name;
 	private String password;
+	@Column(name = "privileges")
 	private boolean isAdmin;
+
+	@OneToMany(mappedBy = "user")
+	private Collection<ProductIncome> productIncomes = new HashSet<>();
+
+	public User() {
+	}
+
+	public User(Integer id, String name, String password, boolean isAdmin) {
+		this.id = id;
+		this.name = name;
+		this.password = password;
+		this.isAdmin = isAdmin;
+	}
 
 	@Override
 	public int hashCode() {
@@ -58,6 +69,44 @@ public class User {
 				+ "]";
 	}
 
-	
-	
+
+    public Integer getId() {
+        return this.id;
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public String getPassword() {
+        return this.password;
+    }
+
+    public boolean isAdmin() {
+        return this.isAdmin;
+    }
+
+    public Collection<ProductIncome> getProductIncomes() {
+        return this.productIncomes;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setAdmin(boolean isAdmin) {
+        this.isAdmin = isAdmin;
+    }
+
+    public void setProductIncomes(Collection<ProductIncome> productIncomes) {
+        this.productIncomes = productIncomes;
+    }
 }

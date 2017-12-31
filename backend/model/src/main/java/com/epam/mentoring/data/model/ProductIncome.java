@@ -1,24 +1,45 @@
 package com.epam.mentoring.data.model;
 
+import javax.persistence.*;
 import java.util.Date;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
+@Entity
+@Table(name = "product_income")
 public class ProductIncome {
+
+	@Id
 	private Integer id;
 	private Integer quantity;
+
+	@Column(name = "order_number")
 	private Long orderNumber;
 	private Date date;
+
+	@ManyToOne(optional = false)
+	@JoinColumn(name = "product_id", nullable = false)
 	private Product product;
+
+	@ManyToOne(optional = false)
+	@JoinColumn(name = "user_id", nullable = false)
 	private User user;
+
+	@ManyToOne(optional = false)
+	@JoinColumn(name = "supplier_id", nullable = false)
 	private Supplier supplier;
+
+	@java.beans.ConstructorProperties({"id", "quantity", "orderNumber", "date", "product", "user", "supplier"})
+	public ProductIncome(Integer id, Integer quantity, Long orderNumber, Date date, Product product, User user, Supplier supplier) {
+		this.id = id;
+		this.quantity = quantity;
+		this.orderNumber = orderNumber;
+		this.date = date;
+		this.product = product;
+		this.user = user;
+		this.supplier = supplier;
+	}
+
+	public ProductIncome() {
+	}
 
 	@Override
 	public int hashCode() {
@@ -75,7 +96,61 @@ public class ProductIncome {
 		return "ProductIncome [id=" + id + ", product=" + product + ", quantity=" + quantity + ", orderNumber="
 				+ orderNumber + ", date=" + date + ", user=" + user + ", supplier=" + supplier + "]";
 	}
-	
-	
-	
+
+
+	public Integer getId() {
+		return this.id;
+	}
+
+	public Integer getQuantity() {
+		return this.quantity;
+	}
+
+	public Long getOrderNumber() {
+		return this.orderNumber;
+	}
+
+	public Date getDate() {
+		return this.date;
+	}
+
+	public Product getProduct() {
+		return this.product;
+	}
+
+	public User getUser() {
+		return this.user;
+	}
+
+	public Supplier getSupplier() {
+		return this.supplier;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public void setQuantity(Integer quantity) {
+		this.quantity = quantity;
+	}
+
+	public void setOrderNumber(Long orderNumber) {
+		this.orderNumber = orderNumber;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
+	}
+
+	public void setProduct(Product product) {
+		this.product = product;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public void setSupplier(Supplier supplier) {
+		this.supplier = supplier;
+	}
 }
