@@ -7,12 +7,13 @@ import com.epam.mentoring.service.ProductTypeService;
 import com.epam.mentoring.service.jpa.dao.AbstractDao;
 import org.springframework.dao.DataAccessException;
 
+import javax.persistence.EntityManagerFactory;
 import java.util.List;
 
 public class ProductTypeServiceJpa extends AbstractDao<ProductType> implements ProductTypeService {
 
-    public ProductTypeServiceJpa() {
-        super(ProductType.class);
+    public ProductTypeServiceJpa(EntityManagerFactory emf) {
+        super(ProductType.class, emf);
     }
 
     @Override

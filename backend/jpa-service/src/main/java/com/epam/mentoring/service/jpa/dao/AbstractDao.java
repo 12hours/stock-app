@@ -1,6 +1,5 @@
 package com.epam.mentoring.service.jpa.dao;
 
-import com.epam.mentoring.service.jpa.config.EntityManagerFactoryWrapper;
 import org.hibernate.Hibernate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,9 +22,9 @@ public abstract class AbstractDao<T> {
 
     private EntityManagerFactory emf;
 
-    public AbstractDao(Class<T> entityClass) {
+    public AbstractDao(Class<T> entityClass, EntityManagerFactory emf) {
         this.entityClass = entityClass;
-        this.emf = EntityManagerFactoryWrapper.getInstance().getEntityManagerFactory();
+        this.emf = emf;
     }
 
     private EntityManager getEntityManager() {

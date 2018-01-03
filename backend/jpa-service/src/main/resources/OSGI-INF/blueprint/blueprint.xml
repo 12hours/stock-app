@@ -20,16 +20,28 @@
     <!--<bean id="dpService2" class="com.epam.mentoring.service.jpa.ProductServiceJpa" init-method="init"/>-->
     <!--<service ref="dpService" interface="com.epam.mentoring.service.ProductTypeService"/>-->
 
-    <bean id="productService" class="com.epam.mentoring.service.jpa.ProductServiceJpa"/>
+    <bean id="emf" class="com.epam.mentoring.service.jpa.config.EntityManagerFactoryLocator"
+          factory-method="getEntityManagerFactory"
+          destroy-method="close"/>
+
+    <bean id="productService" class="com.epam.mentoring.service.jpa.ProductServiceJpa">
+        <argument ref="emf"></argument>
+    </bean>
     <service ref="productService" interface="com.epam.mentoring.service.ProductService"/>
 
-    <bean id="productTypeService" class="com.epam.mentoring.service.jpa.ProductTypeServiceJpa"/>
+    <bean id="productTypeService" class="com.epam.mentoring.service.jpa.ProductTypeServiceJpa">
+        <argument ref="emf"></argument>
+    </bean>
     <service ref="productTypeService" interface="com.epam.mentoring.service.ProductTypeService"/>
 
-    <bean id="productIncomeService" class="com.epam.mentoring.service.jpa.ProductIncomeServiceJpa"/>
+    <bean id="productIncomeService" class="com.epam.mentoring.service.jpa.ProductIncomeServiceJpa">
+        <argument ref="emf"></argument>
+    </bean>
     <service ref="productIncomeService" interface="com.epam.mentoring.service.ProductIncomeService"/>
 
-    <bean id="supplierService" class="com.epam.mentoring.service.jpa.SupplierServiceJpa"/>
+    <bean id="supplierService" class="com.epam.mentoring.service.jpa.SupplierServiceJpa">
+        <argument ref="emf"></argument>
+    </bean>
     <service ref="supplierService" interface="com.epam.mentoring.service.SupplierService"/>
 
 </blueprint>

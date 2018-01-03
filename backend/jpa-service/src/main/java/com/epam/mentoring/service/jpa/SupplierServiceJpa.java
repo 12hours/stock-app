@@ -7,12 +7,13 @@ import com.epam.mentoring.service.SupplierService;
 import com.epam.mentoring.service.jpa.dao.AbstractDao;
 import org.springframework.dao.DataAccessException;
 
+import javax.persistence.EntityManagerFactory;
 import java.util.List;
 
 public class SupplierServiceJpa extends AbstractDao<Supplier> implements SupplierService {
 
-    public SupplierServiceJpa() {
-        super(Supplier.class);
+    public SupplierServiceJpa(EntityManagerFactory emf) {
+        super(Supplier.class, emf);
     }
 
     @Override

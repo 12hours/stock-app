@@ -5,18 +5,17 @@ import com.epam.mentoring.data.model.dto.DTOUtils;
 import com.epam.mentoring.data.model.dto.ProductForm;
 import com.epam.mentoring.data.model.dto.ProductWithQuantityView;
 import com.epam.mentoring.service.ProductService;
-import com.epam.mentoring.service.jpa.config.EntityManagerFactoryWrapper;
 import com.epam.mentoring.service.jpa.dao.AbstractDao;
 import org.springframework.dao.DataAccessException;
 
-import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import java.util.List;
 import java.util.Map;
 
 public class ProductServiceJpa extends AbstractDao<Product> implements ProductService {
 
-    public ProductServiceJpa() {
-        super(Product.class);
+    public ProductServiceJpa(EntityManagerFactory emf) {
+        super(Product.class, emf);
     }
 
     @Override

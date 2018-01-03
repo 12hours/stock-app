@@ -7,10 +7,12 @@ import com.epam.mentoring.service.ProductIncomeService;
 import com.epam.mentoring.service.jpa.dao.AbstractDao;
 import org.springframework.dao.DataAccessException;
 
+import javax.persistence.EntityManagerFactory;
+
 public class ProductIncomeServiceJpa extends AbstractDao<ProductIncome> implements ProductIncomeService {
 
-    public ProductIncomeServiceJpa() {
-        super(ProductIncome.class);
+    public ProductIncomeServiceJpa(EntityManagerFactory emf) {
+        super(ProductIncome.class, emf);
     }
 
     @Override
