@@ -1,5 +1,7 @@
 package com.epam.mentoring.data.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.HashSet;
@@ -9,13 +11,21 @@ import java.util.HashSet;
 public class User {
 
 	@Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
 	private Integer id;
+
+	@Column(name = "name")
 	private String name;
+
+	@Column(name = "password")
 	private String password;
+
 	@Column(name = "privileges")
 	private boolean isAdmin;
 
-	@OneToMany(mappedBy = "user")
+	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+	@JsonIgnore
 	private Collection<ProductIncome> productIncomes = new HashSet<>();
 
 	public User() {
@@ -32,7 +42,6 @@ public class User {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + id;
 		result = prime * result + (isAdmin ? 1231 : 1237);
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((password == null) ? 0 : password.hashCode());
@@ -47,8 +56,6 @@ public class User {
 		if (getClass() != obj.getClass())
 			return false;
 		User other = (User) obj;
-		if (id != other.id)
-			return false;
 		if (isAdmin != other.isAdmin)
 			return false;
 		if (name == null) {

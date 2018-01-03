@@ -14,12 +14,19 @@ public class ProductIncomeServiceJpa extends AbstractDao<ProductIncome> implemen
 
     @Override
     public ProductIncome getProductIncomeById(Integer id) throws DataAccessException {
-        return null;
+        ProductIncome productIncome = find(id);
+        return productIncome;
     }
 
     @Override
     public Integer saveProductIncome(ProductIncome productIncome) throws DataAccessException {
-        return null;
+        try {
+            persist(productIncome);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new DataAccessException("Can not save ProductIncome", e) {};
+        }
+        return productIncome.getId();
     }
 
     @Override

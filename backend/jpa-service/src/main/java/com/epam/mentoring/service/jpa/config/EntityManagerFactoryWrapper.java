@@ -16,31 +16,27 @@ public class EntityManagerFactoryWrapper implements BundleActivator {
 
     private EntityManagerFactory emf;
 
-    public EntityManagerFactoryWrapper() {
-        ourInstance = this;
-    }
-
     public static EntityManagerFactoryWrapper getInstance() {
         return ourInstance;
     }
 
-    public EntityManager getEntityManager() {
+    public EntityManagerFactory getEntityManagerFactory() {
+        return emf;
+    }
+
+    @Override
+    public void start(BundleContext context) throws Exception {
         if (emf == null) {
             log.debug("Creating EntityManagerFactory...");
-            Bundle thisBundle = FrameworkUtil.getBundle(EntityManagerFactoryWrapper.class);
-            BundleContext context = thisBundle.getBundleContext();
+//            Bundle thisBundle = FrameworkUtil.getBundle(EntityManagerFactoryWrapper.class);
+//            BundleContext context = thisBundle.getBundleContext();
 
             ServiceReference serviceReference = context.getServiceReference(PersistenceProvider.class.getName());
             PersistenceProvider persistenceProvider = (PersistenceProvider) context.getService(serviceReference);
             emf = persistenceProvider.createEntityManagerFactory("PU", null);
             log.debug("EntityManagerFactory created: " + emf.toString());
         }
-        return emf.createEntityManager();
-    }
-
-    @Override
-    public void start(BundleContext context) throws Exception {
-
+        ourInstance = this;
     }
 
     @Override

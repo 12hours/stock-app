@@ -25,7 +25,7 @@
             <property name="javax.persistence.jdbc.url"
                       value="jdbc:mysql://localhost:3306/test_db"/>
             <property name="javax.persistence.jdbc.user" value="root"/>
-            <property name="javax.persistence.jdbc.password" value="jAn22enin"/>
+            <property name="javax.persistence.jdbc.password" value="root"/>
             <property name="hibernate.hbm2ddl.auto" value="create"/>
             <property name="hibernate.hbm2ddl.import_files" value="init.sql"/>
             <property name="hibernate.show_sql" value="true"/>

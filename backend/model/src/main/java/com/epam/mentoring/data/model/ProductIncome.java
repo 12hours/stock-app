@@ -1,5 +1,9 @@
 package com.epam.mentoring.data.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -8,11 +12,18 @@ import java.util.Date;
 public class ProductIncome {
 
 	@Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
 	private Integer id;
+
+	@Column(name = "quantity")
 	private Integer quantity;
 
 	@Column(name = "order_number")
 	private Long orderNumber;
+
+	@Column(name = "date")
+    @Temporal(value = TemporalType.DATE)
 	private Date date;
 
 	@ManyToOne(optional = false)
@@ -46,7 +57,6 @@ public class ProductIncome {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((date == null) ? 0 : date.hashCode());
-		result = prime * result + id;
 		result = prime * result + (int) (orderNumber ^ (orderNumber >>> 32));
 		result = prime * result + ((product == null) ? 0 : product.hashCode());
 		result = prime * result + quantity;
@@ -67,8 +77,6 @@ public class ProductIncome {
 			if (other.date != null)
 				return false;
 		} else if (!date.equals(other.date))
-			return false;
-		if (id != other.id)
 			return false;
 		if (orderNumber != other.orderNumber)
 			return false;

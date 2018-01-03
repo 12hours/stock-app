@@ -1,6 +1,8 @@
 package com.epam.mentoring.data.model;
 
 
+import com.fasterxml.jackson.annotation.*;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Collection;
@@ -9,6 +11,7 @@ import java.util.HashSet;
 @Entity
 @Table(name = "product")
 public class Product {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
@@ -20,11 +23,13 @@ public class Product {
     @Column(name = "price")
 	private BigDecimal price;
 
+    @Column(name = "type")
     @ManyToOne(optional = false)
     @JoinColumn(name = "product_type_id", nullable = false, updatable = true)
 	private ProductType type;
 
-    @OneToMany(mappedBy = "product")
+    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
+	@JsonIgnore
     private Collection<ProductIncome> productIncomes = new HashSet<>();
 
 	public Product() {

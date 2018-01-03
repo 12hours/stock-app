@@ -14,14 +14,10 @@ public class ProductTypeServiceJpa extends AbstractDao<ProductType> implements P
         super(ProductType.class);
     }
 
-    public void init(){
-        ProductType productType = find(1);
-        System.out.println("ProductType found: " + productType);
-    }
-
     @Override
     public ProductType getProductTypeById(Integer id) throws DataAccessException {
-        return null;
+        ProductType productType = find(id);
+        return productType;
     }
 
     @Override
@@ -36,7 +32,13 @@ public class ProductTypeServiceJpa extends AbstractDao<ProductType> implements P
 
     @Override
     public Integer saveProductType(ProductType productType) throws DataAccessException {
-        return null;
+        try {
+            persist(productType);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new DataAccessException("Can not save ProductType", e) {};
+        }
+        return productType.getId();
     }
 
     @Override

@@ -1,9 +1,8 @@
 package com.epam.mentoring.data.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import javax.persistence.*;
 import java.util.Collection;
 import java.util.HashSet;
 
@@ -12,11 +11,18 @@ import java.util.HashSet;
 public class Supplier {
 
 	@Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
 	private Integer id;
+
+	@Column(name = "name")
 	private String name;
+
+	@Column(name = "details")
 	private String details;
 
 	@OneToMany(mappedBy = "supplier")
+	@JsonIgnore
 	private Collection<ProductIncome> productIncomes = new HashSet<>();
 
 	public Supplier() {
@@ -33,7 +39,6 @@ public class Supplier {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((details == null) ? 0 : details.hashCode());
-		result = prime * result + id;
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		return result;
 	}
@@ -50,8 +55,6 @@ public class Supplier {
 			if (other.details != null)
 				return false;
 		} else if (!details.equals(other.details))
-			return false;
-		if (id != other.id)
 			return false;
 		if (name == null) {
 			if (other.name != null)

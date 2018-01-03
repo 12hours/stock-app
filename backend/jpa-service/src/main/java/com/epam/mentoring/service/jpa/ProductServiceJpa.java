@@ -18,20 +18,21 @@ public class ProductServiceJpa extends AbstractDao<Product> implements ProductSe
         super(Product.class);
     }
 
-
-    public void init(){
-        Product product = find(1);
-        System.out.println("Product found: " + product);
-    }
-
     @Override
     public Product findProductById(Integer id) throws DataAccessException {
-        return null;
+        Product product = find(id);
+        return product;
     }
 
     @Override
     public Integer saveProduct(Product product) throws DataAccessException {
-        return null;
+        try {
+            persist(product);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new DataAccessException("Can not save Product", e){};
+        }
+        return product.getId();
     }
 
     @Override

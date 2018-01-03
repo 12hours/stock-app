@@ -1,20 +1,25 @@
 package com.epam.mentoring.data.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import com.fasterxml.jackson.annotation.*;
+
+import javax.persistence.*;
 import java.util.Collection;
 import java.util.HashSet;
 
 @Entity
 @Table(name = "product_type")
 public class ProductType {
+
 	@Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
 	private Integer id;
+
+	@Column(name = "name")
 	private String name;
 
-	@OneToMany(mappedBy = "type")
+	@OneToMany(mappedBy = "type", fetch = FetchType.LAZY)
+    @JsonIgnore
 	private Collection<Product> products = new HashSet<>();
 
     public ProductType() {
@@ -29,7 +34,6 @@ public class ProductType {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + id;
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		return result;
 	}
@@ -42,8 +46,6 @@ public class ProductType {
 		if (getClass() != obj.getClass())
 			return false;
 		ProductType other = (ProductType) obj;
-		if (id != other.id)
-			return false;
 		if (name == null) {
 			if (other.name != null)
 				return false;

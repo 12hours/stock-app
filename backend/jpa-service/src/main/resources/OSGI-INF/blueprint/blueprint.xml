@@ -16,20 +16,20 @@
     <!--<argument ref="properties"/>-->
     <!--</bean>-->
 
-    <bean id="dpService" class="com.epam.mentoring.service.jpa.ProductTypeServiceJpa" init-method="init"/>
-    <bean id="dpService2" class="com.epam.mentoring.service.jpa.ProductServiceJpa" init-method="init"/>
+    <!--<bean id="dpService" class="com.epam.mentoring.service.jpa.ProductTypeServiceJpa" init-method="init"/>-->
+    <!--<bean id="dpService2" class="com.epam.mentoring.service.jpa.ProductServiceJpa" init-method="init"/>-->
     <!--<service ref="dpService" interface="com.epam.mentoring.service.ProductTypeService"/>-->
 
-    <bean id="productService" class="com.epam.mentoring.service.jpa.dummy.DummyProductService"/>
+    <bean id="productService" class="com.epam.mentoring.service.jpa.ProductServiceJpa"/>
     <service ref="productService" interface="com.epam.mentoring.service.ProductService"/>
 
-    <bean id="productTypeService" class="com.epam.mentoring.service.jpa.dummy.DummyProductTypeService"/>
+    <bean id="productTypeService" class="com.epam.mentoring.service.jpa.ProductTypeServiceJpa"/>
     <service ref="productTypeService" interface="com.epam.mentoring.service.ProductTypeService"/>
 
-    <bean id="productIncomeService" class="com.epam.mentoring.service.jpa.dummy.DummyProductIncomeService"/>
+    <bean id="productIncomeService" class="com.epam.mentoring.service.jpa.ProductIncomeServiceJpa"/>
     <service ref="productIncomeService" interface="com.epam.mentoring.service.ProductIncomeService"/>
 
-    <bean id="supplierService" class="com.epam.mentoring.service.jpa.dummy.DummySupplierService"/>
+    <bean id="supplierService" class="com.epam.mentoring.service.jpa.SupplierServiceJpa"/>
     <service ref="supplierService" interface="com.epam.mentoring.service.SupplierService"/>
 
 </blueprint>

@@ -3,6 +3,7 @@ package com.epam.mentoring.service.jpa.dao;
 import com.epam.mentoring.service.jpa.config.EntityManagerFactoryWrapper;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
@@ -13,20 +14,15 @@ public class AbstractDao<T> {
 
     protected Class<T> entityClass;
 
-    private EntityManager em;
+    private EntityManagerFactory emf;
 
     public AbstractDao(Class<T> entityClass) {
         this.entityClass = entityClass;
-        EntityManager em = EntityManagerFactoryWrapper.getInstance().getEntityManager();
-        setEntityManager(em);
+        this.emf = EntityManagerFactoryWrapper.getInstance().getEntityManagerFactory();
     }
 
-    public EntityManager getEntityManager() {
-        return this.em;
-    }
-
-    public void setEntityManager(EntityManager em) {
-        this.em = em;
+    private EntityManager getEntityManager() {
+        return this.emf.createEntityManager();
     }
 
     /**
@@ -38,32 +34,46 @@ public class AbstractDao<T> {
         return getEntityManager().getMetamodel().entity(entityClass);
     }
 
-    public void persist(T entity) {
-        getEntityManager().persist(entity);
+    protected void persist(T entity) throws Exception {
+        EntityManager em = getEntityManager();
+        try {
+            em.getTransaction().begin();
+            em.persist(entity);
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            if (em.getTransaction().isActive())
+                em.getTransaction().rollback();
+            throw e;
+        } finally {
+            em.close();
+        }
     }
 
-    public T merge(T entity) {
+    protected T merge(T entity) {
         return getEntityManager().merge(entity);
     }
 
-    public void remove(Object entityId) {
+    protected void remove(Object entityId) {
         T entity = find(entityId);
         if (entity != null)
             getEntityManager().remove(entity);
     }
 
-    public T find(Object id) {
-        return getEntityManager().find(entityClass, id);
+    protected T find(Object id) {
+        EntityManager em = getEntityManager();
+        T entity = em.find(entityClass, id);
+//        em.close();
+        return entity;
     }
 
-    public List<T> findAll() {
+    protected List<T> findAll() {
         CriteriaQuery<T> cq = getEntityManager().getCriteriaBuilder().createQuery(
                 entityClass);
         cq.select(cq.from(entityClass));
         return getEntityManager().createQuery(cq).getResultList();
     }
 
-    public int count() {
+    protected int count() {
         CriteriaBuilder cb = getEntityManager().getCriteriaBuilder();
         CriteriaQuery<Long> cq = cb.createQuery(Long.class);
         Root<T> root = cq.from(entityClass);
