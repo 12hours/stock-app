@@ -43,6 +43,12 @@
             <artifactId>org.osgi.enterprise</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>commons-beanutils</groupId>
+            <artifactId>commons-beanutils</artifactId>
+            <version>1.9.2</version>
+        </dependency>
+
         <!--<dependency>-->
             <!--<groupId>org.apache.geronimo.specs</groupId>-->
             <!--<artifactId>geronimo-jpa_2.0_spec</artifactId>-->

@@ -1,6 +1,10 @@
 package com.epam.mentoring.service.jpa.dao;
 
 import com.epam.mentoring.service.jpa.config.EntityManagerFactoryWrapper;
+import org.hibernate.Hibernate;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -8,9 +12,12 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import javax.persistence.metamodel.EntityType;
+import java.lang.reflect.Field;
 import java.util.List;
 
-public class AbstractDao<T> {
+public abstract class AbstractDao<T> {
+
+    private static Logger log = LoggerFactory.getLogger(AbstractDao.class.getName());
 
     protected Class<T> entityClass;
 
@@ -45,7 +52,11 @@ public class AbstractDao<T> {
                 em.getTransaction().rollback();
             throw e;
         } finally {
-            em.close();
+            try {
+                em.close();
+            } catch (Exception e) {
+                log.warn("Can not close EntityManager: {}", e);
+            }
         }
     }
 
@@ -54,23 +65,93 @@ public class AbstractDao<T> {
     }
 
     protected void remove(Object entityId) {
-        T entity = find(entityId);
-        if (entity != null)
-            getEntityManager().remove(entity);
+        EntityManager em = getEntityManager();
+        T entity = em.find(entityClass, entityId);
+        if (entity != null) {
+            em.getTransaction().begin();
+            try {
+                em.remove(entity);
+                em.getTransaction().commit();
+            } catch (Exception e) {
+                em.getTransaction().rollback();
+                throw e;
+            } finally {
+                try {
+                    em.close();
+                } catch (Exception e) {
+                    log.warn("Can not close EntityManager: {}", e);
+                }
+            }
+        }
     }
 
     protected T find(Object id) {
         EntityManager em = getEntityManager();
         T entity = em.find(entityClass, id);
-//        em.close();
+        em.close();
         return entity;
     }
 
+    /**
+     * Finds object by id, initialize, extracts and returns requested field
+     * @param id requested object id
+     * @param fieldName name of the field to extract
+     * @return {@code Object} laying in requested field
+     * @throws NoSuchFieldException
+     * @throws IllegalAccessException
+     */
+    protected Object findAndFetchField(Object id, String fieldName) throws NoSuchFieldException, IllegalAccessException {
+        EntityManager em = getEntityManager();
+        T entity = em.find(entityClass, id);
+        Hibernate.initialize(entity);
+        Field field = entity.getClass().getDeclaredField(fieldName);
+        field.setAccessible(true);
+        Object requestedField = field.get(entity);
+        em.close();
+        return requestedField;
+    }
+
+    protected void update(Object id, T updatedEntity) {
+        T persistedEntity = find(id);
+
+        if (persistedEntity != null) {
+            EntityManager em = getEntityManager();
+            try {
+                em.getTransaction().begin();
+                BeanUtils.copyProperties(updatedEntity, persistedEntity);
+                em.getTransaction().commit();
+            } catch (Exception e) {
+                em.getTransaction().rollback();
+                throw e;
+            } finally {
+                try {
+                    em.close();
+                } catch (Exception e) {
+                    log.warn("Can not close EntityManager: {}", e);
+                }
+            }
+        }
+    }
+
     protected List<T> findAll() {
-        CriteriaQuery<T> cq = getEntityManager().getCriteriaBuilder().createQuery(
-                entityClass);
-        cq.select(cq.from(entityClass));
-        return getEntityManager().createQuery(cq).getResultList();
+        EntityManager em = getEntityManager();
+        List<T> list = null;
+        try {
+            CriteriaQuery<T> cq = em.getCriteriaBuilder().createQuery(
+                    entityClass);
+            cq.select(cq.from(entityClass));
+            list = em.createQuery(cq).getResultList();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                em.close();
+            } catch (Exception e) {
+                log.warn("Can not close EntityManager: {}", e);
+            }
+        }
+
+        return list;
     }
 
     protected int count() {

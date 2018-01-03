@@ -21,7 +21,7 @@ public class Supplier {
 	@Column(name = "details")
 	private String details;
 
-	@OneToMany(mappedBy = "supplier")
+	@OneToMany(mappedBy = "supplier", fetch = FetchType.LAZY, orphanRemoval = true)
 	@JsonIgnore
 	private Collection<ProductIncome> productIncomes = new HashSet<>();
 

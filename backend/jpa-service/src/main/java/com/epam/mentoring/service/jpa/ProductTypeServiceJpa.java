@@ -1,6 +1,7 @@
 package com.epam.mentoring.service.jpa;
 
 import com.epam.mentoring.data.model.ProductType;
+import com.epam.mentoring.data.model.dto.DTOUtils;
 import com.epam.mentoring.data.model.dto.ProductTypeForm;
 import com.epam.mentoring.service.ProductTypeService;
 import com.epam.mentoring.service.jpa.dao.AbstractDao;
@@ -22,12 +23,12 @@ public class ProductTypeServiceJpa extends AbstractDao<ProductType> implements P
 
     @Override
     public List<ProductType> getAllProductTypes() throws DataAccessException {
-        return null;
+        return findAll();
     }
 
     @Override
     public void updateProductType(ProductType productType) throws DataAccessException {
-
+        update(productType.getId(), productType);
     }
 
     @Override
@@ -43,11 +44,13 @@ public class ProductTypeServiceJpa extends AbstractDao<ProductType> implements P
 
     @Override
     public Integer saveProductType(ProductTypeForm productTypeForm) throws DataAccessException {
-        return null;
+        ProductType productType = DTOUtils.map(productTypeForm, ProductType.class);
+        return saveProductType(productType);
     }
 
     @Override
     public int deleteProductType(Integer id) throws DataAccessException {
+        remove(id);
         return 0;
     }
 }

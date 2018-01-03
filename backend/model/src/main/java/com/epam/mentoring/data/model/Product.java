@@ -23,12 +23,11 @@ public class Product {
     @Column(name = "price")
 	private BigDecimal price;
 
-    @Column(name = "type")
     @ManyToOne(optional = false)
     @JoinColumn(name = "product_type_id", nullable = false, updatable = true)
 	private ProductType type;
 
-    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY, orphanRemoval = true)
 	@JsonIgnore
     private Collection<ProductIncome> productIncomes = new HashSet<>();
 

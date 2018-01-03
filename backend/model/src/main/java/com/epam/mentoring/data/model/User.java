@@ -24,7 +24,7 @@ public class User {
 	@Column(name = "privileges")
 	private boolean isAdmin;
 
-	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY, orphanRemoval = true)
 	@JsonIgnore
 	private Collection<ProductIncome> productIncomes = new HashSet<>();
 

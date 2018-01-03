@@ -18,7 +18,7 @@ public class ProductType {
 	@Column(name = "name")
 	private String name;
 
-	@OneToMany(mappedBy = "type", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "type", fetch = FetchType.LAZY, orphanRemoval = true)
     @JsonIgnore
 	private Collection<Product> products = new HashSet<>();
 
@@ -29,6 +29,7 @@ public class ProductType {
         this.id = id;
         this.name = name;
     }
+
 
     @Override
 	public int hashCode() {

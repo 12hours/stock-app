@@ -1,6 +1,7 @@
 package com.epam.mentoring.service.jpa;
 
 import com.epam.mentoring.data.model.Product;
+import com.epam.mentoring.data.model.dto.DTOUtils;
 import com.epam.mentoring.data.model.dto.ProductForm;
 import com.epam.mentoring.data.model.dto.ProductWithQuantityView;
 import com.epam.mentoring.service.ProductService;
@@ -37,7 +38,8 @@ public class ProductServiceJpa extends AbstractDao<Product> implements ProductSe
 
     @Override
     public Integer saveProduct(ProductForm productForm) throws DataAccessException {
-        return null;
+        Product product = DTOUtils.map(productForm, Product.class);
+        return saveProduct(product);
     }
 
     @Override
@@ -47,12 +49,14 @@ public class ProductServiceJpa extends AbstractDao<Product> implements ProductSe
 
     @Override
     public void updateProduct(Integer id, ProductForm productForm) throws DataAccessException {
-
+        Product product = DTOUtils.map(productForm, Product.class);
+        update(id, product);
     }
 
     @Override
     public List<Product> getAllProducts() throws DataAccessException {
-        return null;
+        List<Product> products = findAll();
+        return products;
     }
 
     @Override
@@ -62,7 +66,7 @@ public class ProductServiceJpa extends AbstractDao<Product> implements ProductSe
 
     @Override
     public void deleteProductById(Integer id) throws DataAccessException {
-
+        remove(id);
     }
 
     @Override

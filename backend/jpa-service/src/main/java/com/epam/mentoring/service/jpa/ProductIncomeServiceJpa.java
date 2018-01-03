@@ -1,6 +1,7 @@
 package com.epam.mentoring.service.jpa;
 
 import com.epam.mentoring.data.model.ProductIncome;
+import com.epam.mentoring.data.model.dto.DTOUtils;
 import com.epam.mentoring.data.model.dto.ProductIncomeForm;
 import com.epam.mentoring.service.ProductIncomeService;
 import com.epam.mentoring.service.jpa.dao.AbstractDao;
@@ -31,12 +32,13 @@ public class ProductIncomeServiceJpa extends AbstractDao<ProductIncome> implemen
 
     @Override
     public Integer saveProductIncome(ProductIncomeForm productIncomeForm) throws DataAccessException {
-        return null;
+        ProductIncome productIncome = DTOUtils.map(productIncomeForm, ProductIncome.class);
+        return saveProductIncome(productIncome);
     }
 
     @Override
     public void deleteProductIncome(Integer id) throws DataAccessException {
-
+        remove(id);
     }
 
     @Override
