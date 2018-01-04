@@ -17,14 +17,14 @@
     <!--</bean>-->
 
     <!--<bean id="dpService" class="com.epam.mentoring.service.jpa.ProductTypeServiceJpaImplImpl" init-method="init"/>-->
-    <!--<bean id="dpService2" class="com.epam.mentoring.service.jpa.ProductServiceJpa" init-method="init"/>-->
+    <!--<bean id="dpService2" class="com.epam.mentoring.service.jpa.ProductServiceJpaImplImpl" init-method="init"/>-->
     <!--<service ref="dpService" interface="com.epam.mentoring.service.ProductTypeService"/>-->
 
     <bean id="emf" class="com.epam.mentoring.service.jpa.config.EntityManagerFactoryLocator"
           factory-method="getEntityManagerFactory"
           destroy-method="close"/>
 
-    <bean id="productService" class="com.epam.mentoring.service.jpa.ProductServiceJpa">
+    <bean id="productService" class="com.epam.mentoring.service.jpa.ProductServiceJpaImpl">
         <argument ref="emf"></argument>
     </bean>
     <service ref="productService" interface="com.epam.mentoring.service.ProductService"/>

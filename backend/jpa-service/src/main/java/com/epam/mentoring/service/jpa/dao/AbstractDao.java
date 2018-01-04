@@ -93,7 +93,11 @@ public abstract class AbstractDao<T> {
     protected T find(Object id) {
         EntityManager em = getEntityManager();
         T entity = em.find(entityClass, id);
-        em.close();
+        try {
+            em.close();
+        } catch (Exception e) {
+            log.warn("Can not close EntityManager: {}", e);
+        }
         return entity;
     }
 
@@ -103,7 +107,11 @@ public abstract class AbstractDao<T> {
         Field field = entity.getClass().getDeclaredField(fieldName);
         field.setAccessible(true);
         Hibernate.initialize(field.get(entity)); // avoid LazyInitializationException
-        em.close();
+        try {
+            em.close();
+        } catch (Exception e) {
+            log.warn("Can not close EntityManager: {}", e);
+        }
         return entity;
     }
 
@@ -123,41 +131,49 @@ public abstract class AbstractDao<T> {
         field.setAccessible(true);
         Hibernate.initialize(field.get(entity)); // avoid LazyInitializationException
         Object requestedField = field.get(entity); // actually getting of the initialized field
-        em.close();
+        try {
+            em.close();
+        } catch (Exception e) {
+            log.warn("Can not close EntityManager: {}", e);
+        }
         return requestedField;
     }
 
     /**
      * Updates object with given id with fields of provided object.
      * This method <b>ignores</b> all collection fields. If you need to update collection fields, use {@code merge(T entity)} instead.
+     *
      * @param id
      * @param dtoEntity
      */
     protected void update(Object id, T dtoEntity) {
         EntityManager em = getEntityManager();
-        T persistedEntity = em.find(entityClass, id);
-        if (persistedEntity != null) {
-            try {
-                String[] fieldsToIgnore = Arrays.stream(dtoEntity.getClass().getDeclaredFields())
-                        .filter(field -> field.getType().isAssignableFrom(Collection.class))
-                        .map(field -> field.getName())
-                        .toArray(String[]::new);
+        try {
+            T persistedEntity = em.find(entityClass, id);
+            if (persistedEntity == null) { /* TODO: check */ }
 
-                em.getTransaction().begin();
-                BeanUtils.copyProperties(dtoEntity, persistedEntity, fieldsToIgnore);
-                em.getTransaction().commit();
-            } catch (Exception e) {
+            String[] fieldsToIgnore = Arrays.stream(dtoEntity.getClass().getDeclaredFields())
+                    .filter(field -> field.getType().isAssignableFrom(Collection.class))
+                    .map(field -> field.getName())
+                    .toArray(String[]::new);
+
+            em.getTransaction().begin();
+            BeanUtils.copyProperties(dtoEntity, persistedEntity, fieldsToIgnore);
+            em.getTransaction().commit();
+        } catch (Exception ex) {
+            try {
                 em.getTransaction().rollback();
-                throw e;
-            } finally {
-                try {
-                    em.close();
-                } catch (Exception e) {
-                    log.warn("Can not close EntityManager: {}", e);
-                }
+            } catch (Exception e) {
+                log.error("Can not rollback: {}", e);
             }
-        } else {
-            em.close();
+            throw ex;
+        } finally {
+            try {
+                em.close();
+            } catch (Exception e) {
+                log.warn("Can not close EntityManager: {}", e);
+            }
+
         }
     }
 
