@@ -1,6 +1,7 @@
 package com.epam.mentoring.service.jpa.dao;
 
 import org.hibernate.Hibernate;
+import org.hibernate.HibernateException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -63,10 +64,21 @@ public abstract class AbstractDao<T> {
 
     protected T merge(T entity) {
         EntityManager em = getEntityManager();
-        em.getTransaction().begin();
-        em.merge(entity);
-        em.getTransaction().commit();
-        return entity;
+        try {
+            em.getTransaction().begin();
+            em.merge(entity);
+            em.getTransaction().commit();
+            return entity;
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw e;
+        } finally {
+            try {
+                em.close();
+            } catch (Exception e) {
+                log.warn("Can not close EntityManager: {}", e);
+            }
+        }
     }
 
     protected void remove(Object entityId) {
@@ -101,12 +113,22 @@ public abstract class AbstractDao<T> {
         return entity;
     }
 
-    protected T find(Object id, String fieldName) throws NoSuchFieldException, IllegalAccessException {
+    /**
+     * Finds object with given id, initialize specified field
+     * @param id id of object to find
+     * @param fieldNames names of the fields that should be initialized in case they are lazy-fetched by default
+     * @return entity object
+     * @throws NoSuchFieldException
+     * @throws IllegalAccessException
+     */
+    protected T find(Object id, String... fieldNames) throws NoSuchFieldException, IllegalAccessException {
         EntityManager em = getEntityManager();
         T entity = em.find(entityClass, id);
-        Field field = entity.getClass().getDeclaredField(fieldName);
-        field.setAccessible(true);
-        Hibernate.initialize(field.get(entity)); // avoid LazyInitializationException
+        for (String fieldName: fieldNames) {
+            Field field = entity.getClass().getDeclaredField(fieldName);
+            field.setAccessible(true);
+            Hibernate.initialize(field.get(entity)); // avoid LazyInitializationException
+        }
         try {
             em.close();
         } catch (Exception e) {
@@ -126,25 +148,32 @@ public abstract class AbstractDao<T> {
      */
     protected Object findAndFetchField(Object id, String fieldName) throws NoSuchFieldException, IllegalAccessException {
         EntityManager em = getEntityManager();
-        T entity = em.find(entityClass, id);
-        Field field = entity.getClass().getDeclaredField(fieldName);
-        field.setAccessible(true);
-        Hibernate.initialize(field.get(entity)); // avoid LazyInitializationException
-        Object requestedField = field.get(entity); // actually getting of the initialized field
+        Object requestedField = null; // actually getting of the initialized field
         try {
-            em.close();
+            T entity = em.find(entityClass, id);
+            Field field = entity.getClass().getDeclaredField(fieldName);
+            field.setAccessible(true);
+            Hibernate.initialize(field.get(entity)); // avoid LazyInitializationException
+            requestedField = field.get(entity);
+            return requestedField;
         } catch (Exception e) {
-            log.warn("Can not close EntityManager: {}", e);
+            e.printStackTrace();
+            throw e;
+        } finally {
+            try {
+                em.close();
+            } catch (Exception e) {
+                log.warn("Can not close EntityManager: {}", e);
+            }
         }
-        return requestedField;
     }
 
     /**
      * Updates object with given id with fields of provided object.
      * This method <b>ignores</b> all collection fields. If you need to update collection fields, use {@code merge(T entity)} instead.
      *
-     * @param id
-     * @param dtoEntity
+     * @param id id of object to update
+     * @param dtoEntity transfer object with updated fields
      */
     protected void update(Object id, T dtoEntity) {
         EntityManager em = getEntityManager();
