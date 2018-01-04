@@ -92,14 +92,19 @@ public class ProductServiceJpaImpl extends AbstractProductDao implements Product
     }
 
     @Override
-    public List<ProductWithQuantityView> getAllProductsWithQuantitiesViews() {
-        Map<Product, Integer> allProductsWithProductIncomesMap = getAllProductsWithProductIncomesMap();
-        List<ProductWithQuantityView> productWithQuantityViewsList = new ArrayList<>();
-        for (Map.Entry<Product, Integer> entry : allProductsWithProductIncomesMap.entrySet()) {
-            Product product = entry.getKey();
-            Integer quantity = entry.getValue();
-            productWithQuantityViewsList.add(new ProductWithQuantityView(product.getId(), product.getName(), quantity));
+    public List<ProductWithQuantityView> getAllProductsWithQuantitiesViews() throws DataAccessException {
+        try {
+            Map<Product, Integer> allProductsWithProductIncomesMap = getAllProductsWithProductIncomesMap();
+            List<ProductWithQuantityView> productWithQuantityViewsList = new ArrayList<>();
+            for (Map.Entry<Product, Integer> entry : allProductsWithProductIncomesMap.entrySet()) {
+                Product product = entry.getKey();
+                Integer quantity = entry.getValue();
+                productWithQuantityViewsList.add(new ProductWithQuantityView(product.getId(), product.getName(), quantity));
+            }
+            return productWithQuantityViewsList;
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new DataAccessException("Can not fetch list of products with quantities"){};
         }
-        return productWithQuantityViewsList;
     }
 }

@@ -28,6 +28,7 @@ public abstract class AbstractProductDao extends AbstractDao<Product> {
         for (Object[] item : resultList) {
             productIntegerHashMap.put((Product)item[0], ((Long)item[1]).intValue());
         }
+        em.close();
         return productIntegerHashMap;
     }
 
