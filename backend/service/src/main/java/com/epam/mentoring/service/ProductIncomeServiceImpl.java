@@ -63,7 +63,7 @@ public class ProductIncomeServiceImpl implements ProductIncomeService {
     }
 
     @Override
-    public void updateProductIncome(ProductIncomeForm productIncomeForm) throws DataAccessException {
+    public void updateProductIncome(Integer id, ProductIncomeForm productIncomeForm) throws DataAccessException {
         ProductIncome productIncome = DTOUtils.map(productIncomeForm, ProductIncome.class);
         Assert.notNull(productIncome, "No ProductIncome provided");
         Assert.notNull(productIncome.getProduct(), "No Product for product income");

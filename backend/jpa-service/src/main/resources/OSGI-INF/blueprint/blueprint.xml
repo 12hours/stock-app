@@ -34,7 +34,7 @@
     </bean>
     <service ref="productTypeService" interface="com.epam.mentoring.service.ProductTypeService"/>
 
-    <bean id="productIncomeService" class="com.epam.mentoring.service.jpa.ProductIncomeServiceJpa">
+    <bean id="productIncomeService" class="com.epam.mentoring.service.jpa.ProductIncomeServiceJpaImpl">
         <argument ref="emf"></argument>
     </bean>
     <service ref="productIncomeService" interface="com.epam.mentoring.service.ProductIncomeService"/>

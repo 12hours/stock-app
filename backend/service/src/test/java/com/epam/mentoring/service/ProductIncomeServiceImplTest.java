@@ -100,7 +100,7 @@ public class ProductIncomeServiceImplTest {
     @Test
     public void updateProductIncome() {
         ProductIncomeForm productIncomeForm = TestData.productIncomeForms().get(0);
-        productIncomeService.updateProductIncome(productIncomeForm);
+        productIncomeService.updateProductIncome(, productIncomeForm);
         verify(dao, times(1)).updateProductIncome(any(ProductIncome.class));
         verify(dao).updateProductIncome(productIncomeArgumentCaptor.capture());
         assertEquals(DTOUtils.map(productIncomeForm, ProductIncome.class), productIncomeArgumentCaptor.getValue());

@@ -34,7 +34,7 @@ public class DummyProductIncomeService implements ProductIncomeService {
     }
 
     @Override
-    public void updateProductIncome(ProductIncomeForm productIncomeForm) throws DataAccessException {
+    public void updateProductIncome(Integer id, ProductIncomeForm productIncomeForm) throws DataAccessException {
 
     }
 }
