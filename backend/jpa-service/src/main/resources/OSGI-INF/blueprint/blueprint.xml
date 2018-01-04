@@ -39,7 +39,7 @@
     </bean>
     <service ref="productIncomeService" interface="com.epam.mentoring.service.ProductIncomeService"/>
 
-    <bean id="supplierService" class="com.epam.mentoring.service.jpa.SupplierServiceJpa">
+    <bean id="supplierService" class="com.epam.mentoring.service.jpa.SupplierServiceJpaImpl">
         <argument ref="emf"></argument>
     </bean>
     <service ref="supplierService" interface="com.epam.mentoring.service.SupplierService"/>

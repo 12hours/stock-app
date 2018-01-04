@@ -10,15 +10,20 @@ import org.springframework.dao.DataAccessException;
 import javax.persistence.EntityManagerFactory;
 import java.util.List;
 
-public class SupplierServiceJpa extends AbstractDao<Supplier> implements SupplierService {
+public class SupplierServiceJpaImpl extends AbstractDao<Supplier> implements SupplierService {
 
-    public SupplierServiceJpa(EntityManagerFactory emf) {
+    public SupplierServiceJpaImpl(EntityManagerFactory emf) {
         super(Supplier.class, emf);
     }
 
     @Override
     public List<Supplier> getAllSuppliers() throws DataAccessException {
-        return findAll();
+        try {
+            return findAll();
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new DataAccessException("Can not get list of suppliers"){};
+        }
     }
 
     @Override
@@ -40,17 +45,32 @@ public class SupplierServiceJpa extends AbstractDao<Supplier> implements Supplie
 
     @Override
     public void updateSupplier(Supplier supplier) throws DataAccessException {
-        update(supplier.getId(), supplier);
+        try {
+            update(supplier.getId(), supplier);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new DataAccessException("Can not update supplier"){};
+        }
     }
 
     @Override
     public int deleteSupplier(Integer id) throws DataAccessException {
-        remove(id);
+        try {
+            remove(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new DataAccessException("Can not remove supplier"){};
+        }
         return 0;
     }
 
     @Override
     public Supplier getSupplierById(Integer id) throws DataAccessException {
-        return find(id);
+        try {
+            return find(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new DataAccessException("Can not get supplier"){};
+        }
     }
 }
