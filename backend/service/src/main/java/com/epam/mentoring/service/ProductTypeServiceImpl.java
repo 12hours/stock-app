@@ -66,7 +66,7 @@ public class ProductTypeServiceImpl implements ProductTypeService {
     }
 
     @Override
-    public int deleteProductType(Integer id) throws DataAccessException {
+    public void deleteProductType(Integer id) throws DataAccessException {
         Assert.notNull(id, "No id provided");
         logger.debug("Deleting item with id: {}", id);
         productTypeDao.deleteProductType(id);

@@ -13,13 +13,16 @@ import java.util.List;
  */
 public interface ProductTypeService {
     ProductType getProductTypeById(Integer id) throws DataAccessException;
+
     List<ProductType> getAllProductTypes() throws DataAccessException;
+
     void updateProductType(ProductType productType) throws DataAccessException;
+
     Integer saveProductType(ProductType productType) throws DataAccessException;
 
     Integer saveProductType(ProductTypeForm productTypeForm) throws DataAccessException;
 
-    int deleteProductType(Integer id) throws DataAccessException;
+    void deleteProductType(Integer id) throws DataAccessException;
 
     Collection<Product> getAllProductsOfType(Integer id);
 

@@ -32,7 +32,7 @@ public class DummySupplierService implements SupplierService {
     }
 
     @Override
-    public int deleteSupplier(Integer id) throws DataAccessException {
+    public void deleteSupplier(Integer id) throws DataAccessException {
         return 0;
     }
 

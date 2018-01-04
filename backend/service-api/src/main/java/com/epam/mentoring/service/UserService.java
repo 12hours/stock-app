@@ -10,8 +10,12 @@ import java.util.List;
  */
 public interface UserService {
     User getUserById(int id) throws DataAccessException;
+
     List<User> getAllUsers() throws DataAccessException;
-    int addUser(User user) throws DataAccessException;
-    int updateUser(User user) throws DataAccessException;
-    int deleteUser(int id) throws DataAccessException;
+
+    Integer addUser(User user) throws DataAccessException;
+
+    void updateUser(User user) throws DataAccessException;
+
+    void deleteUser(int id) throws DataAccessException;
 }

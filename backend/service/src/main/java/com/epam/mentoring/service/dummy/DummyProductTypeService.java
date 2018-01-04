@@ -39,7 +39,7 @@ public class DummyProductTypeService implements ProductTypeService {
     }
 
     @Override
-    public int deleteProductType(Integer id) throws DataAccessException {
+    public void deleteProductType(Integer id) throws DataAccessException {
         return 0;
     }
 }

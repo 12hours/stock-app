@@ -18,7 +18,7 @@ public interface SupplierService {
 
     void updateSupplier(Supplier supplier) throws DataAccessException;
 
-    int deleteSupplier(Integer id) throws DataAccessException;
+    void deleteSupplier(Integer id) throws DataAccessException;
 
     Supplier getSupplierById(Integer id) throws DataAccessException;
 }

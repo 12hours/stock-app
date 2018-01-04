@@ -54,14 +54,13 @@ public class SupplierServiceJpaImpl extends AbstractDao<Supplier> implements Sup
     }
 
     @Override
-    public int deleteSupplier(Integer id) throws DataAccessException {
+    public void deleteSupplier(Integer id) throws DataAccessException {
         try {
             remove(id);
         } catch (Exception e) {
             e.printStackTrace();
             throw new DataAccessException("Can not remove supplier"){};
         }
-        return 0;
     }
 
     @Override

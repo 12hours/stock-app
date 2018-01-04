@@ -52,9 +52,8 @@ public class ProductTypeServiceJpaImpl extends AbstractDao<ProductType> implemen
     }
 
     @Override
-    public int deleteProductType(Integer id) throws DataAccessException {
+    public void deleteProductType(Integer id) throws DataAccessException {
         remove(id);
-        return 0;
     }
 
     @Override

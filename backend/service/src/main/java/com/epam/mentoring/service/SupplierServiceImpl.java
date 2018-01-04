@@ -54,7 +54,7 @@ public class SupplierServiceImpl implements SupplierService {
     }
 
     @Override
-    public int deleteSupplier(Integer id) throws DataAccessException {
+    public void deleteSupplier(Integer id) throws DataAccessException {
         Assert.notNull(id, "No id provided");
         logger.debug("Deleting item with id: {}", id);
         supplierDao.deleteSupplier(id);
