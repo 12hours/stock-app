@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<persistence
+        xsi:schemaLocation="
+        http://java.sun.com/xml/ns/persistence
+        http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
+        xmlns="http://java.sun.com/xml/ns/persistence"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        version="2.0">
+    <persistence-unit name="PU" transaction-type="RESOURCE_LOCAL">
+        <description>My Persistence Unit</description>
+        <!--<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>-->
+        <!--<provider>org.hibernate.osgi.OsgiPersistenceProvider</provider>-->
+        <!--<provider>org.hibernate.ejb.HibernatePersistence</provider>-->
+        <!--<mapping-file></mapping-file>-->
+        <!--<jar-file>model-2.0.jar</jar-file>-->
+        <class>com.epam.mentoring.data.model.Product</class>
+        <class>com.epam.mentoring.data.model.ProductType</class>
+        <class>com.epam.mentoring.data.model.ProductIncome</class>
+        <class>com.epam.mentoring.data.model.Supplier</class>
+        <class>com.epam.mentoring.data.model.User</class>
+
+        <exclude-unlisted-classes>true</exclude-unlisted-classes>
+        <properties>
+            <property name="hibernate.connection.driver_class" value="org.h2.Driver"/>
+            <property name="hibernate.connection.url"
+                      value="jdbc:h2:mem:test"/>
+            <property name="hibernate.hbm2ddl.auto" value="create"/>
+            <property name="hibernate.hbm2ddl.import_files" value="init.sql"/>
+            <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>
+        </properties>
+    </persistence-unit>
+
+</persistence>

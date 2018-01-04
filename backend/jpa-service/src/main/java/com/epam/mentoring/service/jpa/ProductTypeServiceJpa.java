@@ -1,5 +1,6 @@
 package com.epam.mentoring.service.jpa;
 
+import com.epam.mentoring.data.model.Product;
 import com.epam.mentoring.data.model.ProductType;
 import com.epam.mentoring.data.model.dto.DTOUtils;
 import com.epam.mentoring.data.model.dto.ProductTypeForm;
@@ -8,6 +9,7 @@ import com.epam.mentoring.service.jpa.dao.AbstractDao;
 import org.springframework.dao.DataAccessException;
 
 import javax.persistence.EntityManagerFactory;
+import java.util.Collection;
 import java.util.List;
 
 public class ProductTypeServiceJpa extends AbstractDao<ProductType> implements ProductTypeService {
@@ -53,5 +55,17 @@ public class ProductTypeServiceJpa extends AbstractDao<ProductType> implements P
     public int deleteProductType(Integer id) throws DataAccessException {
         remove(id);
         return 0;
+    }
+
+    @Override
+    public Collection<Product> getAllProductsOfType(Integer id) {
+        Collection<Product> products = null;
+        try {
+            products = (Collection<Product>) findAndFetchField(id, "products");
+        } catch (NoSuchFieldException | IllegalAccessException e) {
+            e.printStackTrace();
+            throw new DataAccessException("Can not get access to products field of ProductType", e) {};
+        }
+        return products;
     }
 }

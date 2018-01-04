@@ -12,6 +12,8 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import javax.persistence.metamodel.EntityType;
 import java.lang.reflect.Field;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
 public abstract class AbstractDao<T> {
@@ -92,8 +94,9 @@ public abstract class AbstractDao<T> {
     }
 
     /**
-     * Finds object by id, initialize, extracts and returns requested field
-     * @param id requested object id
+     * Finds object by id, initializes, extracts and returns requested field
+     *
+     * @param id        requested object id
      * @param fieldName name of the field to extract
      * @return {@code Object} laying in requested field
      * @throws NoSuchFieldException
@@ -102,22 +105,32 @@ public abstract class AbstractDao<T> {
     protected Object findAndFetchField(Object id, String fieldName) throws NoSuchFieldException, IllegalAccessException {
         EntityManager em = getEntityManager();
         T entity = em.find(entityClass, id);
-        Hibernate.initialize(entity);
         Field field = entity.getClass().getDeclaredField(fieldName);
         field.setAccessible(true);
-        Object requestedField = field.get(entity);
+        Hibernate.initialize(field.get(entity)); // avoid LazyInitializationException
+        Object requestedField = field.get(entity); // actually getting of the initialized field
         em.close();
         return requestedField;
     }
 
-    protected void update(Object id, T updatedEntity) {
-        T persistedEntity = find(id);
-
+    /**
+     * Updates object with given id with fields of provided object
+     *
+     * @param id
+     * @param dtoEntity
+     */
+    protected void update(Object id, T dtoEntity) {
+        EntityManager em = getEntityManager();
+        T persistedEntity = em.find(entityClass, id);
         if (persistedEntity != null) {
-            EntityManager em = getEntityManager();
             try {
+                String[] fieldsToIgnore = Arrays.stream(dtoEntity.getClass().getDeclaredFields())
+                        .filter(field -> field.getType().isAssignableFrom(Collection.class))
+                        .map(field -> field.getName())
+                        .toArray(String[]::new);
+
                 em.getTransaction().begin();
-                BeanUtils.copyProperties(updatedEntity, persistedEntity);
+                BeanUtils.copyProperties(dtoEntity, persistedEntity, fieldsToIgnore);
                 em.getTransaction().commit();
             } catch (Exception e) {
                 em.getTransaction().rollback();
@@ -129,6 +142,8 @@ public abstract class AbstractDao<T> {
                     log.warn("Can not close EntityManager: {}", e);
                 }
             }
+        } else {
+            em.close();
         }
     }
 

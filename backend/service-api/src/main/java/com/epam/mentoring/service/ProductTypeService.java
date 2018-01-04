@@ -1,9 +1,11 @@
 package com.epam.mentoring.service;
 
+import com.epam.mentoring.data.model.Product;
 import com.epam.mentoring.data.model.ProductType;
 import com.epam.mentoring.data.model.dto.ProductTypeForm;
 import org.springframework.dao.DataAccessException;
 
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -18,4 +20,6 @@ public interface ProductTypeService {
     Integer saveProductType(ProductTypeForm productTypeForm) throws DataAccessException;
 
     int deleteProductType(Integer id) throws DataAccessException;
+
+    Collection<Product> getAllProductsOfType(Integer id);
 }
