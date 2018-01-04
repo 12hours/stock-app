@@ -5,7 +5,6 @@ import com.epam.mentoring.data.model.dto.DTOUtils;
 import com.epam.mentoring.data.model.dto.ProductForm;
 import com.epam.mentoring.data.model.dto.ProductWithQuantityView;
 import com.epam.mentoring.service.ProductService;
-import com.epam.mentoring.service.jpa.dao.AbstractDao;
 import com.epam.mentoring.service.jpa.dao.AbstractProductDao;
 import org.springframework.dao.DataAccessException;
 
@@ -27,7 +26,8 @@ public class ProductServiceJpaImpl extends AbstractProductDao implements Product
             return product;
         } catch (Exception e) {
             e.printStackTrace();
-            throw new DataAccessException("Can not get Product", e) {};
+            throw new DataAccessException("Can not get Product", e) {
+            };
         }
     }
 
@@ -37,7 +37,8 @@ public class ProductServiceJpaImpl extends AbstractProductDao implements Product
             persist(product);
         } catch (Exception e) {
             e.printStackTrace();
-            throw new DataAccessException("Can not save Product", e) {};
+            throw new DataAccessException("Can not save Product", e) {
+            };
         }
         return product.getId();
     }
@@ -54,7 +55,8 @@ public class ProductServiceJpaImpl extends AbstractProductDao implements Product
             update(product.getId(), product);
         } catch (Exception e) {
             e.printStackTrace();
-            throw new DataAccessException("Can not update Product", e) {};
+            throw new DataAccessException("Can not update Product", e) {
+            };
         }
     }
 
@@ -72,13 +74,20 @@ public class ProductServiceJpaImpl extends AbstractProductDao implements Product
             return products;
         } catch (Exception e) {
             e.printStackTrace();
-            throw new DataAccessException("Can not get list of Products", e) {};
+            throw new DataAccessException("Can not get list of Products", e) {
+            };
         }
     }
 
     @Override
     public Map<Product, Integer> getAllProductsWithQuantities() throws DataAccessException {
-        return null;
+        try {
+            return getAllProductsWithProductIncomesMap();
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new DataAccessException("Can not fetch list of products with quantities") {
+            };
+        }
     }
 
     @Override
@@ -87,24 +96,20 @@ public class ProductServiceJpaImpl extends AbstractProductDao implements Product
             remove(id);
         } catch (Exception e) {
             e.printStackTrace();
-            throw new DataAccessException("Can not delete Product", e) {};
+            throw new DataAccessException("Can not delete Product", e) {
+            };
         }
     }
 
     @Override
     public List<ProductWithQuantityView> getAllProductsWithQuantitiesViews() throws DataAccessException {
-        try {
-            Map<Product, Integer> allProductsWithProductIncomesMap = getAllProductsWithProductIncomesMap();
-            List<ProductWithQuantityView> productWithQuantityViewsList = new ArrayList<>();
-            for (Map.Entry<Product, Integer> entry : allProductsWithProductIncomesMap.entrySet()) {
-                Product product = entry.getKey();
-                Integer quantity = entry.getValue();
-                productWithQuantityViewsList.add(new ProductWithQuantityView(product.getId(), product.getName(), quantity));
-            }
-            return productWithQuantityViewsList;
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw new DataAccessException("Can not fetch list of products with quantities"){};
+        Map<Product, Integer> allProductsWithProductIncomesMap = getAllProductsWithQuantities();
+        List<ProductWithQuantityView> productWithQuantityViewsList = new ArrayList<>();
+        for (Map.Entry<Product, Integer> entry : allProductsWithProductIncomesMap.entrySet()) {
+            Product product = entry.getKey();
+            Integer quantity = entry.getValue();
+            productWithQuantityViewsList.add(new ProductWithQuantityView(product.getId(), product.getName(), quantity));
         }
+        return productWithQuantityViewsList;
     }
 }
