@@ -12,6 +12,7 @@ import org.junit.Test;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -107,5 +108,21 @@ public class ProductServiceJpaImplTest {
     public void getProductsWithQuantitesTest() {
         List<ProductWithQuantityView> allProductsWithQuantitiesViews = service.getAllProductsWithQuantitiesViews();
         assertNotNull(allProductsWithQuantitiesViews);
+
+        List<ProductWithQuantityView> expectedQuantitiesList = new ArrayList<ProductWithQuantityView>() {
+            {
+                add(new ProductWithQuantityView(1, "Intel Core i7 8700", 10));
+                add(new ProductWithQuantityView(2, "Intel Core i3 8100", 40));
+                add(new ProductWithQuantityView(3, "Nvidia GTX 1050Ti", 45));
+                add(new ProductWithQuantityView(4, "Intel Pentium G4360", 50));
+                add(new ProductWithQuantityView(5, "AMD Ryzen 7 1700", 25));
+                add(new ProductWithQuantityView(6, "Samsung 850 Evo 256 Gb", 50));
+                add(new ProductWithQuantityView(7, "Intel Core i5 6600K", 10));
+                add(new ProductWithQuantityView(8, "Kingston UV400 120 Gb", 30));
+                add(new ProductWithQuantityView(9, "ASRock Z370", 25));
+            }
+        };
+
+        assertTrue(allProductsWithQuantitiesViews.containsAll(expectedQuantitiesList));
     }
 }

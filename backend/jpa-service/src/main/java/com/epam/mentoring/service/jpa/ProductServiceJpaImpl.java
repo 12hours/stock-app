@@ -10,6 +10,7 @@ import com.epam.mentoring.service.jpa.dao.AbstractProductDao;
 import org.springframework.dao.DataAccessException;
 
 import javax.persistence.EntityManagerFactory;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -92,7 +93,13 @@ public class ProductServiceJpaImpl extends AbstractProductDao implements Product
 
     @Override
     public List<ProductWithQuantityView> getAllProductsWithQuantitiesViews() {
-        getAllProductsWithProductIncomesMap();
-        return null;
+        Map<Product, Integer> allProductsWithProductIncomesMap = getAllProductsWithProductIncomesMap();
+        List<ProductWithQuantityView> productWithQuantityViewsList = new ArrayList<>();
+        for (Map.Entry<Product, Integer> entry : allProductsWithProductIncomesMap.entrySet()) {
+            Product product = entry.getKey();
+            Integer quantity = entry.getValue();
+            productWithQuantityViewsList.add(new ProductWithQuantityView(product.getId(), product.getName(), quantity));
+        }
+        return productWithQuantityViewsList;
     }
 }
