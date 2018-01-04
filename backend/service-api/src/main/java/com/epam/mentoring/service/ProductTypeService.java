@@ -22,4 +22,6 @@ public interface ProductTypeService {
     int deleteProductType(Integer id) throws DataAccessException;
 
     Collection<Product> getAllProductsOfType(Integer id);
+
+    void addProductToProductType(Integer id, Product product);
 }

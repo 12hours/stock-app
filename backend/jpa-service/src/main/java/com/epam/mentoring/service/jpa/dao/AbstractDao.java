@@ -62,7 +62,11 @@ public abstract class AbstractDao<T> {
     }
 
     protected T merge(T entity) {
-        return getEntityManager().merge(entity);
+        EntityManager em = getEntityManager();
+        em.getTransaction().begin();
+        em.merge(entity);
+        em.getTransaction().commit();
+        return entity;
     }
 
     protected void remove(Object entityId) {
@@ -93,8 +97,18 @@ public abstract class AbstractDao<T> {
         return entity;
     }
 
+    protected T find(Object id, String fieldName) throws NoSuchFieldException, IllegalAccessException {
+        EntityManager em = getEntityManager();
+        T entity = em.find(entityClass, id);
+        Field field = entity.getClass().getDeclaredField(fieldName);
+        field.setAccessible(true);
+        Hibernate.initialize(field.get(entity)); // avoid LazyInitializationException
+        em.close();
+        return entity;
+    }
+
     /**
-     * Finds object by id, initializes, extracts and returns requested field
+     * Finds object by id. Initializes, extracts and returns requested field
      *
      * @param id        requested object id
      * @param fieldName name of the field to extract
@@ -114,8 +128,8 @@ public abstract class AbstractDao<T> {
     }
 
     /**
-     * Updates object with given id with fields of provided object
-     *
+     * Updates object with given id with fields of provided object.
+     * This method <b>ignores</b> all collection fields. If you need to update collection fields, use {@code merge(T entity)} instead.
      * @param id
      * @param dtoEntity
      */

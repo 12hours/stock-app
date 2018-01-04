@@ -68,4 +68,17 @@ public class ProductTypeServiceJpa extends AbstractDao<ProductType> implements P
         }
         return products;
     }
+
+    @Override
+    public void addProductToProductType(Integer id, Product product) {
+        try {
+            ProductType productType = find(id, "products");
+            product.setType(productType);
+            productType.getProducts().add(product);
+            merge(productType);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new DataAccessException("Can not add product to ProductType", e) {};
+        }
+    }
 }

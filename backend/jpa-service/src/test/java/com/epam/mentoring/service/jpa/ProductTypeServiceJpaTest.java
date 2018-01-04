@@ -3,12 +3,10 @@ package com.epam.mentoring.service.jpa;
 import com.epam.mentoring.data.model.Product;
 import com.epam.mentoring.data.model.ProductType;
 import com.epam.mentoring.service.ProductTypeService;
-import org.hibernate.Hibernate;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
@@ -16,9 +14,7 @@ import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.HashSet;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertNull;
+import static org.junit.Assert.*;
 
 public class ProductTypeServiceJpaTest {
 
@@ -85,7 +81,6 @@ public class ProductTypeServiceJpaTest {
         productToUpdate.setProducts(products);
         service.updateProductType(productToUpdate);
         ProductType productTypeById = emf.createEntityManager().find(ProductType.class, 3);
-//        Hibernate.initialize(productTypeById.getProducts());
         assertEquals("UPDATED_NAME", productTypeById.getName());
         assertNotEquals(products, productTypeById.getProducts());
         System.out.println(products);
@@ -99,4 +94,14 @@ public class ProductTypeServiceJpaTest {
         assertEquals(5, allProductsOfType.size());
 
     }
+
+    @Test
+    public void addNewProductToTypeTest() {
+        Product product = new Product(42, "TestProduct", BigDecimal.ONE, null);
+        service.addProductToProductType(3, product);
+
+        Collection<Product> allProductsOfType = service.getAllProductsOfType(3);
+        assertTrue(allProductsOfType.contains(product));
+    }
+
 }
