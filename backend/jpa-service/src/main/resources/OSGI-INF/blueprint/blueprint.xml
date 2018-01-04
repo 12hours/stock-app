@@ -16,7 +16,7 @@
     <!--<argument ref="properties"/>-->
     <!--</bean>-->
 
-    <!--<bean id="dpService" class="com.epam.mentoring.service.jpa.ProductTypeServiceJpa" init-method="init"/>-->
+    <!--<bean id="dpService" class="com.epam.mentoring.service.jpa.ProductTypeServiceJpaImplImpl" init-method="init"/>-->
     <!--<bean id="dpService2" class="com.epam.mentoring.service.jpa.ProductServiceJpa" init-method="init"/>-->
     <!--<service ref="dpService" interface="com.epam.mentoring.service.ProductTypeService"/>-->
 
@@ -29,7 +29,7 @@
     </bean>
     <service ref="productService" interface="com.epam.mentoring.service.ProductService"/>
 
-    <bean id="productTypeService" class="com.epam.mentoring.service.jpa.ProductTypeServiceJpa">
+    <bean id="productTypeService" class="com.epam.mentoring.service.jpa.ProductTypeServiceJpaImpl">
         <argument ref="emf"></argument>
     </bean>
     <service ref="productTypeService" interface="com.epam.mentoring.service.ProductTypeService"/>

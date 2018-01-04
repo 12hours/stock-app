@@ -16,7 +16,7 @@ import java.util.HashSet;
 
 import static org.junit.Assert.*;
 
-public class ProductTypeServiceJpaTest {
+public class ProductTypeServiceJpaImplTest {
 
     private EntityManagerFactory emf;
 
@@ -25,7 +25,7 @@ public class ProductTypeServiceJpaTest {
     @Before
     public void before() {
         emf = Persistence.createEntityManagerFactory("PU");
-        service = new ProductTypeServiceJpa(emf);
+        service = new ProductTypeServiceJpaImpl(emf);
     }
 
     @After

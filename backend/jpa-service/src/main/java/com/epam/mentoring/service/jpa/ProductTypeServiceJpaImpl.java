@@ -12,9 +12,9 @@ import javax.persistence.EntityManagerFactory;
 import java.util.Collection;
 import java.util.List;
 
-public class ProductTypeServiceJpa extends AbstractDao<ProductType> implements ProductTypeService {
+public class ProductTypeServiceJpaImpl extends AbstractDao<ProductType> implements ProductTypeService {
 
-    public ProductTypeServiceJpa(EntityManagerFactory emf) {
+    public ProductTypeServiceJpaImpl(EntityManagerFactory emf) {
         super(ProductType.class, emf);
     }
 
