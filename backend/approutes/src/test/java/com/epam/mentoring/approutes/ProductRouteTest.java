@@ -31,7 +31,6 @@ import org.springframework.test.context.ContextConfiguration;
 
 import javax.ws.rs.core.Response;
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -47,7 +46,7 @@ import static org.mockito.Mockito.verify;
 public class ProductRouteTest {
 
     ProductMapper productMapper = Mappers.getMapper(ProductMapper.class);
-    CollectionMapper<ProductView> productViewCollectionMapper = Mappers.getMapper(CollectionMapper.class);
+    CollectionMapper collectionMapper = Mappers.getMapper(CollectionMapper.class);
 
     @Autowired
     ModelCamelContext context;
@@ -82,7 +81,7 @@ public class ProductRouteTest {
         List<ProductView> productViews = TestData.products().stream()
                 .map(product -> productMapper.productToProductView(product))
                 .collect(Collectors.toList());
-        CollectionView collectionView = productViewCollectionMapper.collectionToCollectionView(productViews);
+        CollectionView collectionView = collectionMapper.collectionToCollectionView(productViews);
 
         Exchange response = template.send(productRouteEndpoint, exchange);
         assertEquals(objectMapper.writeValueAsString( collectionView), response.getIn().getBody());
@@ -97,7 +96,8 @@ public class ProductRouteTest {
         exchange.setIn(in);
 
         Exchange response = template.send(productRouteEndpoint, exchange);
-        assertEquals(objectMapper.writeValueAsString(TestData.productWithQuantityViews()), response.getIn().getBody());
+        assertEquals(objectMapper.writeValueAsString(collectionMapper.collectionToCollectionView(TestData.productWithQuantityViews())),
+                response.getIn().getBody());
     }
 
     @Test
