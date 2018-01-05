@@ -1,10 +1,13 @@
 package com.epam.mentoring.data.model;
 
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+
 import javax.persistence.*;
-import java.util.Date;
+import java.sql.Date;
 
 @Entity
 @Table(name = "product_income")
+@Access(AccessType.FIELD)
 public class ProductIncome {
 
 	@Id
@@ -19,7 +22,7 @@ public class ProductIncome {
 	private Long orderNumber;
 
 	@Column(name = "date")
-    @Temporal(value = TemporalType.DATE)
+//    @Temporal(value = TemporalType.DATE)
 	private Date date;
 
 	@ManyToOne(optional = false)

@@ -57,12 +57,12 @@ public class TestData {
         List<ProductIncome> productIncomes = new ArrayList<>();
         productIncomes.add(
                 new ProductIncome(1, 10, 10010L,
-                        new Date(System.currentTimeMillis()), products.get(1),
+                        new java.sql.Date(System.currentTimeMillis()), products.get(1),
                         users.get(0),
                         suppliers.get(0)));
         productIncomes.add(
                 new ProductIncome(2, 20, 10010L,
-                        new Date(System.currentTimeMillis()), products.get(2),
+                        new java.sql.Date(System.currentTimeMillis()), products.get(2),
                         users.get(0),
                         suppliers.get(0)));
         return productIncomes;

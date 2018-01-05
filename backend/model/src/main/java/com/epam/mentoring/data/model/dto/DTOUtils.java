@@ -22,7 +22,7 @@ public class DTOUtils {
             @Override
             protected void configure() {
                 skip().setId(null);
-                map().setDate(source.getDate());
+                map().setDate(new java.sql.Date(source.getDate().getTime()));
                 map().setOrderNumber(source.getOrderNumber());
                 map().setQuantity(source.getQuantity());
                 map().getProduct().setId(source.getProductId());

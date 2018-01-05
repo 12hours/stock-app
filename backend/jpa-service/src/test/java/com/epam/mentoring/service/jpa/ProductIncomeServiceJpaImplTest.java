@@ -14,7 +14,7 @@ import org.junit.Test;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import java.util.Calendar;
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -139,6 +139,11 @@ public class ProductIncomeServiceJpaImplTest {
 
         Calendar dateB = Calendar.getInstance();
         dateB.setTime(piB.getDate());
+
+        System.out.println("DATE A " + piA.getDate());
+        System.out.println("DATE A YEAR" + dateA.get(dateA.YEAR));
+        System.out.println("DATE B " + piB.getDate());
+        System.out.println("DATE A YEAR" + dateB.get(dateB.YEAR));
 
         assertEquals(dateA.get(dateA.YEAR),         dateB.get(dateB.YEAR));
         assertEquals(dateA.get(dateA.MONTH),        dateB.get(dateB.MONTH));

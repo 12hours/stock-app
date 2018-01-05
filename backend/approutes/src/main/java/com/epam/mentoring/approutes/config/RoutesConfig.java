@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider;
 import org.apache.camel.component.jackson.JacksonDataFormat;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
@@ -32,6 +33,8 @@ public class RoutesConfig {
         objectMapper.configure(JsonParser.Feature.ALLOW_UNQUOTED_FIELD_NAMES, true);
         objectMapper.configure(JsonParser.Feature.ALLOW_SINGLE_QUOTES, true);
 //        objectMapper.configure(SerializationFeature.WRITE_NULL_MAP_VALUES, false);
+
+        objectMapper.registerModule(new JavaTimeModule());
         return objectMapper;
     }
 
