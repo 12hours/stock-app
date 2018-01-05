@@ -1,8 +1,7 @@
 package com.epam.mentoring.approutes;
 
-import com.epam.mentoring.data.model.dto.ProductForm;
+import com.epam.mentoring.data.model.dto.form.ProductForm;
 import com.epam.mentoring.approutes.constants.Headers;
-import com.epam.mentoring.approutes.constants.RouteNames;
 import com.epam.mentoring.service.ProductService;
 import com.epam.mentoring.test.TestData;
 import com.fasterxml.jackson.core.JsonProcessingException;

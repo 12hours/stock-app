@@ -3,7 +3,7 @@ package com.epam.mentoring.service;
 import com.epam.mentoring.data.dao.ProductIncomeDao;
 import com.epam.mentoring.data.model.ProductIncome;
 import com.epam.mentoring.data.model.dto.DTOUtils;
-import com.epam.mentoring.data.model.dto.ProductIncomeForm;
+import com.epam.mentoring.data.model.dto.form.ProductIncomeForm;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataAccessException;

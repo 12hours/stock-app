@@ -2,9 +2,9 @@ package com.epam.mentoring.test;
 
 import com.epam.mentoring.data.model.*;
 import com.epam.mentoring.data.model.dto.DTOUtils;
-import com.epam.mentoring.data.model.dto.ProductIncomeForm;
-import com.epam.mentoring.data.model.dto.ProductView;
-import com.epam.mentoring.data.model.dto.ProductWithQuantityView;
+import com.epam.mentoring.data.model.dto.form.ProductIncomeForm;
+import com.epam.mentoring.data.model.dto.view.ProductView;
+import com.epam.mentoring.data.model.dto.view.ProductWithQuantityView;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;

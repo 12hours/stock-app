@@ -1,7 +1,7 @@
 package com.epam.mentoring.service.dummy;
 
 import com.epam.mentoring.data.model.ProductType;
-import com.epam.mentoring.data.model.dto.ProductTypeForm;
+import com.epam.mentoring.data.model.dto.form.ProductTypeForm;
 import com.epam.mentoring.service.ProductTypeService;
 import org.springframework.dao.DataAccessException;
 

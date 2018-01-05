@@ -1,7 +1,6 @@
 package com.epam.mentoring.approutes.processors.supplier;
 
-import com.epam.mentoring.data.model.dto.ProductTypeForm;
-import com.epam.mentoring.data.model.dto.SupplierForm;
+import com.epam.mentoring.data.model.dto.form.SupplierForm;
 import com.epam.mentoring.approutes.constants.Headers;
 import com.epam.mentoring.service.SupplierService;
 import org.apache.camel.Exchange;

@@ -3,7 +3,7 @@ package com.epam.mentoring.data.dao;
 import java.util.List;
 import java.util.Map;
 
-import com.epam.mentoring.data.model.dto.ProductWithQuantityView;
+import com.epam.mentoring.data.model.dto.view.ProductWithQuantityView;
 import org.springframework.dao.DataAccessException;
 
 import com.epam.mentoring.data.model.Product;

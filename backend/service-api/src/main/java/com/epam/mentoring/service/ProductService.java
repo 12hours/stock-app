@@ -5,13 +5,11 @@ import java.util.List;
 import java.util.Map;
 
 import com.epam.mentoring.data.model.ProductIncome;
-import com.epam.mentoring.data.model.dto.ProductForm;
-import com.epam.mentoring.data.model.dto.ProductView;
-import com.epam.mentoring.data.model.dto.ProductWithQuantityView;
+import com.epam.mentoring.data.model.dto.form.ProductForm;
+import com.epam.mentoring.data.model.dto.view.ProductWithQuantityView;
 import org.springframework.dao.DataAccessException;
 
 import com.epam.mentoring.data.model.Product;
-import com.epam.mentoring.data.model.ProductType;
 import org.springframework.dao.DataRetrievalFailureException;
 
 /**

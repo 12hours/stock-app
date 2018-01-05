@@ -2,8 +2,8 @@ package com.epam.mentoring.client;
 
 import com.epam.mentoring.client.exception.ServerDataAccessException;
 import com.epam.mentoring.data.model.ProductIncome;
-import com.epam.mentoring.data.model.dto.ProductForm;
-import com.epam.mentoring.data.model.dto.ProductIncomeForm;
+import com.epam.mentoring.data.model.dto.form.ProductForm;
+import com.epam.mentoring.data.model.dto.form.ProductIncomeForm;
 
 import java.util.List;
 

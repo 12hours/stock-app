@@ -5,7 +5,7 @@ import com.epam.mentoring.approutes.constants.RouteNames;
 import com.epam.mentoring.approutes.processors.income.DeleteProductIncomeProcesoor;
 import com.epam.mentoring.approutes.processors.income.GetProductIncomeByIdProcessor;
 import com.epam.mentoring.approutes.processors.income.SaveProductIncomeProcessor;
-import com.epam.mentoring.data.model.dto.ProductIncomeForm;
+import com.epam.mentoring.data.model.dto.form.ProductIncomeForm;
 import com.epam.mentoring.service.ProductIncomeService;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.model.dataformat.JsonLibrary;

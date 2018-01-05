@@ -1,6 +1,6 @@
 package com.epam.mentoring.approutes.processors.income;
 
-import com.epam.mentoring.data.model.dto.ProductIncomeForm;
+import com.epam.mentoring.data.model.dto.form.ProductIncomeForm;
 import com.epam.mentoring.approutes.constants.Headers;
 import com.epam.mentoring.service.ProductIncomeService;
 import org.apache.camel.Exchange;

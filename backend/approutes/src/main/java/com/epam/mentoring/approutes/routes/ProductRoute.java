@@ -1,18 +1,12 @@
 package com.epam.mentoring.approutes.routes;
 
-import com.epam.mentoring.approutes.processors.product.GetIncomesOfProductProcessor;
-import com.epam.mentoring.approutes.processors.product.DeleteProductProcessor;
-import com.epam.mentoring.approutes.processors.product.GetAllProductsWithQuantitiesProcessor;
-import com.epam.mentoring.data.model.dto.ProductForm;
 import com.epam.mentoring.approutes.constants.Headers;
 import com.epam.mentoring.approutes.constants.RouteNames;
-import com.epam.mentoring.approutes.processors.product.GetAllProductsProcessor;
-import com.epam.mentoring.approutes.processors.product.GetProductByIdProcessor;
-import com.epam.mentoring.approutes.processors.product.SaveProductProcessor;
+import com.epam.mentoring.approutes.processors.product.*;
+import com.epam.mentoring.data.model.dto.form.ProductForm;
 import com.epam.mentoring.service.ProductService;
 import org.apache.camel.Exchange;
 import org.apache.camel.LoggingLevel;
-import org.apache.camel.Processor;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.model.dataformat.JsonDataFormat;
 import org.apache.camel.model.dataformat.JsonLibrary;
@@ -23,7 +17,6 @@ import org.springframework.stereotype.Component;
 
 import javax.ws.rs.NotFoundException;
 import javax.ws.rs.WebApplicationException;
-import javax.ws.rs.core.Response;
 
 @Component
 public class ProductRoute extends RouteBuilder {

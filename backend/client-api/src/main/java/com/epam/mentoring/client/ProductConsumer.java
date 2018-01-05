@@ -6,10 +6,9 @@ import java.util.Map;
 
 import com.epam.mentoring.client.exception.ServerDataAccessException;
 import com.epam.mentoring.data.model.Product;
-import com.epam.mentoring.data.model.ProductType;
-import com.epam.mentoring.data.model.dto.ProductForm;
-import com.epam.mentoring.data.model.dto.ProductView;
-import com.epam.mentoring.data.model.dto.ProductWithQuantityView;
+import com.epam.mentoring.data.model.dto.form.ProductForm;
+import com.epam.mentoring.data.model.dto.view.ProductView;
+import com.epam.mentoring.data.model.dto.view.ProductWithQuantityView;
 
 public interface ProductConsumer {
 	

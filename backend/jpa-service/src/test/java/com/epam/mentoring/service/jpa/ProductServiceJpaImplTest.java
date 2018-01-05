@@ -2,8 +2,8 @@ package com.epam.mentoring.service.jpa;
 
 import com.epam.mentoring.data.model.Product;
 import com.epam.mentoring.data.model.ProductType;
-import com.epam.mentoring.data.model.dto.ProductForm;
-import com.epam.mentoring.data.model.dto.ProductWithQuantityView;
+import com.epam.mentoring.data.model.dto.form.ProductForm;
+import com.epam.mentoring.data.model.dto.view.ProductWithQuantityView;
 import com.epam.mentoring.service.ProductService;
 import org.junit.After;
 import org.junit.Before;

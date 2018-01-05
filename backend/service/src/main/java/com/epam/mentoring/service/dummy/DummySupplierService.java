@@ -1,7 +1,7 @@
 package com.epam.mentoring.service.dummy;
 
 import com.epam.mentoring.data.model.Supplier;
-import com.epam.mentoring.data.model.dto.SupplierForm;
+import com.epam.mentoring.data.model.dto.form.SupplierForm;
 import com.epam.mentoring.service.SupplierService;
 import org.springframework.dao.DataAccessException;
 

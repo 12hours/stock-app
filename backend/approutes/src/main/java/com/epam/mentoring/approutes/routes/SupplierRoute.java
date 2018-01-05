@@ -3,7 +3,7 @@ package com.epam.mentoring.approutes.routes;
 import com.epam.mentoring.approutes.constants.Headers;
 import com.epam.mentoring.approutes.constants.RouteNames;
 import com.epam.mentoring.approutes.processors.supplier.*;
-import com.epam.mentoring.data.model.dto.SupplierForm;
+import com.epam.mentoring.data.model.dto.form.SupplierForm;
 import com.epam.mentoring.service.SupplierService;
 import org.apache.camel.LoggingLevel;
 import org.apache.camel.builder.RouteBuilder;

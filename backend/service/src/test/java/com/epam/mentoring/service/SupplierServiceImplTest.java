@@ -2,7 +2,7 @@ package com.epam.mentoring.service;
 
 import com.epam.mentoring.data.dao.SupplierDao;
 import com.epam.mentoring.data.model.Supplier;
-import com.epam.mentoring.data.model.dto.SupplierForm;
+import com.epam.mentoring.data.model.dto.form.SupplierForm;
 import com.epam.mentoring.test.TestData;
 import org.junit.Before;
 import org.junit.Test;

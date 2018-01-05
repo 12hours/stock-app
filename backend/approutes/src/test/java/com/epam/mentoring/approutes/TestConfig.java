@@ -1,17 +1,14 @@
 package com.epam.mentoring.approutes;
 
-import com.epam.mentoring.data.model.Supplier;
-import com.epam.mentoring.data.model.dto.ProductForm;
-import com.epam.mentoring.data.model.dto.ProductIncomeForm;
-import com.epam.mentoring.data.model.dto.ProductTypeForm;
-import com.epam.mentoring.data.model.dto.SupplierForm;
+import com.epam.mentoring.data.model.dto.form.ProductForm;
+import com.epam.mentoring.data.model.dto.form.ProductIncomeForm;
+import com.epam.mentoring.data.model.dto.form.ProductTypeForm;
+import com.epam.mentoring.data.model.dto.form.SupplierForm;
 import com.epam.mentoring.service.ProductIncomeService;
 import com.epam.mentoring.service.ProductService;
 import com.epam.mentoring.service.ProductTypeService;
 import com.epam.mentoring.service.SupplierService;
 import com.epam.mentoring.test.TestData;
-import org.junit.Before;
-import org.mockito.Mockito;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

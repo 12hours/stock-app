@@ -3,7 +3,7 @@ package com.epam.mentoring.data.dao;
 import com.epam.mentoring.data.TestConfig;
 import com.epam.mentoring.data.model.Product;
 import com.epam.mentoring.data.model.ProductType;
-import com.epam.mentoring.data.model.dto.ProductWithQuantityView;
+import com.epam.mentoring.data.model.dto.view.ProductWithQuantityView;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.FixMethodOrder;

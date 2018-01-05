@@ -5,7 +5,7 @@ import com.epam.mentoring.data.model.ProductIncome;
 import com.epam.mentoring.data.model.Supplier;
 import com.epam.mentoring.data.model.User;
 import com.epam.mentoring.data.model.dto.DTOUtils;
-import com.epam.mentoring.data.model.dto.ProductIncomeForm;
+import com.epam.mentoring.data.model.dto.form.ProductIncomeForm;
 import com.epam.mentoring.service.ProductIncomeService;
 import org.junit.After;
 import org.junit.Before;

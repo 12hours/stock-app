@@ -1,7 +1,7 @@
 package com.epam.mentoring.data.dao;
 
 import com.epam.mentoring.data.model.Product;
-import com.epam.mentoring.data.model.dto.ProductWithQuantityView;
+import com.epam.mentoring.data.model.dto.view.ProductWithQuantityView;
 import com.epam.mentoring.data.util.mappers.ProductResultSetExtractor;
 import com.epam.mentoring.data.util.mappers.ProductRowMapper;
 import com.epam.mentoring.data.util.mappers.ProductsWithQuantitiesResultSetExtractor;

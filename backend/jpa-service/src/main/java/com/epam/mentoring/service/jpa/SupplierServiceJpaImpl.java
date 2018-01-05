@@ -1,10 +1,9 @@
 package com.epam.mentoring.service.jpa;
 
-import com.epam.mentoring.data.model.Product;
 import com.epam.mentoring.data.model.ProductIncome;
 import com.epam.mentoring.data.model.Supplier;
 import com.epam.mentoring.data.model.dto.DTOUtils;
-import com.epam.mentoring.data.model.dto.SupplierForm;
+import com.epam.mentoring.data.model.dto.form.SupplierForm;
 import com.epam.mentoring.service.SupplierService;
 import com.epam.mentoring.service.jpa.dao.AbstractDao;
 import org.springframework.dao.DataAccessException;

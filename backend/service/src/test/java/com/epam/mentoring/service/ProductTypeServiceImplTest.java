@@ -3,7 +3,7 @@ package com.epam.mentoring.service;
 import com.epam.mentoring.data.dao.ProductTypeDao;
 import com.epam.mentoring.data.model.ProductType;
 import com.epam.mentoring.data.model.dto.DTOUtils;
-import com.epam.mentoring.data.model.dto.ProductTypeForm;
+import com.epam.mentoring.data.model.dto.form.ProductTypeForm;
 import com.epam.mentoring.test.TestData;
 import org.junit.Before;
 import org.junit.Test;

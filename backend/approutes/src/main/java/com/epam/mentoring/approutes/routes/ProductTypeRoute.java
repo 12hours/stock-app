@@ -2,7 +2,7 @@ package com.epam.mentoring.approutes.routes;
 
 import com.epam.mentoring.approutes.processors.type.GetProductsOfTypeProcessor;
 import com.epam.mentoring.approutes.processors.type.DeleteProductTypeProcessor;
-import com.epam.mentoring.data.model.dto.ProductTypeForm;
+import com.epam.mentoring.data.model.dto.form.ProductTypeForm;
 import com.epam.mentoring.approutes.constants.Headers;
 import com.epam.mentoring.approutes.constants.RouteNames;
 import com.epam.mentoring.approutes.processors.type.GetAllProductTypesProcessor;

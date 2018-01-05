@@ -2,7 +2,7 @@ package com.epam.mentoring.client;
 
 import com.epam.mentoring.client.exception.ServerDataAccessException;
 import com.epam.mentoring.data.model.Supplier;
-import com.epam.mentoring.data.model.dto.SupplierForm;
+import com.epam.mentoring.data.model.dto.form.SupplierForm;
 
 import java.util.List;
 

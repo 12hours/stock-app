@@ -1,14 +1,12 @@
 package com.epam.mentoring.approutes.processors.product;
 
-import com.epam.mentoring.approutes.constants.Headers;
-import com.epam.mentoring.data.model.dto.ProductForm;
+import com.epam.mentoring.data.model.dto.form.ProductForm;
 import com.epam.mentoring.service.ProductService;
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
 import org.springframework.dao.DataAccessException;
 
 import javax.ws.rs.ServerErrorException;
-import javax.ws.rs.core.Response;
 import java.util.HashMap;
 
 public class SaveProductProcessor implements Processor{

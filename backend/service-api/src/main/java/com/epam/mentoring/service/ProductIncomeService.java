@@ -1,7 +1,7 @@
 package com.epam.mentoring.service;
 
 import com.epam.mentoring.data.model.ProductIncome;
-import com.epam.mentoring.data.model.dto.ProductIncomeForm;
+import com.epam.mentoring.data.model.dto.form.ProductIncomeForm;
 import org.springframework.dao.DataAccessException;
 
 import java.util.List;

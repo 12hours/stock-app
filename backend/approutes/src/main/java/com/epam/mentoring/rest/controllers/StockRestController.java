@@ -1,6 +1,6 @@
 package com.epam.mentoring.rest.controllers;
 
-import com.epam.mentoring.data.model.dto.ProductWithQuantityView;
+import com.epam.mentoring.data.model.dto.view.ProductWithQuantityView;
 import com.epam.mentoring.rest.Paths;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

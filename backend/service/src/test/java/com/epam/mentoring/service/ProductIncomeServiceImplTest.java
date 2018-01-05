@@ -3,7 +3,7 @@ package com.epam.mentoring.service;
 import com.epam.mentoring.data.dao.ProductIncomeDao;
 import com.epam.mentoring.data.model.*;
 import com.epam.mentoring.data.model.dto.DTOUtils;
-import com.epam.mentoring.data.model.dto.ProductIncomeForm;
+import com.epam.mentoring.data.model.dto.form.ProductIncomeForm;
 import com.epam.mentoring.test.TestData;
 import org.junit.Before;
 import org.junit.Test;
