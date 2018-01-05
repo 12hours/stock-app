@@ -11,11 +11,9 @@ public class NotFoundRoute extends RouteBuilder {
 
     @Override
     public void configure() throws Exception {
-        from(RouteNames.NOT_FOUND_ROUTE).routeId(RouteNames.NOT_FOUND_ID).process(new Processor() {
-            @Override
-            public void process(Exchange exchange) throws Exception {
-                exchange.getOut().setBody("{'404':'Not found'}");
-            }
-        }).end();
+        from(RouteNames.NOT_FOUND_ROUTE).routeId(RouteNames.NOT_FOUND_ID)
+                .setBody(simple("{'404':'Not found'}"))
+                .setHeader(Exchange.HTTP_RESPONSE_CODE, constant(404))
+                .end();
     }
 }

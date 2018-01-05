@@ -21,6 +21,5 @@ public class GetProductByIdProcessor implements Processor{
 
         Product product = productService.findProductById(id);
         exchange.getIn().setBody(product);
-        exchange.getIn().setHeader(Headers.STATUS, Response.Status.OK);
     }
 }

@@ -24,6 +24,5 @@ public class SaveProductProcessor implements Processor{
         HashMap<String, Integer> idMap = new HashMap<>();
         idMap.put("id", id);
         exchange.getIn().setBody(idMap);
-        exchange.getIn().setHeader(Headers.STATUS, Response.Status.CREATED);
     }
 }

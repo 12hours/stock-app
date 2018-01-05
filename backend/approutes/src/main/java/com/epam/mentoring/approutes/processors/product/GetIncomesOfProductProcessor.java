@@ -21,6 +21,5 @@ public class GetIncomesOfProductProcessor implements Processor {
         Integer id = (Integer) exchange.getIn().getHeader(Headers.ID);
         Collection<ProductIncome> productIncomes = productService.getIncomesOfProduct(id);
         exchange.getIn().setBody(productIncomes);
-        exchange.getIn().setHeader(Headers.STATUS, Response.Status.OK);
     }
 }

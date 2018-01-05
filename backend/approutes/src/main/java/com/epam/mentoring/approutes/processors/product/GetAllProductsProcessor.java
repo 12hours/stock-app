@@ -20,6 +20,5 @@ public class GetAllProductsProcessor implements Processor {
     public void process(Exchange exchange) throws Exception {
         List<Product> allProducts = productService.getAllProducts();
         exchange.getIn().setBody(allProducts);
-        exchange.getIn().setHeader(Headers.STATUS, Response.Status.OK);
     }
 }

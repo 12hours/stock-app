@@ -7,7 +7,9 @@ import com.epam.mentoring.data.model.dto.ProductForm;
 import com.epam.mentoring.data.model.dto.ProductWithQuantityView;
 import com.epam.mentoring.service.ProductService;
 import com.epam.mentoring.service.jpa.dao.AbstractProductDao;
+import org.hibernate.ObjectNotFoundException;
 import org.springframework.dao.DataAccessException;
+import org.springframework.dao.DataRetrievalFailureException;
 
 import javax.persistence.EntityManagerFactory;
 import java.util.ArrayList;
@@ -96,6 +98,8 @@ public class ProductServiceJpaImpl extends AbstractProductDao implements Product
     public void deleteProductById(Integer id) throws DataAccessException {
         try {
             remove(id);
+        } catch (ObjectNotFoundException e) {
+            throw new DataRetrievalFailureException("Object with given id does not exist");
         } catch (Exception e) {
             e.printStackTrace();
             throw new DataAccessException("Can not delete Product", e) {

@@ -20,6 +20,5 @@ public class GetAllProductsWithQuantitiesProcessor implements Processor {
     public void process(Exchange exchange) throws Exception {
         List<ProductWithQuantityView> productsWithQuantitiesViews = productService.getAllProductsWithQuantitiesViews();
         exchange.getIn().setBody(productsWithQuantitiesViews);
-        exchange.getIn().setHeader(Headers.STATUS, Response.Status.OK);
     }
 }

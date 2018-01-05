@@ -2,6 +2,7 @@ package com.epam.mentoring.service.jpa.dao;
 
 import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
+import org.hibernate.ObjectNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -12,6 +13,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import javax.persistence.metamodel.EntityType;
+import java.io.Serializable;
 import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.Collection;
@@ -87,7 +89,7 @@ public abstract class AbstractDao<T> {
         }
     }
 
-    protected void remove(Object entityId) {
+    protected void remove(Object entityId) throws ObjectNotFoundException {
         EntityManager em = getEntityManager();
         T entity = em.find(entityClass, entityId);
         if (entity != null) {
@@ -105,6 +107,8 @@ public abstract class AbstractDao<T> {
                     log.warn("Can not close EntityManager: {}", e);
                 }
             }
+        } else {
+            throw new ObjectNotFoundException((Serializable) entityId, "Entity with given id does not exist");
         }
     }
 

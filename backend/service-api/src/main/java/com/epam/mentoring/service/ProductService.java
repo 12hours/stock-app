@@ -12,6 +12,7 @@ import org.springframework.dao.DataAccessException;
 
 import com.epam.mentoring.data.model.Product;
 import com.epam.mentoring.data.model.ProductType;
+import org.springframework.dao.DataRetrievalFailureException;
 
 /**
  * Interface for Product service
@@ -31,7 +32,12 @@ public interface ProductService {
     List<Product> getAllProducts() throws DataAccessException;
 
 	Map<Product, Integer> getAllProductsWithQuantities() throws DataAccessException;
-	
+
+    /**
+     * @param id
+     * @throws DataRetrievalFailureException if object with given id not found
+     * @throws DataAccessException in any other situation
+     */
 	void deleteProductById(Integer id) throws DataAccessException;
 
     List<ProductWithQuantityView> getAllProductsWithQuantitiesViews() throws DataAccessException;
