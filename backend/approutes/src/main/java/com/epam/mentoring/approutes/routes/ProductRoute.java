@@ -22,6 +22,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import javax.ws.rs.NotFoundException;
+import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response;
 
 @Component
@@ -39,13 +40,14 @@ public class ProductRoute extends RouteBuilder {
                 .handled(true)
                 .to(RouteNames.NOT_FOUND_ROUTE);
 
+        onException(WebApplicationException.class)
+                .handled(true)
+                .to(RouteNames.EXCEPTION_ROUTE);
+
         from(productRouteEndpoint).routeId(RouteNames.PRODUCT_ROUTE_ID)
                 .log(LoggingLevel.DEBUG, "Method: " + header(Headers.OPERATION))
-                .process(new Processor() {
-                    @Override
-                    public void process(Exchange exchange) throws Exception {
-
-                    }
+                .process(exchange -> {
+                    System.out.println("debug");
                 })
                 .choice()
                     .when(header(Exchange.HTTP_METHOD).isEqualTo("GET"))
