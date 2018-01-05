@@ -40,6 +40,20 @@ ProductRestController {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
+    @Path("/{id}/incomes")
+    @ApiOperation(value = "Retrieve incomes of given product")
+    @ApiResponses(
+            @ApiResponse(code = 200, message = "Collection of incomes returned")
+    )
+    public Response getIncomesOfProduct(
+            @ApiParam(value = "Product's id", required = true)
+            @PathParam("id") Integer id) {
+        return null;
+    }
+
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
     @Path("/quant")
     public Response getAllProductsWithQuantities(){
         return null;

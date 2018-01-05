@@ -1,5 +1,6 @@
 package com.epam.mentoring.approutes.routes;
 
+import com.epam.mentoring.approutes.processors.product.GetIncomesOfProductProcessor;
 import com.epam.mentoring.approutes.processors.product.DeleteProductProcessor;
 import com.epam.mentoring.approutes.processors.product.GetAllProductsWithQuantitiesProcessor;
 import com.epam.mentoring.data.model.dto.ProductForm;
@@ -50,6 +51,8 @@ public class ProductRoute extends RouteBuilder {
                         .process(new GetAllProductsWithQuantitiesProcessor(productService))
                     .when(header(Headers.OPERATION).isEqualTo(Headers.PRODUCT_DELETE))
                         .process(new DeleteProductProcessor(productService))
+                    .when(header(Headers.OPERATION).isEqualTo(Headers.PRODUCT_GET_INCOMES))
+                        .process(new GetIncomesOfProductProcessor(productService))
                     .otherwise().throwException(new UnsupportedOperationException())
                 .end()
                 .marshal(new JsonDataFormat(JsonLibrary.Jackson))

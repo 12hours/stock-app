@@ -1,8 +1,10 @@
 package com.epam.mentoring.service;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
+import com.epam.mentoring.data.model.ProductIncome;
 import com.epam.mentoring.data.model.dto.ProductForm;
 import com.epam.mentoring.data.model.dto.ProductView;
 import com.epam.mentoring.data.model.dto.ProductWithQuantityView;
@@ -32,5 +34,7 @@ public interface ProductService {
 	
 	void deleteProductById(Integer id) throws DataAccessException;
 
-    List<ProductWithQuantityView> getAllProductsWithQuantitiesViews();
+    List<ProductWithQuantityView> getAllProductsWithQuantitiesViews() throws DataAccessException;
+
+    Collection<ProductIncome> getIncomesOfProduct(Integer id) throws DataAccessException;
 }

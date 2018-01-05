@@ -1,6 +1,7 @@
 package com.epam.mentoring.service.jpa;
 
 import com.epam.mentoring.data.model.Product;
+import com.epam.mentoring.data.model.ProductIncome;
 import com.epam.mentoring.data.model.dto.DTOUtils;
 import com.epam.mentoring.data.model.dto.ProductForm;
 import com.epam.mentoring.data.model.dto.ProductWithQuantityView;
@@ -10,6 +11,7 @@ import org.springframework.dao.DataAccessException;
 
 import javax.persistence.EntityManagerFactory;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -112,4 +114,18 @@ public class ProductServiceJpaImpl extends AbstractProductDao implements Product
         }
         return productWithQuantityViewsList;
     }
+
+    @Override
+    public Collection<ProductIncome> getIncomesOfProduct(Integer id) throws DataAccessException {
+        Collection<ProductIncome> productIncomes = null;
+        try {
+            productIncomes = (Collection<ProductIncome>) findAndFetchField(id, "productIncomes");
+        } catch (NoSuchFieldException | IllegalAccessException e) {
+            e.printStackTrace();
+            throw new DataAccessException("Can not get access to productIncomes field of Product", e) {};
+        }
+        return productIncomes;
+    }
+
+
 }

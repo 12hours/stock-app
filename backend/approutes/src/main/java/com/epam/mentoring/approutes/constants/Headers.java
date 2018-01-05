@@ -27,6 +27,7 @@ public class Headers {
     public static final String PRODUCT_POST = "postProduct";
     public static final String PRODUCT_DELETE = "deleteProduct";
     public static final String PRODUCT_GET_ALL_WITH_QAUNT = "getAllProductsWithQuantities";
+    public static final String PRODUCT_GET_INCOMES = "getIncomesOfProduct";
 
     public static final String PRODUCT_TYPE_GET_ALL = "getAllProductTypes";
     public static final String PRODUCT_TYPE_GET_BY_ID = "getProductTypeById";

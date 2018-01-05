@@ -83,7 +83,7 @@ public class SupplierServiceJpaImpl extends AbstractDao<Supplier> implements Sup
             productIncomes = (Collection<ProductIncome>) findAndFetchField(id, "productIncomes");
         } catch (NoSuchFieldException | IllegalAccessException e) {
             e.printStackTrace();
-            throw new DataAccessException("Can not get access to products field of ProductType", e) {};
+            throw new DataAccessException("Can not get access to productIncomes field of Supplier", e) {};
         }
         return productIncomes;
     }
