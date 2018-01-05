@@ -1,10 +1,9 @@
 package com.epam.mentoring.data.model.dto.view;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.math.BigDecimal;
+import java.util.HashMap;
 
 @Data
 @NoArgsConstructor
@@ -14,4 +13,5 @@ public class ProductView {
     private String name;
     private BigDecimal price;
     private Integer productTypeId;
+    private HashMap links;
 }

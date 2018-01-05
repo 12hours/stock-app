@@ -1,0 +1,18 @@
+package com.epam.mentoring.data.model.dto.mapstruct;
+
+import com.epam.mentoring.data.model.ProductIncome;
+import com.epam.mentoring.data.model.dto.view.ProductIncomeView;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.Mappings;
+
+@Mapper
+public interface ProductIncomeMapper {
+
+    @Mappings({
+            @Mapping(source = "productIncome.product.id", target = "productId"),
+            @Mapping(source = "productIncome.user.id", target = "userId"),
+            @Mapping(source = "productIncome.supplier.id", target = "supplierId")
+    })
+    ProductIncomeView productIncomeToProductIncomeView(ProductIncome productIncome);
+}
