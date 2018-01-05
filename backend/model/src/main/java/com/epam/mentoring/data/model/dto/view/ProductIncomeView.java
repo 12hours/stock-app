@@ -18,5 +18,4 @@ public class ProductIncomeView {
     private Integer productId;
     private Integer userId;
     private Integer supplierId;
-    private Map<String, Object> links;
 }

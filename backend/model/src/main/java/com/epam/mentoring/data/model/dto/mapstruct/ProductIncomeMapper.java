@@ -14,7 +14,7 @@ public interface ProductIncomeMapper {
             @Mapping(source = "productIncome.user.id", target = "userId"),
             @Mapping(source = "productIncome.supplier.id", target = "supplierId"),
 //            @Mapping(target = "date", expression = ("java( ((java.sql.Date) productIncome).getDate().toLocalDate())")),
-            @Mapping(target = "links", expression = ("java( new java.util.HashMap<String, Object>())"))
+//            @Mapping(target = "links", expression = ("java( new java.util.HashMap<String, Object>())"))
     })
     ProductIncomeView productIncomeToProductIncomeView(ProductIncome productIncome);
 }

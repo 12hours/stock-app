@@ -10,7 +10,7 @@ import org.mapstruct.Mappings;
 public interface ProductTypeMapper {
 
     @Mappings({
-            @Mapping(target = "links", expression = ("java( new java.util.HashMap<String, Object>())"))
+//            @Mapping(target = "links", expression = ("java( new java.util.HashMap<String, Object>())"))
     })
     ProductTypeView productTypeToProductTypeView(ProductType productType);
 }

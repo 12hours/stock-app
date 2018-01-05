@@ -13,5 +13,4 @@ public class SupplierView {
     private Integer id;
     private String name;
     private String details;
-    private Map<String, Object> links;
 }

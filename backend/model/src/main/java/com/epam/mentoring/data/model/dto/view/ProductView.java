@@ -15,5 +15,4 @@ public class ProductView {
     private String name;
     private BigDecimal price;
     private Integer productTypeId;
-    private Map<String, Object> links;
 }

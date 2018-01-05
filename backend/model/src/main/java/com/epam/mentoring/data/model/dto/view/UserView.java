@@ -12,5 +12,4 @@ import java.util.Map;
 public class UserView {
     private Integer id;
     private String name;
-    private Map<String, Object> links;
 }

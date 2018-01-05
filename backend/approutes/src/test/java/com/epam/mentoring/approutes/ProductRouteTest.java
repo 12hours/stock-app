@@ -5,7 +5,7 @@ import com.epam.mentoring.data.model.dto.form.ProductForm;
 import com.epam.mentoring.approutes.constants.Headers;
 import com.epam.mentoring.data.model.dto.mapstruct.CollectionMapper;
 import com.epam.mentoring.data.model.dto.mapstruct.ProductMapper;
-import com.epam.mentoring.data.model.dto.view.CollectionView;
+import com.epam.mentoring.data.model.dto.CollectionDTO;
 import com.epam.mentoring.data.model.dto.view.ProductView;
 import com.epam.mentoring.service.ProductService;
 import com.epam.mentoring.test.TestData;
@@ -81,10 +81,10 @@ public class ProductRouteTest {
         List<ProductView> productViews = TestData.products().stream()
                 .map(product -> productMapper.productToProductView(product))
                 .collect(Collectors.toList());
-        CollectionView collectionView = collectionMapper.collectionToCollectionView(productViews);
+        CollectionDTO collectionDTO = collectionMapper.collectionToCollectionView(productViews);
 
         Exchange response = template.send(productRouteEndpoint, exchange);
-        assertEquals(objectMapper.writeValueAsString( collectionView), response.getIn().getBody());
+        assertEquals(objectMapper.writeValueAsString(collectionDTO), response.getIn().getBody());
     }
 
     @Test
