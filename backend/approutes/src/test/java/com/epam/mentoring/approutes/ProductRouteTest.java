@@ -1,7 +1,12 @@
 package com.epam.mentoring.approutes;
 
+import com.epam.mentoring.data.model.Product;
 import com.epam.mentoring.data.model.dto.form.ProductForm;
 import com.epam.mentoring.approutes.constants.Headers;
+import com.epam.mentoring.data.model.dto.mapstruct.CollectionMapper;
+import com.epam.mentoring.data.model.dto.mapstruct.ProductMapper;
+import com.epam.mentoring.data.model.dto.view.CollectionView;
+import com.epam.mentoring.data.model.dto.view.ProductView;
 import com.epam.mentoring.service.ProductService;
 import com.epam.mentoring.test.TestData;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -16,6 +21,7 @@ import org.apache.camel.test.spring.CamelSpringJUnit4ClassRunner;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mapstruct.factory.Mappers;
 import org.mockito.ArgumentCaptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -25,6 +31,9 @@ import org.springframework.test.context.ContextConfiguration;
 
 import javax.ws.rs.core.Response;
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.junit.Assert.*;
 import static org.mockito.Matchers.anyInt;
@@ -36,6 +45,9 @@ import static org.mockito.Mockito.verify;
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 @PropertySource("classpath:/test-application.properties")
 public class ProductRouteTest {
+
+    ProductMapper productMapper = Mappers.getMapper(ProductMapper.class);
+    CollectionMapper<ProductView> productViewCollectionMapper = Mappers.getMapper(CollectionMapper.class);
 
     @Autowired
     ModelCamelContext context;
@@ -67,8 +79,13 @@ public class ProductRouteTest {
         in.setHeader(Headers.OPERATION, Headers.PRODUCT_GET_ALL);
         exchange.setIn(in);
 
+        List<ProductView> productViews = TestData.products().stream()
+                .map(product -> productMapper.productToProductView(product))
+                .collect(Collectors.toList());
+        CollectionView collectionView = productViewCollectionMapper.collectionToCollectionView(productViews);
+
         Exchange response = template.send(productRouteEndpoint, exchange);
-        assertEquals(objectMapper.writeValueAsString( TestData.products()), response.getIn().getBody());
+        assertEquals(objectMapper.writeValueAsString( collectionView), response.getIn().getBody());
     }
 
     @Test
@@ -93,7 +110,9 @@ public class ProductRouteTest {
         exchange.setIn(in);
 
         Exchange response = template.send(productRouteEndpoint, exchange);
-        assertEquals(objectMapper.writeValueAsString(TestData.products().get(0)), response.getIn().getBody());
+        Product expectedProduct = TestData.products().get(0);
+        ProductView productView = productMapper.productToProductView(TestData.products().get(0));
+        assertEquals(objectMapper.writeValueAsString(productView), response.getIn().getBody());
     }
 
     @Test

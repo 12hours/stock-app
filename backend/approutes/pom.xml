@@ -168,6 +168,11 @@
             </exclusions>
         </dependency>
 
+        <dependency>
+            <groupId>org.mapstruct</groupId>
+            <artifactId>mapstruct-jdk8</artifactId>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -222,6 +227,7 @@
                             org.springframework.beans.factory,
                             org.apache.cxf.bus.spring
                         </Import-Package>
+                        <Embed-Dependency>mapstruct-jdk8</Embed-Dependency>
                     </instructions>
                 </configuration>
             </plugin>

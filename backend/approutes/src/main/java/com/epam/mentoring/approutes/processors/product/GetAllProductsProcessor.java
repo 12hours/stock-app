@@ -1,15 +1,22 @@
 package com.epam.mentoring.approutes.processors.product;
 
 import com.epam.mentoring.data.model.Product;
-import com.epam.mentoring.approutes.constants.Headers;
+import com.epam.mentoring.data.model.dto.mapstruct.CollectionMapper;
+import com.epam.mentoring.data.model.dto.mapstruct.ProductMapper;
+import com.epam.mentoring.data.model.dto.view.ProductView;
 import com.epam.mentoring.service.ProductService;
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
+import org.mapstruct.factory.Mappers;
 
-import javax.ws.rs.core.Response;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class GetAllProductsProcessor implements Processor {
+
+    private ProductMapper productMapper = Mappers.getMapper(ProductMapper.class);
+    private CollectionMapper<ProductView> productViewCollectionMapper = Mappers.getMapper(CollectionMapper.class);
+
     private ProductService productService;
 
     public GetAllProductsProcessor(ProductService productService) {
@@ -19,6 +26,11 @@ public class GetAllProductsProcessor implements Processor {
     @Override
     public void process(Exchange exchange) throws Exception {
         List<Product> allProducts = productService.getAllProducts();
-        exchange.getIn().setBody(allProducts);
+
+        List<ProductView> productViews = allProducts.stream()
+                        .map(product -> productMapper.productToProductView(product))
+                        .collect(Collectors.toList());
+
+        exchange.getIn().setBody(productViewCollectionMapper.collectionToCollectionView(productViews));
     }
 }

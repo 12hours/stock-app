@@ -9,8 +9,9 @@ import org.mapstruct.Mappings;
 @Mapper
 public interface ProductMapper {
 
-    @Mappings(
-            @Mapping(source = "product.type.id", target = "productTypeId")
-    )
+    @Mappings({
+            @Mapping(source = "product.type.id", target = "productTypeId"),
+            @Mapping(target = "links", expression = ("java( new java.util.HashMap<String, Object>())"))
+    })
     ProductView productToProductView(Product product);
 }
