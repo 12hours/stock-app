@@ -5,7 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
-import java.util.HashMap;
+import java.util.Map;
 
 @Data
 @AllArgsConstructor
@@ -18,5 +18,5 @@ public class ProductIncomeView {
     private Integer productId;
     private Integer userId;
     private Integer supplierId;
-    private HashMap<String, Object> links;
+    private Map<String, Object> links;
 }

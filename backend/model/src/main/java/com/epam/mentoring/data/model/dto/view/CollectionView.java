@@ -5,13 +5,13 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Collection;
-import java.util.HashMap;
+import java.util.Map;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class CollectionView<T> {
     private Collection<T> items;
-    private HashMap<String, Object> properties;
-    private HashMap<String, Object> links;
+    private Map<String, Object> properties;
+    private Map<String, Object> links;
 }

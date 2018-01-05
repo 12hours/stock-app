@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.HashMap;
+import java.util.Map;
 
 @Data
 @AllArgsConstructor
@@ -13,5 +13,5 @@ public class SupplierView {
     private Integer id;
     private String name;
     private String details;
-    private HashMap<String, Object> links;
+    private Map<String, Object> links;
 }

@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.HashMap;
+import java.util.Map;
 
 @Data
 @NoArgsConstructor
@@ -12,5 +12,5 @@ import java.util.HashMap;
 public class ProductTypeView {
     private Integer id;
     private String name;
-    private HashMap<String, Object> links;
+    private Map<String, Object> links;
 }
