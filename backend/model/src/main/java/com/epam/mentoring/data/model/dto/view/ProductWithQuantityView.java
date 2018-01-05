@@ -9,13 +9,11 @@ import java.util.Map;
 @Data
 @NoArgsConstructor
 public class ProductWithQuantityView {
-    private Integer id;
-    private String productName;
+    private ProductView product;
     private Integer quantity;
 
-    public ProductWithQuantityView(Integer id, String productName, Integer quantity) {
-        this.id = id;
-        this.productName = productName;
+    public ProductWithQuantityView(ProductView productView, Integer quantity) {
+        this.product = productView;
         this.quantity = quantity;
     }
 }

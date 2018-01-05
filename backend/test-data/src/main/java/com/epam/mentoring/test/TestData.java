@@ -81,9 +81,9 @@ public class TestData {
         List<Product> products = products();
         ArrayList<ProductWithQuantityView> productWithQuantityViews = new ArrayList<ProductWithQuantityView>(){
             {
-                add(new ProductWithQuantityView(products.get(0).getId(), products.get(0).getName(), 10));
-                add(new ProductWithQuantityView(products.get(1).getId(), products.get(1).getName(), 20));
-                add(new ProductWithQuantityView(products.get(2).getId(), products.get(2).getName(), 30));
+                add(new ProductWithQuantityView(new ProductView(products.get(0).getId(), products.get(0).getName(), products.get(0).getPrice(), products.get(0).getType().getId()), 10));
+                add(new ProductWithQuantityView(new ProductView(products.get(1).getId(), products.get(1).getName(), products.get(1).getPrice(), products.get(1).getType().getId()), 20));
+                add(new ProductWithQuantityView(new ProductView(products.get(2).getId(), products.get(2).getName(), products.get(2).getPrice(), products.get(2).getType().getId()), 30));
             }
         };
         return productWithQuantityViews;

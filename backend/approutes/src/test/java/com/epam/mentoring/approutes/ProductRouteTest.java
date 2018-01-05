@@ -1,9 +1,11 @@
 package com.epam.mentoring.approutes;
 
 import com.epam.mentoring.data.model.Product;
+import com.epam.mentoring.data.model.dto.ItemDTO;
 import com.epam.mentoring.data.model.dto.form.ProductForm;
 import com.epam.mentoring.approutes.constants.Headers;
 import com.epam.mentoring.data.model.dto.mapstruct.CollectionMapper;
+import com.epam.mentoring.data.model.dto.mapstruct.ItemMapper;
 import com.epam.mentoring.data.model.dto.mapstruct.ProductMapper;
 import com.epam.mentoring.data.model.dto.CollectionDTO;
 import com.epam.mentoring.data.model.dto.view.ProductView;
@@ -45,8 +47,9 @@ import static org.mockito.Mockito.verify;
 @PropertySource("classpath:/test-application.properties")
 public class ProductRouteTest {
 
-    ProductMapper productMapper = Mappers.getMapper(ProductMapper.class);
-    CollectionMapper collectionMapper = Mappers.getMapper(CollectionMapper.class);
+    private ProductMapper productMapper = Mappers.getMapper(ProductMapper.class);
+    private CollectionMapper collectionMapper = Mappers.getMapper(CollectionMapper.class);
+    private ItemMapper itemMapper = Mappers.getMapper(ItemMapper.class);
 
     @Autowired
     ModelCamelContext context;
@@ -112,7 +115,7 @@ public class ProductRouteTest {
         Exchange response = template.send(productRouteEndpoint, exchange);
         Product expectedProduct = TestData.products().get(0);
         ProductView productView = productMapper.productToProductView(TestData.products().get(0));
-        assertEquals(objectMapper.writeValueAsString(productView), response.getIn().getBody());
+        assertEquals(objectMapper.writeValueAsString(itemMapper.itemToItemDTO(productView)), response.getIn().getBody());
     }
 
     @Test

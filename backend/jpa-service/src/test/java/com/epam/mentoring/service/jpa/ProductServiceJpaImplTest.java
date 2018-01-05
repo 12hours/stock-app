@@ -3,6 +3,7 @@ package com.epam.mentoring.service.jpa;
 import com.epam.mentoring.data.model.Product;
 import com.epam.mentoring.data.model.ProductType;
 import com.epam.mentoring.data.model.dto.form.ProductForm;
+import com.epam.mentoring.data.model.dto.view.ProductView;
 import com.epam.mentoring.data.model.dto.view.ProductWithQuantityView;
 import com.epam.mentoring.service.ProductService;
 import org.junit.After;
@@ -111,15 +112,15 @@ public class ProductServiceJpaImplTest {
 
         List<ProductWithQuantityView> expectedQuantitiesList = new ArrayList<ProductWithQuantityView>() {
             {
-                add(new ProductWithQuantityView(1, "Intel Core i7 8700", 10));
-                add(new ProductWithQuantityView(2, "Intel Core i3 8100", 40));
-                add(new ProductWithQuantityView(3, "Nvidia GTX 1050Ti", 45));
-                add(new ProductWithQuantityView(4, "Intel Pentium G4360", 50));
-                add(new ProductWithQuantityView(5, "AMD Ryzen 7 1700", 25));
-                add(new ProductWithQuantityView(6, "Samsung 850 Evo 256 Gb", 50));
-                add(new ProductWithQuantityView(7, "Intel Core i5 6600K", 10));
-                add(new ProductWithQuantityView(8, "Kingston UV400 120 Gb", 30));
-                add(new ProductWithQuantityView(9, "ASRock Z370", 25));
+                add(new ProductWithQuantityView(new ProductView(1, "Intel Core i7 8700",    new BigDecimal("360.00"), 1),  10));
+                add(new ProductWithQuantityView(new ProductView(2, "Intel Core i3 8100",    new BigDecimal("135.00"), 1),  40));
+                add(new ProductWithQuantityView(new ProductView(3, "Nvidia GTX 1050Ti",     new BigDecimal("200.00"), 3),  45));
+                add(new ProductWithQuantityView(new ProductView(4, "Intel Pentium G4360",   new BigDecimal("65.00"), 1), 50));
+                add(new ProductWithQuantityView(new ProductView(5, "AMD Ryzen 7 1700",      new BigDecimal("325.00"), 1),  25));
+                add(new ProductWithQuantityView(new ProductView(6, "Samsung 850 Evo 256 Gb",new BigDecimal("100.00"), 4), 50));
+                add(new ProductWithQuantityView(new ProductView(7, "Intel Core i5 6600K",   new BigDecimal("250.00"), 1), 10));
+                add(new ProductWithQuantityView(new ProductView(8, "Kingston UV400 120 Gb", new BigDecimal("65.00"), 4),  30));
+                add(new ProductWithQuantityView(new ProductView(9, "ASRock Z370",           new BigDecimal("165.00"), 2), 25));
             }
         };
 

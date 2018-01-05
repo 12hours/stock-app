@@ -4,6 +4,7 @@ import com.epam.mentoring.data.model.Product;
 import com.epam.mentoring.data.model.ProductIncome;
 import com.epam.mentoring.data.model.dto.DTOUtils;
 import com.epam.mentoring.data.model.dto.form.ProductForm;
+import com.epam.mentoring.data.model.dto.view.ProductView;
 import com.epam.mentoring.data.model.dto.view.ProductWithQuantityView;
 import com.epam.mentoring.service.ProductService;
 import com.epam.mentoring.service.jpa.dao.AbstractProductDao;
@@ -86,7 +87,7 @@ public class ProductServiceJpaImpl extends AbstractProductDao implements Product
     @Override
     public Map<Product, Integer> getAllProductsWithQuantities() throws DataAccessException {
         try {
-            return getAllProductsWithProductIncomesMap();
+            return getAllProductsWithQuantitiesMap();
         } catch (Exception e) {
             e.printStackTrace();
             throw new DataAccessException("Can not fetch list of products with quantities") {
@@ -114,7 +115,8 @@ public class ProductServiceJpaImpl extends AbstractProductDao implements Product
         for (Map.Entry<Product, Integer> entry : allProductsWithProductIncomesMap.entrySet()) {
             Product product = entry.getKey();
             Integer quantity = entry.getValue();
-            productWithQuantityViewsList.add(new ProductWithQuantityView(product.getId(), product.getName(), quantity));
+            ProductView productView = new ProductView(product.getId(), product.getName(), product.getPrice(), product.getType().getId());
+            productWithQuantityViewsList.add(new ProductWithQuantityView(productView, entry.getValue()));
         }
         return productWithQuantityViewsList;
     }

@@ -23,7 +23,7 @@ public abstract class AbstractProductDao extends AbstractDao<Product> {
         this.emf = emf;
     }
 
-    protected Map<Product, Integer> getAllProductsWithProductIncomesMap(){
+    protected Map<Product, Integer> getAllProductsWithQuantitiesMap(){
         EntityManager em = emf.createEntityManager();
         Query query = em.createQuery("SELECT p, SUM(pi.quantity) FROM Product p JOIN p.productIncomes pi GROUP BY p");
         List<Object[]> resultList = query.getResultList();
