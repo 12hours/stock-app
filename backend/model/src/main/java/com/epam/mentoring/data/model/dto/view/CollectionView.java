@@ -12,6 +12,6 @@ import java.util.HashMap;
 @AllArgsConstructor
 public class CollectionView<T> {
     private Collection<T> items;
-    private HashMap properties;
-    private HashMap links;
+    private HashMap<String, Object> properties;
+    private HashMap<String, Object> links;
 }

@@ -12,5 +12,5 @@ import java.util.HashMap;
 public class ProductTypeView {
     private Integer id;
     private String name;
-    private HashMap links;
+    private HashMap<String, Object> links;
 }

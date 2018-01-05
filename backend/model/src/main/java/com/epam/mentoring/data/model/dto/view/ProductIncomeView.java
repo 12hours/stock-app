@@ -18,5 +18,5 @@ public class ProductIncomeView {
     private Integer productId;
     private Integer userId;
     private Integer supplierId;
-    private HashMap links;
+    private HashMap<String, Object> links;
 }

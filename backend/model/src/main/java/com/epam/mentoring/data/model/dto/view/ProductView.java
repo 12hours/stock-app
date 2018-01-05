@@ -13,5 +13,5 @@ public class ProductView {
     private String name;
     private BigDecimal price;
     private Integer productTypeId;
-    private HashMap links;
+    private HashMap<String, Object> links;
 }
