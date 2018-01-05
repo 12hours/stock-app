@@ -2,9 +2,9 @@ package com.epam.mentoring.approutes.routes;
 
 import com.epam.mentoring.approutes.constants.Headers;
 import com.epam.mentoring.approutes.constants.RouteNames;
-import com.epam.mentoring.approutes.processors.productincome.DeleteProductIncomeProcesoor;
-import com.epam.mentoring.approutes.processors.productincome.GetProductIncomeByIdProcessor;
-import com.epam.mentoring.approutes.processors.productincome.SaveProductIncomeProcessor;
+import com.epam.mentoring.approutes.processors.income.DeleteProductIncomeProcesoor;
+import com.epam.mentoring.approutes.processors.income.GetProductIncomeByIdProcessor;
+import com.epam.mentoring.approutes.processors.income.SaveProductIncomeProcessor;
 import com.epam.mentoring.data.model.dto.ProductIncomeForm;
 import com.epam.mentoring.service.ProductIncomeService;
 import org.apache.camel.builder.RouteBuilder;

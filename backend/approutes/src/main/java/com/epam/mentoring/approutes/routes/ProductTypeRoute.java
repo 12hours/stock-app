@@ -1,12 +1,13 @@
 package com.epam.mentoring.approutes.routes;
 
-import com.epam.mentoring.approutes.processors.producttype.DeleteProductTypeProcessor;
+import com.epam.mentoring.approutes.processors.type.GetProductsOfTypeProcessor;
+import com.epam.mentoring.approutes.processors.type.DeleteProductTypeProcessor;
 import com.epam.mentoring.data.model.dto.ProductTypeForm;
 import com.epam.mentoring.approutes.constants.Headers;
 import com.epam.mentoring.approutes.constants.RouteNames;
-import com.epam.mentoring.approutes.processors.producttype.GetAllProductTypesProcessor;
-import com.epam.mentoring.approutes.processors.producttype.GetProductTypeByIdProcessor;
-import com.epam.mentoring.approutes.processors.producttype.SaveProductTypeProcessor;
+import com.epam.mentoring.approutes.processors.type.GetAllProductTypesProcessor;
+import com.epam.mentoring.approutes.processors.type.GetProductTypeByIdProcessor;
+import com.epam.mentoring.approutes.processors.type.SaveProductTypeProcessor;
 import com.epam.mentoring.service.ProductTypeService;
 import org.apache.camel.LoggingLevel;
 import org.apache.camel.builder.RouteBuilder;
@@ -38,6 +39,8 @@ public class ProductTypeRoute extends RouteBuilder {
                     .process(new SaveProductTypeProcessor(productTypeService))
                 .when(header(Headers.OPERATION).isEqualTo(Headers.PRODUCT_TYPE_DELETE))
                     .process(new DeleteProductTypeProcessor(productTypeService))
+                .when(header(Headers.OPERATION).isEqualTo(Headers.PRODUCT_TYPE_PRODUCTS))
+                    .process(new GetProductsOfTypeProcessor(productTypeService))
                 .otherwise().throwException(new UnsupportedOperationException())
                 .end()
                 .marshal().json(JsonLibrary.Jackson)

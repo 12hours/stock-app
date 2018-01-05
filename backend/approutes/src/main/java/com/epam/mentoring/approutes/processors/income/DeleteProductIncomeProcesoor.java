@@ -1,4 +1,4 @@
-package com.epam.mentoring.approutes.processors.productincome;
+package com.epam.mentoring.approutes.processors.income;
 
 import com.epam.mentoring.approutes.constants.Headers;
 import com.epam.mentoring.service.ProductIncomeService;

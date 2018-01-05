@@ -1,4 +1,4 @@
-package com.epam.mentoring.approutes.processors.producttype;
+package com.epam.mentoring.approutes.processors.type;
 
 import com.epam.mentoring.data.model.dto.ProductTypeForm;
 import com.epam.mentoring.approutes.constants.Headers;
