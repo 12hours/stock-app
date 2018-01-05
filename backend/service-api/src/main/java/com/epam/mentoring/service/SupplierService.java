@@ -1,9 +1,11 @@
 package com.epam.mentoring.service;
 
+import com.epam.mentoring.data.model.ProductIncome;
 import com.epam.mentoring.data.model.Supplier;
 import com.epam.mentoring.data.model.dto.SupplierForm;
 import org.springframework.dao.DataAccessException;
 
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -21,4 +23,6 @@ public interface SupplierService {
     void deleteSupplier(Integer id) throws DataAccessException;
 
     Supplier getSupplierById(Integer id) throws DataAccessException;
+
+    Collection<ProductIncome> getAllIncomesOfSupplier(Integer id);
 }

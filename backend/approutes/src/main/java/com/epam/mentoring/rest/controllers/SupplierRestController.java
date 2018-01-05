@@ -38,6 +38,20 @@ public class SupplierRestController {
         return null;
     }
 
+    @GET
+    @Path("/{id}/incomes")
+    @Produces(MediaType.APPLICATION_JSON)
+    @ApiOperation(value = "Retrieve all product incomes provided by given supplier")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "Product incomes collection returned"),
+            @ApiResponse(code = 500, message = "Server error")
+    })
+    public Response getProductIncomesOfSupplier(
+            @ApiParam(value = "Supplier id", required = true)
+            @PathParam("id") Integer id) {
+        return null;
+    }
+
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @ApiOperation(value = "Save supplier object")

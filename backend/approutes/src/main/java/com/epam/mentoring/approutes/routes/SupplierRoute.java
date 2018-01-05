@@ -2,10 +2,7 @@ package com.epam.mentoring.approutes.routes;
 
 import com.epam.mentoring.approutes.constants.Headers;
 import com.epam.mentoring.approutes.constants.RouteNames;
-import com.epam.mentoring.approutes.processors.supplier.DeleteSupplierProcessor;
-import com.epam.mentoring.approutes.processors.supplier.GetAllSuppliersProcessor;
-import com.epam.mentoring.approutes.processors.supplier.GetSupplierByIdProcessor;
-import com.epam.mentoring.approutes.processors.supplier.SaveSupplierProcessor;
+import com.epam.mentoring.approutes.processors.supplier.*;
 import com.epam.mentoring.data.model.dto.SupplierForm;
 import com.epam.mentoring.service.SupplierService;
 import org.apache.camel.LoggingLevel;
@@ -38,6 +35,8 @@ public class SupplierRoute extends RouteBuilder {
                     .process(new SaveSupplierProcessor(supplierService))
                 .when(header(Headers.OPERATION).isEqualTo(Headers.SUPPLIER_DELETE))
                     .process(new DeleteSupplierProcessor(supplierService))
+                .when(header(Headers.OPERATION).isEqualTo(Headers.SUPPLIER_INCOMES))
+                    .process(new GetIncomesOfSupplierProcessor(supplierService))
                 .otherwise().throwException(new UnsupportedOperationException())
                 .end()
                 .marshal().json(JsonLibrary.Jackson)

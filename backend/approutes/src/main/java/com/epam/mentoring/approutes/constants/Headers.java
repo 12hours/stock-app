@@ -46,5 +46,5 @@ public class Headers {
     public static final String SUPPLIER_GET_BY_ID = "getSupplierById";
     public static final String SUPPLIER_POST = "postSupplier";
     public static final String SUPPLIER_DELETE = "deleteSupplier";
-
+    public static final String SUPPLIER_INCOMES = "getProductIncomesOfSupplier";
 }
