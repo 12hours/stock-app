@@ -63,6 +63,7 @@ public class ProductRouteTest {
     public void getAllProductsTest() throws Exception {
         Exchange exchange = new DefaultExchange(context);
         Message in = new DefaultMessage();
+        in.setHeader(Exchange.HTTP_METHOD, "GET");
         in.setHeader(Headers.OPERATION, Headers.PRODUCT_GET_ALL);
         exchange.setIn(in);
 
@@ -74,6 +75,7 @@ public class ProductRouteTest {
     public void getAllProductsWithQuantitiesTest() throws Exception {
         Exchange exchange = new DefaultExchange(context);
         Message in = new DefaultMessage();
+        in.setHeader(Exchange.HTTP_METHOD, "GET");
         in.setHeader(Headers.OPERATION, Headers.PRODUCT_GET_ALL_WITH_QAUNT);
         exchange.setIn(in);
 
@@ -85,6 +87,7 @@ public class ProductRouteTest {
     public void getProductByIdTest() throws JsonProcessingException {
         Exchange exchange = new DefaultExchange(context);
         Message in = new DefaultMessage();
+        in.setHeader(Exchange.HTTP_METHOD, "GET");
         in.setHeader(Headers.OPERATION, Headers.PRODUCT_GET_BY_ID);
         in.setHeader(Headers.ID, Integer.valueOf(42));
         exchange.setIn(in);
@@ -97,6 +100,7 @@ public class ProductRouteTest {
     public void saveProductTest() throws Exception {
         Exchange exchange = new DefaultExchange(context);
         Message in = new DefaultMessage();
+        in.setHeader(Exchange.HTTP_METHOD, "POST");
         in.setHeader(Headers.OPERATION, Headers.PRODUCT_POST);
         in.setBody("{\"name\":\"testProduct\",\"price\":100,\"productTypeId\":1}");
         exchange.setIn(in);
@@ -111,11 +115,12 @@ public class ProductRouteTest {
     public void deleteProductTest() {
         Exchange exchange = new DefaultExchange(context);
         DefaultMessage in = new DefaultMessage();
+        in.setHeader(Exchange.HTTP_METHOD, "DELETE");
         in.setHeader(Headers.OPERATION, Headers.PRODUCT_DELETE);
         exchange.setIn(in);
 
         Exchange response = template.send(productRouteEndpoint, exchange);
         verify(productServiceMock, times(1)).deleteProductById(anyInt());
-        assertEquals(Response.Status.OK, response.getIn().getHeader(Headers.STATUS));
+        assertEquals(Response.Status.OK.getStatusCode(), response.getIn().getHeader(Exchange.HTTP_RESPONSE_CODE));
     }
 }
