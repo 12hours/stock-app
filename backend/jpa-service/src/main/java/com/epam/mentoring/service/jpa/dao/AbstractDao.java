@@ -62,6 +62,12 @@ public abstract class AbstractDao<T> {
         }
     }
 
+    /**
+     * Merge the state of the given entity into the current persistence context.
+     * Method is supposed to be used for updating entities.
+     * @param entity updated entity
+     * @return entity
+     */
     protected T merge(T entity) {
         EntityManager em = getEntityManager();
         try {
@@ -170,7 +176,11 @@ public abstract class AbstractDao<T> {
 
     /**
      * Updates object with given id with fields of provided object.
-     * This method <b>ignores</b> all collection fields. If you need to update collection fields, use {@code merge(T entity)} instead.
+     *
+     * <p>
+     * Provided <code>dtoEntity</code> is used as simple DTO. It means, that it's fields are copied to actual persisted object.
+     * Notice that this method <b>ignores</b> all {@code Collection} fields. If you need to update <b>all</b> fields
+     * (including {@code Collection} fields), use {@link #merge(T) merge} method instead.
      *
      * @param id id of object to update
      * @param dtoEntity transfer object with updated fields
@@ -181,6 +191,7 @@ public abstract class AbstractDao<T> {
             T persistedEntity = em.find(entityClass, id);
             if (persistedEntity == null) { /* TODO: check */ }
 
+            // collect all fields that implement Collection interface
             String[] fieldsToIgnore = Arrays.stream(dtoEntity.getClass().getDeclaredFields())
                     .filter(field -> field.getType().isAssignableFrom(Collection.class))
                     .map(field -> field.getName())
