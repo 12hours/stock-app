@@ -1,50 +1,35 @@
 package com.epam.mentoring.data.model.dto.form;
 
-
 import javax.validation.constraints.NotNull;
 
-public class SupplierForm {
+public class ProductTypeForm {
     @NotNull
     private String name;
-    @NotNull
-    private String details;
 
-    @java.beans.ConstructorProperties({"name", "details"})
-    public SupplierForm(String name, String details) {
+    @java.beans.ConstructorProperties({"name"})
+    public ProductTypeForm(String name) {
         this.name = name;
-        this.details = details;
     }
 
-    public SupplierForm() {
+    public ProductTypeForm() {
     }
 
     public String getName() {
         return this.name;
     }
 
-    public String getDetails() {
-        return this.details;
-    }
-
     public void setName(String name) {
         this.name = name;
     }
 
-    public void setDetails(String details) {
-        this.details = details;
-    }
-
     public boolean equals(Object o) {
         if (o == this) return true;
-        if (!(o instanceof SupplierForm)) return false;
-        final SupplierForm other = (SupplierForm) o;
+        if (!(o instanceof ProductTypeForm)) return false;
+        final ProductTypeForm other = (ProductTypeForm) o;
         if (!other.canEqual((Object) this)) return false;
         final Object this$name = this.getName();
         final Object other$name = other.getName();
         if (this$name == null ? other$name != null : !this$name.equals(other$name)) return false;
-        final Object this$details = this.getDetails();
-        final Object other$details = other.getDetails();
-        if (this$details == null ? other$details != null : !this$details.equals(other$details)) return false;
         return true;
     }
 
@@ -53,12 +38,10 @@ public class SupplierForm {
         int result = 1;
         final Object $name = this.getName();
         result = result * PRIME + ($name == null ? 43 : $name.hashCode());
-        final Object $details = this.getDetails();
-        result = result * PRIME + ($details == null ? 43 : $details.hashCode());
         return result;
     }
 
     protected boolean canEqual(Object other) {
-        return other instanceof SupplierForm;
+        return other instanceof ProductTypeForm;
     }
 }
