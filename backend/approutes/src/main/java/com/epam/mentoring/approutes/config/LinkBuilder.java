@@ -1,9 +1,7 @@
 package com.epam.mentoring.approutes.config;
 
-import com.epam.mentoring.data.model.Product;
 import com.epam.mentoring.data.model.dto.view.ProductTypeView;
 import com.epam.mentoring.data.model.dto.view.ProductView;
-import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Value;
 
 import java.util.HashMap;
@@ -17,7 +15,7 @@ public class LinkBuilder {
     @Value("${product.path}")
     private String productPath;
 
-    @Value(("${productType.path"))
+    @Value(("${productType.path}"))
     private String productTypePath;
 
     public Map<String, Object> getLinks(Object item) {
@@ -26,7 +24,8 @@ public class LinkBuilder {
             ProductView productView = (ProductView) item;
             return getLinksForProduct(productView);
         } else if (item instanceof ProductTypeView) {
-
+            ProductTypeView productTypeView = (ProductTypeView) item;
+            return getLinksForProductType(productTypeView);
         }
         return null;
     }
@@ -54,10 +53,34 @@ public class LinkBuilder {
         return linksMap;
     }
 
+    public Map<String,Object> getLinksForProductType(ProductTypeView productTypeView) {
+        HashMap<String, Object> linksMap = new HashMap<>();
+        String productTypePath = getProductTypePath(productTypeView.getId());
+
+        HashMap<String, String> selfLinksMap = new HashMap<>();
+        selfLinksMap.put("href", productTypePath);
+        linksMap.put("self", selfLinksMap);
+
+        HashMap<String, String> productTypeLinksMap = new HashMap<>();
+        productTypeLinksMap.put("href", productTypePath + "/products");
+        linksMap.put("products", productTypeLinksMap);
+
+        return linksMap;
+    }
+
     public String getProductPath(Integer id) {
         StringBuilder uri = new StringBuilder();
         uri.append(hostUrl);
         uri.append(productPath);
+        uri.append("/");
+        uri.append(id);
+        return uri.toString();
+    }
+
+    public String getProductTypePath(Integer id) {
+        StringBuilder uri = new StringBuilder();
+        uri.append(hostUrl);
+        uri.append(productTypePath);
         uri.append("/");
         uri.append(id);
         return uri.toString();

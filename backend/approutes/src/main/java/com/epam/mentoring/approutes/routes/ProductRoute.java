@@ -40,9 +40,6 @@ public class ProductRoute extends RouteBuilder {
                     .when(header(Exchange.HTTP_METHOD).isEqualTo("DELETE"))
                         .to("direct:delete")
                     .otherwise().throwException(new UnsupportedOperationException())
-                .end()
-                .marshal(new JsonDataFormat(JsonLibrary.Jackson))
-                .convertBodyTo(String.class)
                 .end();
 
         from("direct:get")

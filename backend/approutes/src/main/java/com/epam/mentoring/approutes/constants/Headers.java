@@ -35,7 +35,7 @@ public class Headers {
     public static final String PRODUCT_TYPE_GET_BY_ID = "getProductTypeById";
     public static final String PRODUCT_TYPE_POST = "postProductType";
     public static final String PRODUCT_TYPE_DELETE = "deleteProductType";
-    public static final String PRODUCT_TYPE_PRODUCTS = "getProductsOfType";
+    public static final String PRODUCT_TYPE_GET_PRODUCTS = "getProductsOfType";
 
     public static final String PRODUCT_INCOME_GET_ALL = "getAllProductIncomes";
     public static final String PRODUCT_INCOME_GET_BY_ID = "getProductIncomeById";

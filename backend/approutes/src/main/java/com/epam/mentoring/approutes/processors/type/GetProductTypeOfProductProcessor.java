@@ -24,6 +24,6 @@ public class GetProductTypeOfProductProcessor implements Processor {
         Integer id = (Integer) exchange.getIn().getHeader(Headers.ID);
         ProductType productType = productTypeService.getProductTypeForProduct(id);
         ProductTypeView productTypeView = productTypeMapper.productTypeToProductTypeView(productType);
-        exchange.getIn().setBody(productType);
+        exchange.getIn().setBody(productTypeView);
     }
 }

@@ -4,6 +4,8 @@ import com.epam.mentoring.approutes.constants.RouteNames;
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
 import org.apache.camel.builder.RouteBuilder;
+import org.apache.camel.model.dataformat.JsonDataFormat;
+import org.apache.camel.model.dataformat.JsonLibrary;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -62,6 +64,10 @@ public class MainRoute extends RouteBuilder {
                         .to(RouteNames.SUPPLIER_ROUTE)
                     .otherwise()
                         .to(RouteNames.NOT_FOUND_ROUTE)
+                .end()
+        .setHeader(Exchange.CONTENT_TYPE, constant("application/json"))
+                .marshal(new JsonDataFormat(JsonLibrary.Jackson))
+                .convertBodyTo(String.class)
                 .end();
     }
 }
