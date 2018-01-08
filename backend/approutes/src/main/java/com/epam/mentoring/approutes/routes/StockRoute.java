@@ -11,12 +11,9 @@ import org.springframework.stereotype.Component;
 @Component
 public class StockRoute extends RouteBuilder {
 
-    @Value("${stock.route.endpoint}")
-    private String stockRouteEndpoint;
-
     @Override
     public void configure() throws Exception {
-        from(stockRouteEndpoint).routeId(RouteNames.STOCK_ROUTE_ID).process(new Processor() {
+        from(RouteNames.STOCK_ROUTE).routeId(RouteNames.STOCK_ROUTE_ID).process(new Processor() {
             @Override
             public void process(Exchange exchange) throws Exception {
 

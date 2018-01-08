@@ -18,12 +18,9 @@ public class SupplierRoute extends RouteBuilder {
     @Autowired
     SupplierService supplierService;
 
-    @Value("${supplier.route.endpoint}")
-    private String supplierRouteEndpoint;
-
     @Override
     public void configure() throws Exception {
-        from(supplierRouteEndpoint).routeId(RouteNames.SUPPLIER_ROUTE_ID)
+        from(RouteNames.SUPPLIER_ROUTE).routeId(RouteNames.SUPPLIER_ROUTE_ID)
                 .log(LoggingLevel.DEBUG, "Method: " + header(Headers.OPERATION))
                 .choice()
                 .when(header(Headers.OPERATION).isEqualTo(Headers.SUPPLIER_GET_ALL))

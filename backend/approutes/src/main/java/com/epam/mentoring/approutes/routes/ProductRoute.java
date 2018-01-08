@@ -24,20 +24,10 @@ public class ProductRoute extends RouteBuilder {
     @Autowired
     ProductService productService;
 
-    @Value("${product.route.endpoint}")
-    private String productRouteEndpoint;
-
     @Override
     public void configure() throws Exception {
-        onException(NotFoundException.class)
-                .handled(true)
-                .to(RouteNames.NOT_FOUND_ROUTE);
 
-        onException(WebApplicationException.class)
-                .handled(true)
-                .to(RouteNames.EXCEPTION_ROUTE);
-
-        from(productRouteEndpoint).routeId(RouteNames.PRODUCT_ROUTE_ID)
+        from(RouteNames.PRODUCT_ROUTE).routeId(RouteNames.PRODUCT_ROUTE_ID)
                 .log(LoggingLevel.DEBUG, "Method: " + header(Headers.OPERATION))
                 .process(exchange -> {
                     System.out.println("debug");

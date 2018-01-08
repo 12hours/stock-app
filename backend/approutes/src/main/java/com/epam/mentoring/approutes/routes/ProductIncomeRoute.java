@@ -19,12 +19,9 @@ public class ProductIncomeRoute extends RouteBuilder {
     @Autowired
     ProductIncomeService productIncomeService;
 
-    @Value("${productIncome.route.endpoint}")
-    private String productIncomeRouteEndpoint;
-
     @Override
     public void configure() throws Exception {
-        from(productIncomeRouteEndpoint).routeId(RouteNames.PRODUCT_INCOME_ROUTE_ID)
+        from(RouteNames.PRODUCT_INCOME_ROUTE).routeId(RouteNames.PRODUCT_INCOME_ROUTE_ID)
                 .to("log:" + this.getClass().getName() + "?level=DEBUG&showHeaders=true&showBody=false&showBodyType=false")
                 .choice()
                 .when(header(Headers.OPERATION).isEqualTo(Headers.PRODUCT_INCOME_GET_BY_ID))

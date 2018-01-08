@@ -1,5 +1,6 @@
 package com.epam.mentoring.approutes;
 
+import com.epam.mentoring.approutes.constants.RouteNames;
 import com.epam.mentoring.data.model.dto.form.ProductTypeForm;
 import com.epam.mentoring.approutes.constants.Headers;
 import com.epam.mentoring.service.ProductTypeService;
@@ -46,8 +47,7 @@ public class ProductTypeRouteTest {
     @Autowired
     ProductTypeService productTypeServiceMock;
 
-    @Value("${productType.route.endpoint}")
-    private String productTypeRouteEndpoint;
+    private String productTypeRouteEndpoint = RouteNames.PRODUCT_TYPE_ROUTE;
 
     ArgumentCaptor<ProductTypeForm> productTypeFormArgumentCaptor;
 
