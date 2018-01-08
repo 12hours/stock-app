@@ -134,4 +134,11 @@ public class ProductServiceJpaImplTest {
         ProductWithQuantityView actualProductWithQuantity = service.getProductWithQuantity(3);
         assertEquals(expectedProductWithQuantityView, actualProductWithQuantity);
     }
+
+    @Test
+    public void getProductOfProductIncomeTest() {
+        Product expectedProduct = service.findProductById(3);
+        Product actualProduct = service.getProductOfProductIncome(5);
+        assertEquals(expectedProduct, actualProduct );
+    }
 }

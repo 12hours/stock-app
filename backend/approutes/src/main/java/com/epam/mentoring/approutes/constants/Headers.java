@@ -41,6 +41,9 @@ public class Headers {
     public static final String PRODUCT_INCOME_GET_BY_ID = "getProductIncomeById";
     public static final String PRODUCT_INCOME_POST = "postProductIncome";
     public static final String PRODUCT_INCOME_DELETE = "deleteProductIncome";
+    public static final String PRODUCT_INCOME_GET_PRODUCT = "getProductForProductIncome";
+    public static final String PRODUCT_INCOME_GET_SUPPLIER = "getSupplierForProductIncome";
+    public static final String PRODUCT_INCOME_GET_USER = "getUserForProductIncome";
 
     public static final String STOCK_LIST = "getStockList";
 

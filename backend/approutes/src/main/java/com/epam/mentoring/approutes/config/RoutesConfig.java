@@ -65,7 +65,7 @@ public class RoutesConfig {
     }
 
     @Bean
-    View2HalSerializer view2HalSerializer() {
+    public View2HalSerializer view2HalSerializer() {
         return new View2HalSerializer();
     }
 

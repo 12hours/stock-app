@@ -15,7 +15,7 @@ import java.util.Map;
 public class View2HalSerializer extends StdSerializer {
 
     @Autowired
-    LinkBuilder linkBuilder;
+    private LinkBuilder linkBuilder;
 
     public View2HalSerializer() {
         this(null);

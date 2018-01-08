@@ -56,6 +56,8 @@ public class ProductRoute extends RouteBuilder {
                         .to(RouteNames.PRODUCT_TYPE_ROUTE)
                     .when(header(Headers.OPERATION).isEqualTo(Headers.PRODUCT_GET_QUANTITY))
                         .process(new GetProductWithQuantityProcessor(productService))
+                    .when(header(Headers.OPERATION).isEqualTo(Headers.PRODUCT_INCOME_GET_PRODUCT))
+                        .process(new GetProductOfProductIncomeProcessor(productService))
                 .otherwise().throwException(new UnsupportedOperationException())
                 .end()
                 .choice()

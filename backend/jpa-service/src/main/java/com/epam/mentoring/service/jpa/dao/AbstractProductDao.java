@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -53,5 +54,13 @@ public abstract class AbstractProductDao extends AbstractDao<Product> {
         return productQuantityMap;
     }
 
+    //    TODO: exception handling
+    protected Product findProductOfProductIncome(Integer productIncomeId) {
+        EntityManager em = emf.createEntityManager();
+        TypedQuery<Product> query = em.createQuery("SELECT p FROM Product p JOIN p.productIncomes pi WHERE pi.id = ?1", Product.class);
+        query.setParameter(1, productIncomeId);
+        Product product = query.getSingleResult();
+        return product;
+    }
 
 }

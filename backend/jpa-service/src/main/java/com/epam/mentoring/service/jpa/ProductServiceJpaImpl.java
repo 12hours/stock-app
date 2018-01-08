@@ -143,7 +143,11 @@ public class ProductServiceJpaImpl extends AbstractProductDao implements Product
         ProductView productView = new ProductView(product.getId(), product.getName(), product.getPrice(), product.getType().getId());
         ProductWithQuantityView productWithQuantityView = new ProductWithQuantityView(productView, quantity);
         return productWithQuantityView;
+    }
 
+    @Override
+    public Product getProductOfProductIncome(Integer productIncomeId) {
+        return findProductOfProductIncome(productIncomeId);
     }
 
 
