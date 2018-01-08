@@ -54,7 +54,34 @@ ProductRestController {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    @Path("/quant")
+    @Path("/{id}/quantity")
+    @ApiOperation(value = "Retrieve quantity value for given product")
+    @ApiResponses(
+            @ApiResponse(code = 200, message = "Product with quantity returned")
+    )
+    public Response getQuantityProduct(
+            @ApiParam(value = "Product's id", required = true)
+            @PathParam("id") Integer id) {
+        return null;
+    }
+
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("/{id}/type")
+    @ApiOperation(value = "Retrieve product type of given product")
+    @ApiResponses(
+            @ApiResponse(code = 200, message = "Product type returned")
+    )
+    public Response getTypeOfProduct(
+            @ApiParam(value = "Product's id", required = true)
+            @PathParam("id") Integer id) {
+        return null;
+    }
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("/quantities")
     public Response getAllProductsWithQuantities(){
         return null;
     }

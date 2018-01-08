@@ -20,6 +20,6 @@ public class GetAllProductsWithQuantitiesProcessor implements Processor {
     public void process(Exchange exchange) throws Exception {
         List<ProductWithQuantityView> productsWithQuantitiesViews = productService.getAllProductsWithQuantitiesViews();
 
-        exchange.getIn().setBody(new CollectionDTO<>(productsWithQuantitiesViews));
+        exchange.getIn().setBody(new CollectionDTO<ProductWithQuantityView>(productsWithQuantitiesViews));
     }
 }

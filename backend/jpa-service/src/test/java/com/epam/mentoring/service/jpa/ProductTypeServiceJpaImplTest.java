@@ -104,4 +104,15 @@ public class ProductTypeServiceJpaImplTest {
         assertTrue(allProductsOfType.contains(product));
     }
 
+    @Test
+    public void getProductTypeByProductIdTest() {
+        ProductType expectedProductType = service.getProductTypeById(3);
+        ProductType notExpectedProductType = service.getProductTypeById(2);
+
+        ProductType actualProductTypeByProductId = service.getProductTypeForProduct(3);
+
+        assertEquals(expectedProductType, actualProductTypeByProductId);
+        assertNotEquals(notExpectedProductType, actualProductTypeByProductId);
+    }
+
 }

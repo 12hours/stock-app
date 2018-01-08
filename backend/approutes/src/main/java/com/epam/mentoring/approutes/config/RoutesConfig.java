@@ -1,9 +1,11 @@
 package com.epam.mentoring.approutes.config;
 
+import com.epam.mentoring.data.model.dto.view.ProductView;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider;
 import org.apache.camel.component.jackson.JacksonDataFormat;
@@ -35,6 +37,10 @@ public class RoutesConfig {
 //        objectMapper.configure(SerializationFeature.WRITE_NULL_MAP_VALUES, false);
 
         objectMapper.registerModule(new JavaTimeModule());
+        SimpleModule simpleModule = new SimpleModule();
+        simpleModule.addSerializer(ProductView.class, view2HalSerializer());
+        objectMapper.registerModule(simpleModule);
+
         return objectMapper;
     }
 
@@ -49,6 +55,16 @@ public class RoutesConfig {
         // Undocumented camel feature!!
         // https://stackoverflow.com/questions/33397359/how-to-configure-jackson-objectmapper-for-camel-in-spring-boot
         return new JacksonDataFormat(objectMapper, HashMap.class);
+    }
+
+    @Bean
+    public LinkBuilder linkBuilder() {
+        return new LinkBuilder();
+    }
+
+    @Bean
+    View2HalSerializer view2HalSerializer() {
+        return new View2HalSerializer();
     }
 
 

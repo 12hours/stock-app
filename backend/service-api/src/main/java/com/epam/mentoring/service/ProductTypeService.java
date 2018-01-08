@@ -27,4 +27,6 @@ public interface ProductTypeService {
     Collection<Product> getAllProductsOfType(Integer id);
 
     void addProductToProductType(Integer id, Product product);
+
+    ProductType getProductTypeForProduct(Integer productId);
 }

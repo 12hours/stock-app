@@ -1,8 +1,7 @@
 package com.epam.mentoring.approutes.processors.product;
 
-import com.epam.mentoring.data.model.Product;
 import com.epam.mentoring.approutes.constants.Headers;
-import com.epam.mentoring.data.model.dto.ItemDTO;
+import com.epam.mentoring.data.model.Product;
 import com.epam.mentoring.data.model.dto.mapstruct.ProductMapper;
 import com.epam.mentoring.data.model.dto.view.ProductView;
 import com.epam.mentoring.service.ProductService;
@@ -26,6 +25,6 @@ public class GetProductByIdProcessor implements Processor{
 
         Product product = productService.findProductById(id);
         ProductView productView = productMapper.productToProductView(product);
-        exchange.getIn().setBody(new ItemDTO<>(productView));
+        exchange.getIn().setBody(productView);
     }
 }

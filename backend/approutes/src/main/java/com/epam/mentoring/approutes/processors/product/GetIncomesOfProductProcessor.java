@@ -31,6 +31,7 @@ public class GetIncomesOfProductProcessor implements Processor {
                 .map(productIncome -> productIncomeMapper.productIncomeToProductIncomeView(productIncome))
                 .collect(Collectors.toList());
 
-        exchange.getIn().setBody(new CollectionDTO<>(productIncomeViews));
+        CollectionDTO<ProductIncomeView> dto = new CollectionDTO<>(productIncomeViews);
+        exchange.getIn().setBody(dto);
     }
 }

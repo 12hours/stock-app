@@ -6,16 +6,17 @@ import com.epam.mentoring.data.model.dto.DTOUtils;
 import com.epam.mentoring.data.model.dto.form.ProductTypeForm;
 import com.epam.mentoring.service.ProductTypeService;
 import com.epam.mentoring.service.jpa.dao.AbstractDao;
+import com.epam.mentoring.service.jpa.dao.AbstractProductTypeDao;
 import org.springframework.dao.DataAccessException;
 
 import javax.persistence.EntityManagerFactory;
 import java.util.Collection;
 import java.util.List;
 
-public class ProductTypeServiceJpaImpl extends AbstractDao<ProductType> implements ProductTypeService {
+public class ProductTypeServiceJpaImpl extends AbstractProductTypeDao implements ProductTypeService {
 
     public ProductTypeServiceJpaImpl(EntityManagerFactory emf) {
-        super(ProductType.class, emf);
+        super(emf);
     }
 
     @Override
@@ -80,4 +81,11 @@ public class ProductTypeServiceJpaImpl extends AbstractDao<ProductType> implemen
             throw new DataAccessException("Can not add product to ProductType", e) {};
         }
     }
+
+    @Override
+    public ProductType getProductTypeForProduct(Integer productId) {
+        return findProductTypeByProductId(productId);
+    }
+
+
 }
