@@ -13,7 +13,7 @@ public class Headers {
     public static final String ID = "id";
 
     public static final String GET_ALL = "getAllProducts";
-    public static final String GET = Arrays.stream(ProductRestController.class.getMethods()).filter(m -> m.isAnnotationPresent(javax.ws.rs.GET.class) && (m.getParameterCount() == 1)).findAny().get().getName();
+//    public static final String GET = Arrays.stream(ProductRestController.class.getMethods()).filter(m -> m.isAnnotationPresent(javax.ws.rs.GET.class) && (m.getParameterCount() == 1)).findAny().get().getName();
     public static final String GET_BY_ID = "getProductById";
     public static final String POST = "postProduct";
     public static final String DELETE = "deleteProduct";
@@ -28,13 +28,14 @@ public class Headers {
     public static final String PRODUCT_DELETE = "deleteProduct";
     public static final String PRODUCT_GET_ALL_WITH_QAUNT = "getAllProductsWithQuantities";
     public static final String PRODUCT_GET_INCOMES = "getIncomesOfProduct";
+    public static final String PRODUCT_GET_TYPE = "getTypeOfProduct";
+    public static final String PRODUCT_GET_QUANTITY = "getQuantityOfProduct";
 
     public static final String PRODUCT_TYPE_GET_ALL = "getAllProductTypes";
     public static final String PRODUCT_TYPE_GET_BY_ID = "getProductTypeById";
     public static final String PRODUCT_TYPE_POST = "postProductType";
     public static final String PRODUCT_TYPE_DELETE = "deleteProductType";
     public static final String PRODUCT_TYPE_PRODUCTS = "getProductsOfType";
-
 
     public static final String PRODUCT_INCOME_GET_ALL = "getAllProductIncomes";
     public static final String PRODUCT_INCOME_GET_BY_ID = "getProductIncomeById";

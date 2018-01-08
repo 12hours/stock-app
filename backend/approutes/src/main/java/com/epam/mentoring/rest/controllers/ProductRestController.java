@@ -59,7 +59,7 @@ ProductRestController {
     @ApiResponses(
             @ApiResponse(code = 200, message = "Product with quantity returned")
     )
-    public Response getQuantityProduct(
+    public Response getQuantityOfProduct(
             @ApiParam(value = "Product's id", required = true)
             @PathParam("id") Integer id) {
         return null;

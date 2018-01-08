@@ -41,4 +41,6 @@ public interface ProductService {
     List<ProductWithQuantityView> getAllProductsWithQuantitiesViews() throws DataAccessException;
 
     Collection<ProductIncome> getIncomesOfProduct(Integer id) throws DataAccessException;
+
+    ProductWithQuantityView getProductWithQuantity(Integer id);
 }

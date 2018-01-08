@@ -2,6 +2,8 @@ package com.epam.mentoring.service.jpa.dao;
 
 import com.epam.mentoring.data.dao.ProductDao;
 import com.epam.mentoring.data.model.Product;
+import org.hibernate.ObjectNotFoundException;
+import org.hibernate.exception.DataException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -23,14 +25,14 @@ public abstract class AbstractProductDao extends AbstractDao<Product> {
         this.emf = emf;
     }
 
-    protected Map<Product, Integer> getAllProductsWithQuantitiesMap(){
+    protected Map<Product, Integer> getAllProductsWithQuantitiesMap() {
         EntityManager em = emf.createEntityManager();
         Query query = em.createQuery("SELECT p, SUM(pi.quantity) FROM Product p JOIN p.productIncomes pi GROUP BY p");
         List<Object[]> resultList = query.getResultList();
 
         HashMap<Product, Integer> productQuantityHashMap = new HashMap<>();
         for (Object[] item : resultList) {
-            productQuantityHashMap.put((Product)item[0], ((Long)item[1]).intValue());
+            productQuantityHashMap.put((Product) item[0], ((Long) item[1]).intValue());
         }
         try {
             em.close();
@@ -38,6 +40,17 @@ public abstract class AbstractProductDao extends AbstractDao<Product> {
             log.warn("Can not close EntityManager: {}", e);
         }
         return productQuantityHashMap;
+    }
+
+//    TODO: exception handling
+    protected Map<Product, Integer> getSingleProductWithQuantityMap(Integer id) {
+        EntityManager em = emf.createEntityManager();
+        Query query = em.createQuery("SELECT p, SUM(pi.quantity) FROM Product p JOIN p.productIncomes pi WHERE p.id = ?1");
+        query.setParameter(1, id);
+        Object[] result = (Object[]) query.getSingleResult();
+        Map<Product, Integer> productQuantityMap = new HashMap<>();
+        productQuantityMap.put((Product) result[0], ((Long) result[1]).intValue());
+        return productQuantityMap;
     }
 
 

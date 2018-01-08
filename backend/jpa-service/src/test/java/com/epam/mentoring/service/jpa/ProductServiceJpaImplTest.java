@@ -126,4 +126,12 @@ public class ProductServiceJpaImplTest {
 
         assertTrue(allProductsWithQuantitiesViews.containsAll(expectedQuantitiesList));
     }
+
+
+    @Test
+    public void getSingleProductWithQuantityTest() {
+        ProductWithQuantityView expectedProductWithQuantityView = new ProductWithQuantityView(new ProductView(3, "Nvidia GTX 1050Ti", new BigDecimal("200.00"), 3), 45);
+        ProductWithQuantityView actualProductWithQuantity = service.getProductWithQuantity(3);
+        assertEquals(expectedProductWithQuantityView, actualProductWithQuantity);
+    }
 }

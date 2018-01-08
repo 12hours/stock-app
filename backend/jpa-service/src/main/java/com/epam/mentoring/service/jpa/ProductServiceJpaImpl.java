@@ -13,6 +13,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.dao.DataRetrievalFailureException;
 
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.criteria.CriteriaBuilder;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -131,6 +132,18 @@ public class ProductServiceJpaImpl extends AbstractProductDao implements Product
             throw new DataAccessException("Can not get access to productIncomes field of Product", e) {};
         }
         return productIncomes;
+    }
+
+    @Override
+    public ProductWithQuantityView getProductWithQuantity(Integer id) {
+        Map<Product, Integer> productWithQuantityMap = getSingleProductWithQuantityMap(id);
+        Map.Entry<Product, Integer> pair = productWithQuantityMap.entrySet().iterator().next();
+        Product product = pair.getKey();
+        Integer quantity = pair.getValue();
+        ProductView productView = new ProductView(product.getId(), product.getName(), product.getPrice(), product.getType().getId());
+        ProductWithQuantityView productWithQuantityView = new ProductWithQuantityView(productView, quantity);
+        return productWithQuantityView;
+
     }
 
 

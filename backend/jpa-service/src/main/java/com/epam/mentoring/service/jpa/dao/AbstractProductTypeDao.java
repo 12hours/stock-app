@@ -20,6 +20,7 @@ public class AbstractProductTypeDao extends AbstractDao<ProductType> {
         TypedQuery<ProductType> query = em.createQuery("SELECT pt FROM ProductType pt JOIN pt.products pr WHERE pr.id = ?1", ProductType.class);
         query.setParameter(1, productId);
         ProductType productType = query.getSingleResult();
+        em.close();
         return productType;
     }
 
