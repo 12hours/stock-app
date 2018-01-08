@@ -22,12 +22,9 @@ public class ProductTypeRoute extends RouteBuilder {
     @Autowired
     ProductTypeService productTypeService;
 
-    @Value("${productType.route.endpoint}")
-    private String productTypeRouteEndpoint;
-
     @Override
     public void configure() throws Exception {
-        from(productTypeRouteEndpoint).routeId(RouteNames.PRODUCT_TYPE_ROUTE_ID)
+        from(RouteNames.PRODUCT_TYPE_ROUTE).routeId(RouteNames.PRODUCT_TYPE_ROUTE_ID)
                 .log(LoggingLevel.DEBUG, "Method: " + header(Headers.OPERATION))
                 .choice()
                 .when(header(Headers.OPERATION).isEqualTo(Headers.PRODUCT_TYPE_GET_ALL))

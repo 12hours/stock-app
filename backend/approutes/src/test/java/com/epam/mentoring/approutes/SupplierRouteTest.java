@@ -1,5 +1,6 @@
 package com.epam.mentoring.approutes;
 
+import com.epam.mentoring.approutes.constants.RouteNames;
 import com.epam.mentoring.data.model.dto.form.SupplierForm;
 import com.epam.mentoring.approutes.constants.Headers;
 import com.epam.mentoring.service.SupplierService;
@@ -46,8 +47,8 @@ public class SupplierRouteTest {
     @Autowired
     SupplierService supplierServiceMock;
 
-    @Value("${supplier.route.endpoint}")
-    private String supplierRouteEndpoint;
+    // TODO: replace occurences
+    private String supplierRouteEndpoint = RouteNames.SUPPLIER_ROUTE;
 
     ArgumentCaptor<SupplierForm> supplierFormArgumentCaptor;
 

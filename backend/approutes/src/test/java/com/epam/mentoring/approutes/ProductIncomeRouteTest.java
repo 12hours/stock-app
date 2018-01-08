@@ -1,5 +1,6 @@
 package com.epam.mentoring.approutes;
 
+import com.epam.mentoring.approutes.constants.RouteNames;
 import com.epam.mentoring.data.model.dto.form.ProductIncomeForm;
 import com.epam.mentoring.approutes.constants.Headers;
 import com.epam.mentoring.service.ProductIncomeService;
@@ -47,8 +48,7 @@ public class ProductIncomeRouteTest {
 
     ArgumentCaptor<ProductIncomeForm> productIncomeFormArgumentCaptor;
 
-    @Value("${productIncome.route.endpoint}")
-    private String productIncomeRouteEndpoint;
+    private String productIncomeRouteEndpoint = RouteNames.PRODUCT_INCOME_ROUTE;
 
     @Before
     public void setUp() {
@@ -88,7 +88,7 @@ public class ProductIncomeRouteTest {
         in.setHeader(Headers.OPERATION, Headers.PRODUCT_INCOME_DELETE);
         exchange.setIn(in);
 
-        Exchange response = template.send(productIncomeRouteEndpoint, exchange);
+        Exchange response = template.send(RouteNames.PRODUCT_INCOME_ROUTE, exchange);
         Mockito.verify(productIncomeServiceMock, Mockito.times(1)).deleteProductIncome(Mockito.anyInt());
         assertEquals(Response.Status.OK, response.getIn().getHeader(Headers.STATUS));
     }
