@@ -3,7 +3,6 @@ package com.epam.mentoring.approutes.processors.product;
 import com.epam.mentoring.data.model.Product;
 import com.epam.mentoring.approutes.constants.Headers;
 import com.epam.mentoring.data.model.dto.ItemDTO;
-import com.epam.mentoring.data.model.dto.mapstruct.ItemMapper;
 import com.epam.mentoring.data.model.dto.mapstruct.ProductMapper;
 import com.epam.mentoring.data.model.dto.view.ProductView;
 import com.epam.mentoring.service.ProductService;
@@ -14,7 +13,6 @@ import org.mapstruct.factory.Mappers;
 public class GetProductByIdProcessor implements Processor{
 
     private ProductMapper productMapper = Mappers.getMapper(ProductMapper.class);
-    private ItemMapper itemMapper = Mappers.getMapper(ItemMapper.class);
 
     private ProductService productService;
 
@@ -28,7 +26,6 @@ public class GetProductByIdProcessor implements Processor{
 
         Product product = productService.findProductById(id);
         ProductView productView = productMapper.productToProductView(product);
-        ItemDTO itemDTO = itemMapper.itemToItemDTO(productView);
-        exchange.getIn().setBody(itemDTO);
+        exchange.getIn().setBody(new ItemDTO<>(productView));
     }
 }

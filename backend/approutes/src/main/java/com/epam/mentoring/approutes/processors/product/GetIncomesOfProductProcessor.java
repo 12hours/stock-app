@@ -2,7 +2,7 @@ package com.epam.mentoring.approutes.processors.product;
 
 import com.epam.mentoring.approutes.constants.Headers;
 import com.epam.mentoring.data.model.ProductIncome;
-import com.epam.mentoring.data.model.dto.mapstruct.CollectionMapper;
+import com.epam.mentoring.data.model.dto.CollectionDTO;
 import com.epam.mentoring.data.model.dto.mapstruct.ProductIncomeMapper;
 import com.epam.mentoring.data.model.dto.view.ProductIncomeView;
 import com.epam.mentoring.service.ProductService;
@@ -10,12 +10,10 @@ import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
 import org.mapstruct.factory.Mappers;
 
-import javax.ws.rs.core.Response;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
 public class GetIncomesOfProductProcessor implements Processor {
-    private CollectionMapper collectionMapper = Mappers.getMapper(CollectionMapper.class);
     private ProductIncomeMapper productIncomeMapper = Mappers.getMapper(ProductIncomeMapper.class);
 
     private ProductService productService;
@@ -33,6 +31,6 @@ public class GetIncomesOfProductProcessor implements Processor {
                 .map(productIncome -> productIncomeMapper.productIncomeToProductIncomeView(productIncome))
                 .collect(Collectors.toList());
 
-        exchange.getIn().setBody(collectionMapper.collectionToCollectionView(productIncomeViews));
+        exchange.getIn().setBody(new CollectionDTO<>(productIncomeViews));
     }
 }

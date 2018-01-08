@@ -1,7 +1,7 @@
 package com.epam.mentoring.approutes.processors.product;
 
 import com.epam.mentoring.data.model.Product;
-import com.epam.mentoring.data.model.dto.mapstruct.CollectionMapper;
+import com.epam.mentoring.data.model.dto.CollectionDTO;
 import com.epam.mentoring.data.model.dto.mapstruct.ProductMapper;
 import com.epam.mentoring.data.model.dto.view.ProductView;
 import com.epam.mentoring.service.ProductService;
@@ -15,7 +15,6 @@ import java.util.stream.Collectors;
 public class GetAllProductsProcessor implements Processor {
 
     private ProductMapper productMapper = Mappers.getMapper(ProductMapper.class);
-    private CollectionMapper<ProductView> productViewCollectionMapper = Mappers.getMapper(CollectionMapper.class);
 
     private ProductService productService;
 
@@ -31,6 +30,6 @@ public class GetAllProductsProcessor implements Processor {
                         .map(product -> productMapper.productToProductView(product))
                         .collect(Collectors.toList());
 
-        exchange.getIn().setBody(productViewCollectionMapper.collectionToCollectionView(productViews));
+        exchange.getIn().setBody(new CollectionDTO<ProductView>(productViews));
     }
 }

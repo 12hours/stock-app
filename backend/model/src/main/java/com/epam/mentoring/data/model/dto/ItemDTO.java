@@ -1,15 +1,17 @@
 package com.epam.mentoring.data.model.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.HashMap;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
+@Getter
+@Setter
 public class ItemDTO<T> {
     private T item;
     private HashMap<String, Object> links;
+
+    public ItemDTO(T item) {
+        this.item = item;
+        this.links = new HashMap<>();
+    }
 }

@@ -9,12 +9,8 @@ import org.mapstruct.Mappings;
 @Mapper
 public interface ProductIncomeMapper {
 
-    @Mappings({
-            @Mapping(source = "productIncome.product.id", target = "productId"),
-            @Mapping(source = "productIncome.user.id", target = "userId"),
-            @Mapping(source = "productIncome.supplier.id", target = "supplierId"),
-//            @Mapping(target = "date", expression = ("java( ((java.sql.Date) productIncome).getDate().toLocalDate())")),
-//            @Mapping(target = "links", expression = ("java( new java.util.HashMap<String, Object>())"))
-    })
+    @Mapping(source = "productIncome.product.id", target = "productId")
+    @Mapping(source = "productIncome.user.id", target = "userId")
+    @Mapping(source = "productIncome.supplier.id", target = "supplierId")
     ProductIncomeView productIncomeToProductIncomeView(ProductIncome productIncome);
 }

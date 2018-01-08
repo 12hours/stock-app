@@ -9,9 +9,6 @@ import org.mapstruct.Mappings;
 @Mapper
 public interface UserMapper {
 
-    @Mappings({
-//            @Mapping(target = "links", expression = ("java( new java.util.HashMap<String, Object>())"))
-    })
     UserView userToUserView(User user);
 
 }

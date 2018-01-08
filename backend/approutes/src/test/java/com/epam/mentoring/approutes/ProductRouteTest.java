@@ -4,8 +4,6 @@ import com.epam.mentoring.data.model.Product;
 import com.epam.mentoring.data.model.dto.ItemDTO;
 import com.epam.mentoring.data.model.dto.form.ProductForm;
 import com.epam.mentoring.approutes.constants.Headers;
-import com.epam.mentoring.data.model.dto.mapstruct.CollectionMapper;
-import com.epam.mentoring.data.model.dto.mapstruct.ItemMapper;
 import com.epam.mentoring.data.model.dto.mapstruct.ProductMapper;
 import com.epam.mentoring.data.model.dto.CollectionDTO;
 import com.epam.mentoring.data.model.dto.view.ProductView;
@@ -48,8 +46,6 @@ import static org.mockito.Mockito.verify;
 public class ProductRouteTest {
 
     private ProductMapper productMapper = Mappers.getMapper(ProductMapper.class);
-    private CollectionMapper collectionMapper = Mappers.getMapper(CollectionMapper.class);
-    private ItemMapper itemMapper = Mappers.getMapper(ItemMapper.class);
 
     @Autowired
     ModelCamelContext context;
@@ -84,7 +80,7 @@ public class ProductRouteTest {
         List<ProductView> productViews = TestData.products().stream()
                 .map(product -> productMapper.productToProductView(product))
                 .collect(Collectors.toList());
-        CollectionDTO collectionDTO = collectionMapper.collectionToCollectionView(productViews);
+        CollectionDTO collectionDTO = new CollectionDTO(productViews);
 
         Exchange response = template.send(productRouteEndpoint, exchange);
         assertEquals(objectMapper.writeValueAsString(collectionDTO), response.getIn().getBody());
@@ -99,7 +95,7 @@ public class ProductRouteTest {
         exchange.setIn(in);
 
         Exchange response = template.send(productRouteEndpoint, exchange);
-        assertEquals(objectMapper.writeValueAsString(collectionMapper.collectionToCollectionView(TestData.productWithQuantityViews())),
+        assertEquals(objectMapper.writeValueAsString(new CollectionDTO<>(TestData.productWithQuantityViews())),
                 response.getIn().getBody());
     }
 
@@ -115,7 +111,7 @@ public class ProductRouteTest {
         Exchange response = template.send(productRouteEndpoint, exchange);
         Product expectedProduct = TestData.products().get(0);
         ProductView productView = productMapper.productToProductView(TestData.products().get(0));
-        assertEquals(objectMapper.writeValueAsString(itemMapper.itemToItemDTO(productView)), response.getIn().getBody());
+        assertEquals(objectMapper.writeValueAsString(new ItemDTO<>(productView)), response.getIn().getBody());
     }
 
     @Test
