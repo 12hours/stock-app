@@ -65,7 +65,7 @@
 
     <modules>
         <!--<module>dao</module>-->
-        <module>dao-api</module>
+        <!--<module>dao-api</module>-->
         <!--<module>web-app</module>-->
         <module>model</module>
         <!--<module>service</module>-->
@@ -76,6 +76,7 @@
         <!--<module>rest-app</module>-->
         <module>approutes</module>
         <module>jpa-service</module>
+        <module>stock-app-features</module>
     </modules>
 
     <dependencyManagement>

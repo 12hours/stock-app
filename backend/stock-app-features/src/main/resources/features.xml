@@ -1,0 +1,14 @@
+<features xmlns="http://karaf.apache.org/xmlns/features/v1.0.0">
+    <feature name="stock-app" version="2.0">
+
+        <feature>hibernate</feature>
+        <feature>jpa</feature>
+        <feature>camel-jackson</feature>
+        <feature>cxf-rs-security-cors</feature>
+
+
+        <bundle>mvn:mysql/mysql-connector-java/5.1.44</bundle>
+
+
+    </feature>
+</features>

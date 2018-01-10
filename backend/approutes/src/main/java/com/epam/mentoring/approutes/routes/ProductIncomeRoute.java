@@ -26,6 +26,12 @@ public class ProductIncomeRoute extends RouteBuilder {
 
     @Override
     public void configure() throws Exception {
+
+        onException(NotFoundException.class)
+                .handled(true)
+                .to(RouteNames.NOT_FOUND_ROUTE);
+
+
         from(RouteNames.PRODUCT_INCOME_ROUTE).routeId(RouteNames.PRODUCT_INCOME_ROUTE_ID)
                 .to("log:" + this.getClass().getName() + "?level=DEBUG&showHeaders=true&showBody=false&showBodyType=false")
                 .process(exchange -> {
@@ -50,7 +56,7 @@ public class ProductIncomeRoute extends RouteBuilder {
                     .when(header(Headers.OPERATION).isEqualTo(Headers.PRODUCT_INCOME_GET_SUPPLIER))
                         .to(RouteNames.SUPPLIER_ROUTE)
                     .when(header(Headers.OPERATION).isEqualTo(Headers.PRODUCT_INCOME_GET_USER))
-                        .to(RouteNames.NOT_FOUND_ROUTE) // TODO: user route
+                        .throwException(new NotFoundException("User not found"))// TODO: user route
                     .otherwise().throwException(new UnsupportedOperationException())
                 .end()
                 .choice()

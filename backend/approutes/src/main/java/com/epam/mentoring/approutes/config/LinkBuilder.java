@@ -4,6 +4,7 @@ import com.epam.mentoring.data.model.ProductIncome;
 import com.epam.mentoring.data.model.dto.view.ProductIncomeView;
 import com.epam.mentoring.data.model.dto.view.ProductTypeView;
 import com.epam.mentoring.data.model.dto.view.ProductView;
+import com.epam.mentoring.data.model.dto.view.SupplierView;
 import org.springframework.beans.factory.annotation.Value;
 
 import java.util.HashMap;
@@ -34,8 +35,25 @@ public class LinkBuilder {
             return getLinksForProductType((ProductTypeView) item);
         } else if (item instanceof ProductIncomeView) {
             return getLinksForProductIncome((ProductIncomeView) item);
+        } else if (item instanceof SupplierView) {
+            return getLinksForSupplier((SupplierView) item);
         }
         return null;
+    }
+
+    private Map<String,Object> getLinksForSupplier(SupplierView supplierView) {
+        HashMap<String, Object> linksMap = new HashMap<>();
+        String path = getSupplierPath(supplierView.getId());
+
+        HashMap<String, String> selfLinksMap = new HashMap<>();
+        selfLinksMap.put("href", path);
+        linksMap.put("self", selfLinksMap);
+
+        HashMap<String, String> productIncomesLinksMap = new HashMap<>();
+        productIncomesLinksMap.put("href", path + "/incomes");
+        linksMap.put("productIncomes", productIncomesLinksMap);
+
+        return linksMap;
     }
 
     private Map<String,Object> getLinksForProductIncome(ProductIncomeView productIncomeView) {
@@ -109,6 +127,10 @@ public class LinkBuilder {
 
     private String getProductTypePath(Integer id) {
         return getFullEntityPath(productTypePath, id);
+    }
+
+    private String getSupplierPath(Integer id) {
+        return getFullEntityPath(supplierPath, id);
     }
 
     private String getFullEntityPath(String entityPath, Integer id) {
