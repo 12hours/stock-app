@@ -1,5 +1,6 @@
 package com.epam.mentoring.approutes.config;
 
+import com.epam.mentoring.data.model.dto.view.ProductIncomeView;
 import com.epam.mentoring.data.model.dto.view.ProductTypeView;
 import com.epam.mentoring.data.model.dto.view.ProductView;
 import com.fasterxml.jackson.core.JsonParser;
@@ -41,6 +42,7 @@ public class RoutesConfig {
         SimpleModule simpleModule = new SimpleModule();
         simpleModule.addSerializer(ProductView.class, view2HalSerializer());
         simpleModule.addSerializer(ProductTypeView.class, view2HalSerializer());
+        simpleModule.addSerializer(ProductIncomeView.class, view2HalSerializer());
         objectMapper.registerModule(simpleModule);
 
         return objectMapper;

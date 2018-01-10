@@ -8,6 +8,7 @@ import com.epam.mentoring.approutes.constants.Headers;
 import com.epam.mentoring.data.model.dto.mapstruct.ProductMapper;
 import com.epam.mentoring.data.model.dto.CollectionDTO;
 import com.epam.mentoring.data.model.dto.view.ProductView;
+import com.epam.mentoring.data.model.dto.view.ProductWithQuantityView;
 import com.epam.mentoring.service.ProductService;
 import com.epam.mentoring.test.TestData;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -32,6 +33,8 @@ import org.springframework.test.context.ContextConfiguration;
 
 import javax.ws.rs.core.Response;
 import java.math.BigDecimal;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -83,7 +86,7 @@ public class ProductRouteTest {
         CollectionDTO collectionDTO = new CollectionDTO(productViews);
 
         Exchange response = template.send(productRouteEndpoint, exchange);
-        assertEquals(objectMapper.writeValueAsString(collectionDTO), response.getIn().getBody());
+        assertEquals(collectionDTO, response.getIn().getBody());
     }
 
     @Test
@@ -95,7 +98,7 @@ public class ProductRouteTest {
         exchange.setIn(in);
 
         Exchange response = template.send(productRouteEndpoint, exchange);
-        assertEquals(objectMapper.writeValueAsString(new CollectionDTO<>(TestData.productWithQuantityViews())),
+        assertEquals(new CollectionDTO<ProductWithQuantityView>(TestData.productWithQuantityViews()),
                 response.getIn().getBody());
     }
 
@@ -111,7 +114,7 @@ public class ProductRouteTest {
         Exchange response = template.send(productRouteEndpoint, exchange);
         Product expectedProduct = TestData.products().get(0);
         ProductView productView = productMapper.productToProductView(TestData.products().get(0));
-        assertEquals(objectMapper.writeValueAsString(new ItemDTO<>(productView)), response.getIn().getBody());
+        assertEquals(productView, response.getIn().getBody());
     }
 
     @Test
@@ -126,7 +129,7 @@ public class ProductRouteTest {
         Exchange response = template.send(productRouteEndpoint, exchange);
         verify(productServiceMock).saveProduct(productFormArgumentCaptor.capture());
         assertEquals(productFormArgumentCaptor.getValue(), new ProductForm("testProduct", BigDecimal.valueOf(100), Integer.valueOf(1)));
-        assertEquals("{\"id\":42}", response.getIn().getBody());
+        assertEquals(new HashMap<String,Object>(){{put("id", Integer.valueOf(42));}}, response.getIn().getBody());
     }
 
     @Test

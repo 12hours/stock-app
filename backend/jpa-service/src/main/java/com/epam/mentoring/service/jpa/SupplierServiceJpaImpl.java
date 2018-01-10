@@ -6,16 +6,17 @@ import com.epam.mentoring.data.model.dto.DTOUtils;
 import com.epam.mentoring.data.model.dto.form.SupplierForm;
 import com.epam.mentoring.service.SupplierService;
 import com.epam.mentoring.service.jpa.dao.AbstractDao;
+import com.epam.mentoring.service.jpa.dao.AbstractSupplierDao;
 import org.springframework.dao.DataAccessException;
 
 import javax.persistence.EntityManagerFactory;
 import java.util.Collection;
 import java.util.List;
 
-public class SupplierServiceJpaImpl extends AbstractDao<Supplier> implements SupplierService {
+public class SupplierServiceJpaImpl extends AbstractSupplierDao implements SupplierService {
 
     public SupplierServiceJpaImpl(EntityManagerFactory emf) {
-        super(Supplier.class, emf);
+        super(emf);
     }
 
     @Override
@@ -85,5 +86,16 @@ public class SupplierServiceJpaImpl extends AbstractDao<Supplier> implements Sup
             throw new DataAccessException("Can not get access to productIncomes field of Supplier", e) {};
         }
         return productIncomes;
+    }
+
+    @Override
+    public Supplier getSupplierForProductIncome(Integer productIncomeId) {
+        try {
+            Supplier supplier = findSupplierOfProductIncome(productIncomeId);
+            return supplier;
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new DataAccessException("Can not find Supplier of ProductIncome", e) {};
+        }
     }
 }

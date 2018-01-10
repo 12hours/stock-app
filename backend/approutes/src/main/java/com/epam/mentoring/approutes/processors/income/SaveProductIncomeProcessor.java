@@ -1,12 +1,10 @@
 package com.epam.mentoring.approutes.processors.income;
 
 import com.epam.mentoring.data.model.dto.form.ProductIncomeForm;
-import com.epam.mentoring.approutes.constants.Headers;
 import com.epam.mentoring.service.ProductIncomeService;
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
 
-import javax.ws.rs.core.Response;
 import java.util.HashMap;
 
 public class SaveProductIncomeProcessor implements Processor {
@@ -23,6 +21,5 @@ public class SaveProductIncomeProcessor implements Processor {
         HashMap<String, Object> idMap = new HashMap<>();
         idMap.put("id", id);
         exchange.getIn().setBody(idMap);
-        exchange.getIn().setHeader(Headers.STATUS, Response.Status.CREATED);
     }
 }

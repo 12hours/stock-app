@@ -158,7 +158,8 @@ public abstract class AbstractDao<T> {
      */
     protected Object findAndFetchField(Object id, String fieldName) throws NoSuchFieldException, IllegalAccessException {
         EntityManager em = getEntityManager();
-        Object requestedField = null; // actually getting of the initialized field
+        Object requestedField = null;
+        // actually getting the initialized field
         try {
             T entity = em.find(entityClass, id);
             Field field = entity.getClass().getDeclaredField(fieldName);

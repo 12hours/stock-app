@@ -82,4 +82,11 @@ public class SupplierServiceJpaImplTest {
         service.deleteSupplier(2);
         assertNull(service.getSupplierById(2));
     }
+
+    @Test
+    public void findSupplierOfProductIncomeTest() {
+        Supplier expectedSupplier = service.getSupplierById(3);
+        Supplier actualSupplier = service.getSupplierForProductIncome(5);
+        assertEquals(expectedSupplier, actualSupplier);
+    }
 }

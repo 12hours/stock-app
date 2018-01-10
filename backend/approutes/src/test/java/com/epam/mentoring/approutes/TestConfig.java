@@ -45,6 +45,7 @@ public class TestConfig {
         when(supplierService.getAllSuppliers()).thenReturn(TestData.suppliers());
         when(supplierService.getSupplierById(anyInt())).thenReturn(TestData.suppliers().get(0));
         when(supplierService.saveSupplier(any(SupplierForm.class))).thenReturn(44);
+        when(supplierService.getSupplierForProductIncome(anyInt())).thenReturn(TestData.suppliers().get(1));
         return supplierService;
     }
 

@@ -1,8 +1,11 @@
 package com.epam.mentoring.approutes;
 
 import com.epam.mentoring.approutes.constants.RouteNames;
+import com.epam.mentoring.data.model.ProductIncome;
 import com.epam.mentoring.data.model.dto.form.ProductIncomeForm;
 import com.epam.mentoring.approutes.constants.Headers;
+import com.epam.mentoring.data.model.dto.mapstruct.ProductIncomeMapper;
+import com.epam.mentoring.data.model.dto.view.ProductIncomeView;
 import com.epam.mentoring.service.ProductIncomeService;
 import com.epam.mentoring.test.TestData;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -17,6 +20,7 @@ import org.apache.camel.test.spring.CamelSpringJUnit4ClassRunner;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mapstruct.factory.Mappers;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +30,7 @@ import org.springframework.test.context.ContextConfiguration;
 
 import javax.ws.rs.core.Response;
 import java.util.Date;
+import java.util.HashMap;
 
 import static org.junit.Assert.assertEquals;
 
@@ -33,6 +38,8 @@ import static org.junit.Assert.assertEquals;
 @ContextConfiguration(value = {"classpath:/test-context.xml"})
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 public class ProductIncomeRouteTest {
+
+    private ProductIncomeMapper productIncomeMapper = Mappers.getMapper(ProductIncomeMapper.class);
 
     @Autowired
     ModelCamelContext context;
@@ -48,8 +55,6 @@ public class ProductIncomeRouteTest {
 
     ArgumentCaptor<ProductIncomeForm> productIncomeFormArgumentCaptor;
 
-    private String productIncomeRouteEndpoint = RouteNames.PRODUCT_INCOME_ROUTE;
-
     @Before
     public void setUp() {
         productIncomeFormArgumentCaptor = ArgumentCaptor.forClass(ProductIncomeForm.class);
@@ -61,10 +66,12 @@ public class ProductIncomeRouteTest {
         Message in = new DefaultMessage();
         in.setHeader(Headers.OPERATION, Headers.PRODUCT_INCOME_GET_BY_ID);
         in.setHeader(Headers.ID, Integer.valueOf(42));
+        in.setHeader(Exchange.HTTP_METHOD, "GET");
         exchange.setIn(in);
 
-        Exchange response = template.send(productIncomeRouteEndpoint, exchange);
-        assertEquals(objectMapper.writeValueAsString(TestData.productIncomes().get(0)), response.getIn().getBody());
+        Exchange response = template.send(RouteNames.PRODUCT_INCOME_ROUTE, exchange);
+        ProductIncomeView expectedProductIncome = productIncomeMapper.productIncomeToProductIncomeView(TestData.productIncomes().get(0));
+        assertEquals(expectedProductIncome, response.getIn().getBody());
     }
 
     @Test
@@ -72,13 +79,15 @@ public class ProductIncomeRouteTest {
         Exchange exchange = new DefaultExchange(context);
         Message in = new DefaultMessage();
         in.setHeader(Headers.OPERATION, Headers.PRODUCT_INCOME_POST);
+        in.setHeader(Exchange.HTTP_METHOD, "POST");
         in.setBody("{\"orderNumber\":10000,\"date\":1513609404711,\"quantity\":128,\"productId\":1,\"supplierId\":2,\"userId\":3}");
         exchange.setIn(in);
 
-        Exchange response = template.send(productIncomeRouteEndpoint, exchange);
+        Exchange response = template.send(RouteNames.PRODUCT_INCOME_ROUTE, exchange);
         Mockito.verify(productIncomeServiceMock).saveProductIncome(productIncomeFormArgumentCaptor.capture());
         assertEquals(new ProductIncomeForm(10000L, new Date(1513609404711L), 128, 1, 2, 3), productIncomeFormArgumentCaptor.getValue());
-        assertEquals("{\"id\":45}", response.getIn().getBody());
+
+        assertEquals(new HashMap<String,Object>(){{put("id",Integer.valueOf(45));}}, response.getIn().getBody());
     }
 
     @Test
@@ -86,6 +95,7 @@ public class ProductIncomeRouteTest {
         DefaultExchange exchange = new DefaultExchange(context);
         DefaultMessage in = new DefaultMessage();
         in.setHeader(Headers.OPERATION, Headers.PRODUCT_INCOME_DELETE);
+        in.setHeader(Exchange.HTTP_METHOD, "DELETE");
         exchange.setIn(in);
 
         Exchange response = template.send(RouteNames.PRODUCT_INCOME_ROUTE, exchange);

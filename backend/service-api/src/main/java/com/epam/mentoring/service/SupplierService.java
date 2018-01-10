@@ -25,4 +25,6 @@ public interface SupplierService {
     Supplier getSupplierById(Integer id) throws DataAccessException;
 
     Collection<ProductIncome> getAllIncomesOfSupplier(Integer id);
+
+    Supplier getSupplierForProductIncome(Integer productIncomeId);
 }

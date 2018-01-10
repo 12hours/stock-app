@@ -23,17 +23,17 @@ public class LinkBuilder {
     @Value("${productIncome.path}")
     private String productIncomePath;
 
+    @Value("${supplier.path}")
+    private String supplierPath;
+
     public Map<String, Object> getLinks(Object item) {
 
         if (item instanceof ProductView) {
-            ProductView productView = (ProductView) item;
-            return getLinksForProduct(productView);
+            return getLinksForProduct((ProductView) item);
         } else if (item instanceof ProductTypeView) {
-            ProductTypeView productTypeView = (ProductTypeView) item;
-            return getLinksForProductType(productTypeView);
+            return getLinksForProductType((ProductTypeView) item);
         } else if (item instanceof ProductIncomeView) {
-            ProductIncomeView productIncomeView = (ProductIncomeView) item;
-            return getLinksForProductIncome(productIncomeView);
+            return getLinksForProductIncome((ProductIncomeView) item);
         }
         return null;
     }
@@ -61,7 +61,7 @@ public class LinkBuilder {
         return linksMap;
     }
 
-    public Map<String,Object> getLinksForProduct(ProductView productView) {
+    private Map<String,Object> getLinksForProduct(ProductView productView) {
         HashMap<String, Object> linksMap = new HashMap<>();
         String path = getProductPath(productView.getId());
 
@@ -84,7 +84,7 @@ public class LinkBuilder {
         return linksMap;
     }
 
-    public Map<String,Object> getLinksForProductType(ProductTypeView productTypeView) {
+    private Map<String,Object> getLinksForProductType(ProductTypeView productTypeView) {
         HashMap<String, Object> linksMap = new HashMap<>();
         String path = getProductTypePath(productTypeView.getId());
 
@@ -100,27 +100,21 @@ public class LinkBuilder {
     }
 
     private String getProductIncomePath(Integer id) {
-        StringBuilder uri = new StringBuilder();
-        uri.append(hostUrl);
-        uri.append(productIncomePath);
-        uri.append("/");
-        uri.append(id);
-        return uri.toString();
+        return getFullEntityPath(productIncomePath, id);
     }
 
-    public String getProductPath(Integer id) {
-        StringBuilder uri = new StringBuilder();
-        uri.append(hostUrl);
-        uri.append(productPath);
-        uri.append("/");
-        uri.append(id);
-        return uri.toString();
+    private String getProductPath(Integer id) {
+        return getFullEntityPath(productPath, id);
     }
 
-    public String getProductTypePath(Integer id) {
+    private String getProductTypePath(Integer id) {
+        return getFullEntityPath(productTypePath, id);
+    }
+
+    private String getFullEntityPath(String entityPath, Integer id) {
         StringBuilder uri = new StringBuilder();
         uri.append(hostUrl);
-        uri.append(productTypePath);
+        uri.append(entityPath);
         uri.append("/");
         uri.append(id);
         return uri.toString();

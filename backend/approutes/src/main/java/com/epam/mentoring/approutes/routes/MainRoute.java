@@ -46,7 +46,8 @@ public class MainRoute extends RouteBuilder {
                 productTypeRestEndpoint,
                 productIncomeRestEndpoint,
                 supplierRestEndpoint,
-                stockRestEndpoint).routeId(RouteNames.MAIN_ROUTE_ID)
+                stockRestEndpoint,
+                RouteNames.MAIN_ROUTE).routeId(RouteNames.MAIN_ROUTE_ID)
                 .process(new Processor() {
                     @Override
                     public void process(Exchange exchange) throws Exception {

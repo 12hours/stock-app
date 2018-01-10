@@ -85,7 +85,7 @@ public class ProductIncomeRestController {
             @ApiResponse(code = 500, message = "Server error")
     })
     public Response postProductIncome(@ApiParam(value = "Product income form object", required = true,
-            example = "{'orderNumber':10000,'date':1513609404711,'quantity':128,'productId':1,'supplierId':2,'userId':3}")
+            example = "{'orderNumber':10000,'date':2017-05-21,'quantity':128,'productId':1,'supplierId':2,'userId':3}")
                                                   String body) {
         return null;
     }

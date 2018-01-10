@@ -18,6 +18,5 @@ public class DeleteSupplierProcessor implements Processor {
     public void process(Exchange exchange) throws Exception {
         Integer id = (Integer) exchange.getIn().getHeader(Headers.ID);
         supplierService.deleteSupplier(id);
-        exchange.getIn().setHeader(Headers.STATUS, Response.Status.OK);
     }
 }
