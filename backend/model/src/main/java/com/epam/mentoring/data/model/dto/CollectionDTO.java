@@ -28,7 +28,7 @@ public class CollectionDTO<T> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         CollectionDTO<?> that = (CollectionDTO<?>) o;
-        return Objects.equals(items, that.items) &&
+        return items.containsAll(that.items) &&
                 Objects.equals(properties, that.properties) &&
                 Objects.equals(links, that.links);
     }
