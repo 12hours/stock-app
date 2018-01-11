@@ -29,7 +29,6 @@ repositories {
 dependencies {
     compile('com.epam.mentoring:model:2.0')
 
-    compile('com.jayway.jsonpath:json-path:2.3.0')
     compile('org.springframework.boot:spring-boot-starter-freemarker')
     compile('org.springframework.boot:spring-boot-starter-security')
     compile('org.springframework.boot:spring-boot-starter-validation')
