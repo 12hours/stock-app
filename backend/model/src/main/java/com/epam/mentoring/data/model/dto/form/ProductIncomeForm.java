@@ -1,6 +1,5 @@
 package com.epam.mentoring.data.model.dto.form;
 
-import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.NotNull;
 import java.util.Date;
@@ -8,7 +7,6 @@ import java.util.Date;
 public class ProductIncomeForm {
     @NotNull
     private Long orderNumber;
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private Date date;
     private Integer quantity;
     @NotNull

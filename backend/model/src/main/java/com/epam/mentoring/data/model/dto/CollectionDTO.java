@@ -14,6 +14,9 @@ public class CollectionDTO<T> {
     private Map<String, Object> properties;
     private Map<String, Object> links;
 
+    public CollectionDTO() {
+    }
+
     public CollectionDTO(Collection<T> items) {
         this.items = items;
         this.properties = new HashMap<>();
