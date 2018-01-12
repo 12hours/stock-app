@@ -46,14 +46,14 @@ public class ProductForm {
         if (!(o instanceof ProductForm)) return false;
         final ProductForm other = (ProductForm) o;
         if (!other.canEqual((Object) this)) return false;
-        final Object this$name = this.getName();
-        final Object other$name = other.getName();
+        final String this$name = this.getName();
+        final String other$name = other.getName();
         if (this$name == null ? other$name != null : !this$name.equals(other$name)) return false;
-        final Object this$price = this.getPrice();
-        final Object other$price = other.getPrice();
-        if (this$price == null ? other$price != null : !this$price.equals(other$price)) return false;
-        final Object this$productTypeId = this.getProductTypeId();
-        final Object other$productTypeId = other.getProductTypeId();
+        final BigDecimal this$price = this.getPrice();
+        final BigDecimal other$price = other.getPrice();
+        if (this$price == null ? other$price != null : !(this$price.compareTo(other$price) == 0)) return false;
+        final Integer this$productTypeId = this.getProductTypeId();
+        final Integer other$productTypeId = other.getProductTypeId();
         if (this$productTypeId == null ? other$productTypeId != null : !this$productTypeId.equals(other$productTypeId))
             return false;
         return true;
