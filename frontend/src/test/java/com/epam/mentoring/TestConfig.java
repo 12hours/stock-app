@@ -4,6 +4,10 @@ import com.epam.mentoring.data.model.dto.form.ProductForm;
 import com.epam.mentoring.data.model.dto.form.ProductIncomeForm;
 import com.epam.mentoring.data.model.dto.form.ProductTypeForm;
 import com.epam.mentoring.data.model.dto.form.SupplierForm;
+import com.epam.mentoring.web.client.ProductIncomeServiceClient;
+import com.epam.mentoring.web.client.ProductServiceClient;
+import com.epam.mentoring.web.client.ProductTypeServiceClient;
+import com.epam.mentoring.web.client.SupplierServiceClient;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -78,6 +82,44 @@ public class TestConfig {
 
 
         return restTemplate;
+    }
+
+    @Bean
+    @Profile("controllerTest")
+    ProductServiceClient productServiceClient() {
+        ProductServiceClient productServiceClient = mock(ProductServiceClient.class);
+        when(productServiceClient.findAllProductsWithQuantities()).thenReturn(TestObjectData.productWithQuantityViewCollectionDTO());
+        when(productServiceClient.findAllProducts()).thenReturn(TestObjectData.productViewCollectionDTO());
+        when(productServiceClient.saveProduct(any(ProductForm.class))).thenReturn(Integer.valueOf(12));
+        when(productServiceClient.findProductById(any(Integer.class))).thenReturn(
+                TestObjectData.productViewCollectionDTO().getItems().iterator().next());
+        return productServiceClient;
+    }
+
+    @Bean
+    @Profile("controllerTest")
+    ProductTypeServiceClient productTypeServiceClient() {
+        ProductTypeServiceClient productTypeServiceClient = mock(ProductTypeServiceClient.class);
+        when(productTypeServiceClient.findAllProductTypes()).thenReturn(TestObjectData.productTypeViewCollectionDTO());
+        when(productTypeServiceClient.saveProductType(any(ProductTypeForm.class))).thenReturn(Integer.valueOf(5));
+        return productTypeServiceClient;
+    }
+
+    @Bean
+    @Profile("controllerTest")
+    ProductIncomeServiceClient productIncomeServiceClient() {
+        ProductIncomeServiceClient productIncomeServiceClient = mock(ProductIncomeServiceClient.class);
+        when(productIncomeServiceClient.saveProductIncome(any(ProductIncomeForm.class))).thenReturn(Integer.valueOf(6));
+        return productIncomeServiceClient;
+    }
+
+    @Bean
+    @Profile("controllerTest")
+    SupplierServiceClient supplierServiceClient() {
+        SupplierServiceClient supplierServiceClient = mock(SupplierServiceClient.class);
+        when(supplierServiceClient.findAllSuppliers()).thenReturn(TestObjectData.supplierViewCollectionDTO());
+        when(supplierServiceClient.saveSupplier(any(SupplierForm.class))).thenReturn(Integer.valueOf(7));
+        return supplierServiceClient;
     }
 
 }

@@ -28,6 +28,8 @@ repositories {
 
 dependencies {
     compile('com.epam.mentoring:model:2.0')
+    compile('commons-io:commons-io:2.4')
+
 
     compile('org.springframework.boot:spring-boot-starter-freemarker')
     compile('org.springframework.boot:spring-boot-starter-security')

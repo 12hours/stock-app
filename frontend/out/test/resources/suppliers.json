@@ -1,0 +1,45 @@
+{
+  "items": [
+    {
+      "id": 1,
+      "name": "Nova Computers",
+      "details": "",
+      "_links": {
+        "self": {
+          "href": "http://localhost:8081/api/supplier/1"
+        },
+        "productIncomes": {
+          "href": "http://localhost:8081/api/supplier/1/incomes"
+        }
+      }
+    },
+    {
+      "id": 2,
+      "name": "PC World Group",
+      "details": "",
+      "_links": {
+        "self": {
+          "href": "http://localhost:8081/api/supplier/2"
+        },
+        "productIncomes": {
+          "href": "http://localhost:8081/api/supplier/2/incomes"
+        }
+      }
+    },
+    {
+      "id": 3,
+      "name": "Ultra Hardware Inc.",
+      "details": "",
+      "_links": {
+        "self": {
+          "href": "http://localhost:8081/api/supplier/3"
+        },
+        "productIncomes": {
+          "href": "http://localhost:8081/api/supplier/3/incomes"
+        }
+      }
+    }
+  ],
+  "properties": {},
+  "links": {}
+}

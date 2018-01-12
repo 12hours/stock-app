@@ -22,7 +22,6 @@ public class MainController {
     @GetMapping({"","/","index"})
     public String index(Model model, HttpServletRequest request) {
         CollectionDTO<ProductWithQuantityView> productsWithQuantities = productServiceClient.findAllProductsWithQuantities();
-        model.addAttribute("username", "somename");
         model.addAttribute("productsWithQuantities", productsWithQuantities.getItems());
         return "index";
     }

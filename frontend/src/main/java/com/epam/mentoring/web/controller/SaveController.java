@@ -1,14 +1,12 @@
 package com.epam.mentoring.web.controller;
 
-import com.epam.mentoring.data.model.dto.form.ProductForm;
 import com.epam.mentoring.web.client.ProductServiceClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
+
+import java.math.BigDecimal;
 
 @Controller
 @RequestMapping("/add")
@@ -25,8 +23,11 @@ public class SaveController {
         return "new_income";
     }
 
-    @PostMapping("/product")
-    public String saveProduct(@ModelAttribute("productForm") ProductForm productForm) {
+    @PostMapping(value = "/product")
+    public String saveProduct(@RequestParam("name") String string,
+                              @RequestParam("price") BigDecimal price,
+                              @RequestParam("productTypeId") Integer productTypeId) {
+
 
         return "index";
     }
