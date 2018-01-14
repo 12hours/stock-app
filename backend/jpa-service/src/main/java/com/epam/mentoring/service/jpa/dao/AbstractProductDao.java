@@ -1,9 +1,6 @@
 package com.epam.mentoring.service.jpa.dao;
 
-import com.epam.mentoring.data.dao.ProductDao;
 import com.epam.mentoring.data.model.Product;
-import org.hibernate.ObjectNotFoundException;
-import org.hibernate.exception.DataException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
